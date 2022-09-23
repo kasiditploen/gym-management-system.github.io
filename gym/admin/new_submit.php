@@ -79,7 +79,7 @@ mysqli_real_escape_string($con, $plan);
           $query2="insert into enrolls_to(pid,uid,paid_date,expire,renewal) values('$plan','$memID','$cdate','$expiredate','yes')";
           if(mysqli_query($con,$query2)==1){
 
-            $query4="insert into health_status(uid) values('$memID')";
+            $query4="insert into health_status(uid,active) values('$memID',yes)";
             if(mysqli_query($con,$query4)==1){
 
               $query5="insert into address(id,streetName,state,city,zipcode) values('$memID','$stname','$state','$city','$zipcode')";

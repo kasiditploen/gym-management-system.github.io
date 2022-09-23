@@ -2,13 +2,9 @@
 include('../constant/connect.php');
 
  $memID=$_POST['m_id'];
+ $age=$_POST['age'];
  $goal=mysqli_real_escape_string($con,$_POST['goal']);
- $fname=mysqli_real_escape_string($con,$_POST['fname']);
- $lname=mysqli_real_escape_string($con,$_POST['lname']);
  $gender=$_POST['gender'];
- $dob=$_POST['dob'];
- $phn=$_POST['mobile'];
- $email=$_POST['email'];
  $jdate=$_POST['jdate'];
  $domp=$_POST['domp'];
  $status=$_POST['status'];
@@ -24,15 +20,15 @@ include('../constant/connect.php');
  $emailselect = "SELECT email from users where email='$email'";
  $emaildupe =mysqli_query($con,$emailselect);
 
- $duplicate=mysqli_query($con,"select * from dayusers where dayuserid='$memID' or email ='$email'");
+ $duplicate=mysqli_query($con,"select * from dayusers where dayuserid='$memID'");
 if (mysqli_num_rows($duplicate)>0)
 {
-  echo "<head><script>alert('This Email has already been used! Please fill a new email. ');</script></head></html>";
+  echo "<head><script>alert('ERROR! SOMETHING WRONG WITH USERID. ');</script></head></html>";
   echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
 echo mysqli_error($db);
 }
 //inserting into users table
-$query="insert into dayusers (dayuserid,fname,lname,gender,mobile,email,status,goal,joining_date) VALUES ('$memID','$fname','$lname','$gender','$phn','$email', '$status','$goal','$jdate')";
+$query="insert into dayusers (dayuserid,agegroup,gender,goal,joining_date) VALUES ('$memID','$age','$gender','$goal','$jdate')";
 
 mysqli_real_escape_string($con, $plan);
 //$query="insert into users(username,gender,mobile,email,dob,joining_date,userid) values('$uname','$gender','$phn','$email','$dob','$jdate','$memID','$image')";
@@ -71,15 +67,15 @@ mysqli_real_escape_string($con, $plan);
                 $noyessession="$value1[7]";
                 $query7="insert into sessions2(pid,dayuserid,amount,paid_date,expire,renewal) values('$pt','$memID','$noyessession','$cdate1','$expiredate1','yes')";
                 if(mysqli_query($con,$query7)==1){
-                  echo "<head><script>alert('Member Added Personal ');</script></head></html>";
-                  echo "<meta http-equiv='refresh' content='0; url=view_daypass.php'>";
+                  echo "<head><script>alert('Walk-in Checked ');</script></head></html>";
+                  echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
                 
                 }
               }
 
               if($pt=='' && $ct=='' && $result6){
-                echo "<head><script>alert('Member Added Membership ');</script></head></html>";
-                echo "<meta http-equiv='refresh' content='0; url=view_daypass.php'>";
+                echo "<head><script>alert('Walk-in Checked ');</script></head></html>";
+                echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
               }
           
               if($pt!='' && $ct!='' && $result6){
@@ -105,8 +101,8 @@ mysqli_real_escape_string($con, $plan);
                     $query9="insert into csessions2(pid,dayuserid,amount,paid_date,expire,renewal) values('$ct','$memID','$noyessession','$cdate2','$expiredate2','yes')";
                   
                     if(mysqli_query($con,$query9)==1){
-                      echo "<head><script>alert('Member Added ALL ADD ');</script></head></html>";
-                    echo "<meta http-equiv='refresh' content='0; url=view_daypass.php'>";
+                      echo "<head><script>alert('Walk-in Checked ');</script></head></html>";
+                    echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
                   }
                 }
               }
@@ -132,8 +128,8 @@ mysqli_real_escape_string($con, $plan);
                         $query9="insert into csessions2(pid,dayuserid,amount,paid_date,expire,renewal) values('$ct','$memID','$noyessession','$cdate2','$expiredate2','yes')";
                         
                         if(mysqli_query($con,$query9)==1){
-                          echo "<head><script>alert('Member Added Class and Membership ');</script></head></html>";
-                          echo "<meta http-equiv='refresh' content='0; url=view_daypass.php'>";
+                          echo "<head><script>alert('Walk-in Checked ');</script></head></html>";
+                          echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
                         } 
                         
                         
@@ -153,7 +149,7 @@ mysqli_real_escape_string($con, $plan);
 
               }else if($pt=='' or $ct=='' && $result6){
                 echo "<head><script>alert('Member Added Membership ');</script></head></html>";
-                echo "<meta http-equiv='refresh' content='0; url=view_daypass.php'>";
+                echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
               } else if($pt=='' or $ct==''){
                 echo "<head><script>alert('Please try again!');</script></head></html>";
                 echo "<meta http-equiv='refresh' content='0; url=new_entry.php'>";
@@ -188,8 +184,8 @@ mysqli_real_escape_string($con, $plan);
               $query9="insert into csessions2(pid,dayuserid,amount,paid_date,expire,renewal) values('$ct','$memID','$noyessession','$cdate2','$expiredate2','yes')";
               
               if(mysqli_query($con,$query9)==1){
-                echo "<head><script>alert('Member Added ');</script></head></html>";
-                echo "<meta http-equiv='refresh' content='0; url=view_daypass.php'>";
+                echo "<head><script>alert('Walk-in Checked ');</script></head></html>";
+                echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
               }
           }
 

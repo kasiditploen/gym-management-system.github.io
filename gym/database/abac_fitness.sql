@@ -299,6 +299,7 @@ CREATE TABLE `health_status` (
   `weight` varchar(8) DEFAULT NULL,
   `fat` varchar(8) DEFAULT NULL,
   `remarks` varchar(200) DEFAULT NULL,
+  `active` varchar(200) DEFAULT NULL,
   `uid` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 

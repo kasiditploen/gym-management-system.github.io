@@ -27,13 +27,17 @@ if(isset($_POST['submit'])){
     $fat=$_POST['fat'];
     $remarks=$_POST['remarks'];
     $userid=$_POST['usrid'];
-     
-    $query="update health_status set calorie='".$calorie."', height='".$height."',weight='".$weight."',fat='".$fat."',remarks='".$remarks."' where uid='".$userid."'";
+    $query="update health_status set active='no' where uid='".$userid."'";
+    
+    
       //echo  $query;exit;
     if(mysqli_query($con,$query)){
-        echo "<head><script>alert('Health Status Added ');</script></head></html>";
+        
+        $query0="insert into health_status(calorie,height,weight,fat,remarks,uid,active) values('$calorie','$height','$weight','$fat','$remarks','$userid','yes')";
+if(mysqli_query($con,$query0)){
+    
+    echo "<head><script>alert('Health Status Added ');</script></head></html>";
         echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
-
     }
     else{
      echo "<head><script>alert('NOT SUCCESSFUL, Check Again');</script></head></html>";
@@ -42,7 +46,7 @@ if(isset($_POST['submit'])){
         
     }
 
-    
+}
 }
 else{
     $uid=$_POST['uid'];
