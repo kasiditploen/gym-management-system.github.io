@@ -19,6 +19,9 @@ $classholderid= $_POST['classholderid'];
 $amount= $_GET['am'];
 $csession= $_GET['cs'];
 $pid= $_GET['pid'];
+$tomorrow = date("d-m-Y", strtotime('tomorrow'));
+  $compare_date=date("d M Y");
+  $cdate=date("d M Y H:i"); //current date
 $one= 1;
 $output = $amount-$one;
 
@@ -40,10 +43,12 @@ if(mysqli_query($con,$query)==1){
 $result1=mysqli_query($con,$query1);
 
 	if($result1){
-
-		echo "<head><script>alert('Enrollment Added ');</script></head></html>";
+		$query2="insert into attendance(attendanceid,present,userid,created_date,compare_date,expire,active) values('$aid','yes','$user','$cdate','$compare_date','$tomorrow','yes')";
+		$result2=mysqli_query($con,$query2);
+		
+			if($result2){
+				echo "<head><script>alert('Enrollment Added ');</script></head></html>";
 			echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
-
 		  }
 		  else{
 			  echo "<head><script>alert('Enrollment Failed');</script></head></html>";
@@ -53,6 +58,7 @@ $result1=mysqli_query($con,$query1);
 			 mysqli_query($con,$query3);
 		  }
 		  
+		}
 			
 }
 		 

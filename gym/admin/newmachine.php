@@ -21,7 +21,12 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                
+                <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black9.jpg');
+    height: 200px; width: 1600px;
+  ">
+  <h1 class="color-white mb-3 h1"><b>Gym Equipment</b></h1>
+</div>
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">

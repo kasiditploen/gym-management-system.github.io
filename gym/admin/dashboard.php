@@ -24,10 +24,10 @@
             <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
-    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black2.jpg');
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black4.jpg');
     height: 200px; width: 1600px;
   ">
-  <h1 class="color-white mb-3 h2"><b>Dashboard</b></h1>
+  <h1 class="color-white mb-3 h1"><b>Dashboard</b></h1>
 </div>
                 <div class="card">
                 <div class="col-md-3 align-self-left">
@@ -375,8 +375,8 @@
                 </div>
 
                 
-                        <div class="container-fluid">
-                <div class="card">
+                        
+                <!--<div class="card">
                             <div class="card-body">
                             <h2 class="color-black">PERSONAL TRAINERS STATUS</h2></a>
                         <div class="table-responsive m-t-40">
@@ -493,7 +493,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
             
                       
                        
@@ -501,16 +501,16 @@ $dayOfWeek = date("l", $unixTimestamp);
             <!-- End Container fluid  -->
 
             <!-- Container fluid  -->
-            <div class="container-fluid">
+            
                 <!-- Start Page Content -->
                 
                 <div class="card">
                 <div class="col-md-3 align-self-left">
-                    <h1 class="text-primary">Widgets</h1> </div>
+                    <h1 class="text-primary">Environments</h1> </div>
 
                       <div class="row">
                     <div class="col-md-3">
-                        <div class="card view view-cascade gradient-card-header peach-gradient p-20">
+                        <div class="card bg-danger p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
                                     
@@ -672,7 +672,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card dusty-grass-gradient color-block mb-3 mx-auto p-20">
+                        <div class="card bg-success color-block mb-3 mx-auto p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
                                     <span><i class="ti-star f-s-40"></i></span>
@@ -749,6 +749,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                     </div>
                         </div>
                         </div>
+                        
 
                         
 
@@ -876,6 +877,16 @@ $(document).ready(function(){
 .avatar img {
   width: 100%;
   display: block;
+}
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #ea6666;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(234, 102, 102, 0.45), rgba(255, 0, 0, 0.45));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(234, 102, 102, 0.45), rgba(255, 0, 0, 0.45))
 }
   </style>
 

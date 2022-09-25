@@ -25,7 +25,7 @@
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                               <h1>Machine History</h1>
                             <h3>
                               Details of : - 

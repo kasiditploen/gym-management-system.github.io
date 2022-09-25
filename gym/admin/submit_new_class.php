@@ -18,6 +18,7 @@ $classtype= $_POST['classtype'];
 $session= $_POST['session'];
 
 
+
 $duplicate=mysqli_query($con,"select * from trainertt where trainerid='$trainer' and time_from='$time_from' and time_to='$time_to'");
 if (mysqli_num_rows($duplicate)>0)
 {
@@ -147,7 +148,7 @@ $query="INSERT INTO classes (classid,className,description,classtype,studios,dow
 					
 				
 				} echo "<head><script>alert('Class Added ');</script></head></html>";
-				echo "<meta http-equiv='refresh' content='0; url=view_class.php'>";
+				echo "<meta http-equiv='refresh' content='0; url=view_class_session.php'>";
 				
 
 				

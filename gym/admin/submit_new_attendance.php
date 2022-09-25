@@ -53,7 +53,7 @@ $aid =mysqli_real_escape_string($con,$_POST['attendanceid']);
   
 
   if ($query1 &&$session='Yes' &&!$duplicate){
-    $query1="insert into attendance(attendanceid,present,userid,created_date,expire,active) values('$aid','$presentid','$uid','$cdate','$tomorrow','yes')";
+    $query1="insert into attendance(attendanceid,present,userid,created_date,expire,active) values('$aid','$presentid','$uid','$cdate','$tomorrow','present')";
     $result=mysqli_query($con,$query1);
     $result3=mysqli_query($con,$query3);
     echo "<head><script>alert('3');</script></head></html>";

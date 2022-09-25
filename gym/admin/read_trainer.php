@@ -9,24 +9,53 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary"> Manage Members</h3> </div>
+                    <h3 class="text-primary"> Manage Trainers</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">View Members</li>
+                        <li class="breadcrumb-item active">View Trainers</li>
                     </ol>
                 </div>
             </div>
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
+            <?php
+      $id     = $_GET['id'];;
+      $query  = "select * from trainers WHERE trainerid='$id'";
+      //echo $query;
+      $result = mysqli_query($con, $query);
+
+      if (mysqli_affected_rows($con) != 0) {
+          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $image = $row['image'];
+            $name = $row['username'];
+            $fname = $row['fname'];
+            $lname = $row['lname'];
+              $memid=$row['trainerid'];
+              $gender=$row['gender'];
+              $mobile=$row['mobile'];
+              $email=$row['email'];
+              $joinon=$row['joining_date'];
+              $skills=$row['skills'];
+              $yoe=$row['yoe'];
+              
+          }
+      }
+      ?>
             <div class="container-fluid">
+            <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: '<?php echo 'data:image/jpeg;base64,' . $row['image'];?>';
+    height: 200px; width: 1600px;
+  ">
+  <h1 class="color-white mb-3 h1"><b><?php echo "$fname "," $lname" ?></b></h1>
+</div>
                 <!-- Start Page Content -->
                 
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
-                              <h1>Member History</h1>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                              <h1>Trainer Information</h1>
                             <h3>
                               Details of : - <?php
       $id     = $_GET['id'];;
@@ -53,7 +82,7 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
         <tr>
-        <th>Member Photo</th>
+        <th>Trainer Photo</th>
          <th>Trainer ID</th>
           <th>Name</th>
           <th>Gender</th>
@@ -83,46 +112,68 @@
         </tbody>
                                       
                                     </table>
+
+                                    
                                     <br>
-                                    <br>
-                                    <h3>Training history of : - <?php echo $name;?></h3>
+                                    <h3>Payroll History of : - <?php echo $name;?></h3>
                                                <table class="table table-bordered table-striped">
                                         <thead>
         <tr>
          <th>Sl.No</th>
-          <th>Plan Name</th>
-          <th>Plan Desc</th>
-          <th>Validity</th>
-          <th>Amount</th>
-          <th>Payment Date</th>
-          <th>Expire Date</th>
+         <th>Class ID</th>
+          <th>Class Name</th>
+          <th>Trainee Nickname</th>
+          <th>Description</th>
+          <th>Trainer</th>
+          <th>Training Date</th>
+          <th>Time From</th>
+          <th>Time To</th>
         </tr>
       </thead>    
         <tbody>
           <?php
-            
-            $query1  = "select * from enrolls_to WHERE uid='$memid'";
-            //echo $query;
+          $id     = $_GET['id'];;
+      $query0  = "select * from trainers WHERE trainerid='$id'";
+      $sno    = 1;
+      $result0 = mysqli_query($con, $query0);
+      if($result0){
+        $row0=mysqli_fetch_array($result0,MYSQLI_ASSOC);
+        $trainername=$row0['username'];
+            $query1  = "select * from privateclasses";
             $result = mysqli_query($con, $query1);
-            $sno    = 1;
+           
 
-            if (mysqli_affected_rows($con) != 0) {
-                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $pid=$row['pid'];
-                  $query2="select * from plan where pid='$pid'";
+            if(isset($query1)){
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $pclassid = $row['privateclassid'];
+                  $query2="select * from privateclasses where privateclassid='$pclassid' and trainerid='$id'";
                   $result2=mysqli_query($con,$query2);
-                  if($result2){
-                    $row1=mysqli_fetch_array($result2,MYSQLI_ASSOC);?>
+                  while($row1=mysqli_fetch_array($result2)){
+                    
+                    $pvclassid = $row1['privateclassid'];
+                    $trainerid = $row1['trainerid'];
+                    $trainern = $row1['username'];
+                    $userid = $row1['userid'];
+                    $query3="select * from users where userid='$userid'";
+                  $result3=mysqli_query($con,$query3);
+                    
+                  if($result3){
+                    $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                    
+                    
+                    ?>
          
                   <tr>
                     <td><?php  echo  $sno; ?></td>
-                     <td><?php echo$row1['planName']; ?></td>
-                    
+                    <td><?php echo$row1['privateclassid']; ?></td>
+                     <td><?php echo$row1['className']; ?></td>
+                     <td><?php echo $row2['username']; ?></td>
                      <td width='380'><?php echo $row1['description']; ?></td>
-                     <td><?php echo $row1['validity']; ?></td>
-                     <td><?php echo $row1['amount']; ?> </td>
-                     <td><?php echo $row['paid_date']; ?> </td>
-                     <td><?php echo $row['expire']; ?> </td>
+                     <td><?php echo $trainername ?></td>
+                     <td><?php echo $row1['date_from']; ?> </td>
+                     <td><?php echo $row1['time_from']; ?> </td>
+                     <td><?php echo $row1['time_to']; ?> </td>
                  </tr>
                  <?php 
                  $sno++;
@@ -131,6 +182,10 @@
                 }
                 
             }
+          }
+        }
+      }
+        
 
           ?>      
 
@@ -138,9 +193,149 @@
                                       
                                     </table>
 
-                                </div>
-                            </div>
-                        </div>
+                                    
+                                    <br>
+                                    <h3>Group Class (Sessions) Enrollment history of : - <?php echo $name;?></h3>
+                                               <table class="table table-bordered table-striped">
+                                        <thead>
+        <tr>
+         <th>Sl.No</th>
+         <th>Class ID</th>
+          <th>Class Name</th>
+          <th>Nickname</th>
+          <th>Description</th>
+          <th>Trainer</th>
+          <th>Training Date</th>
+          <th>Time From</th>
+          <th>Time To</th>
+        </tr>
+      </thead>    
+        <tbody>
+          <?php
+          $id     = $_GET['id'];;
+      $query0  = "select * from trainers WHERE trainerid='$id'";
+      $sno    = 1;
+      $result0 = mysqli_query($con, $query0);
+
+      while($row0=mysqli_fetch_array($result0)){
+                  $query2="select * from classes where classid='$classid'";
+                  $result2=mysqli_query($con,$query2);
+                  while($row1=mysqli_fetch_array($result2)){
+                    $classid = $row['classid'];
+                    $trainerid = $row1['trainerid'];
+                    $query3="select * from trainers where trainerid='$id'";
+                  $result3=mysqli_query($con,$query3);
+                    
+                  while($row2=mysqli_fetch_array($result3)){
+                    
+                    
+                    
+                    ?>
+         
+                  <tr>
+                    <td><?php  echo  $sno; ?></td>
+                    <td><?php echo$row1['classid']; ?></td>
+                     <td><?php echo$row1['className']; ?></td>
+                     <td><?php echo $row0['username']; ?></td>
+                     <td width='380'><?php echo $row1['description']; ?></td>
+                     <td><?php echo $row1['username']; ?></td>
+                     <td><?php echo $row1['created_date']; ?> </td>
+                     <td><?php echo $row1['time_from']; ?> </td>
+                     <td><?php echo $row1['time_to']; ?> </td>
+                 </tr>
+                 <?php 
+                 $sno++;
+                }  
+              $memid = 0;
+                }
+                
+            }
+          
+        
+
+          ?>      
+
+        </tbody>
+                                      
+                                    </table>
+
+                                    <h3>Personal Training History of : - <?php echo $name;?></h3>
+                                               <table class="table table-bordered table-striped">
+                                        <thead>
+        <tr>
+         <th>Sl.No</th>
+         <th>Class ID</th>
+          <th>Class Name</th>
+          <th>Trainee Nickname</th>
+          <th>Description</th>
+          <th>Trainer</th>
+          <th>Training Date</th>
+          <th>Time From</th>
+          <th>Time To</th>
+        </tr>
+      </thead>    
+        <tbody>
+          <?php
+          $id     = $_GET['id'];;
+      $query0  = "select * from trainers WHERE trainerid='$id'";
+      $sno    = 1;
+      $result0 = mysqli_query($con, $query0);
+      if($result0){
+        $row0=mysqli_fetch_array($result0,MYSQLI_ASSOC);
+        $trainername=$row0['username'];
+            $query1  = "select * from privateclasses";
+            $result = mysqli_query($con, $query1);
+           
+
+            if(isset($query1)){
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $pclassid = $row['privateclassid'];
+                  $query2="select * from privateclasses where privateclassid='$pclassid' and trainerid='$id'";
+                  $result2=mysqli_query($con,$query2);
+                  while($row1=mysqli_fetch_array($result2)){
+                    
+                    $pvclassid = $row1['privateclassid'];
+                    $trainerid = $row1['trainerid'];
+                    $trainern = $row1['username'];
+                    $userid = $row1['userid'];
+                    $query3="select * from users where userid='$userid'";
+                  $result3=mysqli_query($con,$query3);
+                    
+                  if($result3){
+                    $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                    
+                    
+                    ?>
+         
+                  <tr>
+                    <td><?php  echo  $sno; ?></td>
+                    <td><?php echo$row1['privateclassid']; ?></td>
+                     <td><?php echo$row1['className']; ?></td>
+                     <td><?php echo $row2['username']; ?></td>
+                     <td width='380'><?php echo $row1['description']; ?></td>
+                     <td><?php echo $trainername ?></td>
+                     <td><?php echo $row1['date_from']; ?> </td>
+                     <td><?php echo $row1['time_from']; ?> </td>
+                     <td><?php echo $row1['time_to']; ?> </td>
+                 </tr>
+                 <?php 
+                 $sno++;
+                }  
+              $memid = 0;
+                }
+                
+            }
+          }
+        }
+      }
+        
+
+          ?>      
+
+        </tbody>
+                                      
+                                    </table>
                
                 <!-- /# row -->
 

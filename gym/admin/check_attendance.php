@@ -66,7 +66,7 @@ $dayOfWeek = date("l", $unixTimestamp);
             <div class="card">
             
                             <div class="card-body">
-                            <div><button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b></div>
+                            <div><button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b></div>
                 
                             
                             <h2 class="color-black"><?php echo $classname ."'s Class Attendance" ?></h2></a>

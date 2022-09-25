@@ -270,7 +270,7 @@
                  <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">By Sessions</h2></a>
+                            <h2 class="color-black">PT Sessions</h2></a>
                             <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
                             <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
                          
@@ -392,7 +392,7 @@
                  <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">By Classes</h2></a>
+                            <h2 class="color-black">Class Sessions</h2></a>
                             <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
                             <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
                          

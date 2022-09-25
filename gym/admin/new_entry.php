@@ -34,7 +34,7 @@ include('../constant/connect.php');
                     <div class="col-lg-8" style="    margin-left: 10%;">
                         <div class="card">
                             <div class="card-title">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><b><i class="fas fa-arrow-left"></i></button></b>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                             </div>
 
                             
@@ -127,7 +127,7 @@ include('../constant/connect.php');
                                         
                                         <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label">Thai National ID</label>
+                                                <label class="col-sm-3 control-label">Identity No.</label>
                                                 <div class="col-sm-9">
                                                 <input type="number" name="nationalid" id="boxx" maxlength="13" class="form-control" required pattern="^[0-9]+$" />
                                                 </div>

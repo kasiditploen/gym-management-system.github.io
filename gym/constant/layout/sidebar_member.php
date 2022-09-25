@@ -12,7 +12,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
-                        <li class="nav-label">WELCOME TO ABAC FITNESS DBMS</li>
+                        <li class="nav-label">WELCOME TO AU FITNESS MANAGEMENT SYSTEM</li>
                         <li class="nav-label">Dashboard</li>
                         <li><a href="dashboard.php" aria-expanded="false"><i class="fa fa-tachometer"></i><i></i><span class="hide-menu">Dashboard</span></a></li>
                         

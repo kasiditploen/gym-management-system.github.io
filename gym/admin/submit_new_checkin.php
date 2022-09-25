@@ -15,6 +15,7 @@ include('../constant/connect.php');
 
   $duplicate=mysqli_query($con,"select * from checkin where userid='$userid' and created_date ='$cdatenohs'");
   $query2="insert into checkin(checkinid,userid,created_date,created_time,expire,active) values('$checkinid','$userid','$cdatenohs','$time','$tomorrow','yes')";
+  $query3="update attendance set present='".$presentid."'where userid='".$uid."'";
 if (mysqli_num_rows($duplicate)>0){
 
   echo "<head><script>alert('This user has already checked in today. ');</script></head></html>";
@@ -25,6 +26,7 @@ echo mysqli_error($db);
 mysqli_real_escape_string($con, $checkinid);
 mysqli_real_escape_string($con, $userid);
 $result2=mysqli_query($con,$query2);
+  $result3=mysqli_query($con,$query3);
 echo "<head><script>alert('Checkin Checked ');</script></head></html>";
       echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
 

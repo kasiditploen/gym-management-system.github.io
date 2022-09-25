@@ -48,7 +48,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                     <div class="col-lg-8" style="    margin-left: 10%;">
                         <div class="card">
                             <div class="card-title">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                             </div>
                             <div class="card-body">
                                 <div class="input-states">
@@ -92,7 +92,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                     <option value="Combat Sports">Combat Sports</option>
                                     <option value="Dance">Dance</option>
                                     <option value="Mind and Body">Mind and Body</option>
-                                    <option value="Swimming">Swimming</option>
+                                    
                                 </select>
                             </div>
                             </div>
@@ -139,8 +139,8 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="row">
-                                                <div id="categorydetls">
+                                            <div>
+                                                <div>
                                             </div>
                                         </div>
                                     </div>

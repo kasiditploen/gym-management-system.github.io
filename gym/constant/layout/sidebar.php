@@ -12,9 +12,10 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
-                        <!--<li class="nav-label">WELCOME TO ABAC FITNESS DBMS</li>-->
+                        <!--<li class="nav-label">WELCOME TO AU FITNESS MANAGEMENT SYSTEM</li>-->
                         <p></p>
-                        <li>Welcome to ABAC FITNESS</li>
+                        <br>
+                        <br>
                         <li class="nav-label">Dashboard</li>
                         <li><a href="dashboard.php" aria-expanded="false"><i class="fa fa-tachometer"></i><i></i><span class="hide-menu">Dashboard</span></a></li>
                         
@@ -61,7 +62,7 @@
 
 <li class="nav-label">Arrangements</li>
 <!--<li><a href="view_checkin.php" aria-expanded="false"><i class="fas fa-at"></i><i></i><span class="hide-menu">Check-In/Out</span></a></li>-->
-<li><a href="view_attendance.php" aria-expanded="false"><i class="fas fa-check-double"></i><i></i><span class="hide-menu">Class Attendance</span></a></li>
+
 
 
 
@@ -86,11 +87,7 @@
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-user-clock"></i><i></i><span class="hide-menu">Classes</span></a>
                         <ul aria-expanded="false" class="collapse">
                         
-                        <li class="nav-label">Membership</li>
-
-                        <li>
-                <a href="view_class.php">Group Class Training <p>(Membership)</p></a>
-            </li> 
+                        
 
            <!-- <li>
                 <a href="view_privateclass.php">Semi-Private Personal Training</a>
@@ -113,13 +110,7 @@
                 <a href="view_privateclass.php">Personal Training <p>(Sessions)</p></a>
             </li> 
 
-            <li class="nav-label">Daypasses</li>
-
-            <li>
-                <a href="#">Personal Training <p>(Sessions)</p></a>
-            </li> 
-            
-           
+      
 
             </li>   
             </ul>
@@ -237,7 +228,7 @@
                         
             <li class="nav-label"><b>Customer Services</b></li>   
                         
-            <li><a href="#" aria-expanded="false"><i class="fa fa-window-restore"></i><i></i><span class="hide-menu">Feedback</span></a></li>
+            <li><a href="view_feedback.php" aria-expanded="false"><i class="fa fa-window-restore"></i><i></i><span class="hide-menu">Feedback</span></a></li>
               
                     
                             
@@ -245,18 +236,22 @@
                         
             <li class="nav-label">Office Management</li>
 <!--<li><a href="#" aria-expanded="false"><i class="fas fa-scroll"></i><i></i><span class="hide-menu">Debtors/Bad Debts</span></a></li>-->
-<li><a href="#" aria-expanded="false"><i class="fas fa-clipboard-check"></i><i></i><span class="hide-menu">Reports</span></a></li>
-                         
-                        
-                        <li class="nav-label">Administrator</li>
-                         <li><a href="profile.php" aria-expanded="false"><i class="fas fa-cogs"></i><i></i><span class="hide-menu">Admin Profile</span></a></li>
-                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-info-circle"></i><i></i><span class="hide-menu">Overview</span></a>
+<li><a href="#" aria-expanded="false"><i class="fa fa-percent"></i><i></i><span class="hide-menu">Trainer Payroll</span></a></li>
+<li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-scroll"></i><i></i><span class="hide-menu">Reports</span></a>
                             <ul aria-expanded="false" class="collapse">
                             
                             <li>
-                <a href="charts.php">Charts</a>
+                <a href="charts.php">Charts & Stats</a>
+            </li>
+
+                            <li>
+                            <a href="view_checkin.php" aria-expanded="false"><i></i><span class="hide-menu">Check-in</span></a>
             </li>
                             <li>
+                            <a href="view_attendance.php" aria-expanded="false"><i></i><span class="hide-menu">Personal Training Attendance</span></a>
+            </li>
+
+            <li>
                 <a href="over_members_month.php">Member Joined Log</a>
             </li>
 
@@ -267,8 +262,17 @@
             <li>
                 <a href="revenue_month.php">Monthly Income</a>
             </li>
-                            </ul>
+
+            
+
+            </ul>
                         </li>
+
+                         
+                        
+                        <li class="nav-label">Administrator</li>
+                         <li><a href="profile.php" aria-expanded="false"><i class="fas fa-cogs"></i><i></i><span class="hide-menu">Admin Profile</span></a></li>
+                         
 
 
                          

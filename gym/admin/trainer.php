@@ -21,7 +21,12 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                
+                <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black6.jpg');
+    height: 200px; width: 1600px;
+  ">
+  <h1 class="color-white mb-3 h1"><b>Trainers</b></h1>
+</div>
                 <!-- /# row -->
              
                  <div class="card">
@@ -125,6 +130,7 @@
                   
                  <td>
                  <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-warning" ><i class="far fa-calendar-alt"></i></button></a>
+                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-secondary" ><i class="fas fa-clipboard-check"></i></button></a>
                   <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
                   <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
@@ -216,6 +222,7 @@
                   
                  <td>
                  <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-warning" ><i class="far fa-calendar-alt"></i></button></a>
+                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-secondary" ><i class="fas fa-clipboard-check"></i></button></a>
                   <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
                   <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  

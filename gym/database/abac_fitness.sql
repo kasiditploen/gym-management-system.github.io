@@ -448,7 +448,7 @@ CREATE TABLE `manage_website` (
 --
 
 INSERT INTO `manage_website` (`id`, `title`, `short_title`, `logo`, `footer`, `currency_code`, `currency_symbol`, `login_logo`, `invoice_logo`, `background_login_image`) VALUES
-(1, 'ABAC FITNESS DBMS', 'ABAC FITNESS', 'admin pubb Logo.png', 'Kasidit Ploenthamakhun', 'THB', ' ฿', 'admin pubb Logo 2.png', 'admin pubb Logo 2.png', 'black.jpg');
+(1, 'AU FITNESS MANAGEMENT SYSTEM', 'AU FITNESS', 'admin pubb Logo.png', 'Kasidit Ploenthamakhun', 'THB', ' ฿', 'admin pubb Logo 2.png', 'admin pubb Logo 2.png', 'black.jpg');
 
 -- --------------------------------------------------------
 
@@ -480,6 +480,22 @@ INSERT INTO `plan` (`pid`, `planName`,  `description`, `validity`, `amount`, `pl
 ('575499', '8-PACK SESSIONS',  '60-MINUTE PERSONAL TRAINING', '2','23100','Sessions','yes','8'),
 ('588888', '12-PACK SESSIONS',  '60-MINUTE PERSONAL TRAINING', '3','30030','Sessions','yes','12'),
 ('111111', 'One Day Pass',  'Single-Day Gym Access Only,valid for 1 day from purchase date', '24','500','Hours','yes',NULL);
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `feedbackid` varchar(8) NOT NULL,
+  `userid` varchar(20) NOT NULL,
+  `service` varchar(20) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `active` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 
 
 
@@ -1147,6 +1163,14 @@ ALTER TABLE `plan`
   ADD PRIMARY KEY (`pid`) USING BTREE,
   ADD KEY `pid` (`pid`) USING BTREE;
 
+  --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`feedbackid`) USING BTREE,
+  ADD KEY `userID_idfb` (`userid`) USING BTREE,
+  ADD KEY `feedbackid` (`feedbackid`) USING BTREE;
+
 -- Indexes for table `plan2`
 --
 ALTER TABLE `plan2`
@@ -1314,6 +1338,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `classholder`
   MODIFY `classholderid` int(5) NOT NULL AUTO_INCREMENT;
+
+  --
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `feedbackid` int(5) NOT NULL AUTO_INCREMENT;
 
 
 --
@@ -1501,6 +1531,12 @@ ALTER TABLE `address2`
 ALTER TABLE `enrolls_to`
   ADD CONSTRAINT `plan_ID` FOREIGN KEY (`pid`) REFERENCES `plan` (`pid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `user_ID` FOREIGN KEY (`uid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+  --
+-- Constraints for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `user_IDfb` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
   --
 -- Constraints for table `enrolls_to_day`

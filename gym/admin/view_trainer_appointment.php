@@ -144,7 +144,7 @@
                               <input type='hidden' name='username' value='<?php echo $username?>'/>
                               <input type='hidden' name='session' value='<?php echo $session?>'/>
                               <input type='submit' id='button1' value='Approve' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
-                  <a href="del_class.php?id=<?php echo $row['appointmentid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to disapprove this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
+                  <a href="del_class.php?id=<?php echo $row['appointmentid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 

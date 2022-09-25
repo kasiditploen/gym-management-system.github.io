@@ -17,7 +17,7 @@
              // $result_head_title = $conn->query($sql_head_title);
              // $row_head_title = mysqli_fetch_array($result_head_title);
              ?>
-    <title>ABAC FITNESS MANAGEMENT SYSTEM</title>
+    <title>AU FITNESS MANAGEMENT SYSTEM</title>
 
     
 

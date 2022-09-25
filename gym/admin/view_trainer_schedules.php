@@ -21,7 +21,7 @@
             <!-- Container fluid  -->
             
             <div class="container-fluid">
-            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black3.jpg');

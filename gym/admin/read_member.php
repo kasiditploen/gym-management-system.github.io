@@ -25,8 +25,8 @@
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
-                              <h1>Member History</h1>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                              <h1>Member Information</h1>
                             <h3>
                               Details of : - <?php
       $id     = $_GET['id'];;
@@ -232,8 +232,8 @@
       $query0  = "select * from users WHERE userid='$id'";
       $sno    = 1;
       $result0 = mysqli_query($con, $query0);
-      if($result0){
-        $row0=mysqli_fetch_array($result0,MYSQLI_ASSOC);
+      while($row0=mysqli_fetch_array($result0)){
+        
             $query1  = "select * from classholder WHERE userid='$id'";
             $result = mysqli_query($con, $query1);
            
@@ -302,20 +302,19 @@
           $id     = $_GET['id'];;
       $query0  = "select * from users WHERE userid='$id'";
       $sno    = 1;
+      
       $result0 = mysqli_query($con, $query0);
-      if($result0){
-        $row0=mysqli_fetch_array($result0,MYSQLI_ASSOC);
-            $query1  = "select * from privateclasses";
+                                      while($row0=mysqli_fetch_array($result0)){
+            $query1  = "select * from privateclasses where userid = '$id'";
             $result = mysqli_query($con, $query1);
            
-
+            if(isset($query1)){
             if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   $pclassid = $row['privateclassid'];
                   $query2="select * from privateclasses where privateclassid='$pclassid'";
                   $result2=mysqli_query($con,$query2);
-                  if($result2){
-                    $row1=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                  while($row1=mysqli_fetch_array($result2)){
                     $trainerid = $row1['trainerid'];
                     $query3="select * from trainers where trainerid='$trainerid'";
                   $result3=mysqli_query($con,$query3);
@@ -332,8 +331,8 @@
                      <td><?php echo$row1['className']; ?></td>
                      <td><?php echo $row0['username']; ?></td>
                      <td width='380'><?php echo $row1['description']; ?></td>
-                     <td><?php echo $row0['username']; ?></td>
-                     <td><?php echo $row1['date_fr']; ?> </td>
+                     <td><?php echo $row2['username']; ?></td>
+                     <td><?php echo $row1['date_from']; ?> </td>
                      <td><?php echo $row1['time_from']; ?> </td>
                      <td><?php echo $row1['time_to']; ?> </td>
                  </tr>
@@ -346,6 +345,7 @@
             }
           }
         }
+      }
 
           ?>      
 
