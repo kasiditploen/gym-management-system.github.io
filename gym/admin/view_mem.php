@@ -26,16 +26,16 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+                <a><div class="bg-image hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black7.jpg');
-    height: 200px; width: 1600px;
-  ">
-  <h1 class="color-white mb-3 h1"><b>Memberships</b></h1>
+    height: 300px; width: auto;
+  "></a>
+  <h1 class="color-white mb-3 h1 "><b>Memberships</b></h1>
 </div>
                 <!-- /# row -->
                  <div class="card">
                             
-                 <h2 class="color-black">Memberships</h2></a>
+                 
                             <div class="col-md-16">
                             <a href="new_entry.php"><button class="btn btn-lg btn-dark waves-effect waves-light"><i class="fas fa-plus color-white"></i></button></a>
                         <div class="card view view-cascade gradient-card-header card bg-dark p-10 ">
@@ -151,11 +151,11 @@
                                 <form id="form1" action="del_all_mem.php" method="POST">
                                 
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
-                                    <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                                    
                                     
                                         <thead>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
         <th style="width:2%;">Sl.No</th>
         <th style="width:2%;">Package</th>
           <th style="width:5%;">Image</th>
@@ -260,14 +260,17 @@
                    ?>
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" name="member_delete_id[]" value="<?= $row['userid']; ?>">
+                  
                     <td><?php echo $sno; ?></td>
                     <td><?php 
                      if(strtotime($diff2)<=45 && strtotime($today)< strtotime($expire)){
-        echo '<h4>Membership:<span class="badge badge-success"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4>';
+        echo '<ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4>Membership:<h5 class="color-black"><b>'.$planname.'<b></h5><span class="badge badge-color blue"> '.$diff2.'  Days Left</span></h4></li>
+        </ul>';
         }else if(strtotime($diff)<=15 && strtotime($today) < strtotime($expire)){
-          echo '<h4>Membership:<span class="badge badge-info"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4>';
+          echo '<ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4>Membership:<span class="badge badge-color blue"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4></li>
+        </ul>';
       }else if(strtotime($diff2)<=7 && strtotime($today) < strtotime($expire)){
         echo '<h4>Membership:<span class="badge badge-warning"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4>';
         }else {if(empty($expire)){
@@ -282,11 +285,16 @@
 
 
         if(strtotime($diff4)<=45 && strtotime($today)< strtotime($expire1)){
-          echo '<h4>Personal Training:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-success"><h6 class="color-white">'.$planname1.'</h6> '.$diff4.'  Days Left </span></br></h4>';
+          echo '<ul class="list-group list-group-flush">
+          <li class="list-group-item">
+          <h4>Personal Training:<span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname1.'</h4><span class="badge badge-color blue">'.$diff4.'  Days Left </b></h3></br></li>
+          
+          
+          </ul>';
           }else if(strtotime($diff3)<=15 && strtotime($today) < strtotime($expire1)){
             echo '<h4>Personal Training:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-info"><h6 class="color-white">'.$planname1.'</h6> '.$diff4.'  Days Left </span></br></h4>';
         }else if(strtotime($diff4)<=7 && strtotime($today) < strtotime($expire1)){
-           echo '<h4>Personal Training:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-warning"><h6 class="color-white">'.$planname1.'</h6> '.$diff4.'  Days Left </span></br></h4>';
+           echo '<h5>Personal Training:</br><span class="badge badge-light"><h5 class="color-black"><b>  '.$sessioncount.'</b></h5> Session(s) Left</br></span><br><span class="badge badge-warning"><h5 class="color-white">'.$planname1.'</h5> '.$diff4.'  Days Left </span></br></h5>';
           }else {if(empty($expire1)){
             echo '<h4><span class="badge badge-dark"><h6 class="color-white">No Personal Training</h6></span></h4>';
           
@@ -298,7 +306,12 @@
         }
 
         if(strtotime($diff6)<=45 && strtotime($today)< strtotime($expire2)){
-          echo '<h4>Classes:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount1.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-success"><h6 class="color-white">'.$planname2.'</h6> '.$diff6.'  Days Left </span></br></h4>';
+          echo '<ul class="list-group list-group-flush">
+          <li class="list-group-item">
+          <h4>Classes:<span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount1.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname2.'</h4><span class="badge badge-color blue">'.$diff6.'  Days Left </b></h3></br></li>
+          
+          
+          </ul>';
           }else if(strtotime($diff5)<=15 && strtotime($today) < strtotime($expire2)){
             echo '<h4>Classes:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount1.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-info"><h6 class="color-white">'.$planname2.'</h6> '.$diff6.'  Days Left </span></br></h4>';
         }else if(strtotime($diff6)<=7 && strtotime($today) < strtotime($expire2)){
@@ -322,8 +335,11 @@
                             echo '<p><a href="status_quick.php?userid='.$row['userid'].'&status=1" class="btn btn-dark">Disabled</a></p>';
                         }  ?></p> </td>
                      <td><h4><?php echo $row['userid']; ?></h4></td>
-                     <td><h4><?php echo $row['fname']; ?> <?php echo $row['lname']; ?></h4></td>
+                     <td><h4><?php echo $row['fname']; ?><br><?php echo $row['lname']; ?></br></h4></td>
                      <td ><h4><?php echo$row['username']; ?></h4></td>
+                     
+
+                  </td>
                      <td><?php echo $row['mobile']; ?></td>
                      <td><?php echo $row['email']; ?> </td>
                       <td><?php echo $row['gender']; ?> </td>

@@ -339,7 +339,7 @@ $dayonly = date("l", $unixTimestamp);
                             <div class="card-body">
                             <h2 class="color-black">Cardio</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 
@@ -428,8 +428,10 @@ $dayonly = date("l", $unixTimestamp);
                   
                   
                  <td>
+
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -464,7 +466,7 @@ $dayonly = date("l", $unixTimestamp);
                             <div class="card-body">
                             <h2 class="color-black">HIIT</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit1" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 
@@ -553,6 +555,7 @@ $dayonly = date("l", $unixTimestamp);
                   
                   
                  <td>
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
                   
                   <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
@@ -589,7 +592,7 @@ $dayonly = date("l", $unixTimestamp);
                             <div class="card-body">
                             <h2 class="color-black">Dance</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit2" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 
@@ -678,6 +681,7 @@ $dayonly = date("l", $unixTimestamp);
                   
                   
                  <td>
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
                   
                   <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
@@ -714,7 +718,7 @@ $dayonly = date("l", $unixTimestamp);
                             <div class="card-body">
                             <h2 class="color-black">Mind and Body</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit3" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 
@@ -803,6 +807,7 @@ $dayonly = date("l", $unixTimestamp);
                   
                   
                  <td>
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
                   
                   <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
@@ -839,7 +844,7 @@ $dayonly = date("l", $unixTimestamp);
                             <div class="card-body">
                             <h2 class="color-black">Cycling</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit4" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 
@@ -928,6 +933,8 @@ $dayonly = date("l", $unixTimestamp);
                   
                   
                  <td>
+
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
                   
                   <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  

@@ -43,8 +43,19 @@ $time_from = $_POST['time_from'];
 $time_to = $_POST['time_to'];
 $trainerid= $_POST['trainerid'];
 $sessionid= $_POST['session'];
+
+date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date('Y-m-d');
+        $y1date=date('Y-m-d',strtotime('- 1 days'));
+        $y2date=date('Y-m-d',strtotime('- 2 days'));
+        $y3date=date('Y-m-d',strtotime('- 3 days'));
+        $y4date=date('Y-m-d',strtotime('- 4 days'));
+        $y5date=date('Y-m-d',strtotime('- 5 days'));
+        $y6date=date('Y-m-d',strtotime('- 6 days'));
+        $y7date=date('Y-m-d',strtotime('- 7 days'));
      
-$query="INSERT INTO booking (bookingid,classid,className,username,trainerid,userid,description,classtype,studios,dow,date_from,date_to,time_from,time_to,session) values('$bookingid','$classid','$classname','$username','$trainerid','$userid','$desc','$type','$studio','$dow','$date_from','$date_to','$time_from','$time_to','$sessionid')";
+$query="INSERT INTO booking (bookingid,classid,className,username,trainerid,userid,description,classtype,studios,dow,date_from,date_to,time_from,time_to,session,created_date,approved) values('$bookingid','$classid','$classname','$username','$trainerid','$userid','$desc','$type','$studio','$dow','$date_from','$date_to','$time_from','$time_to','1','$cdate','no')";
       //echo  $query;exit;
     if(mysqli_query($con,$query)){
 

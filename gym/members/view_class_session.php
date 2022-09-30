@@ -169,7 +169,7 @@
                  
               
                   
-                 <form id="form3" action='confirm_booking.php' method='post'><input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                 <form id="form3" action='check_class_session.php?id=<?php echo $classid;?>' method='post'><input type='hidden' name='classid' value='<?php echo $classid;?>'/>
                   
                               <input type='hidden' name='classid' value='<?php echo $classid;?>'/>
                               <input type='hidden' name='className' value='<?php echo $name;?>'/>
@@ -189,7 +189,7 @@
                               
                  
                               <!--  <a href="health_status_entry.php?id=<?php echo $row4['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ></button></a> -->
-                  <input type='submit' id='button1' value='Book' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
+                  <input type='submit' id='button1' value='Proceed' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
                  
                   </td></tr>
                   

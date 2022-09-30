@@ -8,6 +8,25 @@
 src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </script>
 <?php
+        date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date('Y-m-d');
+        $y1date=date('Y-m-d',strtotime('- 1 days'));
+        $y2date=date('Y-m-d',strtotime('- 2 days'));
+        $y3date=date('Y-m-d',strtotime('- 3 days'));
+        $y4date=date('Y-m-d',strtotime('- 4 days'));
+        $y5date=date('Y-m-d',strtotime('- 5 days'));
+        $y6date=date('Y-m-d',strtotime('- 6 days'));
+        $y7date=date('Y-m-d',strtotime('- 7 days'));
+
+
+        $unixTimestamp = strtotime($cdate);
+
+//Get the day of the week using PHP's date function.
+$dayOfWeek = date("l", $unixTimestamp);
+
+?>
+<?php
           $query0  = "select * from users";
           //echo $query;
           $result0 = mysqli_query($con, $query0);
@@ -67,7 +86,7 @@ $result=mysqli_query($con,$qry);
                           ?>  
                      ]);  
                 var options = {  
-                      title: 'Percentage of Male and Female AU Fitness Members',  
+                      title: 'Percentage of Male and Female in AU Fitness Center',  
                       //is3D:true,  
                       pieHole: 0.0 
                      };  
@@ -92,7 +111,7 @@ $result=mysqli_query($con,$qry);
                           ?>  
                      ]);  
                 var options = {  
-                      title: 'Percentage of Class Type in AU Fitness Members',  
+                      title: 'Percentage of Class Type in AU Fitness Center',  
                       //is3D:true,  
                       pieHole: 0.0 
                      };  
@@ -101,7 +120,7 @@ $result=mysqli_query($con,$qry);
            }  
            </script>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+
            <script type="text/javascript">  
            google.charts.load('current', {'packages':['corechart']});  
            google.charts.setOnLoadCallback(drawChart);  
@@ -120,7 +139,7 @@ $result=mysqli_query($con,$qry);
                           ?>  
                      ]);  
                 var options = {  
-                      title: 'Most Selected Personal Trainer in AU Fitness Members',  
+                      title: 'Most Selected Personal Trainer in AU Fitness Center',  
                       //is3D:true,  
                       pieHole: 0.0 
                      };  
@@ -150,11 +169,48 @@ $result=mysqli_query($con,$qry);
                           ?>  
                      ]);  
                 var options = {  
-                      title: 'Most Expensive Gym Equipment in AU Fitness Members',  
+                      title: 'Most Expensive Gym Equipment in AU Fitness Center',  
                       //is3D:true,  
                       pieHole: 0.0 
                      };  
                 var chart = new google.visualization.PieChart(document.getElementById('piechart3'));  
+                chart.draw(data, options);  
+           }  
+           </script>
+
+<script type="text/javascript">  
+           google.charts.load('current', {'packages':['corechart']});  
+           google.charts.setOnLoadCallback(drawChart);  
+           function drawChart()  
+           {  
+                var data = google.visualization.arrayToDataTable([  
+                          ['Gender', 'Number'],  
+                          <?php  $qry="SELECT *, sum(p.amount) as number FROM plan p
+                          INNER JOIN users u
+                          LEFT OUTER JOIN enrolls_to_day et ON et.pid = p.pid
+           LEFT OUTER JOIN sessions2 ss ON ss.pid = p.pid
+           LEFT OUTER JOIN csessions2 css ON css.pid = p.pid
+           LEFT OUTER JOIN enrolls_to e ON e.pid = p.pid
+           LEFT OUTER JOIN sessions s ON s.pid = p.pid
+           LEFT OUTER JOIN csessions c ON c.pid = p.pid
+            where s.pid = p.pid or e.pid = p.pid or c.pid = p.pid or et.pid = p.pid or ss.pid = p.pid or css.pid = p.pid
+
+
+
+                           GROUP BY p.planName";
+$result=mysqli_query($con,$qry);
+                          while($row = mysqli_fetch_array($result))  
+                          {  
+                               echo "['".$row["planName"]."', ".$row["number"]."],";  
+                          }  
+                          ?>  
+                     ]);  
+                var options = {  
+                      title: 'Revenues by Packages in AU Fitness Center',  
+                      //is3D:true,  
+                      pieHole: 0.0 
+                     };  
+                var chart = new google.visualization.PieChart(document.getElementById('piechart4'));  
                 chart.draw(data, options);  
            }  
            </script>
@@ -165,16 +221,19 @@ $result=mysqli_query($con,$qry);
 
       function drawStuff() {
         var data = new google.visualization.arrayToDataTable([
-          ['Terms', 'Total Amount',],
+          ['Terms', 'Total Amount'],
           
           <?php
           $query1 = "SELECT *, SUM(p.amount) as numberone FROM plan p
-           INNER JOIN users u
-            INNER JOIN enrolls_to e ON u.userid = e.uid
-            INNER JOIN sessions s ON u.userid = s.userid
-            INNER JOIN csessions c ON u.userid = c.userid
-            where u.userid='$userid' and s.pid = p.pid or e.pid = p.pid or c.pid = p.pid
-            GROUP BY  u.userid;";
+           
+           LEFT OUTER JOIN enrolls_to_day et ON et.pid = p.pid
+           LEFT OUTER JOIN sessions2 ss ON ss.pid = p.pid
+           LEFT OUTER JOIN csessions2 css ON css.pid = p.pid
+           LEFT OUTER JOIN enrolls_to e ON e.pid = p.pid
+           LEFT OUTER JOIN sessions s ON s.pid = p.pid
+           LEFT OUTER JOIN csessions c ON c.pid = p.pid
+            where s.pid = p.pid or e.pid = p.pid or c.pid = p.pid or et.pid = p.pid or ss.pid = p.pid or css.pid = p.pid
+            ";
 
             $rezz=mysqli_query($con,$query1);
             while($data=mysqli_fetch_array($rezz)){
@@ -206,8 +265,10 @@ $result=mysqli_query($con,$qry);
         ]);
 
         var options = {
+
+          colors: ['#ff0000'],
          
-          width: "1350",
+          width: "1050",
           legend: { position: 'none' },
           
           bars: 'horizontal', // Required for Material Bar Charts.
@@ -226,6 +287,157 @@ $result=mysqli_query($con,$qry);
 
       
     </script>
+    
+<script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart','line']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Terms', 'Members',],
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y7date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y7date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y6date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y6date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y5date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y5date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y4date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y4date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y3date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y3date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y2date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y2date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y1date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y1date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+
+<?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+            where u.joining_date = '$cdate'
+            ;";
+
+            $rezz3=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz3)){
+              $services2=$cdate;
+              $numberone2=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services2;?>',<?php echo $numberone2;?>,],   
+           <?php   
+            }
+           ?> 
+
+      
+
+          
+        ]);
+
+        var options = {'title' : 'New Memberships Each Day',
+      hAxis: {
+         title: 'Date'
+      },
+      vAxis: {
+         title: 'Memberships'
+      },   
+      'width':750,
+      'height':400,
+      pointsVisible: true,
+      colors: ['#ff0000']
+   };
+
+        var chart =  new google.visualization.LineChart(document.getElementById('line1'));
+        chart.draw(data, options);
+      };
+
+
+      
+    </script>
+
 <body>
  <?php
 //session_start();
@@ -253,12 +465,14 @@ include('../constant/connect.php');
                 
                 <!-- /# row -->
                 <div class="card">
-                <h1 class="text-center">Earnings & Expenses</h1>
+                <h1 class="text-center">Total Earnings & Expenses</h1>
                 <div class="card-body">
+                    
       
-        <div id="top_y_div" style="width: 700px; height: 300px;"></div>
+        <div id="top_y_div" style="width: 700px; height: 300px;" class='chart'></div>
       </div>
-    </div>
+      </div>
+      
   
 
     <div class="card">
@@ -274,6 +488,7 @@ include('../constant/connect.php');
                                 </div>
                                 <div class="media-body media-text-right">
                                 <?php
+        $tomorrow = date("d-m-Y", strtotime('tomorrow'));
               $query  = "select * from users ORDER BY joining_date";
               //echo $query;
               $result = mysqli_query($con, $query);
@@ -359,19 +574,19 @@ include('../constant/connect.php');
                                   $classname=$row10['className'];
                                   $tfrom=$row10['time_from'];
                                   $tto=$row10['time_to'];
-                                  $query11="select * from booking where userid='$uid' and trainerid='$trainerid'";
+                                  $query11="select * from booking where userid='$uid' and trainerid='$trainerid' and date_from LIKE '$tomorrow%'";
                                 $result11=mysqli_query($con,$query11);
                                 if($result11){
                                   $row11=mysqli_fetch_array($result11,MYSQLI_ASSOC);
                                   $bookedclassname=$row11['className'];
                                   $tfrom1=$row11['time_from'];
                                   $tto1=$row11['time_to'];
-                                  $query12="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid'";
+                                  $query12="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid' and created_date LIKE '%$cdate%'";
                                 $result12=mysqli_query($con,$query12);
                                 if($result12){
                                   $row12=mysqli_fetch_array($result12,MYSQLI_ASSOC);
                                   $classid1=$row12['classid'];
-                                  $classname1=$row12['className'];
+                                  $classname1=$row10['className'];
                                   $create_date1=$row12['created_date'];
                                   $query13="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid' and created_date LIKE '$cdate%'";
                                 $result13=mysqli_query($con,$query13);
@@ -379,28 +594,58 @@ include('../constant/connect.php');
                                   $row13=mysqli_fetch_array($result13,MYSQLI_ASSOC);
                                   $tfrom2=$row13['time_from'];
                                   $tto2=$row13['time_to'];
-
-
+                                  $query14="select * from enrolls_to_day";
+                                  $result14=mysqli_query($con,$query14);
+                                      if($result14){
+                                        $row14=mysqli_fetch_array($result14,MYSQLI_ASSOC);
+                                        $pid5=$row14['pid'];
+                                        $expire1=$row3['expire'];
+                                        $sessions=$row3['sessionid'];
+                                        $pidss=$row3['pid'];
+                                        $amount=$row3['amount'];
+                                        $sessioncount=$row3['amount'];
+                                        $query15="select * from plan where pid='$pid5'";
+                          $result15=mysqli_query($con,$query15);
+                          if($result15){
+                            $row15=mysqli_fetch_array($result15,MYSQLI_ASSOC);
+                            $planname1=$row15['planName'];
+                            $sessionid=$row15['sessionid'];
+                            $query16="select * from csessions2";
+                                $result16=mysqli_query($con,$query16);
+                                if($result16){
+                                  $row16=mysqli_fetch_array($result16,MYSQLI_ASSOC);
+                                  $pid4=$row16['pid'];
+                                  $query17="select * from plan where pid='$pid4'";
+                                  $result17=mysqli_query($con,$query17);
+                                      if($result17){
+                                        $row17=mysqli_fetch_array($result17,MYSQLI_ASSOC);
+                                        $pid4=$row14['pid'];
+                                        $expire1=$row3['expire'];
+                                        $sessions=$row3['sessionid'];
+                                        $pidss=$row3['pid'];
+                                        $amount=$row3['amount'];
+                                        $sessioncount=$row3['amount'];
+                                      }
+                                    }
+                                  }
                                 }
+                              }
                             }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
                           }
                         }
+                      }
                     }
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
-
-
-
-
+  }
+}
+                                        
 
                                ?>
 
@@ -413,7 +658,6 @@ include('../constant/connect.php');
                             $date  = date('Y-m');
                             $query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
                           
-                            
                             //echo $query;
                             $result  = mysqli_query($con, $query);
                             $revenue = 0;
@@ -421,6 +665,7 @@ include('../constant/connect.php');
                             $revenue2 = 0;
                             $revenue3 = 0;
                             $revenue4 = 0;
+                            $revenue5 = 0;
                             if (mysqli_affected_rows($con) != 0) {
                                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                                     $pid=$row['pid'];
@@ -442,6 +687,10 @@ include('../constant/connect.php');
                                     $result8=mysqli_query($con,$query8);
                                     $query9="select * from plan where pid='$pid4'";
                                     $result9=mysqli_query($con,$query9);
+                                    $query10="select * from enrolls_to_day WHERE  paid_date LIKE '$date%'";
+                                    $result10=mysqli_query($con,$query10);
+                                    $query11="select * from plan where pid='$pid5'";
+                                    $result11=mysqli_query($con,$query11);
 
 
 
@@ -480,29 +729,44 @@ include('../constant/connect.php');
                                         $value3=mysqli_fetch_row($result7);
                                     $revenue3 = $value3[4] + $revenue3;
                                     
-                                    }
+                                    
                                     if($result8){
                                       
-                                      $pid4=$row8['pid'];
+                                      $pid4=$row16['pid'];
                                       
                                   if($result9){
                                     
                                       $value4=mysqli_fetch_row($result9);
                                   $revenue4 = $value4[4] + $revenue4;
-                                  }
-                                  $total=($revenue+$revenue1+$revenue2+$revenue3+$revenue4);
                                   
-                                  
-                                  
-                                  }
+                                  if($result10){
+                                      
+                                    $pid5=$row14['pid'];
 
-                                    }
-                                }
-                            }
-                          }
-                        }
-                      }
-                           
+                                    
+                                    if($result11){
+                                    
+                                      $value5=mysqli_fetch_row($result11);
+                                  $revenue5 = $value5[4] + $revenue5;
+                                  
+                                  $total=($revenue+$revenue1+$revenue2+$revenue3+$revenue4+$revenue5);
+                                  
+
+                               
+                    }
+                  }
+                }   
+              }    
+            }
+          }
+                                  
+        }
+    }
+  }
+
+
+}
+}
                             ?>
                             
                             
@@ -654,17 +918,45 @@ include('../constant/connect.php');
         <div id="piechart1" class="text-center" style="width: 700px; height: 300px;"></div>
         <div id="piechart2" class="text-center" style="width: 700px; height: 300px;"></div>
         <div id="piechart3" class="text-center" style="width: 700px; height: 300px;"></div>
+        <div id="piechart4" class="text-center" style="width: 700px; height: 300px;"></div>
+        
+      </div>
+      
+    </div>
+  
+
+  <div class="card">
+  <h1 class="text-center">Line Chart Reports</h1>
+                <div class="card-body row d-flex justify-content-center">
+      
+                
+                <div class="card-body">
+                    
+      
+        <div id="line1" style="width: 700px; height: 300px;" class='chart'></div>
+      </div>
+      </div>
         
       </div>
       
     </div>
   </div>
- 
+  </div>
   
 
   
   
   </div>
+
+  <style>
+    .chart {
+  width: 100%; 
+  min-height: 450px;
+}
+.row {
+  margin:0 !important;
+}
+  </style>
 
 
 

@@ -56,7 +56,7 @@
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_trainer.php" method="POST">
                                     <table id="myTable" class="table table-bordered table-striped">
-                                    <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                                    
                                         <thead>
         <tr>
         <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
@@ -112,8 +112,8 @@
                   
                   
                  <td>
-                  <a href="read_member.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
-                  <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="read_member.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   

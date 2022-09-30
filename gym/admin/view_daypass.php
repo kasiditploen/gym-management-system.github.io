@@ -146,7 +146,7 @@
                                 <form id="form1" action="del_all_mem.php" method="POST">
                                 
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
-                                    <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                                    
                                     
                                         <thead>
         <tr>

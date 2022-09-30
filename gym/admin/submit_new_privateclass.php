@@ -31,7 +31,7 @@ $compare_date=date("d M Y");
   
   }
 //inserting into private table
-$query="INSERT INTO privateclasses (privateclassid,className,description,userid,studios,dow,date_from,time_from,time_to,trainerid,classtype) values('$classid','$name','$desc','$user','$studio','$dow','$date_from','$time_from','$time_to','$trainer','$classtype')";
+$query="INSERT INTO privateclasses (privateclassid,className,description,userid,studios,dow,date_from,time_from,time_to,trainerid,classtype,active,approved) values('$classid','$name','$desc','$user','$studio','$dow','$date_from','$time_from','$time_to','$trainer','$classtype','yes','yes')";
 $query1="update sessions set amount='".$output."'where userid='".$user."'";
 //$query="insert into privateclasses (privateclassid,className,description,studios,dow,date_from,date_to,time_from,time_to,trainerid) values('$classid','$name','$desc','$studio','$dow','$date_from','$date_to','$time_from','$time_to','$trainer')";
     if(mysqli_query($con,$query)==1){
@@ -41,7 +41,7 @@ $query1="update sessions set amount='".$output."'where userid='".$user."'";
   $result1=mysqli_query($con,$query1);
 
         if($result1){
-			$query2="insert into attendance(attendanceid,present,userid,created_date,compare_date,expire,active) values('$aid','yes','$user','$cdate','$compare_date','$tomorrow','yes')";
+			$query2="insert into attendance(attendanceid,present,userid,created_date,compare_date,expire,active,type) values('$aid','yes','$user','$cdate','$compare_date','$tomorrow','yes','pt')";
 			$result2=mysqli_query($con,$query2);
 			
 				if($result2){

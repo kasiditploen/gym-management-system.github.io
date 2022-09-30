@@ -48,6 +48,7 @@ if (mysqli_num_rows($duplicate)>0)
   echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
 echo mysqli_error($db);
 }
+
 //inserting into users table
 $query="CALL insertData('$uname','$gender','$phn','$email','$dob','$jdate','$memID', '$image','$status','$pass','$fname','$lname','$nationalid','$privilege', '$goal','".mysqli_real_escape_string($con,$i)."')";
 mysqli_real_escape_string($con, $uname);

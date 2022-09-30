@@ -61,7 +61,7 @@
                         <li class="nav-label">My Schedules</li>
 
                         <li>
-                <a href="view_class.php">Group Classes</a>
+                <a href="view_class_session.php">Group Classes</a>
             </li> 
             <li>
                 <a href="view_privateclass.php">Private Classes</a>

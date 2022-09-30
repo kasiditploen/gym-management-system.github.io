@@ -1,3 +1,4 @@
+
 <?php include('../constant/layout/head.php');?>
 <?php include('../constant/layout/header.php');?>
 <?php include('../constant/layout/sidebar.php');
@@ -5,7 +6,7 @@
  
 
   <!-- Page wrapper  -->
-        <div class="page-wrapper">
+        <div class="page-wrapper ">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
@@ -19,14 +20,79 @@
             </div>
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
-            <div class="container-fluid">
+
+            <?php
+      $id     = $_GET['id'];;
+      $query  = "select * from users WHERE userid='$id'";
+      //echo $query;
+      $result = mysqli_query($con, $query);
+
+      if (mysqli_affected_rows($con) != 0) {
+          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $image = $row['image'];
+            $name = $row['username'];
+            $firstname = $row['fname'];
+            $lastname = $row['lname'];
+              $memid=$row['userid'];
+              $gender=$row['gender'];
+              $mobile=$row['mobile'];
+              $email=$row['email'];
+              $joinon=$row['joining_date'];
+              
+              $query4="select COUNT(*) from checkin where userid='$id'";
+                  $result4=mysqli_query($con,$query4);
+                  if($result4){
+                    $row3=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                    $countCheckin = $row3['COUNT(*)'];
+          }
+      }
+    }
+      ?>
+            
+            <div class="container-fluid print-container">
+            <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: '<?php echo 'data:image/jpeg;base64,' . $row['image'];?>';
+    height: 200px; width: 1600px;
+  ">
+  <h1 class="color-black mb-3 h1"><b><?php echo "$firstname "," $lastname" ?></b></h1>
+</div>
                 <!-- Start Page Content -->
                 
+                
                 <!-- /# row -->
-                 <div class="card">
+                 <div class="card ">
                             <div class="card-body">
                             <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
-                              <h1>Member Information</h1>
+                              <h2>Member Information</h2>
+                              <h1 class="color-blue"><b>AU FITNESS CENTER</b></h1>
+                              <div class="widget-content">
+            <div class="row-fluid ">
+              <div class="span4 ">
+                <table class="">
+                  <tbody>
+                    <tr>
+                      <td><h4>AU FITNESS CENTER</h4></td>
+                    </tr>
+                    <tr>
+                      <td>88 Moo 8<br> Bang Na-Trad Km. 26,<br> Bangsaothong Samuthprakarn</br> 10570 Thailand</td>
+                    </tr>
+                    
+                    <tr>
+                      <td>Tel:  +66 2 723 2323</td>
+                    </tr>
+                    <tr>
+                      <td >Email: abac@au.edu</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+                              <button class="btn btn-danger col-sm-2 sm-0" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+                              
+                              
+                    
+
+                    
+                    
                             <h3>
                               Details of : - <?php
       $id     = $_GET['id'];;
@@ -38,12 +104,14 @@
           while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
               $image = $row['image'];
             $name = $row['username'];
+            $fname = $row['fname'];
+            $lname = $row['lname'];
               $memid=$row['userid'];
               $gender=$row['gender'];
               $mobile=$row['mobile'];
               $email=$row['email'];
               $joinon=$row['joining_date'];
-              echo $name;
+              
               $query4="select COUNT(*) from checkin where userid='$id'";
                   $result4=mysqli_query($con,$query4);
                   if($result4){
@@ -52,7 +120,11 @@
           }
       }
     }
-      ?></h3>
+  
+      ?><h1><?php echo $fname. " " . $lname; ?></h1>
+      <h4>(<?php echo $name; ?>)</h4>
+      
+      </h3>
                                 <div class="table-responsive m-t-40">
                                     <table class="table table-bordered table-striped">
                                         <thead>
@@ -423,9 +495,35 @@
 
                                 </div>
                             </div>
+                            
                         </div>
 
+                        <style>
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-container, .print-container * {
+    visibility: visible;
+  }
+
+  .print-container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+  }
+  
+}
+</style>
+                        
+
                 <!-- End PAge Content -->
+
+                
            
 
 <?php include('../constant/layout/footer.php');?>

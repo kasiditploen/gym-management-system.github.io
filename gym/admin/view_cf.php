@@ -113,7 +113,7 @@
                   
                  
                  <td>
-                  <a href="edit_plan.php?id=<?php echo $row['toeid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_plan.php?id=<?php echo $row['toeid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                   <a href="del_wt.php?id=<?php echo $row['toeid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
                   

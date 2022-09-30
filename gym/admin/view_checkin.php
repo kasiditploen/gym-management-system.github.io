@@ -66,6 +66,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 
                 <div class="card mt-4">
                     <div class="card-body">
+                    <h2 class="color-black d-flex justify-content-center">Checkin-List</h2>
                         <table class="table table-borderd">
                             <thead>
                                 <tr>

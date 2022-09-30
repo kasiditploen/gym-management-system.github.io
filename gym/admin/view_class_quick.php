@@ -35,12 +35,12 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary"> Group Classes (Sessions)</h3> </div>
+                    <h3 class="text-primary"> Current Group Classes (Sessions)</h3> </div>
                     
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">View Group Classes (Sessions)</li>
+                        <li class="breadcrumb-item active">View Current Group Classes (Sessions)</li>
                     </ol>
                 </div>
             </div>
@@ -51,10 +51,17 @@
                 
                 <!-- /# row -->
                  <div class="card">
+                  
                             <div class="card-body">
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button>
+                            <br></br>
                             <h2 class="color-black">Cardio </h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            <div class="form-group">
+                            <br><label for="" class="control-label">Current Class Sessions</label>
+            
+						<input type="number" name="amount" id="amount" readonly class="form-control" value='<?php echo $am;?>'>
+					</div></br>
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -103,7 +110,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Cardio' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Cardio' and session='yes' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -142,10 +149,7 @@
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
-                       <div class="form-group">
-						<label for="" class="control-label">Current Class Sessions</label>
-						<input type="number" name="amount" id="amount" readonly class="form-control" value='<?php echo $am;?>'>
-					</div>
+                       
 
                     <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
                     <input type="hidden" name="pid" id="pid" value='<?php echo $pid2;?>'>
@@ -155,7 +159,7 @@
                  <td>
                  
                   
-                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>"<button type="button" class="btn btn-xs btn-primary" >Enroll</button></a>
+                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>&tf=<?php echo $row['time_from'];?>&tt=<?php echo $row['time_to'];?>"<button type="button" class="btn btn-sm btn-danger" >Enroll</button></a>
                  
                   </td></tr>
                   
@@ -190,7 +194,7 @@
                             <div class="card-body">
                             <h2 class="color-black">HIIT</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit1" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -235,7 +239,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='HIIT' and session='yes'";
+              $query  = "select * from classes WHERE classtype='HIIT' and session='yes' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -280,7 +284,7 @@
                   
                  <td>
                   
-                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>"<button type="button" class="btn btn-xs btn-primary" >Enroll</button></a>
+                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>"<button type="button" class="btn btn-sm btn-danger" >Enroll</button></a>
                  
                  </td></tr>
                   
@@ -315,7 +319,7 @@
                             <div class="card-body">
                             <h2 class="color-black">Dance</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit2" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -360,7 +364,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Dance' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Dance' and session='yes' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -405,7 +409,7 @@
                   
                  <td>
                   
-                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>"<button type="button" class="btn btn-xs btn-primary" >Enroll</button></a>
+                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>"<button type="button" class="btn btn-sm btn-danger" >Enroll</button></a>
                  
                   </td></tr>
                   
@@ -440,7 +444,7 @@
                             <div class="card-body">
                             <h2 class="color-black">Mind and Body</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit3" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -485,7 +489,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Mind and Body' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Mind and Body' and session='yes' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -530,7 +534,7 @@
                   
                  <td>
                   
-                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>"<button type="button" class="btn btn-xs btn-primary" >Enroll</button></a>
+                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>"<button type="button" class="btn btn-sm btn-danger" >Enroll</button></a>
                  
                   </td></tr>
                   
@@ -565,7 +569,7 @@
                             <div class="card-body">
                             <h2 class="color-black">Cycling</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit4" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -610,7 +614,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Cycling' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Cycling' and session='yes' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -655,7 +659,7 @@
                   
                  <td>
                   
-                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>"<button type="button" class="btn btn-xs btn-primary" >Enroll</button></a>
+                 <a href="submit_new_classholder.php?id=<?php echo $id;?>&ci=<?php echo $row['classid'];?>&tid=<?php echo $row3['trainerid'];?>&cs=<?php echo $cs;?>&am=<?php echo $am;?>&pid=<?php echo $pid2;?>"<button type="button" class="btn btn-sm btn-danger" >Enroll</button></a>
                  
                   </td></tr>
                   

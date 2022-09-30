@@ -2,7 +2,19 @@
 <?php include('../constant/layout/header.php');?>
 <?php include('../constant/layout/sidebar.php');
 ?>
- 
+ <?php
+      
+      $query  = "select * from classes";
+      //echo $query;
+      $result = mysqli_query($con, $query);
+
+      if (mysqli_affected_rows($con) != 0) {
+          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $classid = $row['classid'];
+           
+          }
+      }
+      ?>
 
   <!-- Page wrapper  -->
         <div class="page-wrapper">
@@ -20,14 +32,14 @@
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
             
-            <div class="container-fluid">
+            <div class="container-fluid print-container">
             <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black3.jpg');
-    height: 200px; width: 1600px;
+    height: 300px; width: auto;
   ">
-  <h1 class="color-white mb-3 h2"><b>Trainer Schedules</b></h1>
+  <h1 class="color-white mb-3 h2"><b>Trainer Schedules</b></h1> 
 
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
@@ -61,10 +73,11 @@
           }
       }
       ?>
-                 <h1 class="color-black mb-3 h2"><b><?php echo $trainername ?></b></h1>
+                 <h1 class="color-black mb-3 h2"><b><?php echo $trainername ?> (Group Classes)</b></h1>
 
 
                             <div class="card-body">
+                 <button class="btn btn-danger col-sm-2 sm-0" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
                             
                             
                             <div class="col-md-16">
@@ -74,7 +87,7 @@
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_trainer.php" method="POST">
                                     <table id="myTable" class="table table-bordered table-striped">
-                                    <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                                    
                                         <thead>
                                         <?php
 //Terminology
@@ -257,14 +270,14 @@ $dayonly = date("l", $unixTimestamp);
           <th>Available Time From</th>
           <th>Available Time To</th>
           
-          <th>Action</th>
+          
         </tr>
       </thead>    
         <tbody>
           
           <?php
           $id     = $_GET['id'];;
-              $query  = "select distinct * from trainertt where trainerid='$id'";
+              $query  = "select distinct * from trainertt where trainerid='$id' or classid='$classid' ORDER BY time_from ASC";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -283,11 +296,11 @@ $dayonly = date("l", $unixTimestamp);
                       
                       $query1  = "select distinct * from trainers WHERE trainerid='$id'";
                       $result1 = mysqli_query($con, $query1);
-                      
+                      $traineryou = $row['trainerid'];
                       if (mysqli_affected_rows($con) == 1) {
                           while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
                             $trainername=$row1['username'];
-                            $query2  = "select distinct * from classes WHERE classid='$cid'";
+                            $query2  = "select distinct * from classes WHERE classid='$cid' and trainerid='$traineryou'";
                       $result2 = mysqli_query($con, $query2);
                             
                             if($result2){
@@ -312,54 +325,50 @@ $dayonly = date("l", $unixTimestamp);
                        if(empty($row['mon_date'])){
                         "nothing";
                        }else {
-                        echo $row2['className']; ?>  <p><?php echo $row['mon_date']; ?></p>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to'];
+                        echo $row2['className']; ?>  <br><?php echo $row['mon_date']; ?></br>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to'];
                        } ?></h3> </td>
                        <td><h3><?php
                        if(empty($row['tues_date'])){
                         "nothing";
                        }else{
-                         echo $row2['className']; ?>  <p><?php echo $row['tues_date']; ?></p>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
+                         echo $row2['className']; ?>  <br><?php echo $row['tues_date']; ?></br>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
                        } ?></h3> </td>
                        <td><h3><?php
                        if(empty($row['wednes_date'])){
                         "nothing";
                        }else{
-                         echo $row2['className']; ?>  <p><?php echo $row['wednes_date']; ?></p>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
+                         echo $row2['className']; ?>  <br><?php echo $row['wednes_date']; ?></br>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
                        } ?></h3> </td>
                        <td><h3><?php
                        if(empty($row['thurs_date'])){
                         "nothing";
                        }else{
-                         echo $row2['className']; ?>  <p><?php echo $row['thurs_date']; ?></p>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
+                         echo $row2['className']; ?>  <br><?php echo $row['thurs_date']; ?></br>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
                        } ?></h3> </td>
                        <td><h3><?php
                        if(empty($row['fri_date'])){
                         "nothing";
                        }else{
-                         echo $row2['className']; ?>  <p><?php echo $row['fri_date']; ?></p>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
+                         echo $row2['className']; ?>  <br><?php echo $row['fri_date']; ?></br>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
                        } ?></h3> </td>
                        <td><h3><?php
                        if(empty($row['satur_date'])){
                         "nothing";
                        }else{
-                         echo $row2['className']; ?>  <p><?php echo $row['satur_date']; ?></p>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
+                         echo $row2['className']; ?>  <br><?php echo $row['satur_date']; ?></br>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
                        } ?></h3> </td>
                        <td><h3><?php
                        if(empty($row['sun_date'])){
                         "nothing";
                        }else{
-                         echo $row2['className']; ?>  <p><?php echo $row['sun_date']; ?></p>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
+                         echo $row2['className']; ?>  <br><?php echo $row['sun_date']; ?></br>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
                        } ?></h3> </td>  
-                       <td><?php echo $row1['time_from']; ?></td>
-                       <td><?php echo $row1['time_to']; ?></td>
+                       <td><?php echo $row2['time_from']; ?></td>
+                       <td><?php echo $row2['time_to']; ?></td>
                        
                   
                   
-                 <td>
-                  <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
-                  <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -718,6 +727,28 @@ $(document).ready(function(){
 <script>
 $('.toast').toast('show');
 </script>
+
+<style>
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-container, .print-container * {
+    visibility: visible;
+  }
+
+  .print-container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+  }
+  
+}
+</style>
 <?php include('../constant/layout/footer.php');?>
 
 

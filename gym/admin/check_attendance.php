@@ -93,7 +93,7 @@ $dayOfWeek = date("l", $unixTimestamp);
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
          <th>Photo</th>
           <th>Class ID</th>
@@ -181,8 +181,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                       <td><?php  echo '<img src="data:image;base64,'.base64_encode($image).'" alt="Image" style="width: 80px; height: 80px;" >'; ?></td>
                        <td><?php echo$row ['classid']; ?></td>

@@ -12,7 +12,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
+
+
+
+    
+    
 
     
 
@@ -28,7 +32,7 @@
    <title><?php echo $row_head_title['title'];?></title>
    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-   
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
 
 
     <link href="../assets/css/lib/chartist/chartist.min.css" rel="stylesheet">
@@ -45,9 +49,16 @@
      <link href="../assets/css/lib/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
+<?php
+             $sql_header_logo = "select * from manage_website"; 
+             $result_header_logo = $con->query($sql_header_logo);
+             $row_header_logo = mysqli_fetch_array($result_header_logo);
+             ?>
+
 <body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
+    
         <svg class="circular" viewBox="25 25 50 50">
       <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="1" /> </svg>
     </div>

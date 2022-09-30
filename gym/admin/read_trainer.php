@@ -42,20 +42,44 @@
           }
       }
       ?>
-            <div class="container-fluid">
+            <div class="container-fluid print-container">
             <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: '<?php echo 'data:image/jpeg;base64,' . $row['image'];?>';
     height: 200px; width: 1600px;
   ">
-  <h1 class="color-white mb-3 h1"><b><?php echo "$fname "," $lname" ?></b></h1>
+  <h1 class="color-black mb-3 h1"><b><?php echo "$fname "," $lname" ?></b></h1>
 </div>
                 <!-- Start Page Content -->
                 
                 <!-- /# row -->
-                 <div class="card">
+                 <div class="card ">
                             <div class="card-body">
                             <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                               <h1>Trainer Information</h1>
+                              <h1 class="color-blue"><b>AU FITNESS CENTER</b></h1>
+                              <div class="widget-content">
+            <div class="row-fluid ">
+              <div class="span4 ">
+                <table class="">
+                  <tbody>
+                    <tr>
+                      <td><h4>AU FITNESS CENTER</h4></td>
+                    </tr>
+                    <tr>
+                      <td>88 Moo 8<br> Bang Na-Trad Km. 26,<br> Bangsaothong Samuthprakarn</br> 10570 Thailand</td>
+                    </tr>
+                    
+                    <tr>
+                      <td>Tel:  +66 2 723 2323</td>
+                    </tr>
+                    <tr>
+                      <td >Email: abac@au.edu</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <button class="btn btn-danger col-sm-2 sm-0" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
                             <h3>
                               Details of : - <?php
       $id     = $_GET['id'];;
@@ -96,7 +120,7 @@
         <tbody>
          
                   <tr>
-                  <td><?php  echo '<img src="data:image;base64,'.base64_encode($image).'" alt="Image" style="width: 80px; height: 80px;" >'; ?></td>
+                  <td><?php  echo '<img src="data:image;base64,'.base64_encode($image).'" alt="Image" style="width: 200px; height: 200px;" >'; ?></td>
                     <td><?php  echo $memid; ?></td>
                      <td><?php echo $name; ?></td>
                      <td><?php echo $gender; ?></td>
@@ -340,6 +364,28 @@
                 <!-- /# row -->
 
                 <!-- End PAge Content -->
+
+                <style>
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-container, .print-container * {
+    visibility: visible;
+  }
+
+  .print-container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+  }
+  
+}
+</style>
            
 
 <?php include('../constant/layout/footer.php');?>

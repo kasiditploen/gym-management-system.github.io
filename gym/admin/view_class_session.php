@@ -30,16 +30,16 @@
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black8.jpg');
-    height: 200px; width: 1600px;
+    height: 300px; width: auto;
   ">
-  <h1 class="color-white mb-3 h1"><b>Group Class Training</b></h1>
+  <h1 class="color-white mb-3 h1 text-center"><b>Group Class Training</b></h1>
 </div>
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">Cardio</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Cardio</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -47,19 +47,28 @@
                                     
                                         <thead>
                                         <?php
-          $query  = "select machineid from newmachine";
-          //echo $query;
-          $result = mysqli_query($con, $query);
-          $sno    = 1;
-          
-          
-
-          if (mysqli_affected_rows($con) != 0) {
-              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
-              }
-            }
-                ?>
+              $queryb  = "select * from users";
+              //echo $query;
+              $result = mysqli_query($con, $queryb);
+              $sno    = 1;
+              
+              $uname;
+                      $udob;
+                      $ujoing;
+                      $ugender;
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                    $fake   = $row['userid'];
+                    $queryv  = "select * from users where userid = '$fake'";
+              //echo $query;
+              $resultr = mysqli_query($con, $queryv);
+              if($resultr) {
+                $rowr = mysqli_fetch_array($resultr, MYSQLI_ASSOC) ;
+                $userid   = $rowr['userid'];
+             
+             
+             
+             ?>
         <tr>
         <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
          <th>Sl.No</th>
@@ -73,6 +82,9 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
+          <th>Pending</th>
+          <th>Enrolled</th>
+          
           <th>Action</th>
         </tr>
 
@@ -84,7 +96,26 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Cardio' and session='yes'";
+        date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date('Y-m-d');
+        $y1date=date('Y-m-d',strtotime('- 1 days'));
+        $y2date=date('Y-m-d',strtotime('- 2 days'));
+        $y3date=date('Y-m-d',strtotime('- 3 days'));
+        $y4date=date('Y-m-d',strtotime('- 4 days'));
+        $y5date=date('Y-m-d',strtotime('- 5 days'));
+        $y6date=date('Y-m-d',strtotime('- 6 days'));
+        $y7date=date('Y-m-d',strtotime('- 7 days'));
+
+
+        $unixTimestamp = strtotime($cdate);
+
+//Get the day of the week using PHP's date function.
+$dayOfWeek = date("l", $unixTimestamp);
+
+?>
+        <?php
+              $query  = "select * from classes WHERE classtype='Cardio' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -97,6 +128,17 @@
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
+                            $query4="SELECT userid, count(*)  FROM classholder where userid='$userid' and classid='$uid' and created_date='$cdate'";
+                            $result4=mysqli_query($con,$query4);
+                            $query5="SELECT b.userid, count(*)  FROM booking b
+                            inner join classes cl
+                            on b.classid = cl.classid
+                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
+                            $result5=mysqli_query($con,$query5);
+                            $query6="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no'";
+                            $result6=mysqli_query($con,$query6);
+                            
                             
                       
                       
@@ -104,11 +146,22 @@
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    if($result4){
+                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                      $count1   = $row4['count(*)'];
+                                      if($result5){
+                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                        $bookingid = $row5['bookingid'];
+                                        $count2   = $row5['count(*)'];
+                                        $count = $count1 + $count2;
+                                        if($result6){
+                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                          $count3   = $row6['count(*)'];
                                     
                                 ?>
                     
                   
-                    
+                    <?php echo $userid?>
                     <tr>
                     <td style="width:10px; text-align: center;">
                                                         <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
@@ -123,13 +176,18 @@
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
+                       <td><?php echo $count3  ?></td>
+                       <td><h2><span class="badge badge-danger"><?php echo $count1 ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       
                        
                   
                   
                   
                  <td>
+
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -140,8 +198,15 @@
                       }
                     }
                   }
+                }
+              }
+            }
                 
-              
+          }
+        }
+      }
+    
+       
             
             
         
@@ -162,9 +227,9 @@
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">HIIT</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">HIIT</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit1" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -198,6 +263,8 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
+          <th>Pending</th>
+          <th>Enrolled</th>
           <th>Action</th>
         </tr>
 
@@ -209,7 +276,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='HIIT' and session='yes'";
+              $query  = "select * from classes WHERE classtype='HIIT' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -222,6 +289,19 @@
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
+                            $query4="SELECT c.userid, count(*)  FROM classholder c
+                            inner join classes cl
+                            on c.classid = cl.classid
+                            WHERE c.classid = cl.classid";
+                            $result4=mysqli_query($con,$query4);
+                            $query5="SELECT b.userid, count(*)  FROM booking b
+                            inner join classes cl
+                            on b.classid = cl.classid
+                            WHERE b.approved='yes' and b.classid = cl.classid";
+                            $result5=mysqli_query($con,$query5);
+                            $query6="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no'";
+                            $result6=mysqli_query($con,$query6);
                             
                       
                       
@@ -229,6 +309,17 @@
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    if($result4){
+                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                      $count1   = $row4['count(*)'];
+                                      if($result5){
+                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                        $bookingid = $row5['bookingid'];
+                                        $count2   = $row5['count(*)'];
+                                        $count = $count1 + $count2;
+                                        if($result6){
+                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                          $count3   = $row6['count(*)'];
                                     
                                 ?>
                     
@@ -248,13 +339,18 @@
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
+                       <td><?php echo $count3  ?></td>
+                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       
                        
                   
                   
                   
                  <td>
+
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -265,6 +361,9 @@
                       }
                     }
                   }
+                }
+              }
+            }
                 
               
             
@@ -287,9 +386,9 @@
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">Dance</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Dance</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit2" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -323,6 +422,8 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
+          <th>Pending</th>
+          <th>Enrolled</th>
           <th>Action</th>
         </tr>
 
@@ -334,7 +435,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Dance' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Dance' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -347,6 +448,19 @@
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
+                            $query4="SELECT c.userid, count(*)  FROM classholder c
+                            inner join classes cl
+                            on c.classid = cl.classid
+                            WHERE c.classid = cl.classid";
+                            $result4=mysqli_query($con,$query4);
+                            $query5="SELECT b.userid, count(*)  FROM booking b
+                            inner join classes cl
+                            on b.classid = cl.classid
+                            WHERE b.approved='yes' and b.classid = cl.classid";
+                            $result5=mysqli_query($con,$query5);
+                            $query6="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no'";
+                            $result6=mysqli_query($con,$query6);
                             
                       
                       
@@ -354,6 +468,17 @@
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    if($result4){
+                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                      $count1   = $row4['count(*)'];
+                                      if($result5){
+                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                        $bookingid = $row5['bookingid'];
+                                        $count2   = $row5['count(*)'];
+                                        $count = $count1 + $count2;
+                                        if($result6){
+                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                          $count3   = $row6['count(*)'];
                                     
                                 ?>
                     
@@ -373,13 +498,18 @@
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
+                       <td><?php echo $count3  ?></td>
+                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       
                        
                   
                   
                   
                  <td>
+
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -390,6 +520,9 @@
                       }
                     }
                   }
+                }
+              }
+            }
                 
               
             
@@ -412,9 +545,9 @@
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">Mind and Body</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Mind and Body</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit3" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -448,6 +581,8 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
+          <th>Pending</th>
+          <th>Enrolled</th>
           <th>Action</th>
         </tr>
 
@@ -459,7 +594,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Mind and Body' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Mind and Body' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -472,6 +607,19 @@
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
+                            $query4="SELECT c.userid, count(*)  FROM classholder c
+                            inner join classes cl
+                            on c.classid = cl.classid
+                            WHERE c.classid = cl.classid";
+                            $result4=mysqli_query($con,$query4);
+                            $query5="SELECT b.userid, count(*)  FROM booking b
+                            inner join classes cl
+                            on b.classid = cl.classid
+                            WHERE b.approved='yes' and b.classid = cl.classid";
+                            $result5=mysqli_query($con,$query5);
+                            $query6="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no'";
+                            $result6=mysqli_query($con,$query6);
                             
                       
                       
@@ -479,6 +627,17 @@
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    if($result4){
+                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                      $count1   = $row4['count(*)'];
+                                      if($result5){
+                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                        $bookingid = $row5['bookingid'];
+                                        $count2   = $row5['count(*)'];
+                                        $count = $count1 + $count2;
+                                        if($result6){
+                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                          $count3   = $row6['count(*)'];
                                     
                                 ?>
                     
@@ -498,13 +657,18 @@
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
+                       <td><?php echo $count3  ?></td>
+                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       
                        
                   
                   
                   
                  <td>
+
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -515,6 +679,9 @@
                       }
                     }
                   }
+                }
+              }
+            }
                 
               
             
@@ -536,10 +703,10 @@
 
                         <!-- /# row -->
                  <div class="card">
-                            <div class="card-body">
-                            <h2 class="color-black">Cycling</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit4" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            <div class="card-body ">
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Cycling</h2></a>
+                            <a href="new_class.php"><button class="btn btn-primary ">Add Class</button></a>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -573,6 +740,8 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
+          <th>Pending</th>
+          <th>Enrolled</th>
           <th>Action</th>
         </tr>
 
@@ -584,7 +753,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Cycling' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Cycling' and active='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -597,6 +766,19 @@
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
+                            $query4="SELECT c.userid, count(*)  FROM classholder c
+                            inner join classes cl
+                            on c.classid = cl.classid
+                            WHERE c.classid = cl.classid";
+                            $result4=mysqli_query($con,$query4);
+                            $query5="SELECT b.userid, count(*)  FROM booking b
+                            inner join classes cl
+                            on b.classid = cl.classid
+                            WHERE b.approved='yes' and b.classid = cl.classid";
+                            $result5=mysqli_query($con,$query5);
+                            $query6="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no'";
+                            $result6=mysqli_query($con,$query6);
                             
                       
                       
@@ -604,6 +786,17 @@
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    if($result4){
+                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                      $count1   = $row4['count(*)'];
+                                      if($result5){
+                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                        $bookingid = $row5['bookingid'];
+                                        $count2   = $row5['count(*)'];
+                                        $count = $count1 + $count2;
+                                        if($result6){
+                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                          $count3   = $row6['count(*)'];
                                     
                                 ?>
                     
@@ -623,13 +816,18 @@
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
+                       <td><?php echo $count3  ?></td>
+                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       
                        
                   
                   
                   
                  <td>
+
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -640,6 +838,9 @@
                       }
                     }
                   }
+                }
+              }
+            }
                 
               
             

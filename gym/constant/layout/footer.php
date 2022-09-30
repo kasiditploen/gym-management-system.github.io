@@ -23,33 +23,7 @@
         <!-- End Page wrapper  -->  
     </div>
     <!-- End Wrapper -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Income', 'Members', 'New Joining'],
-          ['2021', 1000, 400, 200],
-          ['2020', 1170, 460, 250],
-          ['2019', 660, 1120, 300],
-          ['2018', 1030, 540, 350]
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Organization Performance',
-            subtitle: 'Income, Members, and New Joining: 2021-2022',
-          },
-          bars: 'horizontal' // Required for Material Bar Charts.
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
+    
     <!-- All Jquery -->
     <script src="../assets/js/lib/jquery/jquery.min.js"></script>
     

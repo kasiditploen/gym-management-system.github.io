@@ -72,7 +72,7 @@
                   
                   
                  <td>
-                  <a href="viewall_detail.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
+                  <a href="viewall_detail.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                  </td></tr>
                   
               <?php 

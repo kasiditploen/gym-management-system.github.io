@@ -60,7 +60,7 @@ include('../constant/connect.php');
             <div class="file-field">
               <div class="btn btn-outline-white waves-effect btn-sm float-left">
                 <span>Choose file<i class="fas fa-cloud-upload-alt ml-3" aria-hidden="true"></i></span>
-                <input type="file" name="image">
+                <input type="file" name="image" multiple accept="image/*">
               </div>
               
 

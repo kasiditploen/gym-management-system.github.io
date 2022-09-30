@@ -4,17 +4,185 @@
 <?php include('../constant/layout/sidebar.php');?>   
 
 
+<?php
+        date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date('Y-m-d');
+        $y1date=date('Y-m-d',strtotime('- 1 days'));
+        $y2date=date('Y-m-d',strtotime('- 2 days'));
+        $y3date=date('Y-m-d',strtotime('- 3 days'));
+        $y4date=date('Y-m-d',strtotime('- 4 days'));
+        $y5date=date('Y-m-d',strtotime('- 5 days'));
+        $y6date=date('Y-m-d',strtotime('- 6 days'));
+        $y7date=date('Y-m-d',strtotime('- 7 days'));
+
+
+        $unixTimestamp = strtotime($cdate);
+
+//Get the day of the week using PHP's date function.
+$dayOfWeek = date("l", $unixTimestamp);
+
+?>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+<script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart','line']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Terms', 'Members',],
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y7date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y7date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y6date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y6date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y5date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y5date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y4date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y4date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y3date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y3date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y2date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y2date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+          
+          <?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+          where u.joining_date = '$y1date'
+          ;";
+            $rezz2=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz2)){
+              $services1=$y1date;
+              $numberone1=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services1;?>',<?php echo $numberone1;?>,],   
+           <?php   
+            }
+           ?> 
+
+<?php
+          $query1 = "SELECT *, COUNT(u.userid) as numberone FROM users u
+            where u.joining_date = '$cdate'
+            ;";
+
+            $rezz3=mysqli_query($con,$query1);
+            while($data=mysqli_fetch_array($rezz3)){
+              $services2=$cdate;
+              $numberone2=$data['numberone'];
+              // $numbertwo=$data['numbertwo'];
+           ?>
+           ['<?php echo $services2;?>',<?php echo $numberone2;?>,],   
+           <?php   
+            }
+           ?>  
+
+      
+
+          
+        ]);
+
+        var options = {'title' : 'New Memberships Each Day',
+      hAxis: {
+         title: 'Date'
+      },
+      vAxis: {
+         title: 'Memberships'
+      },   
+      'width':750,
+      'height':400,
+      pointsVisible: true,
+      colors: ['#ff0000']
+   };
+
+        var chart =  new google.visualization.LineChart(document.getElementById('line2'));
+        chart.draw(data, options);
+      };
+
+
+      
+    </script>
+
  
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-                    <h3 class="color-white"> Dashboard</h3> </div>
-                <div class="col-md-12 align-self-center">
-                    <marquee direction="left" behavior="alternate" scrollamount=1 >
-   <h3 style="color:red"><b></b></h3>
-</marquee></div>
+                    
+                
                 
             </div>
             <!-- End Bread crumb -->
@@ -25,19 +193,19 @@
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black4.jpg');
-    height: 200px; width: 1600px;
+    height: 300px; width: auto;
   ">
-  <h1 class="color-white mb-3 h1"><b>Dashboard</b></h1>
+  <h1 class="color-white mb-3 h1"><b>Home</b></h1>
 </div>
                 <div class="card">
                 <div class="col-md-3 align-self-left">
-                <a href="new_daypass.php"><button class="btn btn-lg btn-dark waves-effect waves-light"> + Add Walk-ins</button></a>
+                <a href="new_daypass.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Walk-ins</b></button></a>
                  </div>
                  
                  
                     <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_mem.php" method="POST">
-                                <h2>Memberships Search</h2>
+                                <h2 class="text-center">Memberships Search</h2>
  
   <input class="form-control" id="myInput" type="text" placeholder="Search Member..">
   <table id="myTable" class="table">
@@ -65,6 +233,7 @@
       
       <tbody>
         <?php
+        $tomorrow = date("d-m-Y", strtotime('tomorrow'));
               $query  = "select * from users ORDER BY joining_date";
               //echo $query;
               $result = mysqli_query($con, $query);
@@ -130,7 +299,7 @@
                                 $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
                                 $create_date=$row7 ['created_date'];
                                 $create_time=$row7 ['created_time'];
-                                $query8="select * from privateclasses where userid='$uid' and  date_from LIKE '$cdate%'";
+                                $query8="select * from privateclasses where userid='$uid' and approved='yes' and  date_from LIKE '$cdate%'";
                               $result8=mysqli_query($con,$query8);
                               if($result8){
                                 $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
@@ -150,19 +319,19 @@
                                   $classname=$row10['className'];
                                   $tfrom=$row10['time_from'];
                                   $tto=$row10['time_to'];
-                                  $query11="select * from booking where userid='$uid' and trainerid='$trainerid'";
+                                  $query11="select * from booking where userid='$uid' and trainerid='$trainerid' and date_from LIKE '$tomorrow%'";
                                 $result11=mysqli_query($con,$query11);
                                 if($result11){
                                   $row11=mysqli_fetch_array($result11,MYSQLI_ASSOC);
                                   $bookedclassname=$row11['className'];
                                   $tfrom1=$row11['time_from'];
                                   $tto1=$row11['time_to'];
-                                  $query12="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid'";
+                                  $query12="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid' and created_date LIKE '%$cdate%'";
                                 $result12=mysqli_query($con,$query12);
                                 if($result12){
                                   $row12=mysqli_fetch_array($result12,MYSQLI_ASSOC);
                                   $classid1=$row12['classid'];
-                                  $classname1=$row12['className'];
+                                  $classname1=$row10['className'];
                                   $create_date1=$row12['created_date'];
                                   $query13="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid' and created_date LIKE '$cdate%'";
                                 $result13=mysqli_query($con,$query13);
@@ -170,6 +339,38 @@
                                   $row13=mysqli_fetch_array($result13,MYSQLI_ASSOC);
                                   $tfrom2=$row13['time_from'];
                                   $tto2=$row13['time_to'];
+                                  $query14="select * from enrolls_to_day";
+                                  $result14=mysqli_query($con,$query14);
+                                      if($result14){
+                                        $row14=mysqli_fetch_array($result14,MYSQLI_ASSOC);
+                                        $pid5=$row14['pid'];
+                                        $expire1=$row3['expire'];
+                                        $sessions=$row3['sessionid'];
+                                        $pidss=$row3['pid'];
+                                        $amount=$row3['amount'];
+                                        $sessioncount=$row3['amount'];
+                                        $query15="select * from plan where pid='$pid5'";
+                          $result15=mysqli_query($con,$query15);
+                          if($result15){
+                            $row15=mysqli_fetch_array($result15,MYSQLI_ASSOC);
+                            
+                            $query16="select * from csessions2";
+                                $result16=mysqli_query($con,$query16);
+                                if($result16){
+                                  $row16=mysqli_fetch_array($result16,MYSQLI_ASSOC);
+                                  $pid4=$row16['pid'];
+                                  $query17="select * from plan where pid='$pid4'";
+                                  $result17=mysqli_query($con,$query17);
+                                      if($result17){
+                                        $row17=mysqli_fetch_array($result17,MYSQLI_ASSOC);
+                                        $pid4=$row14['pid'];
+                                        $expire1=$row3['expire'];
+                                        $sessions=$row3['sessionid'];
+                                        $pidss=$row3['pid'];
+                                        $amount=$row3['amount'];
+                                        $sessioncount=$row3['amount'];
+                                        
+
                                ?>
 
 
@@ -201,9 +402,13 @@
                     <td><?php echo $sno; ?></td>
                     <td><?php 
                      if(strtotime($diff2)<=45 && strtotime($today)< strtotime($expire)){
-        echo '<h4>Membership:<span class="badge badge-success"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4>';
+        echo '<ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4>Membership:<h5 class="color-black"><b>'.$planname.'<b></h5><span class="badge badge-color blue"> '.$diff2.'  Days Left</span></h4></li>
+        </ul>';
         }else if(strtotime($diff)<=15 && strtotime($today) < strtotime($expire)){
-          echo '<h4>Membership:<span class="badge badge-info"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4>';
+          echo '<ul class="list-group list-group-flush">
+        <li class="list-group-item"><h4>Membership:<span class="badge badge-color blue"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4></li>
+        </ul>';
       }else if(strtotime($diff2)<=7 && strtotime($today) < strtotime($expire)){
         echo '<h4>Membership:<span class="badge badge-warning"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4>';
         }else {if(empty($expire)){
@@ -218,7 +423,12 @@
 
 
         if(strtotime($diff4)<=45 && strtotime($today)< strtotime($expire1)){
-          echo '<h4>Personal Training:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-success"><h6 class="color-white">'.$planname1.'</h6> '.$diff4.'  Days Left </span></br></h4>';
+          echo '<ul class="list-group list-group-flush">
+          <li class="list-group-item">
+          <h4>Personal Training:<span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname1.'</h4><span class="badge badge-color blue">'.$diff4.'  Days Left </b></h3></br></li>
+          
+          
+          </ul>';
           }else if(strtotime($diff3)<=15 && strtotime($today) < strtotime($expire1)){
             echo '<h4>Personal Training:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-info"><h6 class="color-white">'.$planname1.'</h6> '.$diff4.'  Days Left </span></br></h4>';
         }else if(strtotime($diff4)<=7 && strtotime($today) < strtotime($expire1)){
@@ -234,7 +444,12 @@
         }
 
         if(strtotime($diff6)<=45 && strtotime($today)< strtotime($expire2)){
-          echo '<h4>Classes:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount1.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-success"><h6 class="color-white">'.$planname2.'</h6> '.$diff6.'  Days Left </span></br></h4>';
+          echo '<ul class="list-group list-group-flush">
+          <li class="list-group-item">
+          <h4>Classes:<span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount1.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname2.'</h4><span class="badge badge-color blue">'.$diff6.'  Days Left </b></h3></br></li>
+          
+          
+          </ul>';
           }else if(strtotime($diff5)<=15 && strtotime($today) < strtotime($expire2)){
             echo '<h4>Classes:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount1.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-info"><h6 class="color-white">'.$planname2.'</h6> '.$diff6.'  Days Left </span></br></h4>';
         }else if(strtotime($diff6)<=7 && strtotime($today) < strtotime($expire2)){
@@ -256,14 +471,45 @@
                             echo '<p><a href="status_quick.php?userid='.$row['userid'].'&status=0" class="btn btn-success">Enabled</a></p>';
                         } else{
                             echo '<p><a href="status_quick.php?userid='.$row['userid'].'&status=1" class="btn btn-dark">Disabled</a></p>';
-                        }  ?></p> </td>
+                        }  ?></p> 
+                        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+                        <h2>
+                          <span class="badge badge-light">Checkin: <?php echo $row7['created_date']; ?>
+                        <br><?php echo$row7['created_time']; ?></span></h2>
+                      </li>
+                        </ul>
+                      </td>
                      <td><h4><?php echo $row['userid']; ?></h4></td>
                      <td><h4><?php echo $row['fname']; ?><br><?php echo $row['lname']; ?></br></h4></td>
                      <td ><h4><?php echo$row['username']; ?></h4></td>
-                     <td ><h2><span class="badge badge-success">Checkin:<?php echo $row7['created_date']; ?></h2></span><p><h2><span class="badge badge-success"><?php echo$row7['created_time']; ?> </h2></p></span></h2>
-                     <h2><span class="badge badge-dark">Today's PT Sessions: <p><?php echo $privateclassname; ?></h2></span></p><h2><span class="badge badge-dark"><p><?php echo $time_from; ?>-<?php echo $time_to; ?></p></span></h2>
-                     <?php "<h2><span class=badge badge-light">""; "<p>"; "Today's Class Sessions:"; echo $classname1; ?></h2></span></p><h2><span class="badge badge-dark"><p><?php echo $tfrom2; ?>-<?php echo $tto2; ?></p></span></h2>
-                     <h2><span class="badge badge-light">Booked Class Sessions: <p><?php echo $bookedclassname; ?></h2></span></p><h2><span class="badge badge-dark"><p><?php echo $tfrom1; ?>-<?php echo $tto1; ?></p></span></h2>
+                     <td>
+                     <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+                     <h3>
+                      <span class="badge badge-light">PT Sessions <br> <i class="far fa-clock"></i> Today:</br>
+                       <br><?php echo $privateclassname; ?></br>
+                       <h3><br><?php echo $time_from; ?>-<?php echo $time_to; ?>
+                      </br>
+                    </span>
+                  </h3>
+                      </h3>
+          </li>
+                     </ul>
+                     <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+                    <h3>
+                      <span class="badge badge-color red">Class Sessions <br><i class="far fa-clock"></i> Today:</br>
+                      <br><?php echo $classname1;?></br>
+                      <h3><br><?php echo $tfrom2; ?>-<?php echo $tto2; ?></br></span>
+                      </br></h3></h3>
+                      </li>
+                     </ul>
+
+                     <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+                     <h3><span class="badge badge-light">Booked Class Sessions: <p><?php echo $bookedclassname; ?></h2></span></p><h2><span class="badge badge-dark"><p><?php echo $tfrom1; ?>-<?php echo $tto1; ?></p></span></h2>
+
 
                   </td>
                      <td><?php echo $row['mobile']; ?></td>
@@ -286,7 +532,7 @@
                     <div class="dropdown dropdown-animating">
 
 <!--Trigger-->
-<button class="btn btn-danger dropdown-toggle waves-effect waves-light" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+<button class="btn btn-light dropdown-toggle waves-effect waves-light" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
   
   </button>
   <div class="dropdown-menu">
@@ -310,7 +556,7 @@
   </div>
 </div>
 
-<a href="submit_new_checkin.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" >Check In</button></a>
+<a href="submit_new_checkin.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-sm btn-danger" >Check In</button></a>
 
 <a href="new_privateclass_quick.php?id=<?php echo $row['userid'];?>&&ss=<?php echo $sessions;?>&&pi=<?php echo $pidss;?>&&am=<?php echo $amount;?>"><button type="button" class="btn btn-xs btn-success" >Apply Personal Training</button></a>
 
@@ -362,6 +608,10 @@
       }
     }
   }
+}
+              }
+            }
+          }
                 
           ?>  
 
@@ -374,6 +624,140 @@
 </div>
                 </div>
 
+
+                <div class="card">
+                <div class="col-md-3 align-self-left">
+                
+                 </div>
+                 
+                 
+                    <div class="table-responsive m-t-40">
+                                <form id="form1" action="del_all_mem.php" method="POST">
+                                <h2>Trainer Search</h2>
+ 
+  <input class="form-control" id="myInput2" type="text" placeholder="Search Trainer..">
+  <table id="dt-all-checkbox2" class="table">
+                                    
+                                    
+  <thead>
+        <tr>
+        <th style="width:1%;"><input type="checkbox" id="select-all2" /></th>
+        <th>Sl.No</th>
+         <th style="width:10%;">Image</th>
+          <th>Trainer ID</th>
+          <th>STATUS</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Contact</th>
+          <th>E-Mail</th>
+          <th>Gender</th>
+          <th>Joining Date</th>
+          <th style="width:10%;">Available Day</th>
+          <th>Available Time From</th>
+          <th>Available Time To</th>
+          <th>Special Skill</th>
+          <th >Year Of Experience</th>
+          <th>Action</th>
+        </tr>
+      </thead>    
+        <tbody>
+        <?php
+        date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date("Y-m-d");
+        $unixTimestamp = strtotime($cdate);
+//Get the day of the week using PHP's date function.
+$dayOfWeek = date("l", $unixTimestamp);
+
+?>
+          <?php
+              $query  = "select * from trainers";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                      $trainerid   = $row['trainerid'];
+                      $dow = $row['availableday'];
+                      $query7  = "select * from enrolls2_to WHERE uid='$trainerid' AND renewal='yes'";
+                      $result7 = mysqli_query($con, $query7);
+                      if (mysqli_affected_rows($con) == 1) {
+                          while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
+                            $query8="select * from checkint where trainerid='$trainerid' and  created_date LIKE '$cdate%'";
+                              $result8=mysqli_query($con,$query8);
+                              if($result8){
+                                $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                $create_date=$row8 ['created_date'];
+                                $create_time=$row8 ['created_time'];
+                  //$msgid = $row['pid'];
+                  //foreach($result and $result1 as $row)
+                ?>  
+                  
+                  <tr>
+                  <td style="width:10px; text-align: center;">
+                                                        <input type="checkbox" name="trainer_delete_id[]" value="<?= $row['trainerid']; ?>">
+                                                        <td><?php echo $sno; ?></td>
+                    <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?></td>
+                     <td><?php echo $row['trainerid']; ?></td>
+                     <td><?php 
+                     if(strpos($dow,$dayOfWeek) !== false){
+        echo '<h3><span class="badge badge-success">AVAILABLE</span></h3>';
+        }else{
+        echo '<h3><span class="badge badge-danger">NOT AVAILABLE</span></h3>';
+      
+        }
+        
+        
+        
+        ?>
+
+
+        
+    
+    
+    
+    </td>
+                     <td><h4><?php echo $row['fname']; ?></h4></td>
+                     <td><h4><?php echo $row['lname']; ?></h4></td>
+                     <td><h4><?php echo$row['username']; ?><h4></td>
+                     <td><h4><?php echo$row['trainertype']; ?><h4></td>
+                     <td><?php echo $row['mobile']; ?></td>
+                     <td><?php echo $row['email']; ?> </td>
+                      <td><?php echo $row['gender']; ?> </td>
+                       <td><?php echo $row['joining_date']; ?> </td>
+                       <td><?php echo $row['availableday']; ?></td>
+                       <td><?php echo $row['time_from']; ?></td>
+                       <td><?php echo $row['time_to']; ?></td>
+                       <td><?php echo $row['skills']; ?></td>
+                       <td><?php echo $row['yoe'] .' Years'; ?></td>
+                  
+                  
+                 <td>
+
+
+                  </td></tr>
+                  
+              <?php 
+              $sno++; 
+              $msgid = 0;
+                          }
+                      }
+                  }
+              }
+            }
+          ?>  
+
+          
+
+        </tbody>
+        
+                                      
+                                    </table>
+</div>
+                </div>
                 
                         
                 <!--<div class="card">
@@ -418,16 +802,16 @@ $dayOfWeek = date("l", $unixTimestamp);
 
 ?>
           <?php
-              $query  = "select * from trainers where trainertype='Personal Trainer'";
+              $query  = "select * from trainers";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
 
               if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                      $uid   = $row['trainerid'];
+                      $trainerid   = $row['trainerid'];
                       $dow = $row['availableday'];
-                      $query7  = "select * from enrolls2_to WHERE uid='$uid' AND renewal='yes'";
+                      $query7  = "select * from enrolls2_to WHERE uid='$trainerid' AND renewal='yes'";
                       $result7 = mysqli_query($con, $query7);
                       if (mysqli_affected_rows($con) == 1) {
                           while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
@@ -528,6 +912,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             $revenue2 = 0;
                             $revenue3 = 0;
                             $revenue4 = 0;
+                            $revenue5 = 0;
                             if (mysqli_affected_rows($con) != 0) {
                                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                                     $pid=$row['pid'];
@@ -549,6 +934,10 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     $result8=mysqli_query($con,$query8);
                                     $query9="select * from plan where pid='$pid4'";
                                     $result9=mysqli_query($con,$query9);
+                                    $query10="select * from enrolls_to_day WHERE  paid_date LIKE '$date%'";
+                                    $result10=mysqli_query($con,$query10);
+                                    $query11="select * from plan where pid='$pid5'";
+                                    $result11=mysqli_query($con,$query11);
 
 
 
@@ -587,66 +976,59 @@ $dayOfWeek = date("l", $unixTimestamp);
                                         $value3=mysqli_fetch_row($result7);
                                     $revenue3 = $value3[4] + $revenue3;
                                     
-                                    }
+                                    
                                     if($result8){
                                       
-                                      $pid4=$row8['pid'];
+                                      $pid4=$row16['pid'];
                                       
                                   if($result9){
                                     
                                       $value4=mysqli_fetch_row($result9);
                                   $revenue4 = $value4[4] + $revenue4;
-                                  }
-                                  $total=($revenue+$revenue1+$revenue2+$revenue3+$revenue4);
                                   
-                                  }
+                                  if($result10){
+                                      
+                                    $pid5=$row14['pid'];
 
-                                    }
-                                }
-                            }
-                          }
-                        }
-                      }
-                           
+                                    
+                                    if($result11){
+                                    
+                                      $value5=mysqli_fetch_row($result11);
+                                  $revenue5 = $value5[4] + $revenue5;
+                                  
+                                  $total=($revenue+$revenue1+$revenue2+$revenue3+$revenue4+$revenue5);
+                                  
+
+                               
+                    }
+                  }
+                }   
+              }    
+            }
+          }
+                                  
+        }
+    }
+  }
+
+
+}
+}
                             ?>
                             
-                            
+                            <?php echo $pid4?>
                                     <h2 class="color-white"><?php echo $total."฿"; ?></h2>
                                     <a href="revenue_month.php"> <h2 class="color-white">Current Income</h2></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="col-md-3">
-                        <div class="card ripe-malinka-gradient color-block mb-3 mx-auto p-20">
+                        <div class="card bg-danger p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
-                                    <span><i class="ti-id-badge f-s-40"></i></span>
-                                </div>
-                                <div class="media-body media-text-right">
-                                 
-                                    <h2 class="color-white"><?php
-                            $query = "select COUNT(*) from users";
-
-                            $result = mysqli_query($con, $query);
-                            $i      = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h2>
-                                     <a href="table_view.php"><h2 class="color-white">Total Members</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card morpheus-den-gradient color-block mb-3 mx-auto p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="ti-user f-s-40"></i></span>
+                                    
                                 </div>
                                 <div class="media-body media-text-right">
                                     
@@ -666,21 +1048,24 @@ $dayOfWeek = date("l", $unixTimestamp);
                             }
                             $i = 1;
                             ?></h2>
-                                    <a href="over_members_month.php"><h2 class="color-white">Members Joined This Month</h2></a>
+                                    <a href="view_mem.php"><h2 class="color-white">Members Joined This Month</h2></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    
+                    
                     <div class="col-md-3">
-                        <div class="card bg-success color-block mb-3 mx-auto p-20">
+                        <div class="card bg-danger p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
-                                    <span><i class="ti-star f-s-40"></i></span>
+                                    
                                 </div>
                                 <div class="media-body media-text-right">
                                  
                                     <h2 class="color-white"><?php
-                            $query = "select COUNT(*) from trainers";
+                            $query = "select COUNT(*) from booking";
 
                             $result = mysqli_query($con, $query);
                             $i      = 1;
@@ -691,21 +1076,21 @@ $dayOfWeek = date("l", $unixTimestamp);
                             }
                             $i = 1;
                             ?></h2>
-                                     <a href="trainer.php"><h2 class="color-white">Total Trainers</h2></a>
+                                     <a href="view_booking.php"><h2 class="color-white">Reservations Today</h2></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card bg-dark p-20">
+                        <div class="card bg-danger p-20">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
-                                    <span><i class="fa fa-cogs f-s-40"></i></span>
+                                    
                                 </div>
                                 <div class="media-body media-text-right">
                                  
                                     <h2 class="color-white"><?php
-                            $query = "select COUNT(*) from newmachine";
+                            $query = "select COUNT(*) from users where joining_date='$cdate'";
 
                             $result = mysqli_query($con, $query);
                             $i      = 1;
@@ -716,39 +1101,40 @@ $dayOfWeek = date("l", $unixTimestamp);
                             }
                             $i = 1;
                             ?></h2>
-                                     <a href="newmachine.php"><h2 class="color-white">Total Gym Equipment</h2></a>
+                                     <a href="view_mem.php"><h2 class="color-white">New Memberships Today</h2></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card bg-info p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="ti-notepad f-s-40"></i></span>
-                                </div>
-                                <div class="media-body media-text-right">
-                                  
-                                    <h2 class="color-white"><?php
-                            $query = "select COUNT(*) from plan where active='yes'";
+                    
 
-                            //echo $query;
-                            $result  = mysqli_query($con, $query);
-                            $i = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h2>
-                                    <a href="view_plan.php"><h2 class="color-white">Total Packages</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    
                         </div>
                         </div>
+
+                        <div class="card">
+  <h1 class="text-center">Line Chart Reports</h1>
+                <div class="card-body row d-flex justify-content-center">
+      
+                
+                <div class="card-body">
+                    
+      
+        <div id="line2"  class='chart'></div>
+      </div>
+      </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  </div>
+  
+
+  
+  
+  </div>
                         
 
                         
@@ -762,8 +1148,23 @@ drawCallback: function(settings){
             if($('#myInput').val().length > 0)
             {
                 $('#myTable tr').show();
-            } else {
+            } else  {
                 $('#myTable tr').hide();
+            }
+        }
+      });
+    });
+      </script>
+
+<script>
+              $(document).ready(function(){
+              $('#dt-all-checkbox2').dataTable( {
+drawCallback: function(settings){
+            if($('#myInput2').val().length > 0)
+            {
+                $('#dt-all-checkbox2 tr').show();
+            } else {
+                $('#dt-all-checkbox2 tr').hide();
             }
         }
       });
@@ -816,6 +1217,25 @@ $(document).ready(function(){
 <script>
     
     $(document).ready(function () {
+  $('#myTable2').dataTable({
+
+    columnDefs: [{
+      orderable: false,
+      className: 'select-checkbox select-checkbox-all',
+      targets: 0
+    }],
+    select: {
+      style: 'multi',
+      selector: 'td:first-child'
+    }
+  });
+});
+
+</script>
+
+<script>
+    
+    $(document).ready(function () {
   $('#dt-bordered1').dataTable({
 
     columnDefs: [{
@@ -842,6 +1262,18 @@ $(document).ready(function(){
   });
 });
 </script>
+
+<script>
+$(document).ready(function(){
+  $("#myInput2").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#dt-all-checkbox2 tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 
 <style>
   

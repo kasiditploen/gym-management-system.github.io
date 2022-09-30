@@ -319,6 +319,20 @@ CREATE TABLE `checkin` (
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
+--
+-- Table structure for table `checkint`
+--
+
+CREATE TABLE `checkint` (
+  `checkintid` int(5) NOT NULL,
+  `trainerid` varchar(20) NOT NULL,
+  `expire` varchar(40) DEFAULT NULL,
+  `created_date` varchar(20) DEFAULT NULL,
+  `created_time` varchar(20) DEFAULT NULL,
+  `active` varchar(40) NOT NULL
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 
 
 
@@ -352,25 +366,14 @@ CREATE TABLE `attendance` (
   `expire` varchar(40) DEFAULT NULL,
   `created_date` varchar(20) DEFAULT NULL,
   `compare_date` varchar(20) DEFAULT NULL,
+  `type` varchar(20) NOT NULL,
   `active` varchar(40) NOT NULL
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `checkintrainer`
---
 
-CREATE TABLE `checkintrainer` (
-  `checkintrainerid` int(5) NOT NULL,
-  `trainerid` varchar(20) NOT NULL,
-  `expire` varchar(40) DEFAULT NULL,
-  `created_date` varchar(20) DEFAULT NULL,
-  `created_time` varchar(20) DEFAULT NULL,
-  `active` varchar(40) NOT NULL
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 
 
@@ -688,12 +691,14 @@ CREATE TABLE `classes` (
   `time_from` time NOT NULL,
   `time_to` time NOT NULL,
   `session` varchar(100) NOT NULL,
-  `trainerid` varchar(20) NOT NULL
+  `trainerid` varchar(20) NOT NULL,
+  `classcap` int(20) NOT NULL,
+  `active` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
--- Table structure for table `classes`
+-- Table structure for table `classholder`
 --
 SET GLOBAL FOREIGN_KEY_CHECKS=0;
 CREATE TABLE `classholder` (
@@ -704,8 +709,6 @@ CREATE TABLE `classholder` (
   `created_date` date NOT NULL,
   `time_from` time NOT NULL,
   `time_to` time NOT NULL,
-  `usercount` int(20) NOT NULL,
-  `maxusers` int(20) NOT NULL,
   `active` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -754,6 +757,7 @@ CREATE TABLE `booking` (
   `time_from` time NOT NULL,
   `time_to` time NOT NULL,
   `created_date` date NOT NULL,
+  `approved` varchar(300) NOT NULL,
   `session` varchar(500) NOT NULL
   
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
@@ -793,7 +797,11 @@ CREATE TABLE `privateclasses` (
   `userid` varchar(20) NOT NULL,
   `trainerid` varchar(20) NOT NULL,
   `status` varchar(40) NOT NULL,
-  `session` varchar(20) NOT NULL
+  `session` varchar(20) NOT NULL,
+  `classcap` int(20) NOT NULL,
+  `bookcap` int(20) NOT NULL,
+  `approved` varchar(300) NOT NULL,
+  `active` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 
@@ -1112,6 +1120,13 @@ ALTER TABLE `checkin`
   ADD KEY `userID_idc` (`userid`) USING BTREE;
 
     --
+-- Indexes for table `checkint`
+--
+ALTER TABLE `checkint`
+  ADD PRIMARY KEY (`checkintid`) USING BTREE,
+  ADD KEY `trainerID_idc` (`trainerid`) USING BTREE;
+
+    --
 -- Indexes for table `checkout`
 --
 ALTER TABLE `checkout`
@@ -1125,12 +1140,7 @@ ALTER TABLE `attendance`
   ADD PRIMARY KEY (`attendanceid`) USING BTREE,
   ADD KEY `userID_idaa` (`userid`) USING BTREE;
 
-  --
--- Indexes for table `checkintrainer`
---
-ALTER TABLE `checkintrainer`
-  ADD PRIMARY KEY (`checkintrainerid`) USING BTREE,
-  ADD KEY `trainerID_idc` (`trainerid`) USING BTREE;
+
 
   -- Indexes for table `health2_status`
 --
@@ -1452,6 +1462,12 @@ ALTER TABLE `checkin`
   MODIFY `checkinid` int(5) NOT NULL AUTO_INCREMENT;
 
     --
+-- AUTO_INCREMENT for table `checkint`
+--
+ALTER TABLE `checkint`
+  MODIFY `checkintid` int(5) NOT NULL AUTO_INCREMENT;
+
+    --
 -- AUTO_INCREMENT for table `checkout`
 --
 ALTER TABLE `checkout`
@@ -1463,11 +1479,7 @@ ALTER TABLE `checkout`
 ALTER TABLE `attendance`
   MODIFY `attendanceid` int(5) NOT NULL AUTO_INCREMENT;
 
-  --
--- AUTO_INCREMENT for table `checkintrainer`
---
-ALTER TABLE `checkintrainer`
-  MODIFY `checkintrainerid` int(5) NOT NULL AUTO_INCREMENT;
+
 
     --
 -- AUTO_INCREMENT for table `trainertt`
@@ -1622,6 +1634,12 @@ ALTER TABLE `health_status`
 ALTER TABLE `checkin`
   ADD CONSTRAINT `userIDC` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
+    --
+-- Constraints for table `checkint`
+--
+ALTER TABLE `checkint`
+  ADD CONSTRAINT `trainerIDC` FOREIGN KEY (`trainerid`) REFERENCES `trainers` (`trainerid`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
   
 
     --
@@ -1636,11 +1654,6 @@ ALTER TABLE `checkout`
 ALTER TABLE `attendance`
   ADD CONSTRAINT `userIDAA` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
-    --
--- Constraints for table `checkintrainer`
---
-ALTER TABLE `checkintrainer`
-  ADD CONSTRAINT `trainerIDC` FOREIGN KEY (`trainerid`) REFERENCES `trainers` (`trainerid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
    --
 -- Constraints for table `booking`

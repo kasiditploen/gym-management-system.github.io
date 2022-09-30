@@ -114,6 +114,15 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">MAX CLIENTS</label>
+                                                <div class="col-sm-9">
+                                                 <input name="classcap" id="classcap" type="number" min="1" max="30" placeholder="Enter maximum clients"class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         
                                         
                                         <div class="form-group">
@@ -224,7 +233,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                     </div>
 
                                     
-                                        <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit</button>
+                                        <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Add</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
 
                 

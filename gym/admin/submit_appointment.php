@@ -3,8 +3,8 @@ include('../constant/connect.php');
 
 
 $trainerttid =mysqli_real_escape_string($con,$_POST['trainerttid']);
-$appointmentid =$_GET['id'];
-
+$classid =$_GET['classid'];
+$classid =$_POST['classid'];
 $name = $_POST['classname'];
 $desc = $_POST['desc'];
 $studio = $_POST['studios'];
@@ -30,7 +30,7 @@ echo mysqli_error($db);
 date_default_timezone_set("Asia/Bangkok"); 
 $date_to_now = (date("Y-m-d",strtotime($date_to.'-1 +1 month -1 day')));
 $cdate = date("Y-m-d H:i");
-$query="UPDATE appointment set approved='yes' where appointmentid='".$appointmentid."'";
+$query="UPDATE privateclasses set approved='yes' where privateclassid='".$classid."'";
 //$query="insert into classes (pid,className,description,studios,dow,date_from,date_to,time_from,time_to,trainerid) values('$classid','$name','$desc','$studio','$dow','$date_from','$date_to','$time_from','$time_to','$trainer')";
 if(mysqli_query($con,$query)==1){
 	//Retrieve information of plan selected by user
@@ -46,7 +46,7 @@ if(mysqli_query($con,$query)==1){
 				echo "<head><script>alert('Approved');</script></head></html>";
 			   echo "error: ".mysqli_error($con);
 			   //Deleting record of users if inserting to enrolls_to table failed to execute
-			   $query3 = "DELETE FROM appointment WHERE appointmentid='$appointmentid'";
+			   $query3 = "DELETE FROM privateclasses where privateclassid='".$classid."'";
 			   mysqli_query($con,$query3);
 			}
 		  }
@@ -55,7 +55,7 @@ if(mysqli_query($con,$query)==1){
 			 echo "<head><script>alert('Approved Added');</script></head></html>";
 			echo "error: ".mysqli_error($con);
 			 //Deleting record of users if inserting to enrolls_to table failed to execute
-			  $query3 = "DELETE FROM appointment WHERE appointmentid='$appointmentid'";
+			  $query3 = "DELETE FROM privateclasses where privateclassid='".$classid."'";
 			  mysqli_query($con,$query3);
 		  }
             

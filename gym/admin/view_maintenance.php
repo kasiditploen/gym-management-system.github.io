@@ -120,7 +120,7 @@
                                 $result7=mysqli_query($con,$query7);
                                 if($result7){
                                     $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
-                                    $query8="select * from enrolls_to_maintenance where machineid='$uid'";  
+                                    $query8="select * from enrolls_to_maintenance where machineid='$uid' and renewal='yes'";  
                             $result8=mysqli_query($con,$query8);
                                     if($result8){
                                         $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
@@ -240,7 +240,7 @@
           ?>  
           <div class="row">
           <div class="col-md-6">
-          <div class="card bg-primary p-10">
+          <div class="card bg-warning p-10">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-right">
                                 </div>
@@ -259,7 +259,7 @@ $sum = $row['value_sum'];
                         </div>
                     </div>
                     <div class="col-md-6">
-          <div class="card bg-success p-10">
+          <div class="card bg-dark p-10">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-right">
                                 </div>

@@ -27,12 +27,13 @@
             <div class="container-fluid">
                 <!-- Start Page Content -->
                 
+                
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">Strength Training</h2></a>
+                            <h2 class="color-black d-flex justify-content-center">Strength Training</h2></a>
                             <a href="new_privateclass.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -76,7 +77,7 @@ $trainerid=$row['trainerid'];
       
         <tbody>
         <?php
-              $query  = "select * from privateclasses WHERE trainerid='$trainerid' and classtype='Strength Training'";
+              $query  = "select * from privateclasses WHERE trainerid='$trainerid' and classtype='Strength Training' and active='yes' and approved='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -153,9 +154,9 @@ $trainerid=$row['trainerid'];
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">Combat Sports</h2></a>
+                            <h2 class="color-black d-flex justify-content-center">Combat Sports</h2></a>
                             <a href="new_privateclass.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit1" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -199,7 +200,7 @@ $trainerid=$row['trainerid'];
       
         <tbody>
         <?php
-              $query  = "select * from privateclasses WHERE classtype='Combat Sports'";
+              $query  = "select * from privateclasses WHERE classtype='Combat Sports' and active='yes' and approved='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -277,9 +278,9 @@ $trainerid=$row['trainerid'];
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">Dance</h2></a>
+                            <h2 class="color-black d-flex justify-content-center">Dance</h2></a>
                             <a href="new_privateclass.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit2" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -323,7 +324,7 @@ $trainerid=$row['trainerid'];
       
         <tbody>
         <?php
-              $query  = "select * from privateclasses WHERE trainerid='$trainerid' and classtype='Dance'";
+              $query  = "select * from privateclasses WHERE trainerid='$trainerid' and classtype='Dance' and active='yes' and approved='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -401,9 +402,9 @@ $trainerid=$row['trainerid'];
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">Mind and Body</h2></a>
+                            <h2 class="color-black d-flex justify-content-center">Mind and Body</h2></a>
                             <a href="new_privateclass.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit3" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -447,7 +448,7 @@ $trainerid=$row['trainerid'];
       
         <tbody>
         <?php
-              $query  = "select * from privateclasses WHERE trainerid='$trainerid' and classtype='Mind and Body'";
+              $query  = "select * from privateclasses WHERE trainerid='$trainerid' and classtype='Mind and Body' and active='yes' and approved='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;

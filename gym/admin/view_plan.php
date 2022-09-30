@@ -32,7 +32,7 @@
                             <div class="card-body">
                             <h2 class="color-black">By Months (Memberships)</h2></a>
                             <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -115,7 +115,7 @@
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -151,7 +151,7 @@
                             <div class="card-body">
                             <h2 class="color-black">By Hours (Daypasses)</h2></a>
                             <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -236,7 +236,7 @@
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -272,7 +272,7 @@
                             <div class="card-body">
                             <h2 class="color-black">PT Sessions</h2></a>
                             <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -358,7 +358,7 @@
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -394,7 +394,7 @@
                             <div class="card-body">
                             <h2 class="color-black">Class Sessions</h2></a>
                             <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
@@ -479,7 +479,7 @@
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['pid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   

@@ -30,8 +30,8 @@
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">All Personal Trainer (Approval Request Training)</h2></a>
-                            <a href="new_appointment.php"><button class="btn btn-primary">Add Appointment</button></a>
+                            <h2 class="color-black">Personal Trainer (Approval Request Training)</h2></a>
+                            <a href="new_appointment.php"><button class="btn btn-light">Add Appointment</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -40,19 +40,24 @@
                                     
                                         <thead>
                                         <?php
-          $query  = "select machineid from newmachine";
-          //echo $query;
-          $result = mysqli_query($con, $query);
-          $sno    = 1;
-          
-          
+      $id     = $_GET['id'];;
+      $query  = "select * from trainers WHERE trainerid='$id'";
+      //echo $query;
+      $result = mysqli_query($con, $query);
 
-          if (mysqli_affected_rows($con) != 0) {
-              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
-              }
-            }
-                ?>
+      if (mysqli_affected_rows($con) != 0) {
+          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $image = $row['image'];
+            $trainername = $row['username'];
+              $memid=$row['userid'];
+              $gender=$row['gender'];
+              $mobile=$row['mobile'];
+              $email=$row['email'];
+              $joinon=$row['joining_date'];
+              echo $name;
+          }
+      }
+      ?>
         <tr>
         <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
          <th>Sl.No</th>
@@ -76,7 +81,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from appointment where approved='no'";
+              $query  = "select * from appointment where approved='no' and trainerid='$id'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -175,7 +180,7 @@
                         <!-- /# row -->
                         <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">All Appointments</h2></a>
+                            <h2 class="color-black">Appointments</h2></a>
                             
                             
                          

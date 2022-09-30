@@ -23,7 +23,7 @@
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black9.jpg');
-    height: 200px; width: 1600px;
+    height: 300px; width: auto;
   ">
   <h1 class="color-white mb-3 h1"><b>Gym Equipment</b></h1>
 </div>
@@ -171,7 +171,7 @@
                 $query1 = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
                 
                 
-                echo '<h3><span class="badge badge-danger">WARRANTY VOID!!!</span></h3>';
+                echo '<h3><span class="badge badge-danger ">WARRANTY VOID!!!</span></h3>';
             
             
                
@@ -211,7 +211,14 @@
                             echo '<p><a href="status_machine.php?machineid='.$row['machineid'].'&status=0" class="btn blue-gradient waves-effect waves-light">Active</a></p>';
                         } else{
                             echo '<p><a href="status_machine.php?machineid='.$row['machineid'].'&status=1" class="btn purple-gradient waves-effect waves-light">Inactive</a></p>';
-                        }  ?> </td>
+                        }  ?> 
+                        <?php
+                        if($row['mneed']=='1'){
+                            echo '<p><a href="status_mneed.php?machineid='.$row['machineid'].'&mneed=0" class="btn btn-red mneedbutton">Maintenance Enabled</a></p>';
+                        } else{
+                            echo '<p><a href="status_mneed.php?machineid='.$row['machineid'].'&mneed=1" class="btn btn-black button">Maintenance Disabled</a></p>';
+                        }  ?>
+                    </td>
                      
                   
                      
@@ -257,7 +264,7 @@
           ?>  
           <div class="row">
           <div class="col-md-6">
-          <div class="card bg-primary p-10">
+          <div class="card bg-danger p-10">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-right">
                                 </div>
@@ -276,7 +283,7 @@ $sum = $row['value_sum'];
                         </div>
                     </div>
                     <div class="col-md-6">
-          <div class="card bg-success p-10">
+          <div class="card bg-dark p-10">
                             <div class="media widget-ten">
                                 <div class="media-left meida media-right">
                                 </div>

@@ -279,7 +279,7 @@
 
         <tbody>
         <?php
-              $query  = "select * from maintain where active='yes'";
+              $query  = "select * from maintain where machineid='$id' and active='yes'";
               $result = mysqli_query($con, $query);
               $mid= $row['maintainid'];
               $sno    = 1;
@@ -289,10 +289,12 @@
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     $mid= $row['maintainid'];
                     $uid   = $row['machineid'];
-                    $query1  = "select * from enrolls_to_maintain where machineid='$uid'";
+                    $query1  = "select * from enrolls_to_maintain where machineid='$id' ORDER BY etmt_id DESC";
                     $result1 = mysqli_query($con, $query1);
                     if($result1){
-                      $row1=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                      $row1=mysqli_fetch_array($result1,MYSQLI_ASSOC);
+                      $duration  = $row1['duration']; 
+                      $start  = $row1['start_date']; 
                       $result2 = mysqli_query($con, $query1);
                       if($result2){
                         $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
@@ -304,7 +306,7 @@
               
                 $uid2   = $row2['machineid'];
                 $mid2= $row2['maintainid'];
-                      $duration  = $row1['duration'];      
+                           
                       date_default_timezone_set("Asia/Bangkok"); 
                       $mid2= $row2['maintainid'];
                       $query4  = "select * from maintain where active='yes' and maintainid='$mid2' and machineid='$uid2'";
@@ -320,14 +322,14 @@
 
                   
                   <tr>
+                  <?php echo date("h:i:s")  ?>
+                  <?php echo $duration ?>
                   
                     <td style="width:10%;"><?php echo $sno; ?></td>
-                    <td><?php if (date("h:i:s") <= $duration){
+                    <td><?php if ($startdate <= date("h:i:s") and date("h:i:s")  <= $duration){
                                             echo '<h1><span class="badge badge-dark">In Progress</span></h1>';
-                                        } else  if (date("h:i:s") >= $duration){
+                                        } else  if ($startdate <= date("h:i:s") and date("h:i:s") >= $duration){
                                             echo '<h1><span class="badge badge-success">Complete</span></h1>';
-                                        }else {
-                                          echo '<h1><span class="badge badge-success"></span></h1>';
                                         }
                                     
                                        ?></td>             

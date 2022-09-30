@@ -145,13 +145,14 @@ $dayOfWeek = date("l", $unixTimestamp);
                                  $query0  = "select * from attendance where userid = '$uid2'";
                                  $result0 = mysqli_query($con, $query0);
                                  while($rowme=mysqli_fetch_array($result0)){
-                                   $attendanceid=$rowme['attendancenid'];
+                                   $attendanceid=$rowme['attendanceid'];
+                                   $uid3=$rowme['userid'];
                                    //$usernamein=$rowme['username'];
                                  }
                                    ?>
 
 <?php 
-                                 $query3  = "select * from privateclasses where userid = '$uid2'";
+                                 $query3  = "select * from privateclasses where userid = '$uid3'";
                                  $result3 = mysqli_query($con, $query3);
                                  while($row3=mysqli_fetch_array($result3)){
                                    $privateclassid=$row3['privateclassid'];
@@ -161,7 +162,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             
                             
 
-                                 
+                                
 
                                    <?php
                                    
@@ -189,10 +190,10 @@ $dayOfWeek = date("l", $unixTimestamp);
                                    // $from_date = $_GET['from_date'];
                                     //$to_date = $_GET['to_date'];
                                     $sno    = 1;
-                                    $where = !empty( $clauses ) ? ' where '.implode(' and ',$clauses ) : '';
+                                    $where = !empty( $clauses ) ? ' and '.implode(' and ',$clauses ) : '';
                                     $query = "SELECT * FROM users u 
-                                    INNER JOIN attendance a ON u.userid=a.userid
-                                    INNER JOIN  privateclasses p ON u.userid=p.userid" . $where;
+                                    LEFT OUTER JOIN attendance a ON u.userid=a.userid
+                                    LEFT OUTER JOIN  privateclasses p ON u.userid=p.userid where a.userid='$uid3' and a.type='pt' " . $where;
                                     //$query_run = mysqli_query($con, $query);
                                     
                                     if(isset($query)){
@@ -211,6 +212,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                                 <td><?= $row['created_date']; ?></td>
                                                 <td><?= $row['created_time']; ?></td>
                                                 <td><?= $row['present']; ?></td>
+                                                
                                             </tr>
                                             <?php
                                         }
@@ -347,6 +349,10 @@ $(document).ready(function(){
 });
 
 </script>
+<script>
+  $("#classname").select2({
+});
+    </script>
      
 <div class="tab-content ">
         <div class="tab-pane fade in show active" id="docsTabsOverview" role="tabpanel">

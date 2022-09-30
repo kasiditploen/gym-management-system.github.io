@@ -32,11 +32,123 @@
                             <div class="card-body">
                             <h2 class="color-black">Feedback</h2></a>
                             <a href="new_feedback.php"><button class="btn btn-primary">Add Feedback</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_class.php" method="POST">
                                     <table id="myTable" class="table table-bordered table-striped">
+                                    
+                                        <thead>
+                                        <?php
+          $query  = "select * from feedback";
+          //echo $query;
+          $result = mysqli_query($con, $query);
+          $sno    = 1;
+          
+          
+
+          if (mysqli_affected_rows($con) != 0) {
+              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+              }
+            }
+                ?>
+        <tr>
+        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        <th>S.No</th>
+          <th>User ID</th>
+          <th>Satisfaction</th>
+          <th>Specifc Feedback Detail</th>
+          <th>Action</th>
+        </tr>
+
+        
+              
+              
+      </thead>    
+
+      
+        <tbody>
+        <?php
+              $query  = $query  = "select * from feedback";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $uid   = $row['feedbackid'];
+
+                  $query2="select studioid,studioName from studio";
+                            $result2=mysqli_query($con,$query2);
+                            $query3="select userid,username from users";
+                            $result3=mysqli_query($con,$query3);
+                            
+                      
+                      
+                            if($result2){
+                                $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                                if($result3){
+                                    $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    
+                                ?>
+                    
+                  
+                    
+                    <tr>
+                    <td style="width:10px; text-align: center;">
+                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                      
+                      <td><?php echo $sno ?></td>
+                     <td><?php echo$row3 ['userid']; ?></td>
+                     <td><?php echo $row['service'] ?></td>
+                     <td width='380'><?php echo $row['description'] ?></td>
+                     
+                       
+                  
+                  
+                  
+                 <td>
+                  
+                  
+                 
+                  <a href="del_class.php?id=<?php echo $row['feedbackid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  
+              <?php 
+              $sno++; 
+              $msgid = 0;
+                          }
+                      }
+                    }
+                  }
+                
+              
+            
+            
+        
+          
+        
+            
+          ?>  
+
+        </tbody>
+       
+                                      
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                            <h2 class="color-black">Trainer Rating</h2></a>
+                            <a href="new_feedback.php"><button class="btn btn-primary">Add Trainer Rating</button></a>
+                            
+                         
+                                <div class="table-responsive m-t-40">
+                                <form id="form1" action="del_all_class.php" method="POST">
+                                    <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
                                         <?php
