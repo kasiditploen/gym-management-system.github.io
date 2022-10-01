@@ -32,7 +32,7 @@
    <title><?php echo $row_head_title['title'];?></title>
    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
+
 
 
     <link href="../assets/css/lib/chartist/chartist.min.css" rel="stylesheet">

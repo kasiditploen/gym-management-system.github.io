@@ -81,6 +81,7 @@ include('../constant/connect.php');
                     <div class="col-lg-8" style="    margin-left: 10%;">
                         <div class="card">
                             <div class="card-title">
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                                
                             </div>
                             <div class="card-body">

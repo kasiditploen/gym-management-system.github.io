@@ -628,7 +628,8 @@ CREATE TABLE `newmachine` (
   `mainday` varchar(100) NOT NULL,
   `repair` varchar(100) NOT NULL,
   `status` varchar(300) DEFAULT NULL,
-  `mneed` varchar(300) DEFAULT NULL
+  `mneed` varchar(300) DEFAULT NULL,
+  `subtotal` float(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------

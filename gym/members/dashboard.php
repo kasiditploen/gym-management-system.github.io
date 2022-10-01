@@ -236,7 +236,7 @@
                             ?>
                             
                                     <h2 class="color-white"><?php echo $revenue."฿"; ?></h2>
-                                    <a href="revenue_month.php"> <h2 class="color-white">Current Income</h2></a>
+                                    <a href="revenue_month.php"> <h2 class="color-white">Current Revenue</h2></a>
                                 </div>
                             </div>
                         </div>

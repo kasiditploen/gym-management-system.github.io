@@ -85,7 +85,7 @@
 
  <script src="../assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="../assets/js/lib/html5-editor/wysihtml5-0.3.0.js"></script>
-    <script src="../assets/js/lib/html../assets/5-editor/bootstrap-wysihtml5.js"></script>
+   
     <script src="../assets/js/lib/html5-editor/wysihtml5-init.js"></script>
     
 </body>

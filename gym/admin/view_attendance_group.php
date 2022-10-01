@@ -39,12 +39,15 @@ $dayOfWeek = date("l", $unixTimestamp);
                                    
                                  }
                                    ?>
-            <div class="container-fluid">
+            <div class="container-fluid print-container">
 
             <div class="card">
+
                             <div class="card-body">
+                            
                             <form action="" method="GET">
                             <div class="row">
+                              
                             <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Nickname</label>
@@ -69,7 +72,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                                <select name="classname" id="classname"   class="form-control">
                     <option value="">ALL</option>
                     <?php
-                        $query="select className,className,classid from classes";
+                        $query="select classid,className from classes";
                         $result=mysqli_query($con,$query);
                         if(mysqli_affected_rows($con)!=0){
                             while($row=mysqli_fetch_row($result)){
@@ -105,10 +108,17 @@ $dayOfWeek = date("l", $unixTimestamp);
                         </form>
                     </div>
                 </div>
+                
 
                 <div class="card mt-4">
                     <div class="card-body">
                         <table class="table table-borderd">
+                        <div class="table-responsive m-t-40">
+                        
+                                
+                                
+                                    <table id="dt-all-checkbox" class="table table-bordered table-striped">
+                                    <button class="btn btn-danger col-sm-2 sm-0" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
                             <thead>
                                 <tr>
                                 <th style="width:2%;">Sl.No</th>
@@ -128,11 +138,11 @@ $dayOfWeek = date("l", $unixTimestamp);
                               
 
                             <?php 
-                                 $query  = "select * from users where userid='$uid'";
+                                 $query  = "select * from users";
                                  $result = mysqli_query($con, $query);
                                  if($result){
                                    $row1=mysqli_fetch_array($result,MYSQLI_ASSOC);
-                                   
+                                   $uid1=$row1['userid'];
                                    
                                  }
                                    ?>
@@ -190,7 +200,7 @@ $dayOfWeek = date("l", $unixTimestamp);
       }
 
       if( isset( $_GET['classname'] ) && !empty( $_GET['classname'] ) ){
-        $clauses[] = "`classname` = '{$_GET['classname']}'";   
+        $clauses[] = "`classid` = '{$_GET['classname']}'";   
     }
 
       
@@ -204,7 +214,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     LEFT OUTER JOIN attendance a ON u.userid=a.userid
                                     inner join classes c
                                     
-                                    where a.userid='$uid2' and a.type='cs'" . $where;
+                                    where classid='$classid' and a.type='cs'" . $where;
                                     //$query_run = mysqli_query($con, $query);
                                     
                                     if(isset($query)){
@@ -222,7 +232,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                             <td><?= $row['lname']; ?></td>
                                             <td><?= $row['username']; ?></td>
                                                 <td><?= $row['created_date']; ?></td>
-                                                <td><?= $row['created_time']; ?></td>
+                                                
                                                 <td><?= $row['present']; ?></td>
                                                 
                                             </tr>
@@ -246,6 +256,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 
             </div>
         </div>
+    </div>
     </div>
                 <!-- Start Page Content -->
                 
@@ -511,6 +522,28 @@ $('.toast').toast('show');
   $("#Classname").select2({
 });
     </script>
+
+<style>
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-container, .print-container * {
+    visibility: visible;
+  }
+
+  .print-container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+  }
+  
+}
+</style>
 <?php include('../constant/layout/footer.php');?>
 
 

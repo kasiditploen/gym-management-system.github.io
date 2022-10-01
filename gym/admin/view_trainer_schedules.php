@@ -274,6 +274,39 @@ $dayonly = date("l", $unixTimestamp);
         </tr>
       </thead>    
         <tbody>
+        <?php
+          $id     = $_GET['id'];;
+              $query  = "select * from trainertt where trainerid='$id'ORDER BY time_from ASC";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                      
+                      $cid   = $row['classid'];
+                      $mondate= $row['mon_date'];
+                      $tuesdate= $row['tues_date'];
+                      $wednesdate= $row['wednes_date'];
+                      $thursdate= $row['thurs_date'];
+                      $fridate= $row['fri_date'];
+                      $saturdate= $row['satur_date'];
+                      $sundate= $row['sun_date'];
+                      
+                      $query1  = "select distinct * from trainers WHERE trainerid='$id'";
+                      $result1 = mysqli_query($con, $query1);
+                      $traineryou = $row['trainerid'];
+                      if (mysqli_affected_rows($con) == 1) {
+                          while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
+                            $trainername=$row1['username'];
+                            $query2  = "select * from classes WHERE trainerid='$traineryou'";
+                      $result2 = mysqli_query($con, $query2);
+                            
+                            if($result2){
+                              while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) {
+                                $i=$row2['dow'];
+                  
+                ?>  
           
           <?php
           $id     = $_GET['id'];;
@@ -379,6 +412,12 @@ $dayonly = date("l", $unixTimestamp);
               }
             }
           }
+        }
+      }
+    }
+  }
+}
+              }
     
             
           ?>  

@@ -3,6 +3,59 @@
 
 <?php include('../constant/layout/sidebar.php');?>   
 
+<?php
+              $query  = "select * from trainers";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                      $trainerid   = $row['trainerid'];
+                      $dow = $row['availableday'];
+                      $query7  = "select * from enrolls2_to WHERE uid='$trainerid' AND renewal='yes'";
+                      $result7 = mysqli_query($con, $query7);
+                      if (mysqli_affected_rows($con) == 1) {
+                          while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
+                            $query8="select * from checkint where trainerid='$trainerid' and  created_date LIKE '$cdate%'";
+                              $result8=mysqli_query($con,$query8);
+                              if($result8){
+                                $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                $create_date=$row8 ['created_date'];
+                                $create_time=$row8 ['created_time'];
+                  //$msgid = $row['pid'];
+                  //foreach($result and $result1 as $row)
+                              }
+                            }
+                          }
+                        }
+                      }
+                ?>  
+
+                
+<?php
+              $query  = "select * from users";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                      $userid  = $row['userid'];
+                      $query7  = "select * from users WHERE userid='$userid'";
+                      $result7 = mysqli_query($con, $query7);
+                      if (mysqli_affected_rows($con) == 1) {
+                          while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
+                            $useridx  = $row1['userid'];
+                            
+                  //$msgid = $row['pid'];
+                  //foreach($result and $result1 as $row)
+                              }
+                            }
+                          }
+                        }
+                      
+                ?> 
 
 <?php
         date_default_timezone_set("Asia/Bangkok"); 
@@ -191,17 +244,21 @@ $dayOfWeek = date("l", $unixTimestamp);
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
+                
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black4.jpg');
-    height: 300px; width: auto;
+    height: 125px; width: auto;
   ">
-  <h1 class="color-white mb-3 h1"><b>Home</b></h1>
+  
+  <h1 class="color-white mb-3 h1"><b>Control Panel</b></h1>
 </div>
                 <div class="card">
+                  
                 <div class="col-md-3 align-self-left">
-                <a href="new_daypass.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Walk-ins</b></button></a>
+                
                  </div>
                  
+                 <a href="new_daypass.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Walk-ins</b></button></a>
                  
                     <div class="table-responsive m-t-40">
                                 <form id="form1" action="del_all_mem.php" method="POST">
@@ -234,11 +291,11 @@ $dayOfWeek = date("l", $unixTimestamp);
       <tbody>
         <?php
         $tomorrow = date("d-m-Y", strtotime('tomorrow'));
-              $query  = "select * from users ORDER BY joining_date";
+              $query  = "select * from users  ORDER BY joining_date";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
-              $uid   = $row['userid'];
+              
               $uname;
                       $udob;
                       $ujoing;
@@ -306,12 +363,8 @@ $dayOfWeek = date("l", $unixTimestamp);
                                 $privateclassname=$row8['className'];
                                 $time_from=$row8['time_from'];
                                 $time_to=$row8['time_to'];
-                                $query9="select * from trainers";
-                                $result9=mysqli_query($con,$query9);
-                                if($result9){
-                                  $row9=mysqli_fetch_array($result9,MYSQLI_ASSOC);
-                                  $trainerid=$row9['trainerid'];
-                                  $query10="select * from classes where trainerid='$trainerid'";
+                                
+                                  $query10="select * from classes order by time_from desc";
                                 $result10=mysqli_query($con,$query10);
                                 if($result10){
                                   $row10=mysqli_fetch_array($result10,MYSQLI_ASSOC);
@@ -319,26 +372,33 @@ $dayOfWeek = date("l", $unixTimestamp);
                                   $classname=$row10['className'];
                                   $tfrom=$row10['time_from'];
                                   $tto=$row10['time_to'];
-                                  $query11="select * from booking where userid='$uid' and trainerid='$trainerid' and date_from LIKE '$tomorrow%'";
+                                  $query11="select * from booking where userid='$uid'  and date_from LIKE '$tomorrow%'";
                                 $result11=mysqli_query($con,$query11);
                                 if($result11){
                                   $row11=mysqli_fetch_array($result11,MYSQLI_ASSOC);
                                   $bookedclassname=$row11['className'];
                                   $tfrom1=$row11['time_from'];
                                   $tto1=$row11['time_to'];
-                                  $query12="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid' and created_date LIKE '%$cdate%'";
+                                  $query12="select ch.userid,COUNT(*) from classholder ch
+                                  inner join users u ON u.userid=ch.userid
+                                  LEFT OUTER JOIN classes c ON c.trainerid=ch.trainerid
+                                   where u.userid='$uid' and ch.classid='$classid' and created_date LIKE '%$cdate%'";
                                 $result12=mysqli_query($con,$query12);
                                 if($result12){
                                   $row12=mysqli_fetch_array($result12,MYSQLI_ASSOC);
+                                  $classcount=$row12['COUNT(*)'];
+                                  $userid12=$row12['userid'];
                                   $classid1=$row12['classid'];
-                                  $classname1=$row10['className'];
+                                  $classname1=$row12['className'];
                                   $create_date1=$row12['created_date'];
-                                  $query13="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid' and created_date LIKE '$cdate%'";
+                                  $tfrom2=$row12['time_from'];
+                                  $tto2=$row12['time_to'];
+                                  $query13="select * from classholder where userid='$userid12'  and classid='$classid1' and created_date LIKE '$cdate%'";
                                 $result13=mysqli_query($con,$query13);
                                 if($result13){
                                   $row13=mysqli_fetch_array($result13,MYSQLI_ASSOC);
-                                  $tfrom2=$row13['time_from'];
-                                  $tto2=$row13['time_to'];
+                                  $classid11=$row13['classid'];
+                                  $classname11=$row13['className'];
                                   $query14="select * from enrolls_to_day";
                                   $result14=mysqli_query($con,$query14);
                                       if($result14){
@@ -372,6 +432,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                         
 
                                ?>
+                               
 
 
                           
@@ -496,14 +557,18 @@ $dayOfWeek = date("l", $unixTimestamp);
                       </h3>
           </li>
                      </ul>
+
                      <ul class="list-group list-group-flush">
           <li class="list-group-item">
-                    <h3>
-                      <span class="badge badge-color red">Class Sessions <br><i class="far fa-clock"></i> Today:</br>
-                      <br><?php echo $classname1;?></br>
-                      <h3><br><?php echo $tfrom2; ?>-<?php echo $tto2; ?></br></span>
-                      </br></h3></h3>
-                      </li>
+                     <h3>
+                      <span class="badge badge-light">Class Sessions <br> <i class="far fa-clock"></i> Today:</br>
+                       <br><?php echo $classcount; ?></br>
+                       <h3><br><?php echo $tfrom2; ?>-<?php echo $tto2; ?>
+                      </br>
+                    </span>
+                  </h3>
+                      </h3>
+          </li>
                      </ul>
 
                      <ul class="list-group list-group-flush">
@@ -611,7 +676,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 }
               }
             }
-          }
+          
                 
           ?>  
 
@@ -1018,7 +1083,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             
                             <?php echo $pid4?>
                                     <h2 class="color-white"><?php echo $total."฿"; ?></h2>
-                                    <a href="revenue_month.php"> <h2 class="color-white">Current Income</h2></a>
+                                    <a href="revenue_month.php"> <h2 class="color-white">Current Revenue</h2></a>
                                 </div>
                             </div>
                         </div>

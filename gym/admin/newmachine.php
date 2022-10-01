@@ -36,12 +36,12 @@
 
                     
                             <a href="new_add_machine.php"><button class="btn btn-primary" id="addProductModalBtn">Add Gym Equipment</button></a></div>
-                            <form action="del_all_machine.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
         <tr>
-        <th style="width:1%;"><button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger btn-sm">Delete</button></th>
+        
           <th style="width:10%;">S.No</th>
           <th style="width:10%;">Machine Condition</th>
           <th style="width:10%;">Types Of Equipment</th>
@@ -73,7 +73,7 @@
           $result = mysqli_query($con, $query);
           $sno    = 1;
           
-          
+          $revenue = 0;
 
           if (mysqli_affected_rows($con) != 0) {
               while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -97,20 +97,32 @@
                             
                             $query2="select * from newmachine where machineid='$uid1'";
                       $result2=mysqli_query($con,$query2);
-                      $query3="select * from toe where toeid='$toe'";
-                      $result3=mysqli_query($con,$query3);
-                      $query4="select * from newmachine where toe='$toeid'";
-                      $result4=mysqli_query($con,$query2);
+                      
+                      
                       
                       if($result2){
                         $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                        $subtotal=$row2['subtotal'];
                         $toe   = $row2['toe'];
                         $uid   = $row2['machineid'];
+                        $query3="select * from toe where toeid='$toe'";
+                      $result3=mysqli_query($con,$query3);
                         if($result3){
                             $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                            $extotal=$row3['amount']* $row2['quantity'];
+                            
+                            $query4="select * from newmachine where toe='$toeid'";
+
+                      $result4=mysqli_query($con,$query2);
+                      
+                            
+                                    $revenue = $subtotal+$revenue;
+                            
                             if($result4){
                                 $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
                                 $uids   = $row4['machineid'];
+                                $value=mysqli_fetch_row($result2);
+                            $value1=mysqli_fetch_row($result3);
                             $query5="select * from categories where categoryid='$category'";  
                             $result5=mysqli_query($con,$query5);
 
@@ -144,17 +156,16 @@
                   
                                         
                                         
-                                            
+                  $total=($revenue);           
                                                 
                                             
                                 ?>
-                  
+                      
                   
                   
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="room_delete_id[]" value="<?= $row['machineid']; ?>">
+                  
                     <td><?php echo $sno ?></td>
                     <td class="text-center">
                     
@@ -204,7 +215,7 @@
                      <td width='100'><h3><b> <?php echo $row3['warranty'].' Years'?></b></h3> </td>
                      <td> <h3><b> <?php echo $row3['amount'].'฿'?> </b></h3></td>
                      <td width='100'> <h3><b><?php echo $row2['quantity']?></h3></b></td>
-                     <td width='100'><h3><b><?php echo $row3['amount']* $row2['quantity'].'฿'?></h3></b></td>
+                     <td width='100'><h3><b><?php echo $extotal.'฿'?></h3></b></td>
                      <td width='100'><b><?php echo $row2['mainday'].' days'?></b></td>
                      <td><?php
                         if($row['status']=='1'){
@@ -227,9 +238,10 @@
                  
                  <td>
                  <a href="read_machine.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-secondary"  ><i class="fa fa-folder"></i></button></a>
+                 <a href="read_maintenance.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-warning"   ><i class="fa fa-wrench"></i></button></a>
                  <a href="edit_plan.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-primary" ><i class="fa fa-pencil"></i></button></a>
                   <a href="del_newmachine.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a>
-                  <a href="read_maintenance.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-warning"   ><i class="fa fa-wrench"></i></button></a></td>
+                  </td>
                   
                   
               <?php 
@@ -315,9 +327,9 @@ $sum = $row['value_sum'];
         <tbody>
         
       <tr>
-       <th colspan="14"><h3><b>Total Price</b></h3></th>
+       <th colspan="13"><h3><b>Total Price</b></h3></th>
           
-                     <td> <h3><b><?php echo $row9['value_sum'].'฿'?></b></h3> </td>
+                     <td> <h3><b><?php echo $total.'฿'?></b></h3> </td>
                      <td</td>
                      
        

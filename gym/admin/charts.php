@@ -247,9 +247,9 @@ $result=mysqli_query($con,$qry);
            ?> 
 
       <?php
-          $query10 = "SELECT *, SUM(t.amount) as numbert FROM toe t
+          $query10 = "SELECT *, SUM(n.subtotal) as numbert FROM toe t
           INNER JOIN newmachine n on t.toeid = n.toe
-          GROUP BY t.type";
+          ";
             $res1000=mysqli_query($con,$query10);
             while($data=mysqli_fetch_array($res1000)){
               $expenses='Expenses';
@@ -656,7 +656,7 @@ include('../constant/connect.php');
                                   <?php
                             date_default_timezone_set("Asia/Bangkok"); 
                             $date  = date('Y-m');
-                            $query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
+                            $query = "select * from enrolls_to WHERE  paid_date LIKE '%$date%'";
                           
                             //echo $query;
                             $result  = mysqli_query($con, $query);
@@ -771,7 +771,7 @@ include('../constant/connect.php');
                             
                             
                                     <h2 class="color-white"><?php echo $total."฿"; ?></h2>
-                                    <a href="revenue_month.php"> <h2 class="color-white">Current Income</h2></a>
+                                    <a href="revenue_month.php"> <h2 class="color-white">Current Revenue</h2></a>
                                 </div>
                             </div>
                         </div>

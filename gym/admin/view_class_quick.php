@@ -73,7 +73,7 @@
                                         $cs    = $_GET['cs'];;
                                         $am    = $_GET['am'];;
                                         $pid2    = $_GET['pi'];;
-          $query  = "select machineid from newmachine";
+          $query  = "select * from trainers";
           //echo $query;
           $result = mysqli_query($con, $query);
           $sno    = 1;
@@ -82,7 +82,7 @@
 
           if (mysqli_affected_rows($con) != 0) {
               while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
+$thistrainer = $row['trainerid'];
               }
             }
                 ?>
@@ -121,7 +121,7 @@
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
-                            $query3="select trainerid,username from trainers";
+                            $query3="select trainerid,username from trainers where trainerid='$thistrainer'";
                             $result3=mysqli_query($con,$query3);
                             
                       
@@ -250,7 +250,7 @@
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
-                            $query3="select trainerid,username from trainers";
+                            $query3="select trainerid,username from trainers where trainerid='$thistrainer'";
                             $result3=mysqli_query($con,$query3);
                             
                       
@@ -375,7 +375,7 @@
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
-                            $query3="select trainerid,username from trainers";
+                            $query3="select trainerid,username from trainers where trainerid='$thistrainer'";
                             $result3=mysqli_query($con,$query3);
                             
                       
@@ -500,7 +500,7 @@
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
-                            $query3="select trainerid,username from trainers";
+                            $query3="select trainerid,username from trainers  where trainerid='$trainerid'";
                             $result3=mysqli_query($con,$query3);
                             
                       
@@ -625,7 +625,7 @@
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
-                            $query3="select trainerid,username from trainers";
+                            $query3="select trainerid,username from trainers where trainerid='$$thistrainer'";
                             $result3=mysqli_query($con,$query3);
                             
                       

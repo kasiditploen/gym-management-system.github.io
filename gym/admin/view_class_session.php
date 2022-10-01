@@ -35,9 +35,9 @@
   <h1 class="color-white mb-3 h1 text-center"><b>Group Class Training</b></h1>
 </div>
                 <!-- /# row -->
-                 <div class="card">
+                <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Cardio</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">CARDIO</h2></a>
                             <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
                             
                          
@@ -47,28 +47,19 @@
                                     
                                         <thead>
                                         <?php
-              $queryb  = "select * from users";
-              //echo $query;
-              $result = mysqli_query($con, $queryb);
-              $sno    = 1;
-              
-              $uname;
-                      $udob;
-                      $ujoing;
-                      $ugender;
-              if (mysqli_affected_rows($con) != 0) {
-                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                    $fake   = $row['userid'];
-                    $queryv  = "select * from users where userid = '$fake'";
-              //echo $query;
-              $resultr = mysqli_query($con, $queryv);
-              if($resultr) {
-                $rowr = mysqli_fetch_array($resultr, MYSQLI_ASSOC) ;
-                $userid   = $rowr['userid'];
-             
-             
-             
-             ?>
+          $query  = "select machineid from newmachine";
+          //echo $query;
+          $result = mysqli_query($con, $query);
+          $sno    = 1;
+          
+          
+
+          if (mysqli_affected_rows($con) != 0) {
+              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+              }
+            }
+                ?>
         <tr>
         <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
          <th>Sl.No</th>
@@ -84,36 +75,16 @@
           <th>By Trainer:</th>
           <th>Pending</th>
           <th>Enrolled</th>
-          
           <th>Action</th>
         </tr>
 
         
-              <!--  and dow LIKE '%Monday%' "use to spcify Monday" -->
+              
               
       </thead>    
 
       
         <tbody>
-        <?php
-        date_default_timezone_set("Asia/Bangkok"); 
-        $day=date("Y-m-d");
-        $cdate=date('Y-m-d');
-        $y1date=date('Y-m-d',strtotime('- 1 days'));
-        $y2date=date('Y-m-d',strtotime('- 2 days'));
-        $y3date=date('Y-m-d',strtotime('- 3 days'));
-        $y4date=date('Y-m-d',strtotime('- 4 days'));
-        $y5date=date('Y-m-d',strtotime('- 5 days'));
-        $y6date=date('Y-m-d',strtotime('- 6 days'));
-        $y7date=date('Y-m-d',strtotime('- 7 days'));
-
-
-        $unixTimestamp = strtotime($cdate);
-
-//Get the day of the week using PHP's date function.
-$dayOfWeek = date("l", $unixTimestamp);
-
-?>
         <?php
               $query  = "select * from classes WHERE classtype='Cardio' and active='yes'";
               //echo $query;
@@ -128,7 +99,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT userid, count(*)  FROM classholder where userid='$userid' and classid='$uid' and created_date='$cdate'";
+                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result4=mysqli_query($con,$query4);
                             $query5="SELECT b.userid, count(*)  FROM booking b
                             inner join classes cl
@@ -138,7 +109,6 @@ $dayOfWeek = date("l", $unixTimestamp);
                             $query6="SELECT bookingid,count(*)  FROM booking 
                             WHERE approved='no'";
                             $result6=mysqli_query($con,$query6);
-                            
                             
                       
                       
@@ -161,7 +131,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                 ?>
                     
                   
-                    <?php echo $userid?>
+                    
                     <tr>
                     <td style="width:10px; text-align: center;">
                                                         <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
@@ -177,7 +147,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
                        <td><?php echo $count3  ?></td>
-                       <td><h2><span class="badge badge-danger"><?php echo $count1 ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
                        
                   
@@ -187,7 +157,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -202,11 +172,7 @@ $dayOfWeek = date("l", $unixTimestamp);
               }
             }
                 
-          }
-        }
-      }
-    
-       
+              
             
             
         
@@ -289,15 +255,12 @@ $dayOfWeek = date("l", $unixTimestamp);
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT c.userid, count(*)  FROM classholder c
-                            inner join classes cl
-                            on c.classid = cl.classid
-                            WHERE c.classid = cl.classid";
+                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result4=mysqli_query($con,$query4);
                             $query5="SELECT b.userid, count(*)  FROM booking b
                             inner join classes cl
                             on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid";
+                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
                             $result5=mysqli_query($con,$query5);
                             $query6="SELECT bookingid,count(*)  FROM booking 
                             WHERE approved='no'";
@@ -350,7 +313,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -448,15 +411,12 @@ $dayOfWeek = date("l", $unixTimestamp);
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT c.userid, count(*)  FROM classholder c
-                            inner join classes cl
-                            on c.classid = cl.classid
-                            WHERE c.classid = cl.classid";
+                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result4=mysqli_query($con,$query4);
                             $query5="SELECT b.userid, count(*)  FROM booking b
                             inner join classes cl
                             on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid";
+                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
                             $result5=mysqli_query($con,$query5);
                             $query6="SELECT bookingid,count(*)  FROM booking 
                             WHERE approved='no'";
@@ -509,7 +469,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -607,15 +567,12 @@ $dayOfWeek = date("l", $unixTimestamp);
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT c.userid, count(*)  FROM classholder c
-                            inner join classes cl
-                            on c.classid = cl.classid
-                            WHERE c.classid = cl.classid";
+                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result4=mysqli_query($con,$query4);
                             $query5="SELECT b.userid, count(*)  FROM booking b
                             inner join classes cl
                             on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid";
+                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
                             $result5=mysqli_query($con,$query5);
                             $query6="SELECT bookingid,count(*)  FROM booking 
                             WHERE approved='no'";
@@ -668,7 +625,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
@@ -766,15 +723,12 @@ $dayOfWeek = date("l", $unixTimestamp);
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT c.userid, count(*)  FROM classholder c
-                            inner join classes cl
-                            on c.classid = cl.classid
-                            WHERE c.classid = cl.classid";
+                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result4=mysqli_query($con,$query4);
                             $query5="SELECT b.userid, count(*)  FROM booking b
                             inner join classes cl
                             on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid";
+                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
                             $result5=mysqli_query($con,$query5);
                             $query6="SELECT bookingid,count(*)  FROM booking 
                             WHERE approved='no'";
@@ -827,7 +781,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   

@@ -17,7 +17,7 @@
                         <br>
                         <br>
                         
-                        <li><a href="dashboard.php" aria-expanded="false"><i class="fas fa-home"></i><i></i><span class="hide-menu">Home</span></a></li>
+                        <li><a href="dashboard.php" aria-expanded="false"><i class="fas fa-home"></i><i></i><span class="hide-menu">Control Panel</span></a></li>
                         
                         
                         

@@ -1,6 +1,6 @@
 <?php
 include('../constant/connect.php');
-
+$revenue = 0;
 $machineid =$_POST['machineid'];
 $type = $_POST['type'];
 $name = $_POST['machinename'];
@@ -18,12 +18,13 @@ $mneed = $_POST['mneed'];
 $query="INSERT INTO newmachine (machineid,toe,description,studio,quantity,status,mainday,repair,mneed) values('$machineid','$type','$desc','$studio','$qty','$status','$mainday','$repair','$mneed')";
 //$query="insert into users(username,gender,mobile,email,dob,joining_date,userid) values('$uname','$gender','$phn','$email','$dob','$jdate','$memID','$image')";
 if(mysqli_query($con,$query)==1){
-  //Retrieve information of plan selected by user
   $query1="select * from toe where toeid='$type'";
   $result1=mysqli_query($con,$query1);
   
   if(mysqli_query($con,$query1)==1){
-    $query2="update newmachine set type='".$type."' where machineid='".$id."'";
+    $row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);
+                                    $revenue = ($row1['amount'] * $qty)+$revenue;
+    $query2="update newmachine set type='".$type."',subtotal='".$revenue."' where machineid='".$machineid."'";
     $result2=mysqli_query($con,$query2);
   }
   if(mysqli_query($con,$query2)==1){
@@ -45,6 +46,7 @@ if(mysqli_query($con,$query)==1){
       $result5=mysqli_query($con,$query5);
       
       if(mysqli_query($con,$query5)==1){
+
 				echo "<head><script>alert('Asset Added ');</script></head></html>";
               echo "<meta http-equiv='refresh' content='0; url=newmachine.php'>";
 

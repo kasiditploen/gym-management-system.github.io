@@ -50,20 +50,16 @@
       ?>
             
             <div class="container-fluid print-container">
-            <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
-    background-image: '<?php echo 'data:image/jpeg;base64,' . $row['image'];?>';
-    height: 200px; width: 1600px;
-  ">
-  <h1 class="color-black mb-3 h1"><b><?php echo "$firstname "," $lastname" ?></b></h1>
-</div>
+            
                 <!-- Start Page Content -->
                 
                 
                 <!-- /# row -->
                  <div class="card ">
                             <div class="card-body">
+                              
                             <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
-                              <h2>Member Information</h2>
+                            <h1 class="color-black mb-3 h1"><b><?php echo "$firstname "," $lastname" ?>'s Information </b></h1>
                               <h1 class="color-blue"><b>AU FITNESS CENTER</b></h1>
                               <div class="widget-content">
             <div class="row-fluid ">
@@ -173,7 +169,10 @@
         <tbody>
           <?php
             
-            $query1  = "select * from enrolls_to WHERE uid='$memid'";
+            $query1  = "select pid,paid_date,expire from enrolls_to e
+            union all
+            select pid,paid_date,expire from sessions s  
+            ";
             //echo $query;
             $result = mysqli_query($con, $query1);
             $sno    = 1;

@@ -69,7 +69,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                                <select name="classname" id="classname"   class="form-control">
                     <option value="">ALL</option>
                     <?php
-                        $query="select className,className,privateclassid from privateclasses";
+                        $query="select privateclassid,className from privateclasses";
                         $result=mysqli_query($con,$query);
                         if(mysqli_affected_rows($con)!=0){
                             while($row=mysqli_fetch_row($result)){
@@ -181,7 +181,7 @@ $dayOfWeek = date("l", $unixTimestamp);
       }
 
       if( isset( $_GET['classname'] ) && !empty( $_GET['classname'] ) ){
-        $clauses[] = "`classname` = '{$_GET['classname']}'";   
+        $clauses[] = "`privateclassid` = '{$_GET['classname']}'";   
     }
 
       
