@@ -89,11 +89,7 @@
                             if($result5){
                                 $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                                 $category   = $row5['categoryName'];
-                            $query6="select * from vendors where vendorid='$vendor'";  
-                            $result6=mysqli_query($con,$query6);
-
-                            if($result6){
-                                $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                           
                                 $query7="select * from studio where studioid='$studio'";  
                                 $result7=mysqli_query($con,$query7);
                                 if($result7){
@@ -116,7 +112,7 @@
                       }
                     }
                   }
-                }
+                
               
                                         
                                         
@@ -184,6 +180,7 @@
           <th>Start Time</th>
           <th>Finish Time</th>
           <th>Maintenance Frequency (Time)</th>
+          <th>Maintenance Cost</th>
         </tr>
       </thead>    
         <tbody>
@@ -197,6 +194,8 @@
 
           if (mysqli_affected_rows($con) != 0) {
             while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $etmt   = $row['etmt_id'];
+              $maintainid   = $row['maintainid'];
               $uid   = $row['machineid'];
               $query1  = "select * from maintain where machineid='$uid'";
           $result1 = mysqli_query($con, $query1);
@@ -215,6 +214,7 @@
                      <td width='380'><?php echo $row['start_date']; ?></td>
                      <td width='380'><?php echo $row['duration']; ?></td>
                      <td><?php echo$row['wid'].' Days'; ?></td>
+                     <td width='380'><?php echo $row1['cost']; ?></td>
                      <!--<td><?php echo $row['expire']; ?></td>-->
                     
                      
@@ -250,9 +250,9 @@
 
                     
                              
-<h1 class="color-red"><b></b>Maintenance Records</h1>
+<h1 class="color-red"><b></b>Maintenance Records (In Progress)</h1>
 
-<div><a href="new_maintain.php?id=<?php echo $row['machineid'];?>"><button class="btn btn-secondary" id="addProductModalBtn">Maintain/Repair</button></a>
+<div><a href="new_maintain.php?id=<?php echo $id;?>"><button class="btn btn-secondary" id="addProductModalBtn">Maintain/Repair</button></a>
                             <a href="new_add_machine.php"><button class="btn btn-danger" id="addProductModalBtn">Replace</button></a></div></div></div>
                             <form action="del_all_machine.php" method="POST">
                                 <div class="table-responsive m-t-40">
@@ -267,6 +267,7 @@
           <th style="width:10%;">SERIAL NO.</th>
           <th style="width:10%;">Maintenance Freq. Days</th>
           <th style="width:10%;">Duration Time</th>
+          <th style="width:10%;">Maintenance Cost</th>
           <th style="width:10%;">Action</th>
           
           
@@ -289,7 +290,7 @@
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     $mid= $row['maintainid'];
                     $uid   = $row['machineid'];
-                    $query1  = "select * from enrolls_to_maintain where machineid='$id' ORDER BY etmt_id DESC";
+                    $query1  = "select * from enrolls_to_maintain where etmt_id='$etmt'  ORDER BY etmt_id DESC";
                     $result1 = mysqli_query($con, $query1);
                     if($result1){
                       $row1=mysqli_fetch_array($result1,MYSQLI_ASSOC);
@@ -302,7 +303,7 @@
                       $query2  = "select * from maintain where maintainid='$mid'and machineid='$uid1'";
                       $result3 = mysqli_query($con, $query3);
                       if($result3){
-                        $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                        $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
               
                 $uid2   = $row2['machineid'];
                 $mid2= $row2['maintainid'];
@@ -312,7 +313,7 @@
                       $query4  = "select * from maintain where active='yes' and maintainid='$mid2' and machineid='$uid2'";
                       $result4 = mysqli_query($con, $query3);
                       if($result4){
-                        $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                        $row3=mysqli_fetch_array($result4,MYSQLI_ASSOC);
                         $mid3= $row3['maintainid'];    
                         
                           
@@ -326,9 +327,15 @@
                   <?php echo $duration ?>
                   
                     <td style="width:10%;"><?php echo $sno; ?></td>
-                    <td><?php if ($startdate <= date("h:i:s") and date("h:i:s")  <= $duration){
+                    <td><?php if ($start <= date("h:i:s") and date("h:i:s")  <= $duration){
+                       $query="select * from newmachine where machineid='$uid1'";
+                       $con->query("UPDATE maintain SET active='yes' WHERE machineid='".$uid."'");
+                 $result=mysqli_query($con,$query);
                                             echo '<h1><span class="badge badge-dark">In Progress</span></h1>';
-                                        } else  if ($startdate <= date("h:i:s") and date("h:i:s") >= $duration){
+                                        } else  if ($start <= date("h:i:s") and date("h:i:s") >= $duration){
+                                          $query1="select * from newmachine where machineid='$uid1'";
+                       $con->query("UPDATE maintain SET active='no' WHERE machineid='".$uid."'");
+                 $result1=mysqli_query($con,$query1);
                                             echo '<h1><span class="badge badge-success">Complete</span></h1>';
                                         }
                                     
@@ -337,6 +344,7 @@
                      <td><?php echo $row['maintainName']; ?></td>
                      <td><?php echo $row['machineid']; ?></td>
                      <td><h4><?php echo $row['mainday'],' days'; ?></h4></td>
+                     <td><h4><?php echo $row['cost'],' ฿'; ?></h4></td>
                      <td><h4><?php echo $row['duration'],' minutes'; ?></h4></td>
                     
                        

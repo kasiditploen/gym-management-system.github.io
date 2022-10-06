@@ -3,25 +3,59 @@
 <?php include('../constant/layout/header.php');?>
 
 <?php include('../constant/layout/sidebar.php');?> 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="popup_style.css">
-  
+
  <?php
 //session_start();
 //error_reporting(0);
 include('../constant/connect.php');
+                     $machineid=$_GET['id'];
+                    
+                    $query6  = "SELECT * FROM newmachine m
+                               INNER JOIN toe t ON t.toeid=m.toe
+                               
+                               WHERE machineid=".$_GET['id'];
+                    //echo $query;
+                    $result6 = mysqli_query($con, $query6);
+                    $sno    = 1;
+                    
+                    $name="";
+                    $gender="";
 
-?>
+                    if (mysqli_affected_rows($con) == 1) {
+                        while ($row = mysqli_fetch_array($result6, MYSQLI_ASSOC)) {
+                    
+                            $machineid    = $row['machineid'];
+                            $toename    = $row['toeName'];
+                            $type = $row['type'];
+                            $desc=$row['description'];
+                            $studio=$row['studio'];
+                            $quantity=$row['quantity'];  
+                            $mainday=$row['mainday'];
+                            
+                            
+
+                        }
+                    }
+                    else{
+                         echo "<html><head><script>alert('Cannot obtain previous information!');</script></head></html>";
+                         echo mysqli_error($con);
+                    }
+
+
+                ?>
+            
+
   <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Add New Machine Model</h3> </div>
+                    <h3 class="text-primary">Edit Machine Details </h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Add New Machine Model</li>
+                        <li class="breadcrumb-item active">Edit Machine Details</li>
                     </ol>
                 </div>
             </div>
@@ -39,27 +73,17 @@ include('../constant/connect.php');
                             </div>
                             <div class="card-body">
                                 <div class="input-states">
-                                    <form class="form-horizontal" method="POST"  name="userform" enctype="multipart/form-data" action="submit_new_machine_new.php" id="submitProductForm" name="form1">
+                                    <form class="form-horizontal" method="POST"  name="userform" enctype="multipart/form-data" action="edit_machine_submit.php" id="form1" name="form1">
+
                                     <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label"><h4><b>MODEL NUMBER</b></h4></label>
+                                                <label class="col-sm-3 control-label">Machine ID</label>
                                                 <div class="col-sm-9">
-                                                  <?php
-              function getRandomWord($len = 6)
-              {
-                  $word = array_merge(range('0', '9'));
-                  shuffle($word);
-                  return substr(implode($word), 0, $len);
-              }
-
-            ?>
-                                                  <input type="text" name="machineid" id="machineID" value="<?php echo time(); ?>" class="form-control">
+                                                
+                                                  <input type="text" name="machineid" id="machineID" readonly value='<?php echo $machineid ?>' class="form-control">
                                                 </div>
                                             </div>
                                         </div>
-
-                                  
-
                                         <div class="from-group">
                     <div class="row">
                     <label class="col-sm-3 control-label"><h4><b>TYPES OF EQUIPMENT</b></h4></label>
@@ -91,7 +115,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label"><h4><b>MODEL DESCRIPTION</b></h4></label>
                                                 <div class="col-sm-9">
-                                                 <input type="text" name="desc" id="Desc" placeholder="Enter machine description" class="form-control" required/>
+                                                 <input type="text" name="desc" id="Desc" placeholder="Enter machine description" value='<?php echo $desc?>' class="form-control" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,7 +146,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label"><h4><b>STUDIO</b></h4></label>
                                                 <div class="col-sm-9">
-                                               <select name="studio" id="Studio" required onchange="mycategorydetail(this.value)" class="form-control">
+                                               <select name="studio" id="Studio" required onchange="mycategorydetail(this.value)" value='<?php echo $studio?>' class="form-control">
                     <option value="">--Please Select Studio--</option>
                     <?php
                         $query="select * from studio where active='yes'";
@@ -149,7 +173,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label"><h4><b>Quantity</b></h4></label>
                                                 <div class="col-sm-9">
-                                                <input type="number" name="quantity" id="Qty" placeholder="Enter Quantity amount"  min="1" minlength="1" maxlength="5"  class="form-control"  required/>
+                                                <input type="number" name="quantity" id="Qty" placeholder="Enter Quantity amount" value='<?php echo $quantity?>'  min="1" minlength="1" maxlength="5"  class="form-control"  required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -162,38 +186,36 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label"><h4><b>Maintenance Frequency Days</b></h4></label>
                                                 <div class="col-sm-9">
-                                                 <input type="number" name="mainday" id="Mainday" placeholder="Enter maintenance frequency in day(s)" class="form-control" required/>
+                                                 <input type="number" name="mainday" id="Mainday" placeholder="Enter maintenance frequency in day(s)" readonly value='<?php echo $mainday?>' class="form-control" required/>
                                                 </div>
                                             </div>
                                         </div>
 
                                         
                                         </div>
-                                        
-                                        <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Add</button>
+                                         
+                                        <button type="submit" name="submit" id="submit" value="UPDATE" class="btn btn-primary btn-flat m-b-30 m-t-30">UPDATE</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
 
                 
                                     </form>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                   
                 </div>
-
-                
                 
                
                 <!-- /# row -->
 
                 <!-- End PAge Content -->
-
-                <script>
-            function mybranddetail(str){
+    <script>
+            function myplandetail(str){
                  
                 if(str==""){
-                    document.getElementById("branddetls").innerHTML = "";
+                    document.getElementById("plandetls").innerHTML = "";
                     return;
                 }else{
                     if (window.XMLHttpRequest) {
@@ -202,46 +224,19 @@ include('../constant/connect.php');
                      }
                     xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                     document.getElementById("branddetls").innerHTML=this.responseText;
+                     document.getElementById("plandetls").innerHTML=this.responseText;
                 
                         }
                     };
                     
-                     xmlhttp.open("GET","branddetail.php?q="+str,true);
+                     xmlhttp.open("GET","plandetail.php?q="+str,true);
                      xmlhttp.send();    
                 }
                 
             }
         </script>
-        <script>
-            function mycategorydetail(str){
-                 
-                if(str==""){
-                    document.getElementById("categorydetls").innerHTML = "";
-                    return;
-                }else{
-                    if (window.XMLHttpRequest) {
-                 // code for IE7+, Firefox, Chrome, Opera, Safari
-                     xmlhttp = new XMLHttpRequest();
-                     }
-                    xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                     document.getElementById("categorydetls").innerHTML=this.responseText;
-                
-                        }
-                    };
-                    
-                     xmlhttp.open("GET","categorydetail.php?q="+str,true);
-                     xmlhttp.send();    
-                }
-                
-            }
-        </script>
-        
-    
-                <script src="admin/custom/js/product.js"></script>
 
-                <script>
+<script>
   $("#Studio").select2({
 });
     </script>
@@ -261,9 +256,9 @@ include('../constant/connect.php');
   $("#Warranty").select2({
 });
     </script>
-
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
 
 <?php include('../constant/layout/footer.php');?>
-  
 
+
+ 

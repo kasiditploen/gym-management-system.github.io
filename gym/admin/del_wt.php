@@ -3,7 +3,7 @@ include('../constant/connect.php');
 
 $msgid = $_GET['id'];
 if (strlen($msgid) > 0) {
-    mysqli_query($con, "DELETE FROM wt WHERE wtid='$msgid'");
+    mysqli_query($con, "DELETE FROM toe WHERE toeid='$msgid'");
     echo "<html><head><script>alert('Weight Training Equipment Deleted');</script></head></html>";
     echo "<meta http-equiv='refresh' content='0; url=view_wt.php'>";
 } else {

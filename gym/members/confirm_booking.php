@@ -1,6 +1,6 @@
 
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_member.php');?>
 
 <?php include('../constant/layout/sidebar.php');?> 
 <link rel="stylesheet" href="popup_style.css">

@@ -154,10 +154,10 @@
                     
                     
                     if (strtotime(date("d-m-Y")) < strtotime($row8['expire'])){
-                        $query = $con->query("UPDATE newmachine SET mneed='0' WHERE machineid='".$uids."'");
+                        $query = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
                         
                         if($query){
-                        echo '<h3><span class="badge badge-success">Good</span></h3>';
+                        echo '<h3><span class="badge badge-warning">Maintenance Needed</span></h3>';
                         }
                         } else if (strtotime(date("d-m-Y")) > strtotime($row8['expire'] )) {
                             $query1 = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
@@ -238,51 +238,7 @@
           
 
           ?>  
-          <div class="row">
-          <div class="col-md-6">
-          <div class="card bg-warning p-10">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-right">
-                                </div>
-                                <div class="media-body media-text-right">
-                                
-                                    <h2 class="color-white"><?php
-                            
-                            $result = mysqli_query($con, 'SELECT SUM(amount) AS value_sum FROM toe where toeid="$toe"'); 
-$row = mysqli_fetch_assoc($result); 
-$sum = $row['value_sum'];
-                            ?></h2>
-                             <h2 class="color-white"><?php echo $row['value_sum']."฿"; ?></h2>
-                                     <a><h2 class="color-white">Total Gym Equipment Price</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-          <div class="card bg-dark p-10">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-right">
-                                </div>
-                                <div class="media-body media-text-right">
-                                
-                                    <h2 class="color-white"><?php
-                            $query = "select COUNT(*) from toe";
-                            
-                            $result = mysqli_query($con, $query);
-                            $i      = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h2>
-                                     <a><h2 class="color-white">Total Gym Equipment</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        </div>
+          
               
            
 

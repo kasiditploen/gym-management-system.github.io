@@ -89,20 +89,7 @@ include('../constant/connect.php');
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">Session Class</label>
-                                                <div class="col-sm-9">
-                                                <select class="form-control" id="session" name="session">
-                                                <option value="Yes">Yes</option>
-                                                <option value="No">No</option>
-                                               
-                                               
-    </select>
-					</div>
-                    
-
-                    </div>
+                                        
                                   
 
                                         <div class="form-group">

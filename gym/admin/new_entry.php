@@ -16,7 +16,7 @@ include('../constant/connect.php');
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">New User Management</h3> </div>
+                <h1 class="color-black mb-3 h2 text-center"><b>New User Management</b></h1> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
@@ -54,20 +54,40 @@ include('../constant/connect.php');
                                         <div class="col-md-6 mb-3">
 
         <!--Card-->
-        <div class="card indigo text-center z-depth-2 light-version py-4 px-5">
+        <div class="card red text-center z-depth-2 light-version py-3 px-4">
 
           <form class="md-form" action="#">
-            <div class="file-field">
-              <div class="btn btn-outline-white waves-effect btn-sm float-left">
+          <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">PHOTO</label>
+                                                <div class="col-sm-9">
                 <span>Choose file<i class="fas fa-cloud-upload-alt ml-3" aria-hidden="true"></i></span>
-                <input type="file" name="image" multiple accept="image/*">
+                <input type="file" name="image" id="image" required multiple accept="image/*">
+                
+                <img id="blah" src="#"   alt="image"   style="width: 80px; height: 80px;" />
               </div>
+              <script>
+image.onchange = evt => {
+  const [file] = image.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+   document.querySelectorAll('img').forEach(function(img){
+  	img.onerror = function(){onerror="this.src='fallback-img.jpg'";};
+   })
+});
+</script>
               
 
 
         </div>
         <!--/.Card-->
 
+      </div>
       </div>
       </div>
  
@@ -226,6 +246,7 @@ include('../constant/connect.php');
                                             </div>
                                         </div>
                                     </div>
+                                    
 
                                     <div class="from-group">
                     <div class="row">
@@ -356,6 +377,7 @@ include('../constant/connect.php');
                                         </div>
 
                                         <input type="hidden" name="status" id="status" value="1">
+                                        <input type="hidden" name="utype" id="utype" value="user">
                                          
                                         <button type="submit" name="submit" id="submit" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>

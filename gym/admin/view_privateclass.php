@@ -32,7 +32,7 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black d-flex justify-content-center">Strength Training</h2></a>
-                            <a href="new_privateclass.php"><button class="btn btn-primary">Add Class</button></a>
+                            <a href="new_privateclass.php"><button class="btn btn-light">Add Class</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -155,7 +155,7 @@ $trainerid=$row['trainerid'];
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black d-flex justify-content-center">Combat Sports</h2></a>
-                            <a href="new_privateclass.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -279,7 +279,7 @@ $trainerid=$row['trainerid'];
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black d-flex justify-content-center">Dance</h2></a>
-                            <a href="new_privateclass.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -403,7 +403,7 @@ $trainerid=$row['trainerid'];
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black d-flex justify-content-center">Mind and Body</h2></a>
-                            <a href="new_privateclass.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">

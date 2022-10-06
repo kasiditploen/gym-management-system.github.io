@@ -40,7 +40,7 @@ include('../constant/connect.php');
                             if($result2){
                               $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                               $planname=$row2['planName'];
-                              $query3="select * from sessions where userid='$uid'";
+                              $query3="select * from sessions where userid='$uid' and renewal='yes'";
                           $result3=mysqli_query($con,$query3);
                               if($result3){
                                 $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
@@ -57,7 +57,7 @@ include('../constant/connect.php');
                             $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
                             $planname1=$row4['planName'];
                             $sessionid=$row3['sessionid'];
-                            $query5="select * from csessions where userid='$uid'";
+                            $query5="select * from csessions where userid='$uid' and renewal='yes'";
                           $result5=mysqli_query($con,$query5);
                           if($result5){
                             $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);

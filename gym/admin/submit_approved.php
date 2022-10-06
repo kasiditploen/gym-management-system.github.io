@@ -27,8 +27,7 @@ $query="INSERT INTO appointment (appointmentid,className,description,userid,stud
 
         if($result){
           echo "<head><script>alert('Approval Added ');</script></head></html>";
-               echo "<meta http-equiv='refresh' content='0; url=view_trainer_appointment.php'>"; 
-
+               echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>"; 
               }
               else{
                   echo "<head><script>alert('Approval Added');</script></head></html>";

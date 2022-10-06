@@ -8,11 +8,12 @@ $desc = $_POST['desc'];
 $cons = $_POST['conditionnow'];
 $duration = $_POST['duration'];
 $mainday = $_POST['mainday'];
+$cost = $_POST['cost'];
 
 
 
 //inserting into users table
-$query="INSERT INTO maintain(maintainid,machineid,maintainName,description,mainday,duration,active) values('$maintainid','$machineid','$name','$desc','$mainday','$duration','yes')";
+$query="INSERT INTO maintain(maintainid,machineid,maintainName,description,mainday,duration,active,cost) values('$maintainid','$machineid','$name','$desc','$mainday','$duration','yes','$cost')";
 //$query="insert into users(username,gender,mobile,email,dob,joining_date,userid) values('$uname','$gender','$phn','$email','$dob','$jdate','$memID','$image')";
 
   if(mysqli_query($con,$query)==1){
@@ -46,9 +47,27 @@ $query="INSERT INTO maintain(maintainid,machineid,maintainName,description,maind
 
 
       if(mysqli_query($con,$query5)==1){
+        
 
+        $query6="select * from toe";
+        $result6=mysqli_query($con,$query6);
+
+        if(mysqli_query($con,$query6)==1){
+          $row6 = mysqli_fetch_array($result6, MYSQLI_ASSOC);
+          $toeid=$row6['toeid'];
+          $query55="select * from enrolls_to_warranty where toeid='$toeid'";
+        $result55=mysqli_query($con,$query55);
+        if(mysqli_query($con,$query55)==1){
+          $row55 = mysqli_fetch_array($result55, MYSQLI_ASSOC);
+          $expire=$row55['expire'];
+          $warranty=$row6['warranty'];
+          $type=$row6['toeid'];
+          $query7="update enrolls_to_warranty set active='no' where toeid='$type' and machineid='$machineid'";
+          if(mysqli_query($con,$query7)==1){
+            $query8="insert into enrolls_to_warranty(wid,toeid,paid_date,expire,active,machineid) values('$warranty','$type','$cdate','$expire','yes','$machineid')";
+          if(mysqli_query($con,$query8)==1){
 				echo "<head><script>alert('Maintain Added ');</script></head></html>";
-              echo "<meta http-equiv='refresh' content='0; url=new_maintain.php?id=<?php echo $row[machineid];?>'>";
+              echo "<meta http-equiv='refresh' content='0; url=new_maintain.php'>";
 
       }
              
@@ -68,6 +87,11 @@ $query="INSERT INTO maintain(maintainid,machineid,maintainName,description,maind
              $query3 = "DELETE FROM maintain WHERE machineid='$machineid'";
              mysqli_query($con,$query3);
           }
+        }
+      }
+    }
+  }
+    
         
 
 

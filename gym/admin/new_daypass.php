@@ -55,21 +55,41 @@ include('../constant/connect.php');
                                             </div>
                                         </div>
 
-                                        <div class="from-group">
-                    <div class="row">
-                    <label class="col-sm-3 control-label"><h4><b>Age Group</b></h4></label>
-                    <div class="col-sm-9">
-                                <select name="age" id="age" required class="form-control">
-                                    <option value="">--Select Age Group--</option>
-                                    <option value="Teenager">Teenager</option>
-                                    <option value="Young Adult">Young Adult</option>
-                                    <option value="Adult">Adult</option>
-                                    <option value="Elderly">Elderly</option>
-                                </select>
-                            </div>
-                            </div>
-                            </div>
-</div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">First Name</label>
+                                                <div class="col-sm-9">
+                                                 <input name="fname" id="boxx"  required  class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Last Name</label>
+                                                <div class="col-sm-9">
+                                                 <input name="lname" id="boxx"  required  class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">USERNAME</label>
+                                                <div class="col-sm-9">
+                                                 <input name="name" id="boxx"  required  class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">EMAIL ID</label>
+                                                <div class="col-sm-9">
+                                                <input type="email" name="email" id="boxx" class="form-control" required  />
+                                                </div>
+                                            </div>
+                                        </div>
 <div class="form-group">
                                             <div class="row">
                                                 <div>
@@ -91,6 +111,15 @@ include('../constant/connect.php');
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">PHONE NO</label>
+                                                <div class="col-sm-9">
+                                                <input type="number" name="mobile" id="boxx" maxlength="10" class="form-control" required pattern="^[0][1-9]\d{9}$|^[1-9]\d{9}$">
+                                                </div>
+                                            </div>
+                                        </div>
                                         
                                         <div class="form-group">
                                             <div class="row">
@@ -101,33 +130,7 @@ include('../constant/connect.php');
                                             </div>
                                         </div>
 
-                                        <div class="from-group">
-                    <div class="row">
-                    <label class="col-sm-3 control-label"><h4><b>Goal</b></h4></label>
-                    <div class="col-sm-9">
-                                <select name="goal" id="goal" required class="form-control">
-                                    <option value="">--Select Goal--</option>
-                                    <option value="Athletic">Athletic</option>
-                                    <option value="Weight Loss">Weight Loss</option>
-                                    <option value="Increase Strength">Increase Strength</option>
-                                    <option value="Well Being">Well Being</option>
-                                </select>
-                            </div>
-                            </div>
-                            </div>
-</div>
-<div class="form-group">
-                                            <div class="row">
-                                                <div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        
-                    
-
-
-
-
+                     
 
                                         <div class="form-group">
                                             <div class="row">

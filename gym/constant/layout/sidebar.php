@@ -17,29 +17,17 @@
                         <br>
                         <br>
                         
-                        <li><a href="dashboard.php" aria-expanded="false"><i class="fas fa-home"></i><i></i><span class="hide-menu">Control Panel</span></a></li>
+                        <li><a href="dashboard.php" aria-expanded="false"><i class="fas fa-home"></i><i></i><span class="hide-menu">Service</span></a></li>
                         
                         
                         
-                        <li class="nav-label">Users</li>
+                        
 
                         
                         
-<li><a href="view_mem.php" aria-expanded="false"><i class="fas fa-id-card-alt"></i><i></i><span class="hide-menu">Memberships <span class="badge badge-pill badge-dark"><h6 class="color-white"><?php
-                            $query = "select COUNT(*) from users";
 
-                            //echo $query;
-                            $result  = mysqli_query($con, $query);
-                            $i = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h6></span></a></span></a></li>
 
-<li><a href="trainer.php" aria-expanded="false"><i class="fa fa-star"></i><i></i><span class="hide-menu">Trainers <span class="badge badge-pill badge-dark"><h6 class="color-white"><?php
+<li><a href="trainer.php" aria-expanded="false"><i class="fa fa-star"></i><i></i><span class="hide-menu">Trainers <span class="badge badge-pill badge-light"><h6 class="color-black"><?php
                             $query = "select COUNT(*) from trainers";
 
                             //echo $query;
@@ -60,7 +48,7 @@
 
 
 
-<li class="nav-label color-black">Arrangements</li>
+
 <!--<li><a href="view_checkin.php" aria-expanded="false"><i class="fas fa-at"></i><i></i><span class="hide-menu">Check-In/Out</span></a></li>-->
 
 
@@ -83,7 +71,7 @@
                 
             <li><a href="view_booking.php" aria-expanded="false"><i class="fa fa-plus"></i><i></i><span class="hide-menu">Booking List</span></a></li> 
             
-            <li class="nav-label">Courses</li>
+            
                         <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-user-clock"></i><i></i><span class="hide-menu">Classes</span></a>
                         <ul aria-expanded="false" class="collapse">
                         
@@ -115,10 +103,10 @@
 
                         
 
-                        <li class="nav-label">Facilities</li>
+                        
 
                         
-                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-dumbbell"></i><i></i><span class="hide-menu">Equipment <span class="badge badge-pill badge-dark"><?php
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-dumbbell"></i><i></i><span class="hide-menu">Equipment <span class="badge badge-pill badge-light"><?php
                             $query = "select COUNT(*) from newmachine where mneed='1'";
 
                             //echo $query;
@@ -141,7 +129,7 @@
             </li> 
 
             <li>
-                <a href="view_maintenance.php">Maintenance <h6 class="color-white"><span class="badge badge-pill badge-dark"><?php
+                <a href="view_maintenance.php">Maintenance <h6 class="color-white"><span class="badge badge-pill badge-light"><?php
                             $query = "select COUNT(*) from newmachine where mneed='1'";
 
                             //echo $query;
@@ -182,9 +170,7 @@
             <li>
                 <a href="view_category.php">Categories</a>
             </li>   
-            <li>
-                <a href="view_vendor.php">Vendors</a>
-            </li>   
+   
 
        
                         </li>
@@ -196,7 +182,7 @@
             </ul>
                          
                 
-            <li class="nav-label">PLANS</li>
+            
 
 <li><a href="view_plan.php" aria-expanded="false"><i class="fas fa-wallet"></i><i></i><span class="hide-menu">Packages</span></a></li>
 
@@ -224,7 +210,7 @@
             <!--<li><a href="#" aria-expanded="false"><i class="fa fa-sun"></i><i></i><span class="hide-menu">Daypasses</span></a></li> -->
            <!-- <li><a href="#" aria-expanded="false"><i class="fa fa-fire" aria-hidden="true"></i><i></i><span class="hide-menu">Bootcamp</span></a></li> -->
                         
-            <li class="nav-label"><b>Customer Services</b></li>   
+            
                         
             <li><a href="view_feedback.php" aria-expanded="false"><i class="fa fa-window-restore"></i><i></i><span class="hide-menu">Feedback</span></a></li>
               
@@ -232,7 +218,7 @@
                             
                             
                         
-            <li class="nav-label">Office Management</li>
+            <li class="nav-label">Reports</li>
 <!--<li><a href="#" aria-expanded="false"><i class="fas fa-scroll"></i><i></i><span class="hide-menu">Debtors/Bad Debts</span></a></li>-->
 <!--<li><a href="#" aria-expanded="false"><i class="fa fa-percent"></i><i></i><span class="hide-menu">Trainer Payroll</span></a></li>-->
 <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-scroll"></i><i></i><span class="hide-menu">Overview</span></a>
@@ -243,14 +229,14 @@
             </li>
 
                             <li>
-                            <a href="view_checkin.php" aria-expanded="false"><i></i><span class="hide-menu">Check-in</span></a>
+                            <a href="view_checkin.php" aria-expanded="false"><i></i>Check-in</a>
             </li>
                             <li>
-                            <a href="view_attendance.php" aria-expanded="false"><i></i><span class="hide-menu">Personal Training Attendance</span></a>
+                            <a href="view_attendance.php" aria-expanded="false"><i></i>PT Attendance</a>
             </li>
 
             <li>
-                            <a href="view_attendance_group.php" aria-expanded="false"><i></i><span class="hide-menu">Group Class Attendance</span></a>
+                            <a href="view_attendance_group.php" aria-expanded="false"><i></i>Group Class Attendance</a>
             </li>
 
             <li>

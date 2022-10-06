@@ -23,7 +23,7 @@
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black6.jpg');
-    height: 300px; width: auto;
+    height: 150px; width: auto;
   ">
   <h1 class="color-white mb-3 h1"><b>Trainers</b></h1>
 </div>
@@ -34,18 +34,18 @@
 
 
                             <div class="card-body">
-                            <h2 class="color-black d-flex justify-content-center">Personal Trainers</h2></a>
+                            <h2 class="color-black d-flex justify-content-center mb-3 h2"><b>Personal Trainers</b></h2></a>
                             <a href="new_trainer.php"><button class="btn btn-light">Add Trainer</button></a>
                             
                             <div class="col-md-16">
-                        <div class="card card bg-dark p-10">
+                        <div>
                             <div class="media widget-ten">
                                 <div class="media-left meida media-middle">
                                     
                                 </div>
                                 <div class="media-body media-text-right">
                                 
-                                    <h2 class="color-white"><?php
+                                    <h1 class="color-black mb-3 h1"><b><?php
                             $query = "select COUNT(*) from trainers";
 
                             $result = mysqli_query($con, $query);
@@ -56,8 +56,8 @@
                                 }
                             }
                             $i = 1;
-                            ?></h2>
-                                     <a><h2 class="color-white">Total Trainers</h2></a>
+                            ?></b></h1>
+                                     <a><h3 class="color-black mb-3 h4">Total Trainers</h3></a>
                                 </div>
                             </div>
                         </div>
@@ -74,8 +74,7 @@
         <th>Sl.No</th>
          <th style="width:10%;">Image</th>
           <th>Trainer ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
+          <th>Full Name</th>
           <th>Username</th>
           <th>Role</th>
           <th>Contact</th>
@@ -85,8 +84,6 @@
           <th style="width:10%;">Available Day</th>
           <th>Available Time From</th>
           <th>Available Time To</th>
-          <th>Special Skill</th>
-          <th >Year Of Experience</th>
           <th>Action</th>
         </tr>
       </thead>    
@@ -115,10 +112,12 @@
                   <tr>
                   
                                                         <td><?php echo $sno; ?></td>
-                    <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?></td>
+                    <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?>
+                    <br><h4><span class="badge badge-light">Skill(s):</h4><span class="badge badge-light"><h4><?php echo $row['skills']; ?></h4></span>
+                    <br><?php echo $row['yoe'] .' Years'; ?>
+                  </td>
                      <td><?php echo $row['trainerid']; ?></td>
-                     <td><h4><?php echo $row['fname']; ?></h4></td>
-                     <td><h4><?php echo $row['lname']; ?></h4></td>
+                     <td><h4><?php echo $row['fname']; ?> <?php echo $row['lname']; ?></h4></td>
                      <td><h4><?php echo$row['username']; ?><h4></td>
                      <td><h4><?php echo$row['trainertype']; ?><h4></td>
                      <td><?php echo $row['mobile']; ?></td>
@@ -128,17 +127,18 @@
                        <td><?php echo $row['availableday']; ?></td>
                        <td><?php echo $row['time_from']; ?></td>
                        <td><?php echo $row['time_to']; ?></td>
-                       <td><?php echo $row['skills']; ?></td>
-                       <td><?php echo $row['yoe'] .' Years'; ?></td>
+                       
+                       
                   
                   
                  <td>
-                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-warning" ><i class="far fa-calendar-alt"></i></button></a>
-                 <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-secondary btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>
-                  <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-danger" ><i class="fa fa-folder-open"></i></button></a>
-                  <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="far fa-calendar-alt"></i></button></a>
+                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-dollar"></i></button></a>
+                  <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-white btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>
                  
-                  <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-red" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -157,20 +157,32 @@
                         </div>
 
                         <div class="card">
+                 
+
+
                             <div class="card-body">
-                            <h2 class="color-black d-flex justify-content-center">Fitness Instructors</h2></a>
-                        <div class="table-responsive m-t-40">
-                                <form id="form2" action="del_all_trainer.php" method="POST">
+                            <h2 class="color-black d-flex justify-content-center">Fitness Instructor</h2></a>
+                            
+                            <div class="col-md-16">
+                        <div>
+                            <div class="media widget-ten">
+                                <div class="media-left meida media-middle">
+                                    
+                                </div>
+                                
+                         
+                                <div class="table-responsive m-t-40">
+                                <form id="form1" action="del_all_trainer.php" method="POST">
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
+                                            
         <tr>
         
         <th>Sl.No</th>
          <th style="width:10%;">Image</th>
           <th>Trainer ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
+          <th>Full Name</th>
           <th>Username</th>
           <th>Role</th>
           <th>Contact</th>
@@ -180,8 +192,6 @@
           <th style="width:10%;">Available Day</th>
           <th>Available Time From</th>
           <th>Available Time To</th>
-          <th>Special Skill</th>
-          <th >Year Of Experience</th>
           <th>Action</th>
         </tr>
       </thead>    
@@ -199,17 +209,23 @@
                       $result7 = mysqli_query($con, $query7);
                       if (mysqli_affected_rows($con) == 1) {
                           while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
-                  //$msgid = $row['pid'];
-                  //foreach($result and $result1 as $row)
+                            $query8  = "select privateclassid, COUNT(*) from privateclasses WHERE trainerid='$uid' AND approved='no'";
+                            $result8 = mysqli_query($con, $query8);
+                            if ($result8){
+                              $row2 = mysqli_fetch_array($result8, MYSQLI_ASSOC);
+                              $countapp = $row2['COUNT(*)'];
+                            }
                 ?>  
                   
                   <tr>
                   
                                                         <td><?php echo $sno; ?></td>
-                    <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?></td>
+                    <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?>
+                    <br><h4><span class="badge badge-light">Skill(s):</h4><span class="badge badge-light"><h4><?php echo $row['skills']; ?></h4></span>
+                    <br><?php echo $row['yoe'] .' Years'; ?>
+                  </td>
                      <td><?php echo $row['trainerid']; ?></td>
-                     <td><h4><?php echo $row['fname']; ?></h4></td>
-                     <td><h4><?php echo $row['lname']; ?></h4></td>
+                     <td><h4><?php echo $row['fname']; ?> <?php echo $row['lname']; ?></h4></td>
                      <td><h4><?php echo$row['username']; ?><h4></td>
                      <td><h4><?php echo$row['trainertype']; ?><h4></td>
                      <td><?php echo $row['mobile']; ?></td>
@@ -219,17 +235,18 @@
                        <td><?php echo $row['availableday']; ?></td>
                        <td><?php echo $row['time_from']; ?></td>
                        <td><?php echo $row['time_to']; ?></td>
-                       <td><?php echo $row['skills']; ?></td>
-                       <td><?php echo $row['yoe'] .' Years'; ?></td>
+                       
+                       
                   
                   
                  <td>
-                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-warning" ><i class="far fa-calendar-alt"></i></button></a>
-                 <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-secondary btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>
-                  <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-danger" ><i class="fa fa-folder-open"></i></button></a>
-                  <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="far fa-calendar-alt"></i></button></a>
+                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-dollar"></i></button></a>
+                  <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-white btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>
                  
-                  <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-red" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 

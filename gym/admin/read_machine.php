@@ -26,7 +26,7 @@
                  <div class="card">
                             <div class="card-body">
                             <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
-                              <h1>Machine History</h1>
+                              <h1>Machine Information</h1>
                             <h3>
                               Details of : - 
                               <?php
@@ -89,11 +89,7 @@
                             if($result5){
                                 $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                                 $category   = $row5['categoryName'];
-                            $query6="select * from vendors where vendorid='$vendor'";  
-                            $result6=mysqli_query($con,$query6);
-
-                            if($result6){
-                                $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                            
                                 $query7="select * from studio where studioid='$studio'";  
                                 $result7=mysqli_query($con,$query7);
                                 if($result7){
@@ -116,7 +112,7 @@
                       }
                     }
                   }
-                }
+                
               
                                         
                                         

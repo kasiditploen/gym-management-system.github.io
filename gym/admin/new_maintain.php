@@ -87,11 +87,7 @@ include('../constant/connect.php');
                             if($result5){
                                 $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                                 $category   = $row5['categoryName'];
-                            $query6="select * from vendors where vendorid='$vendor'";  
-                            $result6=mysqli_query($con,$query6);
-
-                            if($result6){
-                                $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                           
                                 $query7="select * from studio where studioid='$studio'";  
                                 $result7=mysqli_query($con,$query7);
                                 if($result7){
@@ -114,7 +110,7 @@ include('../constant/connect.php');
                       }
                     }
                   }
-                }
+                
               
                                         
                                         
@@ -149,7 +145,7 @@ include('../constant/connect.php');
               }
 
             ?>
-                                                  <input type="text" name="machineid" id="machineID" readonly=""  value="<?php echo $u2id?>" readonly class="form-control">
+                                                  <input type="text" name="machineid" id="machineID" readonly=""  value="<?php echo $id?>" readonly class="form-control">
                                                 </div>
                                                 </div>
                                                 <div class="form-group">
@@ -208,9 +204,9 @@ include('../constant/connect.php');
 
                                         <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label"><h4><b>CONDITION</b></h4></label>
+                                                <label class="col-sm-3 control-label"><h4><b>Maintenance Cost</b></h4></label>
                                                 <div class="col-sm-9">
-                                                 <input type="text" name="conditionnow" id="conditionnow" placeholder="Enter CONDITION phase" class="form-control" required/>
+                                                 <input type="number" name="cost" id="cost" placeholder="Enter the maintenance cost" class="form-control" required/>
                                                 </div>
                                             </div>
                             <div class="form-group">

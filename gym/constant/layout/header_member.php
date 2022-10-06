@@ -35,7 +35,7 @@
 
 
 <?php 
-include('../constant/check.php');
+include('../constant/check_member.php');
  include('../constant/connect.php');
    
  

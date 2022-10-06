@@ -11,18 +11,25 @@
       $query  = "select * from users WHERE userid='$id'";
       //echo $query;
       $result = mysqli_query($con, $query);
+      if($am > 0){
 
-      if (mysqli_affected_rows($con) != 0) {
-          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-              $image = $row['image'];
-            $name = $row['username'];
-              $memid=$row['userid'];
-              $gender=$row['gender'];
-              $mobile=$row['mobile'];
-              $email=$row['email'];
-              $joinon=$row['joining_date'];
-              echo $name;
-          }
+      
+
+        if (mysqli_affected_rows($con) != 0) {
+            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                $image = $row['image'];
+              $name = $row['username'];
+                $memid=$row['userid'];
+                $gender=$row['gender'];
+                $mobile=$row['mobile'];
+                $email=$row['email'];
+                $joinon=$row['joining_date'];
+                echo $name;
+            }
+        }
+      } else {
+          echo "<head><script>alert('Not Enough Session Point to take a group class. ');</script></head></html>";
+    echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
       }
       ?>
 

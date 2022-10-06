@@ -3,13 +3,9 @@
 <?php include('../constant/layout/header.php');?>
 
 <?php include('../constant/layout/sidebar.php');?> 
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-<link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css">
-<link rel="stylesheet" href="./assets/css/dselect.css" />
 <link rel="stylesheet" href="popup_style.css">
-  
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
  <?php
 //session_start();
 //error_reporting(0);
@@ -18,43 +14,204 @@ include('../constant/connect.php');
 ?>
 <?php
       $id     = $_GET['id'];;
-      $ss    = $_GET['ss'];;
-      (int)$am    = $_GET['am'];;
-      $pidss    = $_GET['pidss'];;
       $query  = "select * from users WHERE userid='$id'";
+      //echo $query;
       $result = mysqli_query($con, $query);
-
-      if($am > 0){
-
-      
 
       if (mysqli_affected_rows($con) != 0) {
           while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
               $image = $row['image'];
             $name = $row['username'];
+            $firstname = $row['fname'];
+            $lastname = $row['lname'];
               $memid=$row['userid'];
               $gender=$row['gender'];
               $mobile=$row['mobile'];
               $email=$row['email'];
               $joinon=$row['joining_date'];
-              echo $name;
+              
+              $query4="select COUNT(*) from checkin where userid='$id'";
+                  $result4=mysqli_query($con,$query4);
+                  if($result4){
+                    $row3=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                    $countCheckin = $row3['COUNT(*)'];
           }
       }
-    } else {
-        echo "<head><script>alert('Not Enough Session Point to take a personal training class. ');</script></head></html>";
-  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
     }
       ?>
+<?php
+        $tomorrow = date("d-m-Y", strtotime('tomorrow'));
+              $query  = "select * from users ORDER BY joining_date";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+              $uid   = $row['userid'];
+              $uname;
+                      $udob;
+                      $ujoing;
+                      $ugender;
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                    $uid  = $row['userid'];
+                      $query1  = "select * from enrolls_to WHERE uid='$uid'";
+                      $result1 = mysqli_query($con, $query1);
+                      
+                      if (mysqli_affected_rows($con) == 1) {
+                          while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
+                            $pid=$row1['pid'];
+                            $expire=$row1['expire'];
+                            $pdate=$row1['paid_date'];
+                            $query2="select * from plan where pid='$pid'";
+                            $result2=mysqli_query($con,$query2);
+                            
+                            if($result2){
+                              $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                              $planname=$row2['planName'];
+                              $query3="select * from sessions where userid='$uid' and renewal='yes'";
+                          $result3=mysqli_query($con,$query3);
+                              if($result3){
+                                $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                $pid1=$row3['pid'];
+                                $expire1=$row3['expire'];
+                                $sessions=$row3['sessionid'];
+                                $pidss=$row3['pid'];
+                                $amount=$row3['amount'];
+                                $sessioncount=$row3['amount'];
+                          $pdate1=$row3['paid_date'];
+                          $query4="select * from plan where pid='$pid1'";
+                          $result4=mysqli_query($con,$query4);
+                          if($result4){
+                            $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                            $planname1=$row4['planName'];
+                            $sessionid=$row3['sessionid'];
+                            $query5="select * from csessions where userid='$uid'and renewal='yes'";
+                          $result5=mysqli_query($con,$query5);
+                          if($result5){
+                            $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                            $pid2=$row5['pid'];
+                            $csessions=$row5['csessionsid'];
+                            $amount1=$row5['amount'];
+                            $expire2=$row5['expire'];
+                            $pdate2=$row5['paid_date'];
+                            $sessioncount1=$row5['amount'];
+                            $query6="select * from plan where pid='$pid2'";
+                            $result6=mysqli_query($con,$query6);
+                            if($result6){
+                              $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                              $planname2=$row6['planName'];
+                              $sessionid1=$row6['sessionid'];
+                              $query7="select * from checkin where userid='$uid' and  created_date LIKE '$cdate%'";
+                              $result7=mysqli_query($con,$query7);
+                              if($result7){
+                                $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
+                                $create_date=$row7 ['created_date'];
+                                $create_time=$row7 ['created_time'];
+                                $query8="select * from privateclasses where userid='$uid' and  date_from LIKE '$cdate%'";
+                              $result8=mysqli_query($con,$query8);
+                              if($result8){
+                                $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                $privateclassname=$row8['className'];
+                                $time_from=$row8['time_from'];
+                                $time_to=$row8['time_to'];
+                                $query9="select * from trainers";
+                                $result9=mysqli_query($con,$query9);
+                                if($result9){
+                                  $row9=mysqli_fetch_array($result9,MYSQLI_ASSOC);
+                                  $trainerid=$row9['trainerid'];
+                                  $query10="select * from classes where trainerid='$trainerid'";
+                                $result10=mysqli_query($con,$query10);
+                                if($result10){
+                                  $row10=mysqli_fetch_array($result10,MYSQLI_ASSOC);
+                                  $classid=$row10['classid'];
+                                  $classname=$row10['className'];
+                                  $tfrom=$row10['time_from'];
+                                  $tto=$row10['time_to'];
+                                  $query11="select * from booking where userid='$uid' and trainerid='$trainerid' and date_from LIKE '$tomorrow%'";
+                                $result11=mysqli_query($con,$query11);
+                                if($result11){
+                                  $row11=mysqli_fetch_array($result11,MYSQLI_ASSOC);
+                                  $bookedclassname=$row11['className'];
+                                  $tfrom1=$row11['time_from'];
+                                  $tto1=$row11['time_to'];
+                                  $query12="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid' and created_date LIKE '%$cdate%'";
+                                $result12=mysqli_query($con,$query12);
+                                if($result12){
+                                  $row12=mysqli_fetch_array($result12,MYSQLI_ASSOC);
+                                  $classid1=$row12['classid'];
+                                  $classname1=$row12['className'];
+                                  $create_date1=$row12['created_date'];
+                                  $query13="select * from classholder where userid='$uid' and trainerid='$trainerid' and classid='$classid' and created_date LIKE '$cdate%'";
+                                $result13=mysqli_query($con,$query13);
+                                if($result13){
+                                  $row13=mysqli_fetch_array($result13,MYSQLI_ASSOC);
+                                  $tfrom2=$row13['time_from'];
+                                  $tto2=$row13['time_to'];
+                                  $query14="select * from enrolls_to_day";
+                                  $result14=mysqli_query($con,$query14);
+                                      if($result14){
+                                        $row14=mysqli_fetch_array($result14,MYSQLI_ASSOC);
+                                        $pid5=$row14['pid'];
+                                        $expire1=$row3['expire'];
+                                        $sessions=$row3['sessionid'];
+                                        $pidss=$row3['pid'];
+                                        $amount=$row3['amount'];
+                                        $sessioncount=$row3['amount'];
+                                        $query15="select * from plan where pid='$pid5'";
+                          $result15=mysqli_query($con,$query15);
+                          if($result15){
+                            $row15=mysqli_fetch_array($result15,MYSQLI_ASSOC);
+                            
+                            $query16="select * from csessions2";
+                                $result16=mysqli_query($con,$query16);
+                                if($result16){
+                                  $row16=mysqli_fetch_array($result16,MYSQLI_ASSOC);
+                                  $pid4=$row16['pid'];
+                                  $query17="select * from plan where pid='$pid4'";
+                                  $result17=mysqli_query($con,$query17);
+                                      if($result17){
+                                        $row17=mysqli_fetch_array($result17,MYSQLI_ASSOC);
+                                        $pid4=$row14['pid'];
+                                        $expire1=$row3['expire'];
+                                        $sessions=$row3['sessionid'];
+                                        $pidss=$row3['pid'];
+                                        $amount=$row3['amount'];
+                                        $sessioncount=$row3['amount'];
+
+                                    }
+                            
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+                                    }
+                                }
+                            }
+                                        
+
+                               ?>
+
   <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Add Private Class</h3> </div>
+                    <h3 class="text-primary">Add Appointment Class</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Add Private Class</li>
+                        <li class="breadcrumb-item active">Add Appointment Class</li>
                     </ol>
                 </div>
             </div>
@@ -72,7 +229,7 @@ include('../constant/connect.php');
                             </div>
                             <div class="card-body">
                                 <div class="input-states">
-                                    <form class="form-horizontal" method="POST"  name="userform" enctype="multipart/form-data" action="submit_new_privateclass.php" id="submitProductForm" name="form1">
+                                    <form class="form-horizontal" method="POST"  name="userform" enctype="multipart/form-data" action="submit_new_noprivateclass.php" id="submitProductForm" name="form1">
                                     <div class="form-group">
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">Class ID</label>
@@ -92,24 +249,33 @@ include('../constant/connect.php');
                                         </div>
 
                                         
-                                    <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">Member ID</label>
-                                                <div class="col-sm-9">
-                                                  
-                                                  <input type="text" name="userid" id="userID" readonly value="<?php echo $id; ?>" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label">Member NAME</label>
+                                                <label class="col-sm-3 control-label">MEMBER</label>
                                                 <div class="col-sm-9">
-                                                 <input name="username" id="userName" type="text" readonly value="<?php echo $name; ?>" placeholder=""class="form-control">
+                                                <input name="userid" id="userid" type="text" required value=<?php echo $id ?> readonly placeholder="Enter class name"class="form-control">
+                                               
+                    
+                    
+                    
+
+
+                            
+         
+        
+
+                    
+                    
+                </select>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div>
+                                            </div>
+                                        </div>
+                                    </div>
                                         
 
                                         <div class="form-group">
@@ -254,17 +420,14 @@ include('../constant/connect.php');
 						<input type="time" name="time_to" id="time_to" class="form-control" value="<?php echo isset($time_to) ? $time_to : '' ?>">
 					</div>
 
-                    <div class="form-group">
-						<label for="" class="control-label">Current Session</label>
-						<input type="number" name="amount" id="amount" readonly class="form-control" value='<?php echo $am;?>'>
-					</div>
-
-                    <input type="hidden" name="session" id="session" value='<?php echo $ss;?>'>
+                    
+                    <input type="hidden" name="session" id="session" value='<?php echo $sessionid;?>'>
+                    <input type="hidden" name="amount" id="amount" value='<?php echo $amount;?>'>
                     <input type="hidden" name="pid" id="pid" value='<?php echo $pidss;?>'>
                     
 
                                     
-                                        <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit</button>
+                                        <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Add</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
 
                 
@@ -275,6 +438,7 @@ include('../constant/connect.php');
                     </div>
                   
                 </div>
+                
 
                 
                 
@@ -313,10 +477,7 @@ include('../constant/connect.php');
 
         
 
-<script>
-  $("#userid").select2({
-});
-    </script>
+
     
   
 

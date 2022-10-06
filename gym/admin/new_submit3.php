@@ -2,8 +2,11 @@
 include('../constant/connect.php');
 
  $memID=$_POST['m_id'];
- $age=$_POST['age'];
- $goal=mysqli_real_escape_string($con,$_POST['goal']);
+ $fname=$_POST['fname'];
+ $lname=$_POST['lname'];
+ $name=$_POST['name'];
+ $email=$_POST['email'];
+ $mobile=$_POST['mobile'];
  $gender=$_POST['gender'];
  $jdate=$_POST['jdate'];
  $domp=$_POST['domp'];
@@ -28,7 +31,7 @@ if (mysqli_num_rows($duplicate)>0)
 echo mysqli_error($db);
 }
 //inserting into users table
-$query="insert into dayusers (dayuserid,agegroup,gender,goal,joining_date) VALUES ('$memID','$age','$gender','$goal','$jdate')";
+$query="insert into dayusers (dayuserid,fname,lname,username,gender,mobile,email,joining_date) VALUES ('$memID','$fname','$lname','$username','$gender','$mobile','$email','$jdate')";
 
 mysqli_real_escape_string($con, $plan);
 //$query="insert into users(username,gender,mobile,email,dob,joining_date,userid) values('$uname','$gender','$phn','$email','$dob','$jdate','$memID','$image')";

@@ -38,7 +38,7 @@
                 <div class="card">
                             <div class="card-body">
                             <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">CARDIO</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            <a href="new_class.php"><button class="btn btn-light">Add Class</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -194,7 +194,7 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">HIIT</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -350,7 +350,7 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Dance</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -506,7 +506,7 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Mind and Body</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -662,7 +662,7 @@
                  <div class="card">
                             <div class="card-body ">
                             <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Cycling</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary ">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">

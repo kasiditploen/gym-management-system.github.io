@@ -16,11 +16,11 @@ include('../constant/connect.php');
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">New Feedback Form</h3> </div>
+                    <h3 class="text-primary">New Trainer Rating Form</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Add New Feedback Form</li>
+                        <li class="breadcrumb-item active">Add New Trainer Rating Form</li>
                     </ol>
                 </div>
             </div>
@@ -38,7 +38,7 @@ include('../constant/connect.php');
                             </div>
                             <div class="card-body">
                                 <div class="input-states">
-                                    <form class="form-horizontal" method="POST"  name="userform" enctype="multipart/form-data" action="submit_feedback.php" id="form1" name="form1">
+                                    <form class="form-horizontal" method="POST"  name="userform" enctype="multipart/form-data" action="submit_rating.php" id="form1" name="form1">
                                     
 
 <div class="form-group">
@@ -49,6 +49,35 @@ include('../constant/connect.php');
                     <option value="">--Please Select Member--</option>
                     <?php
                         $query="select userid, username FROM users";
+                        $result=mysqli_query($con,$query);
+                        if(mysqli_affected_rows($con)!=0){
+                            while($row=mysqli_fetch_row($result)){
+                                echo "<option value=".$row[0].">".$row[1]."</option>";
+                            }
+                        }
+
+                    ?>
+                    
+                    
+                </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div>
+                                                <div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">TRAINER</label>
+                                                <div class="col-sm-9">
+                                               <select name="trainerid" id="trainerid" required  class="form-control">
+                    <option value="">--Please Select Trainer--</option>
+                    <?php
+                        $query="select trainerid, username FROM trainers";
                         $result=mysqli_query($con,$query);
                         if(mysqli_affected_rows($con)!=0){
                             while($row=mysqli_fetch_row($result)){
@@ -140,6 +169,12 @@ include('../constant/connect.php');
   $("#userid").select2({
 });
     </script>
+
+<script>
+  $("#trainerid").select2({
+});
+    </script>
+    
     
 
 <?php include('../constant/layout/footer.php');?>

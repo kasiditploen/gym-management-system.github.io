@@ -48,7 +48,7 @@ $compare_date=date("d M Y");
 			
 				if($result2){
 					echo "<head><script>alert('Persional Training Appointment Added ');</script></head></html>";
-				echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
+					echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>"; 
               }
               else{
                   echo "<head><script>alert('Persional Training Appointment Failed');</script></head></html>";

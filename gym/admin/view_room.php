@@ -37,7 +37,7 @@
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
         <tr>
-        <th style="width:1%;"><button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete</button></th>
+        
          <th>Sl.No</th>
           <th>Studio ID</th>
           <th>Name</th>
@@ -59,8 +59,7 @@
                   ?>  
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="room_delete_id[]" value="<?= $row['studioid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['studioid']; ?></td>
                        <td><?php echo $row['studioName'] ?></td>

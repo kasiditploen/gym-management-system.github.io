@@ -10,7 +10,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+07:00";
 SET GLOBAL FOREIGN_KEY_CHECKS=0;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -26,8 +26,8 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertData` (IN `in_username` VARCHAR(40), IN `in_gender` VARCHAR(8), IN `in_mobile` VARCHAR(20), IN `in_email` VARCHAR(20), IN `in_dob` VARCHAR(10), IN `in_joining_date` VARCHAR(10), IN `in_userid` VARCHAR(20), IN `in_image` LONGBLOB, IN `in_status` varchar(300), IN `in_password` varchar(100), IN `in_fname` varchar(50), IN `in_lname` varchar(500),IN `in_nationalid` varchar(500),IN `in_privilege` varchar(100),IN `in_goal` varchar(100),IN `in_conditions` varchar(200))  BEGIN
-INSERT INTO users(username, gender, mobile, email, dob, joining_date, userid, image, status,password,fname,lname,nationalid,privilege,goal,conditions) VALUES(in_username,in_gender,in_mobile,in_email,in_dob,in_joining_date,in_userid,in_image,in_status,in_password,in_fname,in_lname,in_nationalid,in_privilege,in_goal,in_conditions);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertData` (IN `in_username` VARCHAR(40), IN `in_gender` VARCHAR(8), IN `in_mobile` VARCHAR(20), IN `in_email` VARCHAR(20), IN `in_dob` VARCHAR(10), IN `in_joining_date` VARCHAR(10), IN `in_userid` VARCHAR(20), IN `in_image` LONGBLOB, IN `in_status` varchar(300), IN `in_password` varchar(100), IN `in_fname` varchar(50), IN `in_lname` varchar(500),IN `in_nationalid` varchar(500),IN `in_nationality` varchar(100),IN `in_goal` varchar(100),IN `in_conditions` varchar(200),IN `in_utype` varchar(100))  BEGIN
+INSERT INTO users(username, gender, mobile, email, dob, joining_date, userid, image, status,password,fname,lname,nationalid,nationality,goal,conditions,utype) VALUES(in_username,in_gender,in_mobile,in_email,in_dob,in_joining_date,in_userid,in_image,in_status,in_password,in_fname,in_lname,in_nationalid,in_nationality,in_goal,in_conditions,in_utype);
 END$$
 
 
@@ -38,8 +38,8 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE PROCEDURE `insertTrainers` (IN `in_username` VARCHAR(40), IN `in_gender` VARCHAR(8), IN `in_mobile` VARCHAR(20), IN `in_email` VARCHAR(20), IN `in_dob` VARCHAR(10), IN `in_joining_date` VARCHAR(10), IN `in_trainerid` VARCHAR(20), IN `in_image` LONGBLOB, IN `in_availableday` varchar(130) ,`in_time_from` time , IN `in_time_to` time , IN `in_trainertype` varchar(300), IN `in_skills` varchar(300), IN `in_yoe` int(10),IN `in_password` varchar(100),IN `in_fname` varchar(50),IN `in_lname` varchar(500))  BEGIN
-INSERT INTO trainers(username,  gender, mobile, email, dob, joining_date, trainerid, image, availableday,time_from,time_to,trainertype,skills,yoe,password,fname,lname) VALUES(in_username,in_gender,in_mobile,in_email,in_dob,in_joining_date,in_trainerid,in_image,in_availableday,in_time_from,in_time_to,in_trainertype,in_skills,in_yoe,in_password,in_fname,in_lname);
+CREATE PROCEDURE `insertTrainers` (IN `in_username` VARCHAR(40), IN `in_gender` VARCHAR(8), IN `in_mobile` VARCHAR(20), IN `in_email` VARCHAR(20), IN `in_dob` VARCHAR(10), IN `in_joining_date` VARCHAR(10), IN `in_trainerid` VARCHAR(20), IN `in_image` LONGBLOB, IN `in_availableday` varchar(130) ,`in_time_from` time , IN `in_time_to` time , IN `in_trainertype` varchar(300), IN `in_skills` varchar(300), IN `in_yoe` int(10),IN `in_password` varchar(100),IN `in_fname` varchar(50),IN `in_lname` varchar(500),IN `in_utype` varchar(100))  BEGIN
+INSERT INTO trainers(username,  gender, mobile, email, dob, joining_date, trainerid, image, availableday,time_from,time_to,trainertype,skills,yoe,password,fname,lname,utype) VALUES(in_username,in_gender,in_mobile,in_email,in_dob,in_joining_date,in_trainerid,in_image,in_availableday,in_time_from,in_time_to,in_trainertype,in_skills,in_yoe,in_password,in_fname,in_lname,in_utype);
 END$$
 
 
@@ -98,6 +98,7 @@ CREATE TABLE `admin` (
   `address` varchar(500) NOT NULL,
   `image` varchar(2000) NOT NULL,
   `created_on` date NOT NULL,
+  `utype` varchar(100) NOT NULL,
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -105,8 +106,8 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `email`, `password`, `fname`, `lname`, `gender`, `dob`, `contact`, `address`, `image`, `created_on`, `group_id`) VALUES
-(1, 'Kasidit P.', 'admin@admin.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Kasidit', 'Ploenthamakhun', 'Male', '1999-02-19', '+919090909090', 'Bangkok', 'man1.png', '2018-04-30', 1);
+INSERT INTO `admin` (`id`, `username`, `email`, `password`, `fname`, `lname`, `gender`, `dob`, `contact`, `address`, `image`, `created_on`, `utype`,`group_id`) VALUES
+(1, 'Kasidit P.', 'admin@admin.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Kasidit', 'Ploenthamakhun', 'Male', '1999-02-19', '+919090909090', 'Bangkok', 'man1.png', '2018-04-30','admin', 1);
 
 -- --------------------------------------------------------
 
@@ -267,7 +268,9 @@ CREATE TABLE `enrolls_to_warranty` (
   `wid` varchar(8) NOT NULL,
   `toeid` varchar(20) NOT NULL,
   `paid_date` varchar(15) DEFAULT NULL,
-  `expire` varchar(15) DEFAULT NULL
+  `expire` varchar(15) DEFAULT NULL,
+  `machineid` varchar(20) NOT NULL,
+  `active` varchar(20) NOT NULL
   
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -499,6 +502,21 @@ CREATE TABLE `feedback` (
   `active` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rating`
+--
+
+CREATE TABLE `rating` (
+  `ratingid` varchar(8) NOT NULL,
+  `userid` varchar(20) NOT NULL,
+  `trainerid` varchar(20) NOT NULL,
+  `service` varchar(20) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `active` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 
 
 
@@ -569,25 +587,7 @@ INSERT INTO `categories` (`categoryid`, `categoryName`, `description`, `active`,
 ('765435', 'Aerobic Step Platforms', 'xxxxxxxx ','yes','te');
 
 
---
--- Table structure for table `vendor`
---
 
-CREATE TABLE `vendors` (
-  `vendorid` varchar(20) NOT NULL,
-  `vendorName` varchar(100) NOT NULL,
-  `contactName` varchar(100) NOT NULL,
-  `address` varchar(300) NOT NULL,
-  `mobile` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `uid` varchar(20) NOT NULL,
-  `active` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
-
-INSERT INTO `vendors` (`vendorid`, `vendorName`, `contactName`, `address`, `mobile`, `email`, `description`, `active`) VALUES
-('123456', 'Sarah Supplier', 'Scott Jones','Unknown Avenue',  '099444333', 'sarahsup@gmail.com', 'PLACEHOLDER','yes'),
-('122557', 'Tony Corp.', 'Lance Little', 'Unknown Avenue', '095344293',  'tonyja@org.com', 'PLACEHOLDER','yes');
 
 
 --
@@ -642,7 +642,7 @@ CREATE TABLE `maintain` (
   `machineid` varchar(255) DEFAULT NULL,
   `maintainName` varchar(200) NOT NULL,
   `description` varchar(200) NOT NULL,
-  `condition` text NOT NULL,
+  `cost` varchar(200) NOT NULL,
   `mainday` varchar(100) NOT NULL,
   `duration` varchar(200) NOT NULL,
   `active` varchar(255) DEFAULT NULL
@@ -666,8 +666,12 @@ CREATE TABLE `toe` (
   `description` varchar(200) NOT NULL,
   `brands` varchar(100) NOT NULL,
   `categories` varchar(8) NOT NULL,
-  `vendors` varchar(8) NOT NULL,
+  `vendors` varchar(100) NOT NULL,
   `amount` int(10) NOT NULL,
+  `contact` varchar(100) NOT NULL,
+  `address` varchar(300) NOT NULL,
+  `mobile` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `warranty` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -866,7 +870,7 @@ CREATE TABLE `users` (
   `nationalid` varchar(500) NOT NULL,
   `username` varchar(40) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `privilege` varchar(100) NOT NULL,
+  `nationality` varchar(100) NOT NULL,
   `fname` varchar(50) NOT NULL,
   `lname` varchar(500) NOT NULL,
   `gender` varchar(8) NOT NULL,
@@ -876,7 +880,8 @@ CREATE TABLE `users` (
   `status` varchar(300) DEFAULT NULL,
   `goal` varchar(300) DEFAULT NULL,
   `conditions` varchar(200) DEFAULT NULL,
-  `joining_date` varchar(10) NOT NULL
+  `joining_date` varchar(10) NOT NULL,
+  `utype` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
@@ -885,9 +890,12 @@ CREATE TABLE `users` (
 
 CREATE TABLE `dayusers` (
   `dayuserid` varchar(20) NOT NULL,
-  `agegroup` varchar(8) NOT NULL,
+  `username` varchar(40) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `lname` varchar(500) NOT NULL,
   `gender` varchar(8) NOT NULL,
-  `goal` varchar(300) DEFAULT NULL,
+  `mobile` varchar(20) NOT NULL,
+  `email` varchar(20) NOT NULL,
   `joining_date` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -917,7 +925,8 @@ CREATE TABLE `trainers` (
   `trainertype` varchar(300) DEFAULT NULL,
   `status` varchar(300) DEFAULT NULL,
   `skills` varchar(300) NOT NULL,
-  `yoe` int(10) NOT NULL
+  `yoe` int(10) NOT NULL,
+  `utype` varchar(100) NOT NULL
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -1076,6 +1085,7 @@ ALTER TABLE `enrolls_to_maintain`
 --
 ALTER TABLE `enrolls_to_warranty`
   ADD PRIMARY KEY (`etw_id`) USING BTREE,
+  ADD KEY `machine_ID_war` (`machineid`) USING BTREE,
   ADD KEY `toe_ID` (`toeid`) USING BTREE;
 
 
@@ -1182,6 +1192,15 @@ ALTER TABLE `feedback`
   ADD KEY `userID_idfb` (`userid`) USING BTREE,
   ADD KEY `feedbackid` (`feedbackid`) USING BTREE;
 
+    --
+-- Indexes for table `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`ratingid`) USING BTREE,
+  ADD KEY `userID_idrt` (`userid`) USING BTREE,
+  ADD KEY `trainerID_idrt` (`trainerid`) USING BTREE,
+  ADD KEY `ratingid` (`ratingid`) USING BTREE;
+
 -- Indexes for table `plan2`
 --
 ALTER TABLE `plan2`
@@ -1213,11 +1232,7 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`categoryid`) USING BTREE,
   ADD KEY `categoryid` (`categoryid`) USING BTREE;
 
-    -- Indexes for table `vendors`
---
-ALTER TABLE `vendors`
-  ADD PRIMARY KEY (`vendorid`) USING BTREE,
-  ADD KEY `vendorid` (`vendorid`) USING BTREE;
+
 
 
 
@@ -1355,6 +1370,12 @@ ALTER TABLE `classholder`
 --
 ALTER TABLE `feedback`
   MODIFY `feedbackid` int(5) NOT NULL AUTO_INCREMENT;
+
+    --
+-- AUTO_INCREMENT for table `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `ratingid` int(5) NOT NULL AUTO_INCREMENT;
 
 
 --
@@ -1551,6 +1572,13 @@ ALTER TABLE `enrolls_to`
 ALTER TABLE `feedback`
   ADD CONSTRAINT `user_IDfb` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
+    --
+-- Constraints for table `rating`
+--
+ALTER TABLE `rating`
+  ADD CONSTRAINT `user_IDrt` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `trainer_IDrt` FOREIGN KEY (`trainerid`) REFERENCES `trainers` (`trainerid`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
   --
 -- Constraints for table `enrolls_to_day`
 --
@@ -1602,7 +1630,7 @@ ALTER TABLE `enrolls_to_maintain`
 -- Constraints for table `enrolls_to_warranty`
 --
 ALTER TABLE `enrolls_to_warranty`
-
+ADD CONSTRAINT `machine_IDwar` FOREIGN KEY (`machineid`) REFERENCES `newmachine` (`machineid`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `toe_ID` FOREIGN KEY (`toeid`) REFERENCES `toe` (`toeid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 

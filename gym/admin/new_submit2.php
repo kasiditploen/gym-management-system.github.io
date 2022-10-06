@@ -24,6 +24,7 @@ include('../constant/connect.php');
  $e = implode(',', $trainertype);
  $skills=$_POST['skills'];
  $yoe=$_POST['yoe'];
+ $user=$_POST['utype'];
  //$plan=$_POST['plan2'];
  function createSalt()
  {
@@ -41,7 +42,7 @@ if (mysqli_num_rows($duplicate)>0)
 echo mysqli_error($db);
 }
 //inserting into trainers table
-$query="CALL insertTrainers('$uname','$gender','$phn','$email','$dob','$jdate','$memtID', '$image','".mysqli_real_escape_string($con,$i)."','$timefrom','$timeto','".mysqli_real_escape_string($con,$e)."','$skills','$yoe','$pass','$fname','$lname')";
+$query="CALL insertTrainers('$uname','$gender','$phn','$email','$dob','$jdate','$memtID', '$image','".mysqli_real_escape_string($con,$i)."','$timefrom','$timeto','".mysqli_real_escape_string($con,$e)."','$skills','$yoe','$pass','$fname','$lname','$user')";
 mysqli_real_escape_string($con, $uname);
 mysqli_real_escape_string($con, $stname);
 mysqli_real_escape_string($con, $city);

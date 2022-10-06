@@ -151,6 +151,193 @@
         </tbody>
                                       
                                     </table>
+
+                                    <br>
+                                    <br>
+                                    <h3>Group Class (Sessions) Enrollment history of : - <?php echo $name;?></h3>
+                                               <table class="table table-bordered table-striped">
+                                        <thead>
+        <tr>
+         
+         <th>Group Class Attended</th>
+         <th>Action</th>
+
+        </tr>
+      </thead>    
+        <tbody>
+          <?php
+          $id     = $_GET['id'];;
+      $query0  = "select * from users WHERE userid='$id'";
+      $sno    = 1;
+      $result0 = mysqli_query($con, $query0);
+      while($row0=mysqli_fetch_array($result0)){
+        
+            $query1  = "select classid,COUNT(*) from classholder WHERE userid='$id'";
+            $result = mysqli_query($con, $query1);
+           
+
+            if (mysqli_affected_rows($con) != 0) {
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $classid = $row['classid'];
+                  $classcount = $row['COUNT(*)'];
+                  $query2="select * from classes where classid='$classid'";
+                  $result2=mysqli_query($con,$query2);
+                  if($result2){
+                    $row1=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                    $trainerid = $row1['trainerid'];
+                    $query3="select * from trainers where trainerid='$trainerid'";
+                  $result3=mysqli_query($con,$query3);
+                    
+                  if($result3){
+                    $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                    
+                    
+                    ?>
+         
+                  <tr>
+                    
+                    <td><h1><?php echo $classcount; ?></h1></td>
+                     <td><a href="check_gclass.php?id=<?php echo $id;?>"><button type="button" class="btn btn-xs btn-dark" >Classes Info.</button></a></td>
+                 </tr>
+                 <?php 
+                 $sno++;
+                }  
+              $memid = 0;
+                }
+                
+            }
+          }
+        }
+
+          ?>      
+
+        </tbody>
+                                      
+                                    </table>
+
+                                    <h3>Personal Training Enrollment history of : - <?php echo $name;?></h3>
+                                               <table class="table table-bordered table-striped">
+                                        <thead>
+        <tr>
+         
+         <th>Personal Training Class Attended</th>
+          <th>Action</th>
+          
+        </tr>
+      </thead>    
+        <tbody>
+          <?php
+          $id     = $_GET['id'];;
+      
+            $query1  = "select privateclassid,COUNT(*) from privateclasses where userid = '$id' and approved = 'yes'";
+            $result = mysqli_query($con, $query1);
+           
+            if(isset($query1)){
+            if (mysqli_affected_rows($con) != 0) {
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $pclassid = $row['privateclassid'];
+                  $classcount1 = $row['COUNT(*)'];
+                  
+                    
+                    
+                    
+                    
+                    ?>
+         
+                  <tr>
+                    
+                    <td><h1><?php echo$classcount1; ?></h1></td>
+                    <td><a href="check_ptclass.php?id=<?php echo $id;?>"><button type="button" class="btn btn-xs btn-dark" >Personal Training Info.</button></a></td>
+                 </tr>
+                 <?php 
+                 $sno++;
+                }  
+              $memid = 0;
+                }
+                
+            }
+          
+        
+      
+
+          ?>      
+
+        </tbody>
+                                      
+                                    </table>
+
+                                    <br>
+                                    <br>
+                                    <h3>Checkin history of : - <?php echo $name;?></h3>
+                                   
+
+                                               <table class="table table-bordered table-striped">
+                                        <thead>
+        <tr>
+          <th>Total Checkin</th>
+          <th>Checkin Count</th>
+        </tr>
+      </thead>    
+        <tbody>
+          <?php
+          $id     = $_GET['id'];;
+      $query0  = "select * from users WHERE userid='$id'";
+      $sno    = 1;
+      $result0 = mysqli_query($con, $query0);
+      if($result0){
+        $row0=mysqli_fetch_array($result0,MYSQLI_ASSOC);
+            $query1  = "select checkinid, COUNT(*) from checkin WHERE userid='$id'";
+            $result = mysqli_query($con, $query1);
+           
+
+            if (mysqli_affected_rows($con) != 0) {
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $checkinid=$row['COUNT(*)'];
+                  $classid = $row['classid'];
+                  $query2="select * from classes where classid='$classid'";
+                  $result2=mysqli_query($con,$query2);
+                  if($result2){
+                    $row1=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                    $trainerid = $row1['trainerid'];
+                    $query3="select * from trainers where trainerid='$trainerid'";
+                  $result3=mysqli_query($con,$query3);
+                    
+                  if($result3){
+                    $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                    $query4="select COUNT(*) from checkin where userid='$id'";
+                  $result4=mysqli_query($con,$query4);
+                  if($result4){
+                    $row3=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                    
+                    ?>
+         
+                  <tr>
+                     <td><h1><?php echo$checkinid; ?></h1></td>
+                     <td><a href="check_checkinmem.php?id=<?php echo $id;?>"><button type="button" class="btn btn-xs btn-dark" >Checkin Info.</button></a></td>
+                 </tr>
+                 <?php 
+                 $sno++;
+                }  
+              $memid = 0;
+                }
+                
+            }
+          }
+        }
+      }
+
+          ?>      
+          
+
+        </tbody>
+                                      
+                                    </table>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                                    
                                     <br>
                                     <br>
                                     <h3>Payment history of : - <?php echo $name;?></h3>
@@ -169,9 +356,13 @@
         <tbody>
           <?php
             
-            $query1  = "select pid,paid_date,expire from enrolls_to e
+            $query1  = "select pid,paid_date,expire,uid from enrolls_to e where  uid ='$id'
             union all
-            select pid,paid_date,expire from sessions s  
+            select pid,paid_date,expire,userid from sessions s  
+            where userid='$id'
+            union all
+            select pid,paid_date,expire,userid from csessions cs  
+            where userid='$id'
             ";
             //echo $query;
             $result = mysqli_query($con, $query1);
@@ -280,222 +471,7 @@
                
                 <!-- /# row -->
 
-                <br>
-                                    <br>
-                                    <h3>Group Class (Sessions) Enrollment history of : - <?php echo $name;?></h3>
-                                               <table class="table table-bordered table-striped">
-                                        <thead>
-        <tr>
-         <th>Sl.No</th>
-         <th>Class ID</th>
-          <th>Class Name</th>
-          <th>Nickname</th>
-          <th>Description</th>
-          <th>Trainer</th>
-          <th>Training Date</th>
-          <th>Time From</th>
-          <th>Time To</th>
-        </tr>
-      </thead>    
-        <tbody>
-          <?php
-          $id     = $_GET['id'];;
-      $query0  = "select * from users WHERE userid='$id'";
-      $sno    = 1;
-      $result0 = mysqli_query($con, $query0);
-      while($row0=mysqli_fetch_array($result0)){
-        
-            $query1  = "select * from classholder WHERE userid='$id'";
-            $result = mysqli_query($con, $query1);
-           
-
-            if (mysqli_affected_rows($con) != 0) {
-                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $classid = $row['classid'];
-                  $query2="select * from classes where classid='$classid'";
-                  $result2=mysqli_query($con,$query2);
-                  if($result2){
-                    $row1=mysqli_fetch_array($result2,MYSQLI_ASSOC);
-                    $trainerid = $row1['trainerid'];
-                    $query3="select * from trainers where trainerid='$trainerid'";
-                  $result3=mysqli_query($con,$query3);
-                    
-                  if($result3){
-                    $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                    
-                    
-                    ?>
-         
-                  <tr>
-                    <td><?php  echo  $sno; ?></td>
-                    <td><?php echo$row1['classid']; ?></td>
-                     <td><?php echo$row1['className']; ?></td>
-                     <td><?php echo $row0['username']; ?></td>
-                     <td width='380'><?php echo $row1['description']; ?></td>
-                     <td><?php echo $row2['username']; ?></td>
-                     <td><?php echo $row['created_date']; ?> </td>
-                     <td><?php echo $row['time_from']; ?> </td>
-                     <td><?php echo $row['time_to']; ?> </td>
-                 </tr>
-                 <?php 
-                 $sno++;
-                }  
-              $memid = 0;
-                }
                 
-            }
-          }
-        }
-
-          ?>      
-
-        </tbody>
-                                      
-                                    </table>
-
-                                    <h3>Personal Training Enrollment history of : - <?php echo $name;?></h3>
-                                               <table class="table table-bordered table-striped">
-                                        <thead>
-        <tr>
-         <th>Sl.No</th>
-         <th>Class ID</th>
-          <th>Class Name</th>
-          <th>Nickname</th>
-          <th>Description</th>
-          <th>Trainer</th>
-          <th>Training Date</th>
-          <th>Time From</th>
-          <th>Time To</th>
-        </tr>
-      </thead>    
-        <tbody>
-          <?php
-          $id     = $_GET['id'];;
-      $query0  = "select * from users WHERE userid='$id'";
-      $sno    = 1;
-      
-      $result0 = mysqli_query($con, $query0);
-                                      while($row0=mysqli_fetch_array($result0)){
-            $query1  = "select * from privateclasses where userid = '$id'";
-            $result = mysqli_query($con, $query1);
-           
-            if(isset($query1)){
-            if (mysqli_affected_rows($con) != 0) {
-                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $pclassid = $row['privateclassid'];
-                  $query2="select * from privateclasses where privateclassid='$pclassid'";
-                  $result2=mysqli_query($con,$query2);
-                  while($row1=mysqli_fetch_array($result2)){
-                    $trainerid = $row1['trainerid'];
-                    $query3="select * from trainers where trainerid='$trainerid'";
-                  $result3=mysqli_query($con,$query3);
-                    
-                  if($result3){
-                    $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                    
-                    
-                    ?>
-         
-                  <tr>
-                    <td><?php  echo  $sno; ?></td>
-                    <td><?php echo$row1['privateclassid']; ?></td>
-                     <td><?php echo$row1['className']; ?></td>
-                     <td><?php echo $row0['username']; ?></td>
-                     <td width='380'><?php echo $row1['description']; ?></td>
-                     <td><?php echo $row2['username']; ?></td>
-                     <td><?php echo $row1['date_from']; ?> </td>
-                     <td><?php echo $row1['time_from']; ?> </td>
-                     <td><?php echo $row1['time_to']; ?> </td>
-                 </tr>
-                 <?php 
-                 $sno++;
-                }  
-              $memid = 0;
-                }
-                
-            }
-          }
-        }
-      }
-
-          ?>      
-
-        </tbody>
-                                      
-                                    </table>
-
-                                    <br>
-                                    <br>
-                                    <h3>Checkin history of : - <?php echo $name;?><br>  Total Checkin <?php echo $countCheckin ?></br></h3>
-                                               <table class="table table-bordered table-striped">
-                                        <thead>
-        <tr>
-         <th>Sl.No</th>
-          <th>Nickname</th>
-          <th>Created Date</th>
-          <th>Checkin Count</th>
-        </tr>
-      </thead>    
-        <tbody>
-          <?php
-          $id     = $_GET['id'];;
-      $query0  = "select * from users WHERE userid='$id'";
-      $sno    = 1;
-      $result0 = mysqli_query($con, $query0);
-      if($result0){
-        $row0=mysqli_fetch_array($result0,MYSQLI_ASSOC);
-            $query1  = "select * from checkin WHERE userid='$id'";
-            $result = mysqli_query($con, $query1);
-           
-
-            if (mysqli_affected_rows($con) != 0) {
-                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $classid = $row['classid'];
-                  $query2="select * from classes where classid='$classid'";
-                  $result2=mysqli_query($con,$query2);
-                  if($result2){
-                    $row1=mysqli_fetch_array($result2,MYSQLI_ASSOC);
-                    $trainerid = $row1['trainerid'];
-                    $query3="select * from trainers where trainerid='$trainerid'";
-                  $result3=mysqli_query($con,$query3);
-                    
-                  if($result3){
-                    $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                    $query4="select COUNT(*) from checkin where userid='$id'";
-                  $result4=mysqli_query($con,$query4);
-                  if($result4){
-                    $row3=mysqli_fetch_array($result4,MYSQLI_ASSOC);
-                    
-                    ?>
-         
-                  <tr>
-                    <td><?php  echo  $sno; ?></td>
-                    
-                     <td><?php echo $row0['username']; ?></td>
-                     <td><?php echo $row['created_date']; ?><br><?php echo $row['created_time']; ?></br></td>
-                     <td><?php echo $row3['COUNT(*)']; ?></td>
-                 </tr>
-                 <?php 
-                 $sno++;
-                }  
-              $memid = 0;
-                }
-                
-            }
-          }
-        }
-      }
-
-          ?>      
-
-        </tbody>
-                                      
-                                    </table>
-
-                                </div>
-                            </div>
-                            
-                        </div>
 
                         <style>
 

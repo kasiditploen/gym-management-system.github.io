@@ -310,7 +310,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
 });
     </script>
     <script>
-  $("#privatelasstype").select2({
+  $("#privateclasstype").select2({
 });
     </script>
     

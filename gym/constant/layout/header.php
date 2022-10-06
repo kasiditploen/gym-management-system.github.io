@@ -9,6 +9,16 @@ date_default_timezone_set("Asia/Bangkok"); ?>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
+<!-- Delete if necessary  
+<link href="css/fullcalendar.css" rel="stylesheet" />
+
+<link href="css/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+<script src="js/moment.min.js"></script>
+
+<script src="js/fullcalendar.js"></script>-->
+
+
 
 <!-- Right now I'm using this boostrap  -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.20.0/css/mdb.min.css" rel="stylesheet" />
@@ -73,7 +83,7 @@ include('../constant/check.php');
                                     }
                                                                     ?>
                                 <img src="../assets/uploadImage/Profile/<?=$image?>" alt="user" class="profile-pic" /></a>
-                            <div class="dropdown-menu dropdown-menu-left animated zoomIn">
+                            <div class="dropdown-menu dropdown-menu-left animated zoomIn"><h3>ADMIN: <?php echo $fname ?></h3>
                                 <ul class="dropdown-user">
                                 <li><a href="profile.php"><i class="ti-user"></i> My Profile</a></li>
                                     <li><a href="change_pwd.php"><i class="ti-key"></i> Change Password</a></li>

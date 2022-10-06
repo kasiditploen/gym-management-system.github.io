@@ -1832,7 +1832,7 @@ background: #000000 !important;
   }
   .mini-sidebar .sidebar-nav #sidebarnav > li:hover > a {
     width: 260px;
-    background: #1d93ce;
+    background: #000000;
   }
   .mini-sidebar .sidebar-nav #sidebarnav > li:hover > a .hide-menu {
     display: inline;

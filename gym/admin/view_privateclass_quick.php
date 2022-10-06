@@ -96,7 +96,6 @@
       }
       ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
          <th>Sl.No</th>
           <th>Appointment ID</th>
           <th>Appointer</th>
@@ -151,8 +150,7 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                       <td><?php echo $row['privateclassid'] ?></td>
                       <td><h3><?php echo $row4['username'] ?></h3></td>
@@ -187,7 +185,7 @@
                               <input type='hidden' name='username' value='<?php echo $username?>'/>
                               <input type='hidden' name='session' value='<?php echo $session?>'/>
                               <input type='submit' id='button1' value='Approve' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
-                  <a href="del_class.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
+                  <a href="del_privateclass_quick.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 

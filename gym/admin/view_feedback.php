@@ -35,7 +35,7 @@
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -143,16 +143,16 @@
                         <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Trainer Rating</h2></a>
-                            <a href="new_feedback.php"><button class="btn btn-primary">Add Trainer Rating</button></a>
+                            <a href="new_rating.php"><button class="btn btn-primary">Add Trainer Rating</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
                                         <?php
-          $query  = "select * from feedback";
+          $query  = "select * from rating";
           //echo $query;
           $result = mysqli_query($con, $query);
           $sno    = 1;
@@ -182,14 +182,14 @@
       
         <tbody>
         <?php
-              $query  = $query  = "select * from feedback";
+              $query  = $query  = "select * from rating";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $uid   = $row['feedbackid'];
+                  $uid   = $row['ratingid'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);

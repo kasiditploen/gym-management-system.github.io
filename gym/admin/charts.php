@@ -24,10 +24,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 //Get the day of the week using PHP's date function.
 $dayOfWeek = date("l", $unixTimestamp);
-
 ?>
 <?php
-          $query0  = "select * from users";
+          $query0  = "select * from dayusers";
           //echo $query;
           $result0 = mysqli_query($con, $query0);
           $sno    = 1;
@@ -36,8 +35,35 @@ $dayOfWeek = date("l", $unixTimestamp);
 
           if ($result0){
             $row0 = mysqli_fetch_array($result0, MYSQLI_ASSOC);
-                $userid1=$row0['userid'];
-                $query1  = "select * from users where userid = '$userid1'";
+                $dayuserid1=$row0['dayuserid'];
+                $query1  = "select * from dayusers where dayuserid = '$dayuserid1'";
+          //echo $query;
+          $result1 = mysqli_query($con, $query1);
+          if ($result1){
+            $row = mysqli_fetch_array($result1, MYSQLI_ASSOC);
+            $dayuserid=$row['dayuserid'];
+        }
+              }
+            
+                ?>
+
+
+<?php
+          $query0  = "select * from users ORDER BY joining_date";
+          //echo $query;
+          $result0 = mysqli_query($con, $query0);
+          $sno    = 1;
+         
+          $uname;
+                  $udob;
+                  $ujoing;
+                  $ugender;
+          
+              while ($row0 = mysqli_fetch_array($result0, MYSQLI_ASSOC)) {
+                $uid0=$row0['userid'];
+            
+            
+                $query1  = "select * from users where userid = '$uid'";
           //echo $query;
           $result1 = mysqli_query($con, $query1);
 if ($result1){
@@ -45,6 +71,7 @@ if ($result1){
     $userid=$row['userid'];
 }
               }
+            
             
                 ?>
 
@@ -225,20 +252,27 @@ $result=mysqli_query($con,$qry);
           
           <?php
           $query1 = "SELECT *, SUM(p.amount) as numberone FROM plan p
-           
+           JOIN users u
+           LEFT OUTER JOIN enrolls_to e ON e.pid = p.pid
+           LEFT OUTER JOIN csessions c ON c.pid = p.pid
+           LEFT OUTER JOIN sessions s ON s.pid = p.pid
+           INNER JOIN dayusers du
+           LEFT OUTER JOIN csessions2 css ON css.pid = p.pid
            LEFT OUTER JOIN enrolls_to_day et ON et.pid = p.pid
            LEFT OUTER JOIN sessions2 ss ON ss.pid = p.pid
-           LEFT OUTER JOIN csessions2 css ON css.pid = p.pid
-           LEFT OUTER JOIN enrolls_to e ON e.pid = p.pid
-           LEFT OUTER JOIN sessions s ON s.pid = p.pid
-           LEFT OUTER JOIN csessions c ON c.pid = p.pid
-            where s.pid = p.pid or e.pid = p.pid or c.pid = p.pid or et.pid = p.pid or ss.pid = p.pid or css.pid = p.pid
+           where s.userid = u.userid or e.uid = u.userid or c.userid = u.userid or ss.dayuserid = du.dayuserid or et.dayuserid = du.dayuserid or ss.dayuserid = du.dayuserid
+           
+           
+            
             ";
 
             $rezz=mysqli_query($con,$query1);
             while($data=mysqli_fetch_array($rezz)){
-              $services='Earnings';
+              
+              $numberall=$data['numberone'];
               $numberone=$data['numberone'];
+              $services='Earnings';
+              
               // $numbertwo=$data['numbertwo'];
            ?>
            ['<?php echo $services;?>',<?php echo $numberone;?>,],   
@@ -669,25 +703,26 @@ include('../constant/connect.php');
                             if (mysqli_affected_rows($con) != 0) {
                                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                                     $pid=$row['pid'];
+                                    
                                     $query1="select * from plan where pid='$pid'";
                                     $result1=mysqli_query($con,$query1);
-                                    $query2="select * from sessions WHERE  paid_date LIKE '$date%'";
+                                    $query2="select * from sessions WHERE  paid_date LIKE '%$date%'";
                                     $result2=mysqli_query($con,$query2);
                                     $query3="select * from plan where pid='$pid1'";
                                     $result3=mysqli_query($con,$query3);
-                                    $query4="select * from csessions WHERE  paid_date LIKE '$date%'";
+                                    $query4="select * from csessions WHERE  paid_date LIKE '%$date%'";
                                     $result4=mysqli_query($con,$query4);
                                     $query5="select * from plan where pid='$pid2'";
                                     $result5=mysqli_query($con,$query5);
-                                    $query6="select * from sessions2 WHERE  paid_date LIKE '$date%'";
+                                    $query6="select * from sessions2 WHERE  paid_date LIKE '%$date%'";
                                     $result6=mysqli_query($con,$query6);
                                     $query7="select * from plan where pid='$pid3'";
                                     $result7=mysqli_query($con,$query7);
-                                    $query8="select * from csessions2 WHERE  paid_date LIKE '$date%'";
+                                    $query8="select * from csessions2 WHERE  paid_date LIKE '%$date%'";
                                     $result8=mysqli_query($con,$query8);
                                     $query9="select * from plan where pid='$pid4'";
                                     $result9=mysqli_query($con,$query9);
-                                    $query10="select * from enrolls_to_day WHERE  paid_date LIKE '$date%'";
+                                    $query10="select * from enrolls_to_day WHERE  paid_date LIKE '%$date%'";
                                     $result10=mysqli_query($con,$query10);
                                     $query11="select * from plan where pid='$pid5'";
                                     $result11=mysqli_query($con,$query11);
@@ -701,8 +736,9 @@ include('../constant/connect.php');
                                     
                                     
                                     if($result2){
+                                      $row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
+                                    $pid1=$row2['pid'];
                                       
-                                      $pid1=$row2['pid'];
                                       
                                     if($result3){
                                       
@@ -711,7 +747,7 @@ include('../constant/connect.php');
                                     
                                     }
                                     if($result4){
-                                      
+                                      $row4 = mysqli_fetch_array($result4, MYSQLI_ASSOC);
                                       $pid2=$row4['pid'];
                                       
                                       if($result5){
@@ -721,7 +757,7 @@ include('../constant/connect.php');
                                     
                                     }
                                     if($result6){
-                                      
+                                      $row6 = mysqli_fetch_array($result6, MYSQLI_ASSOC);
                                       $pid3=$row6['pid'];
                                       
                                       if($result7){
@@ -731,7 +767,7 @@ include('../constant/connect.php');
                                     
                                     
                                     if($result8){
-                                      
+                                      $row16 = mysqli_fetch_array($result8, MYSQLI_ASSOC);
                                       $pid4=$row16['pid'];
                                       
                                   if($result9){
@@ -740,7 +776,7 @@ include('../constant/connect.php');
                                   $revenue4 = $value4[4] + $revenue4;
                                   
                                   if($result10){
-                                      
+                                    $row14 = mysqli_fetch_array($result10, MYSQLI_ASSOC);
                                     $pid5=$row14['pid'];
 
                                     
@@ -768,6 +804,8 @@ include('../constant/connect.php');
 }
 }
                             ?>
+
+
                             
                             
                                     <h2 class="color-white"><?php echo $total."฿"; ?></h2>

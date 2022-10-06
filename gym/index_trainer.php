@@ -65,6 +65,7 @@ $pass = hash('sha256', $salt . $passw);
      $_SESSION["fname"] = $row['fname'];
      $_SESSION["lname"] = $row['lname'];
      $_SESSION["image"] = $row['image'];
+     $_SESSION["utype"] = $row['utype'];
      $count=mysqli_num_rows($result);
      
      if(($count)==1 && isset($_SESSION["email"]) && isset($_SESSION["password"])) {

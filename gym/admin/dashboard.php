@@ -17,7 +17,7 @@
                       $result7 = mysqli_query($con, $query7);
                       if (mysqli_affected_rows($con) == 1) {
                           while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
-                            $query8="select * from checkint where trainerid='$trainerid' and  created_date LIKE '$cdate%'";
+                            $query8="select * from checkint where trainerid='$trainerid' and  created_date LIKE '$cdate%' ORDER BY created_time DESC";
                               $result8=mysqli_query($con,$query8);
                               if($result8){
                                 $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
@@ -250,21 +250,36 @@ $dayOfWeek = date("l", $unixTimestamp);
     height: 125px; width: auto;
   ">
   
-  <h1 class="color-white mb-3 h1"><b>Control Panel</b></h1>
+  <h1 class="color-white mb-3 h1"><b>Service</b></h1>
 </div>
                 <div class="card">
-                  
+                
                 <div class="col-md-3 align-self-left">
                 
                  </div>
+                 <div class="row">
+                  
+                 <div class="col-md-16">
+                  
+                 <a href="new_daypass.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Walk-ins</b></button></a></div>
+                 <div class="col-md-16"> <a href="new_entry.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Member</b></button></a></div>
                  
-                 <a href="new_daypass.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Walk-ins</b></button></a>
+
+<!-- Modal -->
+
                  
                     <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_mem.php" method="POST">
+                    
+                                
                                 <h2 class="text-center">Memberships Search</h2>
  
-  <input class="form-control" id="myInput" type="text" placeholder="Search Member..">
+                                <form action="" method="GET">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search for a member">
+                                        <button type="submit" class="btn btn-danger">Search</button>
+                                    </div>
+                                    
+                                </form>
   <table id="myTable" class="table">
                                     
                                     
@@ -276,8 +291,8 @@ $dayOfWeek = date("l", $unixTimestamp);
           <th style="width:5%;">Image</th>
           <th style="width:3%;">Member ID</th>
           <th style="width:10%;">Full Name</th>
-          <th style="width:5%;">Username</th>
-          <th style="width:5%;">Today's Status</th>
+          
+          
           <th style="width:3%;">Contact</th>
           <th style="width:5%;">E-Mail</th>
           <th style="width:1%;">Gender</th>
@@ -290,20 +305,21 @@ $dayOfWeek = date("l", $unixTimestamp);
       
       <tbody>
         <?php
+        $filtervalues = $_GET['search'];
         $tomorrow = date("d-m-Y", strtotime('tomorrow'));
-              $query  = "select * from users  ORDER BY joining_date";
-              //echo $query;
-              $result = mysqli_query($con, $query);
+        $query  = "select * from users WHERE CONCAT(fname,lname,email,userid) LIKE '%$filtervalues%'  ORDER BY joining_date";
+        //echo $query;
+        $result = mysqli_query($con, $query);
               $sno    = 1;
               
               $uname;
                       $udob;
                       $ujoing;
                       $ugender;
-              if (mysqli_affected_rows($con) != 0) {
+                      if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     $uid  = $row['userid'];
-                      $query1  = "select * from enrolls_to WHERE uid='$uid'";
+                      $query1  = "select * from enrolls_to WHERE uid='$uid' AND renewal='yes'";
                       $result1 = mysqli_query($con, $query1);
                       
                       if (mysqli_affected_rows($con) == 1) {
@@ -317,7 +333,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             if($result2){
                               $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                               $planname=$row2['planName'];
-                              $query3="select * from sessions where userid='$uid'";
+                              $query3="select * from sessions where userid='$uid' and renewal='yes'";
                           $result3=mysqli_query($con,$query3);
                               if($result3){
                                 $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
@@ -334,7 +350,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
                             $planname1=$row4['planName'];
                             $sessionid=$row3['sessionid'];
-                            $query5="select * from csessions where userid='$uid'";
+                            $query5="select * from csessions where userid='$uid' and renewal='yes'";
                           $result5=mysqli_query($con,$query5);
                           if($result5){
                             $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
@@ -350,13 +366,13 @@ $dayOfWeek = date("l", $unixTimestamp);
                               $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
                               $planname2=$row6['planName'];
                               $sessionid1=$row6['sessionid'];
-                              $query7="select * from checkin where userid='$uid' and  created_date LIKE '$cdate%'";
+                              $query7="select * from checkin where userid='$uid' and  created_date LIKE '$cdate%' ORDER BY created_time DESC";
                               $result7=mysqli_query($con,$query7);
                               if($result7){
                                 $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
                                 $create_date=$row7 ['created_date'];
                                 $create_time=$row7 ['created_time'];
-                                $query8="select * from privateclasses where userid='$uid' and approved='yes' and  date_from LIKE '$cdate%'";
+                                $query8="select * from privateclasses where userid='$uid' and approved='yes' and  date_from LIKE '$cdate%' ";
                               $result8=mysqli_query($con,$query8);
                               if($result8){
                                 $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
@@ -372,7 +388,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                   $classname=$row10['className'];
                                   $tfrom=$row10['time_from'];
                                   $tto=$row10['time_to'];
-                                  $query11="select * from booking where userid='$uid'  and date_from LIKE '$tomorrow%'";
+                                  $query11="select * from booking where userid='$uid' and classid='$classid' and created_date LIKE '$cdate%'";
                                 $result11=mysqli_query($con,$query11);
                                 if($result11){
                                   $row11=mysqli_fetch_array($result11,MYSQLI_ASSOC);
@@ -457,9 +473,22 @@ $dayOfWeek = date("l", $unixTimestamp);
                   $today = date('Y-m-d');
 
                    ?>
+                  <?php
+                  if(isset($_GET['search']))
+                  {
+                      $filtervalues = $_GET['search'];
+                      $query  = "select * from users WHERE CONCAT(fname,lname,email,userid) LIKE '%$filtervalues%'  ORDER BY joining_date";
+                      //echo $query;
+                      $query_run = mysqli_query($con, $query);
+                   if(mysqli_num_rows($query_run) > 0)
+                      {
+                          foreach($query_run as $items)
+                          {
+
                   
+                            ?>
                   <tr>
-                  
+
                     <td><?php echo $sno; ?></td>
                     <td><?php 
                      if(strtotime($diff2)<=45 && strtotime($today)< strtotime($expire)){
@@ -535,17 +564,10 @@ $dayOfWeek = date("l", $unixTimestamp);
                         }  ?></p> 
                         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-                        <h2>
-                          <span class="badge badge-light">Checkin: <?php echo $row7['created_date']; ?>
-                        <br><?php echo$row7['created_time']; ?></span></h2>
-                      </li>
-                        </ul>
-                      </td>
-                     <td><h4><?php echo $row['userid']; ?></h4></td>
-                     <td><h4><?php echo $row['fname']; ?><br><?php echo $row['lname']; ?></br></h4></td>
-                     <td ><h4><?php echo$row['username']; ?></h4></td>
-                     <td>
-                     <ul class="list-group list-group-flush">
+                        <h4>
+                          <span class="badge badge-light">Latest Checkin: <?php echo $row7['created_date']; ?>
+                        <br><?php echo$row7['created_time']; ?></span></h4>
+                        <ul class="list-group list-group-flush">
           <li class="list-group-item">
                      <h3>
                       <span class="badge badge-light">PT Sessions <br> <i class="far fa-clock"></i> Today:</br>
@@ -573,10 +595,19 @@ $dayOfWeek = date("l", $unixTimestamp);
 
                      <ul class="list-group list-group-flush">
           <li class="list-group-item">
-                     <h3><span class="badge badge-light">Booked Class Sessions: <p><?php echo $bookedclassname; ?></h2></span></p><h2><span class="badge badge-dark"><p><?php echo $tfrom1; ?>-<?php echo $tto1; ?></p></span></h2>
-
-
-                  </td>
+                     <h3><span class="badge badge-light">Booked Class Sessions:<br> <i class="far fa-clock"></i> Today:</br>
+                       <br><?php echo $bookedclassname; ?></br>
+                       <h3><br><?php echo $tfrom1; ?>-<?php echo $tto1; ?>
+                      </br>
+                    </span>
+                  </h3>
+                      </h3>
+          </li>
+                     </ul>
+                      </td>
+                     <td><h4><?= $items['userid']; ?></h4></td>
+                     <td><h4><?php echo $row['fname']; ?><br><?php echo $row['lname']; ?></br></h4></td>
+                     
                      <td><?php echo $row['mobile']; ?></td>
                      <td><?php echo $row['email']; ?> </td>
                       <td><?php echo $row['gender']; ?> </td>
@@ -594,42 +625,36 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     </form>
                                     <td>
                     <!-- Split button -->
-                    <div class="dropdown dropdown-animating">
+                    
 
-<!--Trigger-->
-<button class="btn btn-light dropdown-toggle waves-effect waves-light" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-  
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="read_member.php?id=<?php echo $row['userid'];?>">Info</a>
-    <a class="dropdown-item" href="edit_member.php?id=<?php echo $row['userid'];?>">Edit Member</a>
-    
-    <form id="form2" action='make_payments.php' method='post'><input type='hidden' name='userID' value='<?php echo $uid; ?>'/>
+<a href="read_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-light" >More Info.</button></a>
+    <a href="edit_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-light" >Edit Member</button></a>
+
+<form id="form2" action='make_payments.php' method='post'><input type='hidden' name='userID' value='<?php echo $uid; ?>'/>
                           <input type='hidden' name='planID' value='<?php echo $planid; ?>'/>
-                          <a class="dropdown-item" href="edit_member.php?id=<?php echo $row['userid'];?>"><input type='submit' class="dropdown-item"  value='Payment' /></form></a>
+                          <a href="edit_member.php?id=<?php echo $row['userid'];?>"><input type='submit' class="btn btn-xs btn-light" value='Buy Packages' /></form></a>
 
-                          <form id="form3" action='health_status_entry.php' method='post'>
+<form id="form3" action='health_status_entry.php' method='post'>
                             <input type='hidden' name='uid' value='<?php echo $uid;?>'/>
                   <input type='hidden' name='uname' value='<?php echo $uname;?>'/>
                               <input type='hidden'  name='udob' value='<?php echo $udob;?>'/>
                       
                               <input type='hidden' name='ujoin' value='<?php echo $ujoing;?>'/>
                               <input type='hidden' name='ugender' value='<?php echo $ugender ?>'/>
-                 <!--  <a href="health_status_entry.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ></button></a> -->
-                  <input type='submit' class="dropdown-item"  value='Health Status' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
-                  <a href="del_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-danger"onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a>
-  </div>
-</div>
+                 
+                  <input type='submit'   value='Health Status' class="btn btn-xs btn-light"/></form>
+                  
 
-<a href="submit_new_checkin.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-sm btn-danger" >Check In</button></a>
+<a href="submit_new_checkin.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-blue" >Check In</button></a>
 
-<a href="new_privateclass_quick.php?id=<?php echo $row['userid'];?>&&ss=<?php echo $sessions;?>&&pi=<?php echo $pidss;?>&&am=<?php echo $amount;?>"><button type="button" class="btn btn-xs btn-success" >Apply Personal Training</button></a>
+<a href="new_privateclass_quick.php?id=<?php echo $row['userid'];?>&&ss=<?php echo $sessions;?>&&pi=<?php echo $pidss;?>&&am=<?php echo $amount;?>"><button type="button" class="btn btn-xs btn-light" >Take Personal Training</button></a>
 
-<a href="view_class_quick.php?id=<?php echo $row['userid'];?>&&cs=<?php echo $csessions;?>&&pi=<?php echo $pid2;?>&&am=<?php echo $amount1;?>"><button type="button" class="btn btn-xs btn-success" >Apply Classes</button></a>
+<a href="view_class_quick.php?id=<?php echo $row['userid'];?>&&cs=<?php echo $csessions;?>&&pi=<?php echo $pid2;?>&&am=<?php echo $amount1;?>"><button type="button" class="btn btn-xs btn-light" >Take Classes</button></a>
 
+<a href="new_appointment_quick.php?id=<?php echo $row['userid'];?>"><button class="btn btn-light">Add Appointment</button></a>
 <!--<a href="read_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>-->
                   <!--<a href="edit_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>-->
-                  
+                  <a href="del_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-danger"onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a>         
                  
                  
 
@@ -676,6 +701,11 @@ $dayOfWeek = date("l", $unixTimestamp);
 }
               }
             }
+          }
+        }
+      }
+    
+
           
                 
           ?>  
@@ -688,6 +718,8 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     </table>
 </div>
                 </div>
+                </div>
+                
 
 
                 <div class="card">
@@ -706,14 +738,14 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     
   <thead>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all2" /></th>
+        
         <th>Sl.No</th>
          <th style="width:10%;">Image</th>
           <th>Trainer ID</th>
           <th>STATUS</th>
           <th>First Name</th>
           <th>Last Name</th>
-          <th>Username</th>
+          
           <th>Role</th>
           <th>Contact</th>
           <th>E-Mail</th>
@@ -757,13 +789,28 @@ $dayOfWeek = date("l", $unixTimestamp);
                                 $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
                                 $create_date=$row8 ['created_date'];
                                 $create_time=$row8 ['created_time'];
+                                $query9="select * from privateclasses where trainerid='$trainerid' and approved='yes' and  date_from LIKE '$cdate%' ORDER BY time_from DESC";
+                              $result9=mysqli_query($con,$query9);
+                              if($result9){
+                                $row9=mysqli_fetch_array($result9,MYSQLI_ASSOC);
+                                $privateclassname=$row9['className'];
+                                $time_from=$row9['time_from'];
+                                $time_to=$row9['time_to'];
+                                
+                                  $query10="select * from classes order by time_from desc";
+                                $result10=mysqli_query($con,$query10);
+                                if($result10){
+                                  $row10=mysqli_fetch_array($result10,MYSQLI_ASSOC);
+                                  $classid=$row10['classid'];
+                                  $classname=$row10['className'];
+                                  $tfrom=$row10['time_from'];
+                                  $tto=$row10['time_to'];
                   //$msgid = $row['pid'];
                   //foreach($result and $result1 as $row)
                 ?>  
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" name="trainer_delete_id[]" value="<?= $row['trainerid']; ?>">
+                 
                                                         <td><?php echo $sno; ?></td>
                     <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?></td>
                      <td><?php echo $row['trainerid']; ?></td>
@@ -778,6 +825,18 @@ $dayOfWeek = date("l", $unixTimestamp);
         
         
         ?>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+                     <h3>
+                      <span class="badge badge-light">LATEST PT Sessions <br> <i class="far fa-clock"></i> Today:</br>
+                       <br><?php echo $privateclassname; ?></br>
+                       <h3><br><?php echo $time_from; ?>-<?php echo $time_to; ?>
+                      </br>
+                    </span>
+                  </h3>
+                      </h3>
+          </li>
+                     </ul>
 
 
         
@@ -787,7 +846,7 @@ $dayOfWeek = date("l", $unixTimestamp);
     </td>
                      <td><h4><?php echo $row['fname']; ?></h4></td>
                      <td><h4><?php echo $row['lname']; ?></h4></td>
-                     <td><h4><?php echo$row['username']; ?><h4></td>
+                     
                      <td><h4><?php echo$row['trainertype']; ?><h4></td>
                      <td><?php echo $row['mobile']; ?></td>
                      <td><?php echo $row['email']; ?> </td>
@@ -813,6 +872,9 @@ $dayOfWeek = date("l", $unixTimestamp);
                   }
               }
             }
+          }
+        }
+      
           ?>  
 
           
@@ -823,6 +885,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     </table>
 </div>
                 </div>
+                
                 
                         
                 <!--<div class="card">
@@ -949,257 +1012,15 @@ $dayOfWeek = date("l", $unixTimestamp);
                      
             <!-- End Container fluid  -->
 
+            
+
+            
+
             <!-- Container fluid  -->
             
                 <!-- Start Page Content -->
                 
-                <div class="card">
-                <div class="col-md-3 align-self-left">
-                    <h1 class="text-primary">Environments</h1> </div>
-
-                      <div class="row">
-                    <div class="col-md-3">
-                        <div class="card bg-danger p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    
-                                </div>
-                                <div class="media-body media-text-right">
-                                  <?php
-                            date_default_timezone_set("Asia/Bangkok"); 
-                            $date  = date('Y-m');
-                            $query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
-                          
-                            //echo $query;
-                            $result  = mysqli_query($con, $query);
-                            $revenue = 0;
-                            $revenue1 = 0;
-                            $revenue2 = 0;
-                            $revenue3 = 0;
-                            $revenue4 = 0;
-                            $revenue5 = 0;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    $pid=$row['pid'];
-                                    $query1="select * from plan where pid='$pid'";
-                                    $result1=mysqli_query($con,$query1);
-                                    $query2="select * from sessions WHERE  paid_date LIKE '$date%'";
-                                    $result2=mysqli_query($con,$query2);
-                                    $query3="select * from plan where pid='$pid1'";
-                                    $result3=mysqli_query($con,$query3);
-                                    $query4="select * from csessions WHERE  paid_date LIKE '$date%'";
-                                    $result4=mysqli_query($con,$query4);
-                                    $query5="select * from plan where pid='$pid2'";
-                                    $result5=mysqli_query($con,$query5);
-                                    $query6="select * from sessions2 WHERE  paid_date LIKE '$date%'";
-                                    $result6=mysqli_query($con,$query6);
-                                    $query7="select * from plan where pid='$pid3'";
-                                    $result7=mysqli_query($con,$query7);
-                                    $query8="select * from csessions2 WHERE  paid_date LIKE '$date%'";
-                                    $result8=mysqli_query($con,$query8);
-                                    $query9="select * from plan where pid='$pid4'";
-                                    $result9=mysqli_query($con,$query9);
-                                    $query10="select * from enrolls_to_day WHERE  paid_date LIKE '$date%'";
-                                    $result10=mysqli_query($con,$query10);
-                                    $query11="select * from plan where pid='$pid5'";
-                                    $result11=mysqli_query($con,$query11);
-
-
-
-                                    if($result1){
-                                      
-                                        $value=mysqli_fetch_row($result1);
-                                    $revenue = $value[4] + $revenue;
-                                    
-                                    
-                                    if($result2){
-                                      
-                                      $pid1=$row2['pid'];
-                                      
-                                    if($result3){
-                                      
-                                        $value1=mysqli_fetch_row($result3);
-                                    $revenue1 = $value1[4] + $revenue1;
-                                    
-                                    }
-                                    if($result4){
-                                      
-                                      $pid2=$row4['pid'];
-                                      
-                                      if($result5){
-                                        
-                                        $value2=mysqli_fetch_row($result5);
-                                    $revenue2 = $value2[4] + $revenue2;
-                                    
-                                    }
-                                    if($result6){
-                                      
-                                      $pid3=$row6['pid'];
-                                      
-                                      if($result7){
-                                        
-                                        $value3=mysqli_fetch_row($result7);
-                                    $revenue3 = $value3[4] + $revenue3;
-                                    
-                                    
-                                    if($result8){
-                                      
-                                      $pid4=$row16['pid'];
-                                      
-                                  if($result9){
-                                    
-                                      $value4=mysqli_fetch_row($result9);
-                                  $revenue4 = $value4[4] + $revenue4;
-                                  
-                                  if($result10){
-                                      
-                                    $pid5=$row14['pid'];
-
-                                    
-                                    if($result11){
-                                    
-                                      $value5=mysqli_fetch_row($result11);
-                                  $revenue5 = $value5[4] + $revenue5;
-                                  
-                                  $total=($revenue+$revenue1+$revenue2+$revenue3+$revenue4+$revenue5);
-                                  
-
-                               
-                    }
-                  }
-                }   
-              }    
-            }
-          }
-                                  
-        }
-    }
-  }
-
-
-}
-}
-                            ?>
-                            
-                            <?php echo $pid4?>
-                                    <h2 class="color-white"><?php echo $total."฿"; ?></h2>
-                                    <a href="revenue_month.php"> <h2 class="color-white">Current Revenue</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <div class="card bg-danger p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    
-                                </div>
-                                <div class="media-body media-text-right">
-                                    
-
-                            <h2 class="color-white"><?php
-                            date_default_timezone_set("Asia/Bangkok"); 
-                            $date  = date('Y-m');
-                            $query = "select COUNT(*) from users WHERE joining_date LIKE '$date%'";
-
-                            //echo $query;
-                            $result = mysqli_query($con, $query);
-                            $i      = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h2>
-                                    <a href="view_mem.php"><h2 class="color-white">Members Joined This Month</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    <div class="col-md-3">
-                        <div class="card bg-danger p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    
-                                </div>
-                                <div class="media-body media-text-right">
-                                 
-                                    <h2 class="color-white"><?php
-                            $query = "select COUNT(*) from booking";
-
-                            $result = mysqli_query($con, $query);
-                            $i      = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h2>
-                                     <a href="view_booking.php"><h2 class="color-white">Reservations Today</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card bg-danger p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    
-                                </div>
-                                <div class="media-body media-text-right">
-                                 
-                                    <h2 class="color-white"><?php
-                            $query = "select COUNT(*) from users where joining_date='$cdate'";
-
-                            $result = mysqli_query($con, $query);
-                            $i      = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h2>
-                                     <a href="view_mem.php"><h2 class="color-white">New Memberships Today</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-
-
-                    
-                        </div>
-                        </div>
-
-                        <div class="card">
-  <h1 class="text-center">Line Chart Reports</h1>
-                <div class="card-body row d-flex justify-content-center">
-      
-                
-                <div class="card-body">
-                    
-      
-        <div id="line2"  class='chart'></div>
-      </div>
-      </div>
-        
-      </div>
-      
-    </div>
-  </div>
-  </div>
-  
-
-  
-  
-  </div>
+               
                         
 
                         

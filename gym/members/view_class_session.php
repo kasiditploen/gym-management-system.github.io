@@ -1,5 +1,5 @@
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_member.php');?>
 <?php include('../constant/layout/sidebar.php');
 ?>
 
@@ -76,7 +76,7 @@
       
       <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Cardio' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Cardio'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -271,7 +271,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='HIIT' and session='yes'";
+              $query  = "select * from classes WHERE classtype='HIIT'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -408,7 +408,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Dance' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Dance'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -545,7 +545,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Mind and Body' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Mind and Body'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -682,7 +682,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from classes WHERE classtype='Cycling' and session='yes'";
+              $query  = "select * from classes WHERE classtype='Cycling'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;

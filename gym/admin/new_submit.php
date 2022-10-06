@@ -27,7 +27,7 @@ include('../constant/connect.php');
  $pt=mysqli_real_escape_string($con,$_POST['pt']);
  $ct=mysqli_real_escape_string($con,$_POST['ct']);
 
-
+$user=$_POST['utype'];
 
  function createSalt()
  {
@@ -50,7 +50,7 @@ echo mysqli_error($db);
 }
 
 //inserting into users table
-$query="CALL insertData('$uname','$gender','$phn','$email','$dob','$jdate','$memID', '$image','$status','$pass','$fname','$lname','$nationalid','$privilege', '$goal','".mysqli_real_escape_string($con,$i)."')";
+$query="CALL insertData('$uname','$gender','$phn','$email','$dob','$jdate','$memID', '$image','$status','$pass','$fname','$lname','$nationalid','$privilege', '$goal','".mysqli_real_escape_string($con,$i)."','$user')";
 mysqli_real_escape_string($con, $uname);
 mysqli_real_escape_string($con, $password);
 mysqli_real_escape_string($con, $stname);
@@ -100,14 +100,14 @@ mysqli_real_escape_string($con, $plan);
                 $query7="insert into sessions(pid,userid,amount,paid_date,expire,renewal) values('$pt','$memID','$noyessession','$cdate1','$expiredate1','yes')";
                 if(mysqli_query($con,$query7)==1){
                   echo "<head><script>alert('Member Added Personal ');</script></head></html>";
-                  echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
+                  echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
                 
                 }
               }
 
               if($pt=='' && $ct=='' && $result6){
                 echo "<head><script>alert('Member Added Membership ');</script></head></html>";
-                echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
+                echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
               }
           
               if($pt!='' && $ct!='' && $result6){
@@ -134,7 +134,7 @@ mysqli_real_escape_string($con, $plan);
                   
                     if(mysqli_query($con,$query9)==1){
                       echo "<head><script>alert('Member Added ALL ADD ');</script></head></html>";
-                    echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
+                    echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
                   }
                 }
               }
@@ -161,7 +161,7 @@ mysqli_real_escape_string($con, $plan);
                         
                         if(mysqli_query($con,$query9)==1){
                           echo "<head><script>alert('Member Added Class and Membership ');</script></head></html>";
-                          echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
+                          echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
                         } 
                         
                         
@@ -181,7 +181,7 @@ mysqli_real_escape_string($con, $plan);
 
               }else if($pt=='' or $ct=='' && $result6){
                 echo "<head><script>alert('Member Added Membership ');</script></head></html>";
-                echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
+                echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
               } else if($pt=='' or $ct==''){
                 echo "<head><script>alert('Please try again!');</script></head></html>";
                 echo "<meta http-equiv='refresh' content='0; url=new_entry.php'>";
@@ -221,7 +221,7 @@ mysqli_real_escape_string($con, $plan);
               
               if(mysqli_query($con,$query9)==1){
                 echo "<head><script>alert('Member Added ');</script></head></html>";
-                echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
+                echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
               }
           }
 

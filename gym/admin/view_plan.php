@@ -54,9 +54,8 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
         <th>S.No</th>
-          <th>Package ID</th>
           <th>Package name</th>
           <th>Package Type</th>
           <th>Package Details</th>
@@ -99,11 +98,9 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       
                       <td><?php echo $sno ?></td>
-                     <td><?php echo$row ['pid']; ?></td>
                      <td><?php echo $row['planName'] ?></td>
                      <td><?php echo $row['plantype'] ?></td>
                      <td width='380'><?php echo $row['description'] ?></td>
@@ -173,9 +170,8 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
         <th>S.No</th>
-          <th>Package ID</th>
           <th>Package name</th>
           <th>Package Type</th>
           <th>Package Details</th>
@@ -219,11 +215,9 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       
                       <td><?php echo $sno ?></td>
-                     <td><?php echo$row ['pid']; ?></td>
                      <td><?php echo $row['planName'] ?></td>
                      <td><?php echo $row['plantype'] ?></td>
                      <td width='380'><?php echo $row['description'] ?></td>
@@ -294,9 +288,8 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
         <th>S.No</th>
-          <th>Package ID</th>
           <th>Package name</th>
           <th>Package Type</th>
           <th>Package Details</th>
@@ -340,11 +333,9 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       
                       <td><?php echo $sno ?></td>
-                     <td><?php echo$row ['pid']; ?></td>
                      <td><?php echo $row['planName'] ?></td>
                      <td><?php echo $row['plantype'] ?></td>
                      <td width='380'><?php echo $row['description'] ?></td>
@@ -416,9 +407,8 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
         <th>S.No</th>
-          <th>Package ID</th>
           <th>Package name</th>
           <th>Package Type</th>
           <th>Package Details</th>
@@ -462,11 +452,9 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       
                       <td><?php echo $sno ?></td>
-                     <td><?php echo$row ['pid']; ?></td>
                      <td><?php echo $row['planName'] ?></td>
                      <td><?php echo $row['plantype'] ?></td>
                      <td width='380'><?php echo $row['description'] ?></td>

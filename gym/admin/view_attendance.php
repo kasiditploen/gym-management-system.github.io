@@ -39,7 +39,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                    
                                  }
                                    ?>
-            <div class="container-fluid">
+            <div class="container-fluid print-container">
 
             <div class="card">
                             <div class="card-body">
@@ -104,9 +104,13 @@ $dayOfWeek = date("l", $unixTimestamp);
                 <div class="card mt-4">
                     <div class="card-body">
                         <table class="table table-borderd">
+                        <div class="table-responsive m-t-40">
+                          
+                        <table id="myTable" class="table table-bordered table-striped">
+                        <button class="btn btn-danger col-sm-2 sm-0" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
                             <thead>
                                 <tr>
-                                <th style="width:2%;">Sl.No</th>
+                                
                                     <th>Class Name</th>
                                     <th>Member ID</th>
                                     <th>Image</th>
@@ -193,7 +197,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     $where = !empty( $clauses ) ? ' and '.implode(' and ',$clauses ) : '';
                                     $query = "SELECT * FROM users u 
                                     LEFT OUTER JOIN attendance a ON u.userid=a.userid
-                                    LEFT OUTER JOIN  privateclasses p ON u.userid=p.userid where a.userid='$uid3' and a.type='pt' " . $where;
+                                    LEFT OUTER JOIN  privateclasses p ON u.userid=p.userid where  a.type='pt' " . $where;
                                     //$query_run = mysqli_query($con, $query);
                                     
                                     if(isset($query)){
@@ -202,7 +206,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                       while($row=mysqli_fetch_array($result)){
                                             ?>
                                             <tr>
-                                            <td><?php echo $sno; ?></td>
+                                            
                                             <td><?= $row['className']; ?></td>
                                             <td><?= $row['userid']; ?></td>
                                             <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?><p>
@@ -210,7 +214,6 @@ $dayOfWeek = date("l", $unixTimestamp);
                                             <td><?= $row['lname']; ?></td>
                                             <td><?= $row['username']; ?></td>
                                                 <td><?= $row['created_date']; ?></td>
-                                                <td><?= $row['created_time']; ?></td>
                                                 <td><?= $row['present']; ?></td>
                                                 
                                             </tr>
@@ -234,6 +237,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 
             </div>
         </div>
+    </div>
     </div>
                 <!-- Start Page Content -->
                 
@@ -499,6 +503,28 @@ $('.toast').toast('show');
   $("#Classname").select2({
 });
     </script>
+
+<style>
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-container, .print-container * {
+    visibility: visible;
+  }
+
+  .print-container {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+  }
+  
+}
+</style>
 <?php include('../constant/layout/footer.php');?>
 
 

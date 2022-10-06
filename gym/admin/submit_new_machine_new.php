@@ -24,6 +24,7 @@ if(mysqli_query($con,$query)==1){
   if(mysqli_query($con,$query1)==1){
     $row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC);
                                     $revenue = ($row1['amount'] * $qty)+$revenue;
+                                    $warranty = $row1['warranty'];
     $query2="update newmachine set type='".$type."',subtotal='".$revenue."' where machineid='".$machineid."'";
     $result2=mysqli_query($con,$query2);
   }
@@ -33,17 +34,28 @@ if(mysqli_query($con,$query)==1){
       
       if(mysqli_query($con,$query3)==1){
 				$value=mysqli_fetch_row($result3);
+        $expire=$value['expire'];
           date_default_timezone_set("Asia/Bangkok"); 
           $d=strtotime("+".$value[6]." days");
           $cdate=date("Y-m-d"); //current date
           $expiredate=date("Y-m-d",$d);
           //adding validity retrieve from plan to current date
           //inserting into enrolls_to table of corresponding userid
+          
           $query4="insert into enrolls_to_maintenance(machineid,wid,paid_date,expire,renewal) values('$machineid','$mainday','$cdate','$expiredate','yes')";
       }
       if(mysqli_query($con,$query4)==1){
-        $query5="select * from maintain where machineid='$machineid'";
-      $result5=mysqli_query($con,$query5);
+        $query1="select * from toe where warranty = '$warranty'";
+      $result=mysqli_query($con,$query1);
+        if($result){
+          $value=mysqli_fetch_row($result);
+            date_default_timezone_set("Asia/Bangkok"); 
+            $d=strtotime("+".$value[13]." Years");
+            $cdate=date("Y-m-d"); //current date
+            
+            $toeid=$value['toeid'];
+            $query5="insert into enrolls_to_warranty(wid,toeid,paid_date,expire,active,machineid) values('$warranty','$type','$cdate','$expire','yes',$machineid)";
+        }
       
       if(mysqli_query($con,$query5)==1){
 
