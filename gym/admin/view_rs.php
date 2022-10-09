@@ -128,51 +128,7 @@
           
 
           ?>  
-          <div class="row">
-          <div class="col-md-6">
-          <div class="card bg-primary p-10">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-right">
-                                </div>
-                                <div class="media-body media-text-right">
-                                
-                                    <h2 class="color-white"><?php
-                            
-                            $result = mysqli_query($con, 'SELECT SUM(amount) AS value_sum FROM toe WHERE type="Rig System"'); 
-$row = mysqli_fetch_assoc($result); 
-$sum = $row['value_sum'];
-                            ?></h2>
-                             <h2 class="color-white"><?php echo $row['value_sum']."฿"; ?></h2>
-                                     <a><h2 class="color-white">Total Mats Equipment Price</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-          <div class="card bg-success p-10">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-right">
-                                </div>
-                                <div class="media-body media-text-right">
-                                
-                                    <h2 class="color-white"><?php
-                            $query = "select COUNT(*) from toe";
-
-                            $result = mysqli_query($con, $query);
-                            $i      = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h2>
-                                     <a><h2 class="color-white">Total Strength Equipment</h2></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        </div>
+          
               
            
 

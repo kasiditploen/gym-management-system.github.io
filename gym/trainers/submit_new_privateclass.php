@@ -4,8 +4,8 @@ include('../constant/connect.php');
 
 
 $classid =$_POST['privateclassid'];
-$name = $_POST['privateclassname'];
-$desc = $_POST['desc'];
+$name=mysqli_real_escape_string($con,$_POST['privateclassname']);
+$desc=mysqli_real_escape_string($con,$_POST['desc']);
 $user = $_POST['userid'];
 $studio = $_POST['privatestudios'];
 $dow = $_POST['dow'];
@@ -13,38 +13,61 @@ $date_from = $_POST['date_from'];
 $date_to  = $_POST['date_to'];
 $time_from = $_POST['time_from'];
 $time_to = $_POST['time_to'];
+$classtype= $_POST['privateclasstype'];
 $trainer= $_POST['trainerid'];
+$session=mysqli_real_escape_string($con,$_POST['session']);
+$amount=$_POST['amount'];
+$pid=mysqli_real_escape_string($con,$_POST['pid']);
+$one= 1;
+$output = $amount-$one;
+date_default_timezone_set("Asia/Bangkok"); 
+$cdate=date("d M Y H:i");
+$tomorrow = date("d-m-Y", strtotime('tomorrow'));
+$compare_date=date("d M Y");
 
+  if ($amount <= 0){
+    echo "<head><script>alert('No more session left. Please renew your class package. ');</script></head></html>";
+    echo "<meta http-equiv='refresh' content='0; url=view_attendance.php'>";
+  
+  }
 //inserting into private table
-$query="INSERT INTO privateclasses (privateclassid,className,description,userid,studios,dow,date_from,date_to,time_from,time_to,trainerid) values('$classid','$name','$desc','$user','$studio','$dow','$date_from','$date_to','$time_from','$time_to','$trainer')";
+$query="INSERT INTO privateclasses (privateclassid,className,description,userid,studios,dow,date_from,time_from,time_to,trainerid,classtype,active,approved) values('$classid','$name','$desc','$user','$studio','$dow','$date_from','$time_from','$time_to','$trainer','$classtype','yes','yes')";
+$query1="update sessions set amount='".$output."'where userid='".$user."'";
 //$query="insert into privateclasses (privateclassid,className,description,studios,dow,date_from,date_to,time_from,time_to,trainerid) values('$classid','$name','$desc','$studio','$dow','$date_from','$date_to','$time_from','$time_to','$trainer')";
     if(mysqli_query($con,$query)==1){
-      //Retrieve information of plan selected by user
-      $query1="select * from trainers where trainerid='$trainer'";
-      $result=mysqli_query($con,$query1);
+		$one= 1;
+		$output = $amount-$one;
+      
+  $result1=mysqli_query($con,$query1);
 
-        if($result){
-          echo "<head><script>alert('Private Class Added ');</script></head></html>";
-               echo "<meta http-equiv='refresh' content='0; url=view_privateclass.php'>";
-
+        if($result1){
+			$query2="insert into attendance(attendanceid,present,userid,created_date,compare_date,expire,active,type) values('$aid','yes','$user','$cdate','$compare_date','$tomorrow','yes','pt')";
+			$result2=mysqli_query($con,$query2);
+			
+				if($result2){
+					echo "<head><script>alert('Persional Training Class Added ');</script></head></html>";
+				echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
               }
               else{
-                  echo "<head><script>alert('Asset Added Failed');</script></head></html>";
+                  echo "<head><script>alert('Persional Training Class Failed');</script></head></html>";
                  echo "error: ".mysqli_error($con);
                  //Deleting record of users if inserting to enrolls_to table failed to execute
                  $query3 = "DELETE FROM privateclasses WHERE privateclassid='$classid'";
                  mysqli_query($con,$query3);
               }
-            }
+			  
+				
+	}
+}
              
             else{
-               echo "<head><script>alert('Asset Added Failed');</script></head></html>";
+               echo "<head><script>alert('Persional Training Class Failed');</script></head></html>";
               echo "error: ".mysqli_error($con);
                //Deleting record of users if inserting to enrolls_to table failed to execute
                 $query3 = "DELETE FROM privateclasses WHERE privateclassid='$classid'";
                 mysqli_query($con,$query3);
             }
-            
+		
           
 
          

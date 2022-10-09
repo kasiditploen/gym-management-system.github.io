@@ -9,13 +9,17 @@ $desc = $_POST['desc'];
 $brand = $_POST['brand'];
 $category = $_POST['category'];
 $vendor = $_POST['vendor'];
+$contact = $_POST['contact'];
+$address = $_POST['address'];
+$mobile = $_POST['mobile'];
+$email = $_POST['email'];
 $amount = $_POST['amount'];
 $warranty = $_POST['warranty'];
 
 
 
 //inserting into users table
-$query="INSERT INTO toe (toeid,image,type,toeName,description,brands,categories,vendors,amount,warranty) values('$toeid','$image','$type','$name','$desc','$brand','$category','$vendor','$amount','$warranty')";
+$query="INSERT INTO toe (toeid,image,type,toeName,description,brands,categories,vendors,amount,warranty,contact,address,mobile,email) values('$toeid','$image','$type','$name','$desc','$brand','$category','$vendor','$amount','$warranty','$contact','$address','$mobile','$email')";
 mysqli_real_escape_string($con, $toeid);
 mysqli_real_escape_string($con, $name);
 mysqli_real_escape_string($con, $desc);
@@ -30,13 +34,13 @@ mysqli_real_escape_string($con, $warranty);
       if($result){
         $value=mysqli_fetch_row($result);
           date_default_timezone_set("Asia/Bangkok"); 
-          $d=strtotime("+".$value[8]." Years");
+          $d=strtotime("+".$value[13]." Years");
           $cdate=date("Y-m-d"); //current date
           $expiredate=date("Y-m-d",$d);
-          $query2="insert into enrolls_to_warranty(wid,toeid,paid_date,expire) values('$warranty','$toeid','$cdate','$expiredate')";
+          
       }
      
-          if(mysqli_query($con,$query2)==1){
+          
 
             echo "<head><script>alert(' Equipment Added ');</script></head></html>";
       echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
@@ -55,14 +59,7 @@ mysqli_real_escape_string($con, $warranty);
                 mysqli_query($con,$query3);
             }
             
-          }
-          else{
-            echo "<head><script>alert('Equipment Added Failed');</script></head></html>";
-            echo "error: ".mysqli_error($con);
-            //Deleting record of users if inserting to enrolls_to table failed to execute
-             $query3 = "DELETE FROM toe WHERE toeid='$toeid'";
-             mysqli_query($con,$query3);
-          }
+          
         
 
          

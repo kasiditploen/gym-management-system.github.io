@@ -1,7 +1,6 @@
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
-<?php include('../constant/layout/sidebar.php');
-?>
+<?php include('../constant/layout/header_trainer.php');?>
+<?php include('../constant/layout/sidebar_trainer.php');?>
  
 
   <!-- Page wrapper  -->
@@ -72,7 +71,7 @@
                   
                   
                  <td>
-                  <a href="viewall_detail.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>
+                  <a href="viewall_detail.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                  </td></tr>
                   
               <?php 

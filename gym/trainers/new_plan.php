@@ -1,8 +1,8 @@
 
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_trainer.php');?>
 
-<?php include('../constant/layout/sidebar.php');?> 
+<?php include('../constant/layout/sidebar_trainer.php');?> 
 <link rel="stylesheet" href="popup_style.css">
   
  <?php
@@ -34,7 +34,7 @@ include('../constant/connect.php');
                     <div class="col-lg-8" style="    margin-left: 10%;">
                         <div class="card">
                             <div class="card-title">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                             </div>
                             <div class="card-body">
                                 <div class="input-states">
@@ -77,6 +77,22 @@ include('../constant/connect.php');
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">PACKAGE TYPE</label>
+                                                <div class="col-sm-9">
+                                                <select class="form-control" id="type" name="type">
+                                               <option value="Months">By Months</option>
+                                               <option value="Hours">By Hours </option>
+                                               <option value="Sessions">By Sessions</option>
+                                               
+    </select>
+					</div>
+                    
+
+                    </div>
+                                            </div>
+
                                        <div class="form-group">
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">PACKAGE VALIDITY</label>
@@ -88,7 +104,7 @@ include('../constant/connect.php');
 
                                       <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label">PLAN AMOUNT</label>
+                                                <label class="col-sm-3 control-label">PACKAGE AMOUNT</label>
                                                 <div class="col-sm-9">
                                                 <input type="text" name="amount" id="planAmnt" placeholder="Enter package amount" class="form-control" required/>
                                                 </div>
@@ -110,6 +126,11 @@ include('../constant/connect.php');
                 <!-- /# row -->
 
                 <!-- End PAge Content -->
+
+                <script>
+  $("#type").select2({
+});
+    </script>
     
 
 <?php include('../constant/layout/footer.php');?>

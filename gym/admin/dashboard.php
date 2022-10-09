@@ -257,12 +257,13 @@ $dayOfWeek = date("l", $unixTimestamp);
                 <div class="col-md-3 align-self-left">
                 
                  </div>
-                 <div class="row">
+
+                 <!-- <div class="row"> -->
                   
                  <div class="col-md-16">
                   
-                 <a href="new_daypass.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Walk-ins</b></button></a></div>
-                 <div class="col-md-16"> <a href="new_entry.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Member</b></button></a></div>
+                 <a href="new_daypass.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Walk-ins</b></button></a>
+                 <a href="new_entry.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Member</b></button></a></div>
                  
 
 <!-- Modal -->
@@ -271,7 +272,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                     <div class="table-responsive m-t-40">
                     
                                 
-                                <h2 class="text-center">Memberships Search</h2>
+                                <h2 class="text-center mb-3 h1"><b>Memberships Search</b></h2>
  
                                 <form action="" method="GET">
                                     <div class="input-group mb-3">
@@ -305,10 +306,10 @@ $dayOfWeek = date("l", $unixTimestamp);
       
       <tbody>
         <?php
-        $filtervalues = $_GET['search'];
+        $filtervalues = mysqli_real_escape_string($con, $_GET['search']);
         $tomorrow = date("d-m-Y", strtotime('tomorrow'));
         $query  = "select * from users WHERE CONCAT(fname,lname,email,userid) LIKE '%$filtervalues%'  ORDER BY joining_date";
-        //echo $query;
+        mysqli_real_escape_string($con, $filtervalues);
         $result = mysqli_query($con, $query);
               $sno    = 1;
               
@@ -318,6 +319,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                       $ugender;
                       if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                    mysqli_real_escape_string($con, $filtervalues);
                     $uid  = $row['userid'];
                       $query1  = "select * from enrolls_to WHERE uid='$uid' AND renewal='yes'";
                       $result1 = mysqli_query($con, $query1);
@@ -388,7 +390,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                   $classname=$row10['className'];
                                   $tfrom=$row10['time_from'];
                                   $tto=$row10['time_to'];
-                                  $query11="select * from booking where userid='$uid' and classid='$classid' and created_date LIKE '$cdate%'";
+                                  $query11="select * from booking where userid='$uid' and classid='$classid' and date_from LIKE '%$cdate%'";
                                 $result11=mysqli_query($con,$query11);
                                 if($result11){
                                   $row11=mysqli_fetch_array($result11,MYSQLI_ASSOC);
@@ -445,6 +447,11 @@ $dayOfWeek = date("l", $unixTimestamp);
                                         $pidss=$row3['pid'];
                                         $amount=$row3['amount'];
                                         $sessioncount=$row3['amount'];
+
+
+                                        mysqli_real_escape_string($con, $uid);
+
+
                                         
 
                                ?>
@@ -662,7 +669,8 @@ $dayOfWeek = date("l", $unixTimestamp);
                  
 
                   
-                  </td></tr>
+                  </td>
+                </tr>
                   
 
 
@@ -718,18 +726,19 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     </table>
 </div>
                 </div>
-                </div>
+                
                 
 
 
                 <div class="card">
+                <div class="card-body">
                 <div class="col-md-3 align-self-left">
                 
                  </div>
                  
                  
                     <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_mem.php" method="POST">
+                                
                                 <h2>Trainer Search</h2>
  
   <input class="form-control" id="myInput2" type="text" placeholder="Search Trainer..">
@@ -756,7 +765,7 @@ $dayOfWeek = date("l", $unixTimestamp);
           <th>Available Time To</th>
           <th>Special Skill</th>
           <th >Year Of Experience</th>
-          <th>Action</th>
+          
         </tr>
       </thead>    
         <tbody>
@@ -859,10 +868,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                        <td><?php echo $row['yoe'] .' Years'; ?></td>
                   
                   
-                 <td>
-
-
-                  </td></tr>
+                </tr>
                   
               <?php 
               $sno++; 
@@ -885,6 +891,8 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     </table>
 </div>
                 </div>
+                </div>
+                
                 
                 
                         
@@ -1006,7 +1014,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                 </div>
                             </div>
                         </div> -->
-            
+                        
                       
                        
                      

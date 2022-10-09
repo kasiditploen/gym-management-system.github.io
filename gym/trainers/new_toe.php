@@ -1,8 +1,8 @@
 
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_trainer.php');?>
 
-<?php include('../constant/layout/sidebar.php');?> 
+<?php include('../constant/layout/sidebar_trainer.php');?> 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="popup_style.css">
   
@@ -35,7 +35,7 @@ include('../constant/connect.php');
                     <div class="col-lg-8" style="    margin-left: 10%;">
                         <div class="card">
                             <div class="card-title">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                             </div>
                             <div class="card-body">
                                 <div class="input-states">
@@ -93,19 +93,45 @@ include('../constant/connect.php');
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                        <div class="row">
-	        	<label for="image" class="col-sm-3 control-label"><h4><b>MODEL IMAGE</b></h4></label>
-	        	
-				    
-					    <!-- the avatar markup -->
-							<div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>							
-					    <div class="kv-avatar center-block">					        
-					        <input type="file" class="form-control" id="image" placeholder="Product Name" name="image" class="file-loading" style="width:auto;" required/>
-					    </div>
-				      
-				    </div>
-	        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                        <div class="card red text-center z-depth-2 light-version py-3 px-4">
+
+          <form class="md-form" action="#">
+          <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">PHOTO</label>
+                                                <div class="col-sm-9">
+                <span>Choose file<i class="fas fa-cloud-upload-alt ml-3" aria-hidden="true"></i></span>
+                <input type="file" name="image" id="image" multiple accept="image/*">
+                
+                <img id="blah" src="#"   alt="image"   style="width: 80px; height: 80px;" />
+              </div>
+              <script>
+image.onchange = evt => {
+  const [file] = image.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+   document.querySelectorAll('img').forEach(function(img){
+  	img.onerror = function(){onerror="this.src='fallback-img.jpg'";};
+   })
+});
+</script>
+              
+
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+      </div>
+      </div>
+      
                                         
                                         <div class="form-group">
                                             <div class="row">
@@ -159,31 +185,49 @@ include('../constant/connect.php');
 
                                     <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label"><h4><b>VENDOR</b></h4></label>
+                                                <label class="col-sm-3 control-label"><h4><b>Vendor Name</b></h4></label>
                                                 <div class="col-sm-9">
-                                               <select name="vendor" id="Vendor" required onchange="mycategorydetail(this.value)" class="form-control">
-                    <option value="">--Please Select Category--</option>
-                    <?php
-                        $query="select * from vendors where active='yes'";
-                        $result=mysqli_query($con,$query);
-                        if(mysqli_affected_rows($con)!=0){
-                            while($row=mysqli_fetch_row($result)){
-                                echo "<option value=".$row[0].">".$row[1]."</option>";
-                            }
-                        }
-
-                    ?>
-                    
-                </select>
+                                                 <input type="text" name="vendor" id="Vendor" placeholder="Enter Vendor Name" class="form-control" required/>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
                                             <div class="row">
-                                                <div id="categorydetls">
+                                                <label class="col-sm-3 control-label"><h4><b>Contact Name</b></h4></label>
+                                                <div class="col-sm-9">
+                                                 <input type="text" name="contact" id="Contact" placeholder="Enter Contact name" class="form-control" required/>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label"><h4><b>Address</b></h4></label>
+                                                <div class="col-sm-9">
+                                                 <input type="text" name="address" id="Address" placeholder="Enter Contact name" class="form-control" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label"><h4><b>Phone Number</b></h4></label>
+                                                <div class="col-sm-9">
+                                                <input type="number" name="mobile" id="boxx" placeholder="Enter Phone Number" maxlength="10" class="form-control" required pattern="^[0][1-9]\d{9}$|^[1-9]\d{9}$">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">EMAIL ID</label>
+                                                <div class="col-sm-9">
+                                                <input type="email" name="email" id="boxx" class="form-control" required  />
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                       <div class="form-group">
                                             <div class="row">
@@ -283,14 +327,8 @@ include('../constant/connect.php');
   $("#Category").select2({
 });
     </script>
-    <script>
-  $("#Vendor").select2({
-});
-    </script>
-    <script>
-  $("#Warranty").select2({
-});
-    </script>
+
+    
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 

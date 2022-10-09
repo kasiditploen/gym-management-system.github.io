@@ -1,10 +1,10 @@
-
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_trainer.php');?>
 
-<?php include('../constant/layout/sidebar.php');?> 
+<?php include('../constant/layout/sidebar_trainer.php');?> 
 <link rel="stylesheet" href="popup_style.css">
-  
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
  <?php
 //session_start();
 //error_reporting(0);
@@ -65,7 +65,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                                 </div>
                                             </div>
                                         </div>
-
+                                        
                                   
 
                                         <div class="form-group">
@@ -73,6 +73,38 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                                 <label class="col-sm-3 control-label">CLASS NAME</label>
                                                 <div class="col-sm-9">
                                                  <input name="classname" id="className" type="text" placeholder="Enter class name"class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="from-group">
+                    <div class="row">
+                    <label class="col-sm-3 control-label"><h4><b>Class Type</b></h4></label>
+                    <div class="col-sm-9">
+                                <select name="classtype" id="Classtype" required class="form-control">
+                                    <option value="">--Select Trainer Type--</option>
+                                    <option value="Cardio">Cardio</option>
+                                    <option value="HIIT">HIIT</option>
+                                    <option value="Dance">Dance</option>
+                                    <option value="Mind and Body">Mind and Body</option>
+                                    <option value="Cycling">Cycling</option>
+                                </select>
+                            </div>
+                            </div>
+                            </div>
+</div>
+<div class="form-group">
+                                            <div class="row">
+                                                <div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">MAX CLIENTS</label>
+                                                <div class="col-sm-9">
+                                                 <input name="classcap" id="classcap" type="number" min="1" max="30" placeholder="Enter maximum clients"class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -117,28 +149,30 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                             </div>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="form-group">
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">Days Of Week</label>
                                                 <div class="col-sm-9">
-                                               <select name="dow" id="dow" required onchange="mycategorydetail(this.value)" class="form-control">
-                    <option value="">--Please Select Days Of Week--</option>
-                    <?php 
-							$dow = array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
-							for($i = 0; $i < 7;$i++):
-							?>
-							<option value="<?php echo $i ?>" <?php echo !empty($dow_arr) && in_array($i,$dow_arr) ? 'selected' : '' ?>><?php echo $dow[$i] ?></option>
-						<?php endfor; ?>
-						</select>
+                                                <select class="form-control" id="dow" name="dow[]" multiple="multiple">
+                                                <option value="Sunday">Sunday</option>
+                                                <option value="Monday">Monday</option>
+                                               <option value="Tuesday">Tuesday</option>
+                                               <option value="Wednesday">Wednesday</option>
+                                               <option value="Thursday">Thursday</option>
+                                               <option value="Friday">Friday</option>
+                                               <option value="Saturday">Saturday</option>
+                                               
+    </select>
 					</div>
                     
 
                     </div>
                                             </div> <div class="form-group">
+                                            
                         
 						<label for="" class="control-label">Month From</label>
-						<input type="month" name="date_from" id="date_from" class="form-control" value="<?php echo isset($date_from) ? date('M-y',strtotime($date_from)):'' ?>">
+						<input type="month"  name="date_from" id="date_from" class="form-control" value="<?php echo isset($date_from) ? date('M-y',strtotime($date_from)):'' ?>">
 					</div>
 
 					<div class="form-group">
@@ -163,7 +197,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                                <select name="trainerid" id="trainerid" required onchange="mycategorydetail(this.value)" class="form-control">
                     <option value="">--Please Select Trainer--</option>
                     <?php
-                        $query="select trainerid, username FROM trainers";
+                        $query="select trainerid, username FROM trainers where trainertype LIKE'%Fitness Instructor%'";
                         $result=mysqli_query($con,$query);
                         if(mysqli_affected_rows($con)!=0){
                             while($row=mysqli_fetch_row($result)){
@@ -185,7 +219,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                     </div>
 
                                     
-                                        <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit</button>
+                                        <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Add</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
 
                 
@@ -243,6 +277,16 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
   $("#trainerid").select2({
 });
     </script>
+    <script>
+  $("#Classtype").select2({
+});
+    </script>
+
+    <script>
+  $("#session").select2({
+});
+    </script>
+    
     
                 <script src="admin/custom/js/product.js"></script>
 

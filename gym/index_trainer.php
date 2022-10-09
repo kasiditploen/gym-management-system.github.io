@@ -53,11 +53,11 @@ function createSalt()
 $salt = createSalt();
 $pass = hash('sha256', $salt . $passw);
 //echo $pass;
- $sql = "SELECT * FROM trainers WHERE email='" .$unm . "' and password = '". $pass."'and status = '1'";
+ $sql = "SELECT * FROM trainers WHERE email='" .$unm . "' and password = '". $pass."'";
     $result = mysqli_query($con,$sql);
     $row  = mysqli_fetch_array($result);
     //print_r($row);
-     $_SESSION["id"] = $row['id'];
+     $_SESSION["trainerid"] = $row['trainerid'];
      $_SESSION["username"] = $row['username'];
      $_SESSION["password"] = $row['password'];
      $_SESSION["email"] = $row['email'];
@@ -80,7 +80,7 @@ $pass = hash('sha256', $salt . $passw);
     <p>Login Successfully</p>
     <p>
      <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
-     <?php echo "<script>setTimeout(\"location.href = './trainers/dashboard.php';\",1500);</script>"; ?>
+     <?php echo "<script>setTimeout(\"location.href = './trainers/myprofile.php';\",1500);</script>"; ?>
     </p>
   </div>
 </div>
@@ -146,7 +146,7 @@ else {?>
                                         <input type="password" name="password" class="form-control" placeholder="Password" required="">
                                     </div>
                                    
-                                    <button type="submit" name="btn_login" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
+                                    <button type="submit" name="btn_login" class="btn btn-warning btn-flat m-b-30 m-t-30">Sign in</button>
 
                                     
                                     

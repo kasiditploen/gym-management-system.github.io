@@ -1,8 +1,8 @@
 
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_trainer.php');?>
 
-<?php include('../constant/layout/sidebar.php');?> 
+<?php include('../constant/layout/sidebar_trainer.php');?> 
 <link rel="stylesheet" href="popup_style.css">
   
  <?php
@@ -34,7 +34,7 @@ include('../constant/connect.php');
                     <div class="col-lg-8" style="    margin-left: 10%;">
                         <div class="card">
                             <div class="card-title">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                                
                             </div>
                             <div class="card-body">

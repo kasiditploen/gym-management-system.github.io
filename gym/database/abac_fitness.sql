@@ -339,21 +339,7 @@ CREATE TABLE `checkint` (
 
 
 
--- --------------------------------------------------------
 
---
--- Table structure for table `checkout`
---
-
-CREATE TABLE `checkout` (
-  `checkoutid` int(5) NOT NULL,
-  `userid` varchar(20) NOT NULL,
-  `expire` varchar(40) DEFAULT NULL,
-  `created_date` varchar(20) DEFAULT NULL,
-  `created_time` varchar(20) DEFAULT NULL,
-  `active` varchar(40) NOT NULL
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 
 -- --------------------------------------------------------
@@ -454,7 +440,7 @@ CREATE TABLE `manage_website` (
 --
 
 INSERT INTO `manage_website` (`id`, `title`, `short_title`, `logo`, `footer`, `currency_code`, `currency_symbol`, `login_logo`, `invoice_logo`, `background_login_image`) VALUES
-(1, 'AU FITNESS MANAGEMENT SYSTEM', 'AU FITNESS', 'admin pubb Logo.png', 'Kasidit Ploenthamakhun', 'THB', ' ฿', 'admin pubb Logo 2.png', 'admin pubb Logo 2.png', 'black.jpg');
+(1, 'FITNESS MANAGEMENT SYSTEM', 'FITNESS SYSTEM', 'admin pubb Logo.png', 'Kasidit Ploenthamakhun', 'THB', ' ฿', 'admin pubb Logo 2.png', 'admin pubb Logo 2.png', 'black.jpg');
 
 -- --------------------------------------------------------
 
@@ -950,6 +936,7 @@ CREATE TABLE `trainertt` (
   `time_from` time NOT NULL,
   `time_to` time NOT NULL,
   `status` varchar(300) DEFAULT NULL,
+  `date_from` date DEFAULT NULL,
   `userid` varchar(20) DEFAULT NULL
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
@@ -1137,12 +1124,7 @@ ALTER TABLE `checkint`
   ADD PRIMARY KEY (`checkintid`) USING BTREE,
   ADD KEY `trainerID_idc` (`trainerid`) USING BTREE;
 
-    --
--- Indexes for table `checkout`
---
-ALTER TABLE `checkout`
-  ADD PRIMARY KEY (`checkoutid`) USING BTREE,
-  ADD KEY `userID_idco` (`userid`) USING BTREE;
+
 
       --
 -- Indexes for table `attendance`
@@ -1254,6 +1236,7 @@ ALTER TABLE `studio`
 --
 ALTER TABLE `newmachine`
   ADD PRIMARY KEY (`machineid`) USING BTREE,
+  ADD  KEY `toe_ID_idn` (`toe`) USING BTREE,
   ADD KEY `machineid` (`machineid`) USING BTREE;
 
     -- Indexes for table `maintain`
@@ -1489,11 +1472,6 @@ ALTER TABLE `checkin`
 ALTER TABLE `checkint`
   MODIFY `checkintid` int(5) NOT NULL AUTO_INCREMENT;
 
-    --
--- AUTO_INCREMENT for table `checkout`
---
-ALTER TABLE `checkout`
-  MODIFY `checkoutid` int(5) NOT NULL AUTO_INCREMENT;
 
    --
 -- AUTO_INCREMENT for table `attendance`
@@ -1636,7 +1614,11 @@ ADD CONSTRAINT `machine_IDwar` FOREIGN KEY (`machineid`) REFERENCES `newmachine`
 
 
 
-
+  --
+-- Constraints for table `newmachine`
+--
+ALTER TABLE `newmachine`
+  ADD CONSTRAINT `toe_IDn` FOREIGN KEY (`toe`) REFERENCES `toe` (`toeid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 
   --
@@ -1671,11 +1653,7 @@ ALTER TABLE `checkint`
 
   
 
-    --
--- Constraints for table `checkout`
---
-ALTER TABLE `checkout`
-  ADD CONSTRAINT `userIDCO` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
 
       --
 -- Constraints for table `attendance`

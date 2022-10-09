@@ -173,7 +173,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                             
                         
 						<label for="" class="control-label">Month From</label>
-						<input type="month" name="date_from" id="date_from" class="form-control" value="<?php echo isset($date_from) ? date('M-y',strtotime($date_from)):'' ?>">
+						<input type="month"  name="date_from" id="date_from" class="form-control" value="<?php echo isset($date_from) ? date('M-y',strtotime($date_from)):'' ?>">
 					</div>
 
 					<div class="form-group">

@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 </select>
                 
                                                 </div>
-                                                <input type="hidden" name="utype" id="utype" value="user">
+                                                <input type="hidden" name="utype" id="utype" value="trainer">
                                                 <button type="submit" name="submit" id="submit" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
                                             </div>

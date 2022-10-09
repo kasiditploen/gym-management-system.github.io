@@ -30,14 +30,14 @@
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black8.jpg');
-    height: 300px; width: auto;
+    height: 150px; width: auto;
   ">
-  <h1 class="color-white mb-3 h1 text-center"><b>Group Class Training</b></h1>
+  <h1 class="color-black mb-3 h1 text-center"><b>Group Class Training</b></h1>
 </div>
                 <!-- /# row -->
                 <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">CARDIO</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center"><b>CARDIO</b></h2></a>
                             <a href="new_class.php"><button class="btn btn-light">Add Class</button></a>
                             
                          
@@ -104,7 +104,7 @@
                             $query5="SELECT b.userid, count(*)  FROM booking b
                             inner join classes cl
                             on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
+                            WHERE b.approved='yes' and b.classid = cl.classid and b.date_from='$cdate' or b.userid ='$userid' ";
                             $result5=mysqli_query($con,$query5);
                             $query6="SELECT bookingid,count(*)  FROM booking 
                             WHERE approved='no'";
@@ -193,7 +193,7 @@
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">HIIT</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center"><b>HIIT</b></h2></a>
                             
                             
                          
@@ -349,7 +349,7 @@
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Dance</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center"><b>Dance</b></h2></a>
                             
                             
                          
@@ -505,7 +505,7 @@
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Mind and Body</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center"><b>Mind and Body</b></h2></a>
                             
                             
                          
@@ -661,7 +661,7 @@
                         <!-- /# row -->
                  <div class="card">
                             <div class="card-body ">
-                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center">Cycling</h2></a>
+                            <h2 class="color-black mb-3 h1 text-center d-flex justify-content-center"><b>Cycling</b></h2></a>
                             
                             
                          

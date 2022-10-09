@@ -106,7 +106,17 @@
                             if ($result8){
                               $row2 = mysqli_fetch_array($result8, MYSQLI_ASSOC);
                               $countapp = $row2['COUNT(*)'];
+                              $query9  = "select *,SUM(service),COUNT(*) from rating WHERE trainerid='$uid'";
+                      $result9 = mysqli_query($con, $query9);
+                      if ($result9){
+                        $row3 = mysqli_fetch_array($result9, MYSQLI_ASSOC);
+                        $countt = $row3['COUNT(*)'];
+                        $countrate = $row3['SUM(service)']/$countt;
+                        
+                        
+                      }
                             }
+
                 ?>  
                   
                   <tr>
@@ -115,6 +125,7 @@
                     <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?>
                     <br><h4><span class="badge badge-light">Skill(s):</h4><span class="badge badge-light"><h4><?php echo $row['skills']; ?></h4></span>
                     <br><?php echo $row['yoe'] .' Years'; ?>
+                    <br><h4><span class="badge badge-light">Rating:</h4><span class="badge badge-light"><h3><?php echo number_format($countrate, 1); ?>/5</h3></span>
                   </td>
                      <td><?php echo $row['trainerid']; ?></td>
                      <td><h4><?php echo $row['fname']; ?> <?php echo $row['lname']; ?></h4></td>
@@ -214,6 +225,15 @@
                             if ($result8){
                               $row2 = mysqli_fetch_array($result8, MYSQLI_ASSOC);
                               $countapp = $row2['COUNT(*)'];
+                              $query9  = "select *,SUM(service),COUNT(*) from rating WHERE trainerid='$uid'";
+                      $result9 = mysqli_query($con, $query9);
+                      if ($result9){
+                        $row3 = mysqli_fetch_array($result9, MYSQLI_ASSOC);
+                        $countt = $row3['COUNT(*)'];
+                        $countrate = $row3['SUM(service)']/$countt;
+                        
+                        
+                      }
                             }
                 ?>  
                   
@@ -223,6 +243,7 @@
                     <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?>
                     <br><h4><span class="badge badge-light">Skill(s):</h4><span class="badge badge-light"><h4><?php echo $row['skills']; ?></h4></span>
                     <br><?php echo $row['yoe'] .' Years'; ?>
+                    <br><h4><span class="badge badge-light">Rating:</h4><span class="badge badge-light"><h3><?php echo number_format($countrate, 1); ?>/5</h3></span>
                   </td>
                      <td><?php echo $row['trainerid']; ?></td>
                      <td><h4><?php echo $row['fname']; ?> <?php echo $row['lname']; ?></h4></td>

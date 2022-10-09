@@ -35,7 +35,7 @@
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -151,7 +151,7 @@
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -269,7 +269,7 @@
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -388,7 +388,7 @@
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>

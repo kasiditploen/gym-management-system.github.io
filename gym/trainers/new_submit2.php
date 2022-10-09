@@ -4,6 +4,9 @@ include('../constant/connect.php');
  $memtID=$_POST['mt_id'];
  $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
  $uname=mysqli_real_escape_string($con,$_POST['ut_name']);
+ $password= hash('sha256', mysqli_real_escape_string($con, $_POST['password']));
+ $fname=mysqli_real_escape_string($con,$_POST['fname']);
+ $lname=mysqli_real_escape_string($con,$_POST['lname']);
  $stname=mysqli_real_escape_string($con,$_POST['street_name2']);
  $city=mysqli_real_escape_string($con,$_POST['city2']);
  $zipcode=$_POST['zipcode2'];
@@ -13,13 +16,23 @@ include('../constant/connect.php');
  $phn=$_POST['mobile2'];
  $email=$_POST['email2'];
  $jdate=$_POST['jdate2'];
- $availableday=$_POST['availableday'];
+ $availableday = $_POST['availableday'];
+ $i = implode(',', $availableday);
  $timefrom=$_POST['time_from'];
  $timeto=$_POST['time_to'];
  $trainertype=$_POST['trainertype'];
+ $e = implode(',', $trainertype);
  $skills=$_POST['skills'];
  $yoe=$_POST['yoe'];
+ $user=$_POST['utype'];
  //$plan=$_POST['plan2'];
+ function createSalt()
+ {
+     return '2123293dsj2hu2nikhiljdsd';
+ }
+
+ $salt = createSalt();
+$pass = hash('sha256', $salt . $password);
  
  $duplicate=mysqli_query($con,"select * from trainers where trainerid='$memtID' or email ='$email'");
 if (mysqli_num_rows($duplicate)>0)
@@ -29,12 +42,11 @@ if (mysqli_num_rows($duplicate)>0)
 echo mysqli_error($db);
 }
 //inserting into trainers table
-$query="CALL insertTrainers('$uname','$gender','$phn','$email','$dob','$jdate','$memtID', '$image','$availableday','$timefrom','$timeto','$trainertype','$skills','$yoe')";
+$query="CALL insertTrainers('$uname','$gender','$phn','$email','$dob','$jdate','$memtID', '$image','".mysqli_real_escape_string($con,$i)."','$timefrom','$timeto','".mysqli_real_escape_string($con,$e)."','$skills','$yoe','$pass','$fname','$lname','$user')";
 mysqli_real_escape_string($con, $uname);
 mysqli_real_escape_string($con, $stname);
 mysqli_real_escape_string($con, $city);
 mysqli_real_escape_string($con, $state);
-mysqli_real_escape_string($con, $availableday);
 mysqli_real_escape_string($con, $skills);
 
 

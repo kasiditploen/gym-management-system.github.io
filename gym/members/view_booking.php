@@ -1,6 +1,6 @@
 <?php include('../constant/layout/head.php');?>
 <?php include('../constant/layout/header_member.php');?>
-<?php include('../constant/layout/sidebar.php');
+<?php include('../constant/layout/sidebar_member.php');
 ?>
 
 
@@ -27,16 +27,19 @@
             <div class="container-fluid">
                 <!-- Start Page Content -->
                 
+  
+  
                 <!-- /# row -->
-                 <div class="card">
+
+                <div class="card grey">
+                  
                             <div class="card-body">
-                            <h2 class="color-black">Cardio</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
+                            <h1 class="color-black mb-3 h1"><b>Pending</b></h1>
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
-                                    <table id="myTable" class="table table-bordered table-striped">
+                                
+                                    <table id="dt-all-checkboxm" class="table  table-striped">
                                     
                                         <thead>
                                         <?php
@@ -54,7 +57,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -66,7 +69,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+          
         </tr>
 
         
@@ -77,7 +80,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from booking WHERE classtype='Cardio'";
+              $query  = "select * from booking WHERE approved = 'no'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -103,8 +106,7 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -120,11 +122,132 @@
                   
                   
                   
-                 <td>
-                  
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  
+              <?php 
+              $sno++; 
+              $msgid = 0;
+                          }
+                      }
+                    }
+                  }
+                
+              
+            
+            
+        
+          
+        
+            
+          ?>  
+
+        </tbody>
+       
+                                      
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black.jpg');
+    height: 125px; width: auto;
+  ">
+  
+  <h1 class="color-white mb-3 h1"><b>Booking List</b></h1>
+</div>
+                 <div class="card">
+                  
+                            <div class="card-body">
+                            <h2 class="color-black">Cardio</h2></a>
+                            
+                         
+                                <div class="table-responsive m-t-40">
+                                
+                                    <table id="myTable" class="table table-bordered table-striped">
+                                    
+                                        <thead>
+                                        <?php
+          $query  = "select bookingid from booking";
+          //echo $query;
+          $result = mysqli_query($con, $query);
+          $sno    = 1;
+          
+          
+
+          if (mysqli_affected_rows($con) != 0) {
+              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+              }
+            }
+                ?>
+        <tr>
+        
+         <th>Sl.No</th>
+          <th>Class ID</th>
+          <th>Class</th>
+          <th>Description</th>
+          <th>Studio</th>
+          <th>Days Of Week</th>
+          <th>Date From</th>
+          <th>Date To</th>
+          <th>Time From</th>
+          <th>Time To</th>
+          <th>By Trainer:</th>
+          
+        </tr>
+
+        
+              
+              
+      </thead>    
+
+      
+        <tbody>
+        <?php
+              $query  = "select * from booking WHERE classtype='Cardio' and approved = 'yes'";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $uid   = $row['classid'];
+
+                  $query2="select studioid,studioName from studio";
+                            $result2=mysqli_query($con,$query2);
+                            $query3="select trainerid,username from trainers";
+                            $result3=mysqli_query($con,$query3);
+                            
+                      
+                      
+                            if($result2){
+                                $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                                if($result3){
+                                    $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    
+                                ?>
+                    
+                  
+                    
+                    <tr>
+                    
+                      <td><?php echo $sno ?></td>
+                       <td><?php echo$row ['classid']; ?></td>
+                       <td><?php echo $row['className'] ?></td>
+                       <td width='380'><?php echo $row['description'] ?></td>
+                       <td><?php echo $row2['studioName'] ?></td>
+                       <td><?php echo$row ['dow']; ?></td>
+                       <td><?php echo $row['date_from'] ?></td>
+                       <td><?php echo $row['date_to'] ?></td>
+                       <td><?php echo $row['time_from'] ?></td>
+                       <td><?php echo $row['time_to'] ?></td>
+                       <td><?php echo $row3['username'] ?></td>
+                       
+                  
+                  
+                  
+                 
                   
               <?php 
               $sno++; 
@@ -156,11 +279,10 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">HIIT</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit1" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -179,7 +301,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -191,7 +313,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+          
         </tr>
 
         
@@ -228,8 +350,7 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -245,11 +366,7 @@
                   
                   
                   
-                 <td>
-                  
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -281,11 +398,10 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Dance</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit2" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox1" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -304,7 +420,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -316,7 +432,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+          
         </tr>
 
         
@@ -353,8 +469,7 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -370,11 +485,7 @@
                   
                   
                   
-                 <td>
-                  
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -406,11 +517,10 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Mind and Body</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit3" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-bordered2" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -429,7 +539,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -441,7 +551,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+         
         </tr>
 
         
@@ -478,8 +588,7 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -495,11 +604,7 @@
                   
                   
                   
-                 <td>
-                  
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -531,11 +636,10 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Cycling</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
-                            <button type="submit" id="submit4" name="stud_delete_multiple_btn" class="btn btn-danger">Delete All Rows</button>
+                            
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-bordered3" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -554,7 +658,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -566,7 +670,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+          
         </tr>
 
         
@@ -603,8 +707,7 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -620,11 +723,7 @@
                   
                   
                   
-                 <td>
-                  
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -731,6 +830,25 @@ $(document).ready(function(){
     
     $(document).ready(function () {
   $('#dt-all-checkbox').dataTable({
+
+    columnDefs: [{
+      orderable: false,
+      className: 'select-checkbox select-checkbox-all',
+      targets: 0
+    }],
+    select: {
+      style: 'multi',
+      selector: 'td:first-child'
+    }
+  });
+});
+
+</script>
+
+<script>
+    
+    $(document).ready(function () {
+  $('#dt-all-checkboxm').dataTable({
 
     columnDefs: [{
       orderable: false,

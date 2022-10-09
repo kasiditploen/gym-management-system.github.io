@@ -1,6 +1,6 @@
 <?php include('../constant/layout/head.php');?>
 <?php include('../constant/layout/header_member.php');?>
-<?php include('../constant/layout/sidebar.php');
+<?php include('../constant/layout/sidebar_member.php');
 ?>
 
 
@@ -26,7 +26,13 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                
+                <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black7.jpg');
+    height: 125px; width: auto;
+  ">
+  
+  <h1 class="color-white mb-3 h1"><b>Group Classes</b></h1>
+</div>
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
@@ -189,7 +195,7 @@
                               
                  
                               <!--  <a href="health_status_entry.php?id=<?php echo $row4['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ></button></a> -->
-                  <input type='submit' id='button1' value='Proceed' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
+                  <input type='submit' id='button1' value='Proceed' class="btn btn-dark btn-xs m-b-30 m-t-30"/></form>
                  
                   </td></tr>
                   

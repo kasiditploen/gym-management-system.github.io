@@ -1,9 +1,24 @@
 
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_member.php');?>
 
-<?php include('../constant/layout/sidebar.php');?> 
+<?php include('../constant/layout/sidebar_member.php');?> 
+<?php
+$que="select * from  users where userid = '".$_SESSION["userid"]."'";
+$query=$con->query($que);
+while($row=mysqli_fetch_array($query))
+{
+  //print_r($row);
+  extract($row);
+  $fname = $row['fname'];
+  $lname = $row['lname'];
+  $email = $row['email'];
+  $mobile = $row['mobile'];
+  $dob = $row['dob'];
+  $gender = $row['gender'];
+}
 
+?> 
  <?php
  include('../constant/connect.php');
 if(isset($_POST["btn_update"]))
@@ -11,7 +26,7 @@ if(isset($_POST["btn_update"]))
   extract($_POST);
 
   
-   $q1="UPDATE `admin` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact',`dob`='$dob',`gender`='$gender' where id = '".$_SESSION["id"]."'";
+   $q1="UPDATE `users` SET `fname`='$fname',`lname`='$lname',`email`='$email',`mobile`='$mobile',`dob`='$dob',`gender`='$gender' where id = '".$_SESSION["id"]."'";
   //$query1=$conn->query($q1);
 
     if ($con->query($q1) === TRUE) {
@@ -38,22 +53,7 @@ if(isset($_POST["btn_update"]))
 
 ?>
 
-<?php
-$que="select * from  admin where id = '".$_SESSION["id"]."'";
-$query=$con->query($que);
-while($row=mysqli_fetch_array($query))
-{
-  //print_r($row);
-  extract($row);
-  $fname = $row['fname'];
-  $lname = $row['lname'];
-  $email = $row['email'];
-  $contact = $row['contact'];
-  $dob1 = $row['dob'];
-  $gender = $row['gender'];
-}
 
-?> 
    
 
 
@@ -80,7 +80,7 @@ while($row=mysqli_fetch_array($query))
                     <div class="col-lg-8" style="margin-left: 10%;">
                         <div class="card">
                             <div class="card-title">
-                               
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                             </div>
                             <div class="card-body">
                                 <div class="input-states">
@@ -128,7 +128,7 @@ while($row=mysqli_fetch_array($query))
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">Date Of Birth</label>
                                                 <div class="col-sm-9">
-                                                    <input type="date" value="<?php echo $dob1;?>" name="dob" class="form-control">
+                                                    <input type="date" value="<?php echo $dob;?>" name="dob" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +137,7 @@ while($row=mysqli_fetch_array($query))
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">Contact</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" value="<?php echo $contact;?>"  name="contact" class="form-control" id="tbNumbers" minlength="10" maxlength="10" onkeypress="javascript:return isNumber(event)" required>
+                                                    <input type="text" value="<?php echo $mobile;?>"  name="contact" class="form-control" id="tbNumbers" minlength="10" maxlength="10" onkeypress="javascript:return isNumber(event)" required>
                                                 </div>
                                             </div>
                                         </div>

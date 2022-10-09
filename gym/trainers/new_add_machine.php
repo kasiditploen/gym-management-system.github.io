@@ -1,8 +1,7 @@
-
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_trainer.php');?>
 
-<?php include('../constant/layout/sidebar.php');?> 
+<?php include('../constant/layout/sidebar_trainer.php');?> 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="popup_style.css">
   
@@ -53,7 +52,7 @@ include('../constant/connect.php');
               }
 
             ?>
-                                                  <input type="text" name="machineid" id="machineID" readonly value="<?php echo time(); ?>" class="form-control">
+                                                  <input type="text" name="machineid" id="machineID" value="<?php echo time(); ?>" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -155,6 +154,8 @@ include('../constant/connect.php');
                                         </div>
                                         
                                         <input type="hidden" name="status" id="status" value="1">
+                                        <input type="hidden" name="repair" id="repair" value="0">
+                                        <input type="hidden" name="mneed" id="mneed" value="0">
 
                                         <div class="form-group">
                                             <div class="row">
@@ -168,7 +169,7 @@ include('../constant/connect.php');
                                         
                                         </div>
                                         
-                                        <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit</button>
+                                        <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Add</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
 
                 

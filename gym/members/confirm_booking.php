@@ -71,7 +71,7 @@ $query="INSERT INTO booking (bookingid,classid,className,username,trainerid,user
         if(mysqli_query($con,$query2)==1){
         
             echo "<head><script>alert('Booked ');</script></head></html>";
-            echo "<meta http-equiv='refresh' content='0; url=view_class.php'>";
+            echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
         
         }
 
@@ -79,7 +79,7 @@ $query="INSERT INTO booking (bookingid,classid,className,username,trainerid,user
     else{
      echo "<head><script>alert('NOT SUCCESSFUL, Check Again');</script></head></html>";
      echo "error".mysqli_error($con);
-     echo "<meta http-equiv='refresh' content='0; url=view_class.php'>";
+     echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
         
     }
 

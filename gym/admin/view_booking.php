@@ -87,7 +87,9 @@
                   $classid   = $row['classid'];
                   $trainerid   = $row['trainerid'];
                   $userid   = $row['userid'];
-
+                  $tf   = $row['time_from'];
+                  $tt   = $row['time_to'];
+                  $df   = $row['date_from'];
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";

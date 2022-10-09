@@ -1,8 +1,7 @@
-
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_trainer.php');?>
 
-<?php include('../constant/layout/sidebar.php');?> 
+<?php include('../constant/layout/sidebar_trainer.php');?> 
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -48,7 +47,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                     <div class="col-lg-8" style="    margin-left: 10%;">
                         <div class="card">
                             <div class="card-title">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                             </div>
                             <div class="card-body">
                                 <div class="input-states">
@@ -81,6 +80,29 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="from-group">
+                    <div class="row">
+                    <label class="col-sm-3 control-label"><h4><b>Class Type</b></h4></label>
+                    <div class="col-sm-9">
+                                <select name="privateclasstype" id="privateclasstype" required class="form-control">
+                                    <option value="">--Select Trainer Type--</option>
+                                    <option value="Strength Training">Strength Training</option>
+                                    <option value="Combat Sports">Combat Sports</option>
+                                    <option value="Dance">Dance</option>
+                                    <option value="Mind and Body">Mind and Body</option>
+                                    
+                                </select>
+                            </div>
+                            </div>
+                            </div>
+</div>
+<div class="form-group">
+                                            <div class="row">
+                                                <div id="categorydetls">
+                                            </div>
+                                        </div>
+                                    </div>
 
                                         
                                         
@@ -116,8 +138,8 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="row">
-                                                <div id="categorydetls">
+                                            <div>
+                                                <div>
                                             </div>
                                         </div>
                                     </div>
@@ -284,6 +306,10 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
     </script>
     <script>
   $("#trainerid").select2({
+});
+    </script>
+    <script>
+  $("#privateclasstype").select2({
 });
     </script>
     

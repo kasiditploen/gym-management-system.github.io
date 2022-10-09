@@ -1,7 +1,11 @@
 <?php include('../constant/layout/head.php');?>
 <?php include('../constant/layout/header_member.php');?>
-<?php include('../constant/layout/sidebar.php');
+<?php include('../constant/layout/sidebar_member.php');
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript"> </script>
+
 
 <?php
         date_default_timezone_set("Asia/Bangkok"); 
@@ -18,6 +22,8 @@ $tomorrow = date("l", $unixTimestamptom);
 
 
 ?>
+
+
 
   
   
@@ -40,11 +46,18 @@ $tomorrow = date("l", $unixTimestamptom);
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                
+                <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black5.jpg');
+    height: 125px; width: auto;
+  ">
+  
+  <h1 class="color-white mb-3 h1"><b>Class Reservation</b></h1>
+</div>
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">Tomorrow (<?php echo $tomorrow ?>)</h2></a>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                            <h2 class="color-black mb-3 h1"><b>Tomorrow</b> <h3 class="color-black mb-3 h3"><b>(<?php  echo  $tomorrow ?>)</b></h3></h2></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -241,152 +254,231 @@ $tomorrow = date("l", $unixTimestamptom);
                         </div>
 
                         <!-- /# row -->
-                 <div class="card">
+                        <div class="card">
                             <div class="card-body">
-                            <h2 class="color-black">SPECIFIC DATE</h2></a>
+                            <h2 class="color-black">Specific Date</h2></a>
+                            <form id="form4" action='confirm_bookingdate.php' method='post'><input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                            <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Apply Specific Date</label>
+                                                <div class="col-sm-9">
+                                                <input name="sdate" id="sdate" class="form-control" placeholder="DATE!!!!" required/>
+                                                </div>
+                                            </div>
+                                        </div>
                             
-                            <?php ?>
-
                          
                                 <div class="table-responsive m-t-40">
                                 
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
-                                    <form action="" method="GET">
-                            <div class="row">
-                                    <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Date</label>
-                                        <input type="date" name="date" value="<?php if(isset($_GET['date'])){
-                                          $datebe = $_GET['date'];
-                                          date_default_timezone_set("Asia/Bangkok"); 
-                                          $day=date("Y-m-d");
-                                          $cdate=date("Y-m-d");
-                                  
-                                          $unixTimestamp = strtotime($cdate);
-                                          $unixTimestamptom = strtotime('Tomorrow');
-                                          $datebeformed = strtotime($datebe);
-                                  
-                                  //Get the day of the week using PHP's date function.
-                                  $dayOfWeek = date("l", $unixTimestamp);
-                                  $tomorrow = date("l", $unixTimestamptom);
-                                  $dateform = date("l", $datebeformed);
-                                          
-                                          echo $dateform; } ?>" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label></label> <br>
-                                      <button type="submit" class="btn btn-primary">Filter</button>
-                                    </div>
-                                </div>
-                                </div>
-            </form>
-                                        
-
-                                        <?php 
-                                 $query  = "select * from users where userid='$uid'";
-                                 $result = mysqli_query($con, $query);
-                                 if($result){
-                                   $row1=mysqli_fetch_array($result,MYSQLI_ASSOC);
-                                   
-                                   
-                                 }
-                                   ?>
-
-<?php 
-                                 $query2  = "select * from users where userid='$uid'";
-                                 $result2 = mysqli_query($con, $query2);
-                                 if($result2){
-                                   $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
-                                   $uid2=$row2['userid'];
-                                 }
-                                   ?>
-
-
-                            <?php 
-                                 $query0  = "select * from attendance where userid = '$uid2'";
-                                 $result0 = mysqli_query($con, $query0);
-                                 while($rowme=mysqli_fetch_array($result0)){
-                                   $attendanceid=$rowme['attendancenid'];
-                                   //$usernamein=$rowme['username'];
-                                 }
-                                   ?>
-
-<?php 
-                                 $query3  = "select * from privateclasses where userid = '$uid2'";
-                                 $result3 = mysqli_query($con, $query3);
-                                 while($row3=mysqli_fetch_array($result3)){
-                                   $privateclassid=$row3['privateclassid'];
-                                   //$usernamein=$rowme['username'];
-                                 }
-                                   ?>
-                            
-                            
-
-                                 
-
-                                   <?php
-                                   
-                                   $clauses=array();
-
-                                   
-
-                                   if( isset( $datebe ) && !empty( $datebe ) ){
-                                    $clauses[] = "`dow` LIKE '{%$dateform%}'";   
-                                }
-
-                                
-
-      
-      
-      
-                                   // $from_date = $_GET['from_date'];
-                                    //$to_date = $_GET['to_date'];
-                                    $sno    = 1;
-                                    $where = !empty( $clauses ) ? ' where '.implode(' and ',$clauses ) : '';
-                                    $query = "SELECT * FROM classes" . $where;
-                                    //$query_run = mysqli_query($con, $query);
                                     
-                                    if(isset($query)){
+                                        <thead>
+                                        <?php
+          $query  = "select machineid from newmachine";
+          //echo $query;
+          $result = mysqli_query($con, $query);
+          $sno    = 1;
+          
+          
 
-                                      $result = mysqli_query($con, $query);
-                                      while($row=mysqli_fetch_array($result)){
-                                            ?>
-                                            <tr>
-                                            <td><?php echo $sno; ?></td>
-                                            <td><?= $row['className']; ?></td>
-                                            <td><?= $row['classid']; ?></td>
-                                            <td><?= $row['fname']; ?></td>
-                                            <td><?= $row['lname']; ?></td>
-                                            <td><?= $row['username']; ?></td>
-                                                <td><?= $row['created_date']; ?></td>
-                                                <td><?= $row['created_time']; ?></td>
-                                                <td><?= $row['present']; ?></td>
-                                            </tr>
-                                            <?php
-                                        }
-                                        
-                                    }
-                                  
-                                    else
-                                    {
-                                        echo "No Record Found";
-                                    }
-                              
-                            ?>
-                            <?php 
-              $sno++; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+          if (mysqli_affected_rows($con) != 0) {
+              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
-            </div>
-        </div>
-    </div>
+              }
+            }
+                ?>
+        <tr>
+        
+         <th>Sl.No</th>
+          <th>Class ID</th>
+          <th>Class</th>
+          <th>Description</th>
+          <th>Studio</th>
+          <th>Days Of Week</th>
+          <th>Date From</th>
+          <th>Date To</th>
+          <th>Time From</th>
+          <th>Time To</th>
+          <th>By Trainer:</th>
+          <th>Action</th>
+        </tr>
+
+        
+              <!--  and dow LIKE '%Monday%' "use to spcify Monday" -->
+              
+      </thead>    
 
       
+      <tbody>
+
+      
+
+
+      <?php
+      $id     = $_GET['id'];;
+              $query  = "select * from classes WHERE classid = '$id' ";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+              $userid;
+              $username;
+              $classid;
+              $name;
+                      $desc;
+                      $studioid;
+                      $type;
+                      $dow;
+                      $df;
+                      $dt;
+                      $tf;
+                      $tt;
+                      $trainerid;
+                      $session;
+
+              if (mysqli_affected_rows($con) != 0) {
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $uid   = $row['classid'];
+
+                  $query2="select studioid,studioName from studio";
+                            $result2=mysqli_query($con,$query2);
+                            $query3="select trainerid,username from trainers";
+                            $result3=mysqli_query($con,$query3);
+                            $query4  = "select * from users where userid = '".$_SESSION["userid"]."'";
+              $result4 = mysqli_query($con, $query4);
+              $query5  = "select * from classes";
+              $result5 = mysqli_query($con, $query5);
+              
+                      
+                            if($result2){
+                                $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                                if($result3){
+                                    $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    $trainername;
+                                    $studioname;
+                                    if($result4){
+                                        $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                        $userid   = $row4['userid'];
+                                        $username   = $row4['username'];
+                                        if($result5){
+                                            $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                            $session   = $row5['session'];
+                                            
+                                              
+                                ?>
+                    
+                  
+                    
+                    <tr>
+                    
+                      <td><?php echo $sno ?></td>
+                       <td><?php echo$row ['classid']; ?></td>
+                       <td><?php echo $row['className'] ?></td>
+                       <td width='380'><?php echo $row['description'] ?></td>
+                       <td><?php echo $row2['studioName'] ?></td>
+                       <td><?php echo$row ['dow']; ?></td>
+                       <td><?php echo $row['date_from'] ?></td>
+                       <td><?php echo $row['date_to'] ?></td>
+                       <td><?php echo $row['time_from'] ?></td>
+                       <td><?php echo $row['time_to'] ?></td>
+                       <td><?php echo $row3['username'] ?></td>
+                       
+                  
+                  
+                  
+                 <td>
+                
+                 <?php
+                  $classid=$row['classid'];
+                  $userid=$row4['userid'];
+                  $session=$row4['session'];
+                  $username=$row4['username'];
+                  $name=$row['className'];
+                          $desc=$row['description'];
+                          $studioid=$row2['studioid'];
+                          $type=$row['classtype'];
+                          $dow=$row['dow'];
+                          $df=$row['date_from'];
+                          $dt=$row['date_to'];
+                          $tf=$row['time_from'];
+                          $tt=$row['time_to'];
+                          $trainerid=$row['trainerid'];
+                          $studioname=$row2['studioName'];
+                          $trainername=$row3['trainerName'];
+                          
+                   ?>
+                 
+              
+                  
+                 
+                  
+                              <input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                              <input type='hidden' name='className' value='<?php echo $name;?>'/>
+                              <input type='hidden' name='description' value='<?php echo $desc;?>'/>
+                              <input type='hidden' name='studios' value='<?php echo $studioid ?>'/>
+                              <input type='hidden' name='classtype' value='<?php echo $type;?>'/>
+                              <input type='hidden' name='dow' value='<?php echo $dow;?>'/>
+                              <input type='hidden' name='date_from' value='<?php echo $df;?>'/>
+                              <input type='hidden' name='date_to' value='<?php echo $dt ?>'/>
+                              <input type='hidden' name='time_from' value='<?php echo $tf;?>'/>
+                              <input type='hidden' name='time_to' value='<?php echo $tt;?>'/>
+                              <input type='hidden' name='trainerid' value='<?php echo $trainerid;?>'/>
+                              <input type='hidden' name='trainerName' value='<?php echo $trainername ?>'/>
+                              <input type='hidden' name='userid' value='<?php echo $userid?>'/>
+                              <input type='hidden' name='username' value='<?php echo $username?>'/>
+                              <input type='hidden' name='session' value='<?php echo $session?>'/>
+                              
+                 
+                              <!--  <a href="health_status_entry.php?id=<?php echo $row4['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ></button></a> -->
+                  <input type='submit' id='button1' value='Book' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
+                 
+                  </td></tr>
+                  
+              <?php 
+              $sno++; 
+              $msgid = 0;
+                          }
+                      }
+                    }
+                  }
+                }
+              }
+
+              
+            
+            
+        
+          
+        
+            
+          ?>  
+
+        </tbody>
+       
+                                      
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <?php
+        date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date("Y-m-d");
+
+        $unixTimestamp = strtotime($cdate);
+        $unixTimestamptom = strtotime('Tomorrow');
+
+//Get the day of the week using PHP's date function.
+$dayOfWeek2 = date("w", $unixTimestamp);
+
+$doww = explode (",", $dow);
+
+echo $dow;
+
+
+?>
                  
 
                         
@@ -558,6 +650,136 @@ $(document).ready(function(){
     }
   });
 });
+
+</script>
+
+
+
+
+<script>
+
+    
+
+
+     
+       
+         
+         
+
+         
+
+         
+         var js_array = <?php echo json_encode($dow); ?>;
+         
+         let sunday = js_array.includes("Sunday");
+let monday = js_array.includes("Monday");
+let tuesday = js_array.includes("Tuesday");
+let wednesday = js_array.includes("Wednesday");
+let thursday = js_array.includes("Thursday");
+let friday = js_array.includes("Friday");
+let saturday = js_array.includes("Saturday");
+         
+         if (sunday === true) {
+  var sun ;
+  
+  
+}else if (sunday === false){
+  sun = [0];
+}
+     
+     if (monday === true) {
+  var mon ;
+  
+}else if (monday === false){
+  mon = [1];
+}
+     
+     if (tuesday === true) {
+  var tues ;
+  
+}else if (tuesday === false){
+  tues = [2];
+}
+     
+     if (wednesday === true) {
+  var wed ;
+  
+}else if (wednesday === false){
+  wed = [3];
+}
+     
+     if (thursday === true) {
+  var thu ;
+  
+}else if (thursday === false){
+  thu = [4];
+}
+     
+     if (friday === true) {
+  var fri ;
+  
+}else if (friday === false){
+  fri = [5];
+}
+     
+     if (saturday === true) {
+  var sat ;
+  
+}else if (saturday === false){
+  sat = [6];
+}
+
+const arrayna =  ['0', '1', '2', '3', '4', '5', '6'];
+const arrayuse =  [sun,mon, tues, wed, thu, fri, sat];
+     
+     
+   
+     
+
+
+
+
+
+
+
+  
+
+
+console.log(js_array);
+     console.log(sunday);
+     console.log(sun);
+     console.log(monday);
+     console.log(mon);
+     console.log(tuesday);
+     console.log(tues);
+     console.log(wednesday);
+     console.log(wed);
+     console.log(thursday);
+     console.log(thu);
+     console.log(friday);
+     console.log(fri);
+     console.log(saturday); 
+     console.log(sat); 
+  
+
+         $('#sdate').datepicker({
+          
+           format: "yyyy-mm-dd",
+           daysOfWeekDisabled: arrayuse,
+           daysOfWeekHighlighted: arrayuse
+           
+         });
+
+        
+        
+     
+</script>
+
+
+
+  
+  
+  
 
 </script>
 

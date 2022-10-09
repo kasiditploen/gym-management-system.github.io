@@ -1,7 +1,6 @@
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
-<?php include('../constant/layout/sidebar.php');
-?>
+<?php include('../constant/layout/header_trainer.php');?>
+<?php include('../constant/layout/sidebar_trainer.php');?>
  
 
   <!-- Page wrapper  -->
@@ -25,7 +24,7 @@
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
-                            <button class="btn btn-primary" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
+                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
                               <h1>Machine Maintenance</h1>
                             <h3>
                               Details of : - 
@@ -89,11 +88,7 @@
                             if($result5){
                                 $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                                 $category   = $row5['categoryName'];
-                            $query6="select * from vendors where vendorid='$vendor'";  
-                            $result6=mysqli_query($con,$query6);
-
-                            if($result6){
-                                $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                           
                                 $query7="select * from studio where studioid='$studio'";  
                                 $result7=mysqli_query($con,$query7);
                                 if($result7){
@@ -116,7 +111,7 @@
                       }
                     }
                   }
-                }
+                
               
                                         
                                         
@@ -179,25 +174,32 @@
          <th>Sl.No</th>
           
          <th>Serial No.</th>
+         <th>Maintain Name</th>
           <th>Payment Date</th>
           <th>Start Time</th>
           <th>Finish Time</th>
           <th>Maintenance Frequency (Time)</th>
+          <th>Maintenance Cost</th>
         </tr>
       </thead>    
         <tbody>
           <?php
           $query  = "select * from enrolls_to_maintain";
-          
           $result = mysqli_query($con, $query);
+          
           $sno    = 1;
           
           
 
           if (mysqli_affected_rows($con) != 0) {
             while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-            
-           
+              $etmt   = $row['etmt_id'];
+              $maintainid   = $row['maintainid'];
+              $uid   = $row['machineid'];
+              $query1  = "select * from maintain where machineid='$uid'";
+          $result1 = mysqli_query($con, $query1);
+              if($result1) {
+                $row1=mysqli_fetch_array($result1,MYSQLI_ASSOC);
 
            
                   ?>
@@ -205,11 +207,13 @@
                   <tr>
                     <td><?php  echo  $sno; ?></td>
                      
-                    <td width='380'><?php echo $row['machineid']; ?></td>
+                    <td width='380'><?php echo $row1['machineid']; ?></td>
+                    <td width='380'><?php echo $row1['maintainName']; ?></td>
                      <td width='380'><?php echo $row['main_date']; ?></td>
                      <td width='380'><?php echo $row['start_date']; ?></td>
                      <td width='380'><?php echo $row['duration']; ?></td>
                      <td><?php echo$row['wid'].' Days'; ?></td>
+                     <td width='380'><?php echo $row1['cost']; ?></td>
                      <!--<td><?php echo $row['expire']; ?></td>-->
                     
                      
@@ -220,7 +224,7 @@
                 }  
               $uid = 0;
                 }
-           
+              }
       
 
           ?>      
@@ -245,9 +249,9 @@
 
                     
                              
-<h1 class="color-red"><b></b>Maintenance Records</h1>
+<h1 class="color-red"><b></b>Maintenance Records (In Progress)</h1>
 
-<div><a href="new_maintain.php?id=<?php echo $row['machineid'];?>"><button class="btn btn-secondary" id="addProductModalBtn">Maintain/Repair</button></a>
+<div><a href="new_maintain.php?id=<?php echo $id;?>"><button class="btn btn-secondary" id="addProductModalBtn">Maintain/Repair</button></a>
                             <a href="new_add_machine.php"><button class="btn btn-danger" id="addProductModalBtn">Replace</button></a></div></div></div>
                             <form action="del_all_machine.php" method="POST">
                                 <div class="table-responsive m-t-40">
@@ -257,12 +261,12 @@
           
         <th>Sl.No</th>
           <th style="width:10%;">Maintenance Progress</th>
-          <th style="width:10%;">MAINTAIN ORDER</th>
           <th style="width:10%;">MAINTAIN ID</th>
           <th style="width:10%;">Maintain Name</th>
           <th style="width:10%;">SERIAL NO.</th>
           <th style="width:10%;">Maintenance Freq. Days</th>
           <th style="width:10%;">Duration Time</th>
+          <th style="width:10%;">Maintenance Cost</th>
           <th style="width:10%;">Action</th>
           
           
@@ -275,42 +279,71 @@
 
         <tbody>
         <?php
-              $query  = "select * from maintain ORDER BY maintainid";
+              $query  = "select * from maintain where machineid='$id' and active='yes'";
               $result = mysqli_query($con, $query);
-              $query1  = "select * from enrolls_to_maintain";
-              $result1 = mysqli_query($con, $query1);
+              $mid= $row['maintainid'];
               $sno    = 1;
               
               
               if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                    while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
-                      $duration  = $row1['duration'];      
+                    $mid= $row['maintainid'];
+                    $uid   = $row['machineid'];
+                    $query1  = "select * from enrolls_to_maintain where etmt_id='$etmt'  ORDER BY etmt_id DESC";
+                    $result1 = mysqli_query($con, $query1);
+                    if($result1){
+                      $row1=mysqli_fetch_array($result1,MYSQLI_ASSOC);
+                      $duration  = $row1['duration']; 
+                      $start  = $row1['start_date']; 
+                      $result2 = mysqli_query($con, $query1);
+                      if($result2){
+                        $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                      $uid1   = $row1['machineid'];
+                      $query2  = "select * from maintain where maintainid='$mid'and machineid='$uid1'";
+                      $result3 = mysqli_query($con, $query3);
+                      if($result3){
+                        $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+              
+                $uid2   = $row2['machineid'];
+                $mid2= $row2['maintainid'];
+                           
                       date_default_timezone_set("Asia/Bangkok"); 
+                      $mid2= $row2['maintainid'];
+                      $query4  = "select * from maintain where active='yes' and maintainid='$mid2' and machineid='$uid2'";
+                      $result4 = mysqli_query($con, $query3);
+                      if($result4){
+                        $row3=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                        $mid3= $row3['maintainid'];    
                         
-
+                          
                                 ?>
 
 
 
                   
                   <tr>
+                  <?php echo date("h:i:s")  ?>
+                  <?php echo $duration ?>
                   
                     <td style="width:10%;"><?php echo $sno; ?></td>
-                    <td><?php if (date("h:i:s") <= $duration){
+                    <td><?php if ($start <= date("h:i:s") and date("h:i:s")  <= $duration){
+                       $query="select * from newmachine where machineid='$uid1'";
+                       $con->query("UPDATE maintain SET active='yes' WHERE machineid='".$uid."'");
+                 $result=mysqli_query($con,$query);
                                             echo '<h1><span class="badge badge-dark">In Progress</span></h1>';
-                                        } else  if (date("h:i:s") >= $duration){
+                                        } else  if ($start <= date("h:i:s") and date("h:i:s") >= $duration){
+                                          $query1="select * from newmachine where machineid='$uid1'";
+                       $con->query("UPDATE maintain SET active='no' WHERE machineid='".$uid."'");
+                 $result1=mysqli_query($con,$query1);
                                             echo '<h1><span class="badge badge-success">Complete</span></h1>';
-                                        }else {
-                                          echo '<h1><span class="badge badge-success"></span></h1>';
                                         }
                                     
-                                       ?></td>
-                                       <td><h4><?php echo $row1['etmt_id']; ?></h4></td>
+                                       ?></td>             
                     <td><?php echo $row['maintainid']; ?></td>
                      <td><?php echo $row['maintainName']; ?></td>
                      <td><?php echo $row['machineid']; ?></td>
                      <td><h4><?php echo $row['mainday'],' days'; ?></h4></td>
+                     <td><h4><?php echo $row['cost'],' ฿'; ?></h4></td>
                      <td><h4><?php echo $row['duration'],' minutes'; ?></h4></td>
                     
                        
@@ -326,19 +359,14 @@
                     <!-- Split button -->
                     
 
-<!--<a href="read_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>-->
-                  <!--<a href="edit_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>-->
-                  <?php
-                        if($row['status']=='1'){
-                            echo '<p><a href="status_quick.php?userid='.$row['userid'].'&status=0" class="btn blue-gradient waves-effect waves-light">Enabled</a></p>';
-                        } else{
-                            echo '<p><a href="status_quick.php?userid='.$row['userid'].'&status=1" class="btn purple-gradient waves-effect waves-light">Disabled</a></p>';
-                        }  ?> 
+<!--<a href="read_member.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>-->
+                  <!--<a href="edit_member.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>-->
+                  
                  
                   
 
                   
-                  <a href="del_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-danger"onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_member.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-xs btn-danger"onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
 
 
@@ -361,7 +389,11 @@
                     }
                 }  
               }
-            
+            }
+          }
+        }
+        
+          
           ?>  
 
           

@@ -57,7 +57,7 @@
         <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
         <th>S.No</th>
           <th>User ID</th>
-          <th>Satisfaction</th>
+          <th>Satisfaction Points</th>
           <th>Specifc Feedback Detail</th>
           <th>Action</th>
         </tr>
@@ -101,7 +101,7 @@
                       
                       <td><?php echo $sno ?></td>
                      <td><?php echo$row3 ['userid']; ?></td>
-                     <td><?php echo $row['service'] ?></td>
+                     <td><h1><?php echo $row['service'] ?></h1></td>
                      <td width='380'><?php echo $row['description'] ?></td>
                      
                        
@@ -168,8 +168,8 @@
         <tr>
         <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
         <th>S.No</th>
-          <th>User ID</th>
-          <th>Satisfaction</th>
+          <th>Trainer ID</th>
+          <th>Satisfaction Points</th>
           <th>Specifc Feedback Detail</th>
           <th>Action</th>
         </tr>
@@ -195,6 +195,8 @@
                             $result2=mysqli_query($con,$query2);
                             $query3="select userid,username from users";
                             $result3=mysqli_query($con,$query3);
+                            $query4="select trainerid,username from trainers";
+                            $result4=mysqli_query($con,$query4);
                             
                       
                       
@@ -202,7 +204,8 @@
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                                    
+                                    if($result4){
+                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
                                 ?>
                     
                   
@@ -212,8 +215,8 @@
                                                         <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
                       
                       <td><?php echo $sno ?></td>
-                     <td><?php echo$row3 ['userid']; ?></td>
-                     <td><?php echo $row['service'] ?></td>
+                     <td><?php echo$row4 ['trainerid']; ?></td>
+                     <td><h1><b><?php echo $row['service'] ?></b></h1></td>
                      <td width='380'><?php echo $row['description'] ?></td>
                      
                        
@@ -233,7 +236,7 @@
                       }
                     }
                   }
-                
+              }
               
             
             

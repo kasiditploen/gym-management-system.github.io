@@ -1,5 +1,6 @@
 <?php
 include('../constant/connect.php');
+$day=$_GET['dd'];
 $month=$_GET['mm'];
 $year=$_GET['yy'];
 $flag=$_GET['flag'];
@@ -10,6 +11,9 @@ if($flag==0)
 	$query="select * from users u INNER JOIN address a on u.userid=a.id where u.joining_date like '".$year."-".$month."___'";
 else if($flag==1)
 	$query="select * from users u INNER JOIN address a on u.userid=a.id where u.joining_date like '".$year."______'";
+
+	else if($flag==2)
+	$query="select * from users u INNER JOIN address a on u.userid=a.id where u.joining_date like '".$year."-".$month."-"."$day"."___'";
   
 
 $res=mysqli_query($con,$query);
@@ -66,9 +70,14 @@ else{
 		$monthName = date("F", mktime(0, 0, 0, $month, 10));
 		echo "<h2>No Data found On ".$monthName." ".$year."</h2>";
 	}
-	else if($flag==1)
+	else if($flag==1){
 		echo "<h2>No Data found On ".$year."</h2";
+} else if($flag==2){
+	$monthName = date("F", mktime(0, 0, 0, $day, 10));
+		echo "<h2>No Data found On ".$day." ".$monthName." ".$year."</h2>";
 }
+}
+
 echo "</tbody>";
 
 

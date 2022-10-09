@@ -1,8 +1,7 @@
-
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_trainer.php');?>
 
-<?php include('../constant/layout/sidebar.php');?> 
+<?php include('../constant/layout/sidebar_trainer.php');?> 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="popup_style.css">
   
@@ -87,11 +86,7 @@ include('../constant/connect.php');
                             if($result5){
                                 $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                                 $category   = $row5['categoryName'];
-                            $query6="select * from vendors where vendorid='$vendor'";  
-                            $result6=mysqli_query($con,$query6);
-
-                            if($result6){
-                                $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                           
                                 $query7="select * from studio where studioid='$studio'";  
                                 $result7=mysqli_query($con,$query7);
                                 if($result7){
@@ -114,7 +109,7 @@ include('../constant/connect.php');
                       }
                     }
                   }
-                }
+                
               
                                         
                                         
@@ -149,7 +144,7 @@ include('../constant/connect.php');
               }
 
             ?>
-                                                  <input type="text" name="machineid" id="machineID" readonly=""  value="<?php echo $u2id?>" readonly class="form-control">
+                                                  <input type="text" name="machineid" id="machineID" readonly=""  value="<?php echo $id?>" readonly class="form-control">
                                                 </div>
                                                 </div>
                                                 <div class="form-group">
@@ -206,27 +201,19 @@ include('../constant/connect.php');
                                         
                                         
 
-                                    <div class="from-group">
-                    <div class="row">
-                    <label class="col-sm-3 control-label"><h4><b>Condition</b></h4></label>
-                    <div class="col-sm-9">
-                                <select name="condition" id="Condition" required class="form-control">
-                                    <option value="">--Select Condition--</option>
-                                    <option value="Perfect">Perfect</option>
-                                    <option value="Good">Good</option>
-                                    <option value="Fair">Fair</option>
-                                    <option value="Poor">Poor</option>
-                                </select>
-                                <div class="form-group">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label"><h4><b>Maintenance Cost</b></h4></label>
+                                                <div class="col-sm-9">
+                                                 <input type="number" name="cost" id="cost" placeholder="Enter the maintenance cost" class="form-control" required/>
+                                                </div>
+                                            </div>
+                            <div class="form-group">
                                             <div class="row">
                                                 <div id="categorydetls">
                                             </div>
                                         </div>
                                     </div>
-                            </div>
-                            </div>
-                            </div>
-                            
                             
                             
                                    
