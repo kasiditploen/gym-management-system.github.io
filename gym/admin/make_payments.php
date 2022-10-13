@@ -232,14 +232,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">DATE OF MAKING PAYMENT</label>
-                                                <div class="col-sm-9">
-                                                <input type="date"  name="domp" id="boxx"  class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    
                                         <button type="submit" name="submit" id="submit" value="ADD PAYMENT" class="btn btn-primary btn-flat m-b-30 m-t-30">ADD PAYMENT</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
 

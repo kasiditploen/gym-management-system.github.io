@@ -134,18 +134,17 @@
                                     
                                     <br>
                                     <h3>Payroll History of : - <?php echo $name;?></h3>
+                                    
                                                <table class="table table-bordered table-striped">
                                         <thead>
         <tr>
          <th>Sl.No</th>
-         <th>Class ID</th>
-          <th>Class Name</th>
-          <th>Trainee Nickname</th>
-          <th>Description</th>
-          <th>Trainer</th>
-          <th>Training Date</th>
-          <th>Time From</th>
-          <th>Time To</th>
+         <th>Date</th>
+          <th>Trainer Name</th>
+          <th>Earning</th>
+          <th>Deduction</th>
+          <th>Total</th>
+          
         </tr>
       </thead>    
         <tbody>
@@ -157,15 +156,15 @@
       if($result0){
         $row0=mysqli_fetch_array($result0,MYSQLI_ASSOC);
         $trainername=$row0['username'];
-            $query1  = "select * from privateclasses";
+            $query1  = "select * from salary";
             $result = mysqli_query($con, $query1);
            
-
+            
             if(isset($query1)){
               if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $pclassid = $row['privateclassid'];
-                  $query2="select * from privateclasses where privateclassid='$pclassid' and trainerid='$id'";
+                  $salaryid = $row['salaryid'];
+                  $query2="select * from salary where trainerid='$id' ORDER BY date_from desc";
                   $result2=mysqli_query($con,$query2);
                   while($row1=mysqli_fetch_array($result2)){
                     
@@ -174,24 +173,23 @@
                     $trainern = $row1['username'];
                     $userid = $row1['userid'];
                     $query3="select * from users where userid='$userid'";
-                  $result3=mysqli_query($con,$query3);
                     
+                  $result3=mysqli_query($con,$query3);
+                  
                   if($result3){
                     $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                    
-                    
+                    $extotal=$row1['earning']- $row1['deduction'];
+                    $con->query("UPDATE salary SET total='".$extotal."' WHERE salaryid='".$salaryid."'");
                     ?>
          
                   <tr>
                     <td><?php  echo  $sno; ?></td>
-                    <td><?php echo$row1['privateclassid']; ?></td>
-                     <td><?php echo$row1['className']; ?></td>
-                     <td><?php echo $row2['username']; ?></td>
-                     <td width='380'><?php echo $row1['description']; ?></td>
-                     <td><?php echo $trainername ?></td>
-                     <td><?php echo $row1['date_from']; ?> </td>
-                     <td><?php echo $row1['time_from']; ?> </td>
-                     <td><?php echo $row1['time_to']; ?> </td>
+                    <td><?php echo $row1['date_from']; ?> </td>
+                    <td><?php echo $trainername ?></td>
+                     <td><?php echo $row1['earning']; ?>฿</td>
+                     <td><?php echo $row1['deduction']; ?>฿ </td>
+                     <td><?php echo $row1['total']; ?>฿ </td>
+                     
                  </tr>
                  <?php 
                  $sno++;

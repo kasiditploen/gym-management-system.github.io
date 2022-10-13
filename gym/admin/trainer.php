@@ -3,17 +3,35 @@
 <?php include('../constant/layout/sidebar.php');
 ?>
  
+ <?php
+      
+      $query  = "select * from trainers";
+      //echo $query;
+      $result = mysqli_query($con, $query);
 
+      if (mysqli_affected_rows($con) != 0) {
+          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $image = $row['image'];
+            $trainername = $row['username'];
+              $memid=$row['userid'];
+              $gender=$row['gender'];
+              $mobile=$row['mobile'];
+              $email=$row['email'];
+              $joinon=$row['joining_date'];
+              echo $name;
+              $trainer=$row['trainerid'];
+          }
+      }
+      ?>
   <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary"> Manage Personal Trainer</h3> </div>
+                    
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">View Trainer</li>
+                        
                     </ol>
                 </div>
             </div>
@@ -22,7 +40,7 @@
             <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
-    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black6.jpg');
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black12.jpg');
     height: 150px; width: auto;
   ">
   <h1 class="color-white mb-3 h1"><b>Trainers</b></h1>
@@ -101,7 +119,7 @@
                       $result7 = mysqli_query($con, $query7);
                       if (mysqli_affected_rows($con) == 1) {
                           while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
-                            $query8  = "select privateclassid, COUNT(*) from privateclasses WHERE trainerid='$uid' AND approved='no'";
+                            $query8  = "select appointmentid, COUNT(*) from appointment WHERE trainerid='$uid' AND approved='no'";
                             $result8 = mysqli_query($con, $query8);
                             if ($result8){
                               $row2 = mysqli_fetch_array($result8, MYSQLI_ASSOC);
@@ -111,8 +129,11 @@
                       if ($result9){
                         $row3 = mysqli_fetch_array($result9, MYSQLI_ASSOC);
                         $countt = $row3['COUNT(*)'];
-                        $countrate = $row3['SUM(service)']/$countt;
+                        if ($row3['SUM(service)']> 0) {
+                          $countrate = $row3['SUM(service)']/$countt;
+                      } else {
                         
+                      }
                         
                       }
                             }
@@ -144,7 +165,7 @@
                   
                  <td>
                  <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="far fa-calendar-alt"></i></button></a>
-                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-dollar"></i></button></a>
+                 <a href="read_salary.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-dollar"></i></button></a>
                   <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
                   <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="fa fa-pencil"></i></button></a>
                   <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-white btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>
@@ -220,7 +241,7 @@
                       $result7 = mysqli_query($con, $query7);
                       if (mysqli_affected_rows($con) == 1) {
                           while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
-                            $query8  = "select privateclassid, COUNT(*) from privateclasses WHERE trainerid='$uid' AND approved='no'";
+                            $query8  = "select appointmentid, COUNT(*) from appointment WHERE trainerid='$uid' AND approved='no'";
                             $result8 = mysqli_query($con, $query8);
                             if ($result8){
                               $row2 = mysqli_fetch_array($result8, MYSQLI_ASSOC);
@@ -230,7 +251,13 @@
                       if ($result9){
                         $row3 = mysqli_fetch_array($result9, MYSQLI_ASSOC);
                         $countt = $row3['COUNT(*)'];
-                        $countrate = $row3['SUM(service)']/$countt;
+
+                        if ($row3['SUM(service)']> 0) {
+                          $countrate = $row3['SUM(service)']/$countt;
+                      } else {
+
+                      }
+                        
                         
                         
                       }
@@ -262,7 +289,7 @@
                   
                  <td>
                  <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="far fa-calendar-alt"></i></button></a>
-                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-dollar"></i></button></a>
+                 <a href="read_salary.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-dollar"></i></button></a>
                   <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
                   <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="fa fa-pencil"></i></button></a>
                   <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-white btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>

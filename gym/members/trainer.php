@@ -87,8 +87,11 @@
                       if ($result9){
                         $row3 = mysqli_fetch_array($result9, MYSQLI_ASSOC);
                         $countt = $row3['COUNT(*)'];
-                        $countrate = $row3['SUM(service)']/$countt;
+                        if ($row3['SUM(service)']> 0) {
+                          $countrate = $row3['SUM(service)']/$countt;
+                      } else {
                         
+                      }
                         
                       }
                             }

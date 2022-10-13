@@ -1,6 +1,6 @@
 
 <?php
-date_default_timezone_set('Asia/Kolkata');
+date_default_timezone_set('Asia/Bangkok');
 $current_date = date('Y-m-d');
 include('../connect.php');
 $passw = hash('sha256', $_POST['password']);

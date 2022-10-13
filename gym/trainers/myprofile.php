@@ -21,7 +21,7 @@
             <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
-    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black8.jpg');
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black10.jpg');
     height: 150px; width: auto;
   ">
   <h1 class="color-white mb-3 h1"><b>My Profile</b></h1>
@@ -37,7 +37,7 @@
                             
                             
                             <div class="col-md-16">
-                            <h1 class="color-black mb-2 h1 justify-content-center align-items-center text-center"><b>My Profile</b></h1>
+                            
                         <div>
                             
                          
@@ -84,10 +84,14 @@
                               $query9  = "select *,SUM(service),COUNT(*) from rating WHERE trainerid='$uid'";
                       $result9 = mysqli_query($con, $query9);
                       if ($result9){
+                        
                         $row3 = mysqli_fetch_array($result9, MYSQLI_ASSOC);
                         $countt = $row3['COUNT(*)'];
-                        $countrate = $row3['SUM(service)']/$countt;
+                        if ($row3['SUM(service)']> 0) {
+                          $countrate = $row3['SUM(service)']/$countt;
+                      } else {
                         
+                      }
                         
                       }
                             }

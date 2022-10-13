@@ -3,7 +3,24 @@
 <?php include('../constant/layout/sidebar.php');
 ?>
 
+<?php
+        date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date('Y-m-d');
+        $y1date=date('Y-m-d',strtotime('- 1 days'));
+        $y2date=date('Y-m-d',strtotime('- 2 days'));
+        $y3date=date('Y-m-d',strtotime('- 3 days'));
+        $y4date=date('Y-m-d',strtotime('- 4 days'));
+        $y5date=date('Y-m-d',strtotime('- 5 days'));
+        $y6date=date('Y-m-d',strtotime('- 6 days'));
+        $y7date=date('Y-m-d',strtotime('- 7 days'));
 
+
+        $unixTimestamp = strtotime($cdate);
+
+//Get the day of the week using PHP's date function.
+$dayOfWeek = date("l", $unixTimestamp);
+?>
 
   
   
@@ -14,11 +31,10 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary"> Group Classes (Sessions)</h3> </div>
+                    
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">View Group Classes (Sessions)</li>
+                        
                     </ol>
                 </div>
             </div>
@@ -29,10 +45,10 @@
                 <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
-    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black8.jpg');
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black15.jpg');
     height: 150px; width: auto;
   ">
-  <h1 class="color-black mb-3 h1 text-center"><b>Group Class Training</b></h1>
+  <h1 class="color-white mb-3 h1 text-center"><b>Group Class Training</b></h1>
 </div>
                 <!-- /# row -->
                 <div class="card">
@@ -47,7 +63,7 @@
                                     
                                         <thead>
                                         <?php
-          $query  = "select machineid from newmachine";
+          $query  = "select * from users";
           //echo $query;
           $result = mysqli_query($con, $query);
           $sno    = 1;
@@ -56,12 +72,12 @@
 
           if (mysqli_affected_rows($con) != 0) {
               while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
+$userid = $row['userid'];
               }
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -94,47 +110,56 @@
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   $uid   = $row['classid'];
+                  $classcap = $row['classcap'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
-                            $result4=mysqli_query($con,$query4);
-                            $query5="SELECT b.userid, count(*)  FROM booking b
-                            inner join classes cl
-                            on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid and b.date_from='$cdate' or b.userid ='$userid' ";
-                            $result5=mysqli_query($con,$query5);
-                            $query6="SELECT bookingid,count(*)  FROM booking 
-                            WHERE approved='no'";
+                            $query4  = "select * from users";
+              $result4 = mysqli_query($con, $query4);
+              $query5  = "select * from classes";
+              $result5 = mysqli_query($con, $query5);
+              /////////////////////////////////////////////////////////////////////////////////////////////////
+              $query6="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result6=mysqli_query($con,$query6);
-                            
-                      
+                            $query7="SELECT userid, count(*)  FROM booking  WHERE  classid = '$uid' and userid ='$userid'";
+                            $result7=mysqli_query($con,$query7);
+                            $query8="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no' and classid = '$uid'";
+                            $result8=mysqli_query($con,$query8);
+              
                       
                             if($result2){
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    $trainername;
+                                    $studioname;
                                     if($result4){
-                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
-                                      $count1   = $row4['count(*)'];
-                                      if($result5){
-                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
-                                        $bookingid = $row5['bookingid'];
-                                        $count2   = $row5['count(*)'];
-                                        $count = $count1 + $count2;
-                                        if($result6){
-                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
-                                          $count3   = $row6['count(*)'];
-                                    
-                                ?>
+                                        $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                        $userid   = $row4['userid'];
+                                        $username   = $row4['username'];
+                                        if($result5){
+                                            $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                            $session   = $row5['session'];
+                                            if($result6){
+                                              $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                              $count1   = $row6['count(*)'];
+                                              if($result7){
+                                                $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
+                                                $bookingid = $row7['bookingid'];
+                                                $count2   = $row7['count(*)'];
+                                                $count = (int)$count1 + (int)$count2;
+                                                if($result8){
+                                                  $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                                  $count3   = $row8['count(*)'];
+                                        ?>
                     
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -149,17 +174,19 @@
                        <td><?php echo $count3  ?></td>
                        <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
-                       
+
+                    <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
+                    <input type="hidden" name="pid" id="pid" value='<?php echo $pid2;?>'>
                   
-                  
+                    
                   
                  <td>
-
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
                   <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  </td></tr>
                   
               <?php 
               $sno++; 
@@ -171,6 +198,8 @@
                 }
               }
             }
+          }
+        }
                 
               
             
@@ -217,7 +246,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -250,47 +279,56 @@
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   $uid   = $row['classid'];
+                  $classcap = $row['classcap'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
-                            $result4=mysqli_query($con,$query4);
-                            $query5="SELECT b.userid, count(*)  FROM booking b
-                            inner join classes cl
-                            on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
-                            $result5=mysqli_query($con,$query5);
-                            $query6="SELECT bookingid,count(*)  FROM booking 
-                            WHERE approved='no'";
+                            $query4  = "select * from users";
+              $result4 = mysqli_query($con, $query4);
+              $query5  = "select * from classes";
+              $result5 = mysqli_query($con, $query5);
+              /////////////////////////////////////////////////////////////////////////////////////////////////
+              $query6="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result6=mysqli_query($con,$query6);
-                            
-                      
+                            $query7="SELECT userid, count(*)  FROM booking  WHERE  classid = '$uid' and userid ='$userid'";
+                            $result7=mysqli_query($con,$query7);
+                            $query8="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no' and classid = '$uid'";
+                            $result8=mysqli_query($con,$query8);
+              
                       
                             if($result2){
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    $trainername;
+                                    $studioname;
                                     if($result4){
-                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
-                                      $count1   = $row4['count(*)'];
-                                      if($result5){
-                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
-                                        $bookingid = $row5['bookingid'];
-                                        $count2   = $row5['count(*)'];
-                                        $count = $count1 + $count2;
-                                        if($result6){
-                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
-                                          $count3   = $row6['count(*)'];
-                                    
-                                ?>
+                                        $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                        $userid   = $row4['userid'];
+                                        $username   = $row4['username'];
+                                        if($result5){
+                                            $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                            $session   = $row5['session'];
+                                            if($result6){
+                                              $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                              $count1   = $row6['count(*)'];
+                                              if($result7){
+                                                $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
+                                                $bookingid = $row7['bookingid'];
+                                                $count2   = $row7['count(*)'];
+                                                $count = (int)$count1 + (int)$count2;
+                                                if($result8){
+                                                  $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                                  $count3   = $row8['count(*)'];
+                                        ?>
                     
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -305,17 +343,19 @@
                        <td><?php echo $count3  ?></td>
                        <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
-                       
+
+                    <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
+                    <input type="hidden" name="pid" id="pid" value='<?php echo $pid2;?>'>
                   
-                  
+                    
                   
                  <td>
-
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
                   <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  </td></tr>
                   
               <?php 
               $sno++; 
@@ -327,6 +367,8 @@
                 }
               }
             }
+          }
+        }
                 
               
             
@@ -373,7 +415,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+    
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -406,47 +448,56 @@
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   $uid   = $row['classid'];
+                  $classcap = $row['classcap'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
-                            $result4=mysqli_query($con,$query4);
-                            $query5="SELECT b.userid, count(*)  FROM booking b
-                            inner join classes cl
-                            on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
-                            $result5=mysqli_query($con,$query5);
-                            $query6="SELECT bookingid,count(*)  FROM booking 
-                            WHERE approved='no'";
+                            $query4  = "select * from users";
+              $result4 = mysqli_query($con, $query4);
+              $query5  = "select * from classes";
+              $result5 = mysqli_query($con, $query5);
+              /////////////////////////////////////////////////////////////////////////////////////////////////
+              $query6="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result6=mysqli_query($con,$query6);
-                            
-                      
+                            $query7="SELECT userid, count(*)  FROM booking  WHERE  classid = '$uid' and userid ='$userid'";
+                            $result7=mysqli_query($con,$query7);
+                            $query8="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no' and classid = '$uid'";
+                            $result8=mysqli_query($con,$query8);
+              
                       
                             if($result2){
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    $trainername;
+                                    $studioname;
                                     if($result4){
-                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
-                                      $count1   = $row4['count(*)'];
-                                      if($result5){
-                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
-                                        $bookingid = $row5['bookingid'];
-                                        $count2   = $row5['count(*)'];
-                                        $count = $count1 + $count2;
-                                        if($result6){
-                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
-                                          $count3   = $row6['count(*)'];
-                                    
-                                ?>
+                                        $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                        $userid   = $row4['userid'];
+                                        $username   = $row4['username'];
+                                        if($result5){
+                                            $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                            $session   = $row5['session'];
+                                            if($result6){
+                                              $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                              $count1   = $row6['count(*)'];
+                                              if($result7){
+                                                $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
+                                                $bookingid = $row7['bookingid'];
+                                                $count2   = $row7['count(*)'];
+                                                $count = (int)$count1 + (int)$count2;
+                                                if($result8){
+                                                  $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                                  $count3   = $row8['count(*)'];
+                                        ?>
                     
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -461,17 +512,19 @@
                        <td><?php echo $count3  ?></td>
                        <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
-                       
+
+                    <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
+                    <input type="hidden" name="pid" id="pid" value='<?php echo $pid2;?>'>
                   
-                  
+                    
                   
                  <td>
-
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
                   <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  </td></tr>
                   
               <?php 
               $sno++; 
@@ -483,6 +536,8 @@
                 }
               }
             }
+          }
+        }
                 
               
             
@@ -529,7 +584,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+    
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -562,47 +617,56 @@
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   $uid   = $row['classid'];
+                  $classcap = $row['classcap'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
-                            $result4=mysqli_query($con,$query4);
-                            $query5="SELECT b.userid, count(*)  FROM booking b
-                            inner join classes cl
-                            on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
-                            $result5=mysqli_query($con,$query5);
-                            $query6="SELECT bookingid,count(*)  FROM booking 
-                            WHERE approved='no'";
+                            $query4  = "select * from users";
+              $result4 = mysqli_query($con, $query4);
+              $query5  = "select * from classes";
+              $result5 = mysqli_query($con, $query5);
+              /////////////////////////////////////////////////////////////////////////////////////////////////
+              $query6="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result6=mysqli_query($con,$query6);
-                            
-                      
+                            $query7="SELECT userid, count(*)  FROM booking  WHERE  classid = '$uid' and userid ='$userid'";
+                            $result7=mysqli_query($con,$query7);
+                            $query8="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no' and classid = '$uid'";
+                            $result8=mysqli_query($con,$query8);
+              
                       
                             if($result2){
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    $trainername;
+                                    $studioname;
                                     if($result4){
-                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
-                                      $count1   = $row4['count(*)'];
-                                      if($result5){
-                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
-                                        $bookingid = $row5['bookingid'];
-                                        $count2   = $row5['count(*)'];
-                                        $count = $count1 + $count2;
-                                        if($result6){
-                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
-                                          $count3   = $row6['count(*)'];
-                                    
-                                ?>
+                                        $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                        $userid   = $row4['userid'];
+                                        $username   = $row4['username'];
+                                        if($result5){
+                                            $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                            $session   = $row5['session'];
+                                            if($result6){
+                                              $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                              $count1   = $row6['count(*)'];
+                                              if($result7){
+                                                $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
+                                                $bookingid = $row7['bookingid'];
+                                                $count2   = $row7['count(*)'];
+                                                $count = (int)$count1 + (int)$count2;
+                                                if($result8){
+                                                  $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                                  $count3   = $row8['count(*)'];
+                                        ?>
                     
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -617,17 +681,19 @@
                        <td><?php echo $count3  ?></td>
                        <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
-                       
+
+                    <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
+                    <input type="hidden" name="pid" id="pid" value='<?php echo $pid2;?>'>
                   
-                  
+                    
                   
                  <td>
-
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
                   <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  </td></tr>
                   
               <?php 
               $sno++; 
@@ -639,6 +705,8 @@
                 }
               }
             }
+          }
+        }
                 
               
             
@@ -685,7 +753,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+     
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -718,47 +786,56 @@
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   $uid   = $row['classid'];
+                  $classcap = $row['classcap'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
-                            $result4=mysqli_query($con,$query4);
-                            $query5="SELECT b.userid, count(*)  FROM booking b
-                            inner join classes cl
-                            on b.classid = cl.classid
-                            WHERE b.approved='yes' and b.classid = cl.classid or b.userid ='$userid'";
-                            $result5=mysqli_query($con,$query5);
-                            $query6="SELECT bookingid,count(*)  FROM booking 
-                            WHERE approved='no'";
+                            $query4  = "select * from users";
+              $result4 = mysqli_query($con, $query4);
+              $query5  = "select * from classes";
+              $result5 = mysqli_query($con, $query5);
+              /////////////////////////////////////////////////////////////////////////////////////////////////
+              $query6="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
                             $result6=mysqli_query($con,$query6);
-                            
-                      
+                            $query7="SELECT userid, count(*)  FROM booking  WHERE  classid = '$uid' and userid ='$userid'";
+                            $result7=mysqli_query($con,$query7);
+                            $query8="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no' and classid = '$uid'";
+                            $result8=mysqli_query($con,$query8);
+              
                       
                             if($result2){
                                 $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                                 if($result3){
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    $trainername;
+                                    $studioname;
                                     if($result4){
-                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
-                                      $count1   = $row4['count(*)'];
-                                      if($result5){
-                                        $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
-                                        $bookingid = $row5['bookingid'];
-                                        $count2   = $row5['count(*)'];
-                                        $count = $count1 + $count2;
-                                        if($result6){
-                                          $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
-                                          $count3   = $row6['count(*)'];
-                                    
-                                ?>
+                                        $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                        $userid   = $row4['userid'];
+                                        $username   = $row4['username'];
+                                        if($result5){
+                                            $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                            $session   = $row5['session'];
+                                            if($result6){
+                                              $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                              $count1   = $row6['count(*)'];
+                                              if($result7){
+                                                $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
+                                                $bookingid = $row7['bookingid'];
+                                                $count2   = $row7['count(*)'];
+                                                $count = (int)$count1 + (int)$count2;
+                                                if($result8){
+                                                  $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                                  $count3   = $row8['count(*)'];
+                                        ?>
                     
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -773,17 +850,19 @@
                        <td><?php echo $count3  ?></td>
                        <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
-                       
+
+                    <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
+                    <input type="hidden" name="pid" id="pid" value='<?php echo $pid2;?>'>
                   
-                  
+                    
                   
                  <td>
-
                  <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
                   
                   <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  </td></tr>
                   
               <?php 
               $sno++; 
@@ -795,6 +874,8 @@
                 }
               }
             }
+          }
+        }
                 
               
             

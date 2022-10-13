@@ -31,7 +31,7 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">By Months (Memberships)</h2></a>
-                            <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
+                            <a href="new_plan.php"><button class="btn btn-light">Add Packages</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -147,7 +147,7 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">By Hours (Daypasses)</h2></a>
-                            <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
+                            <a href="new_plan.php"><button class="btn btn-light">Add Packages</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -265,7 +265,7 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">PT Sessions</h2></a>
-                            <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
+                            <a href="new_plan.php"><button class="btn btn-light">Add Packages</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -384,7 +384,7 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Class Sessions</h2></a>
-                            <a href="new_plan.php"><button class="btn btn-primary">Add Packages</button></a>
+                            <a href="new_plan.php"><button class="btn btn-light">Add Packages</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">

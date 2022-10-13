@@ -14,11 +14,10 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary"> Booking Group Classes</h3> </div>
+                    
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">View Booking (Group Classes)</li>
+                        
                     </ol>
                 </div>
             </div>
@@ -26,7 +25,12 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-
+                <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black14.jpg');
+    height: 150px; width: auto;
+  ">
+  <h1 class="color-white mb-3 h1"><b>Booking List</b></h1>
+</div>
                 <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">All Booking (Approval Request To Join Class)</h2></a>
@@ -146,7 +150,7 @@
                               <input type='hidden' name='username' value='<?php echo $username?>'/>
                               <input type='hidden' name='session' value='<?php echo $session?>'/>
                               <input type='submit' id='button1' value='Approve' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
-                  <a href="del_class.php?id=<?php echo $row['bookingid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
+                  <a href="del_book.php?id=<?php echo $row['bookingid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -180,11 +184,11 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Cardio</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                           
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -217,7 +221,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+          
         </tr>
 
         
@@ -228,7 +232,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from booking WHERE classtype='Cardio'";
+              $query  = "select * from booking WHERE classtype='Cardio' and approved ='yes' ";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -276,11 +280,7 @@
                   
                   
                   
-                 <td>
-                  
-                  <a href="view_attendance.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-success" ><i class="fa fa-check" aria-hidden="true"></i></button></a>
-                 
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                </tr>
                   
               <?php 
               $sno++; 
@@ -313,11 +313,11 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">HIIT</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -336,7 +336,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
          <th>Booking ID</th>
          <th>Booked By</th>
@@ -350,7 +350,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+          
         </tr>
 
         
@@ -361,7 +361,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from booking WHERE classtype='HIIT'";
+              $query  = "select * from booking WHERE classtype='HIIT' and approved ='yes'";
              //echo $query;
              $result = mysqli_query($con, $query);
              $sno    = 1;
@@ -391,8 +391,7 @@
                  
                    
                    <tr>
-                   <td style="width:10px; text-align: center;">
-                                                       <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                   
                      <td><?php echo $sno ?></td>
                      <td><?php echo$row ['bookingid']; ?></td>
                      <td><?php echo$row4 ['username ']; ?></td>
@@ -410,11 +409,7 @@
                  
                  
                  
-                <td>
-                 
-                <a href="view_attendance.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-success" ><i class="fa fa-check" aria-hidden="true"></i></button></a>
-                
-                 <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                </tr>
                  
              <?php 
              $sno++; 
@@ -447,11 +442,11 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Dance</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox1" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -470,7 +465,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+       
          <th>Sl.No</th>
          <th>Booking ID</th>
          <th>Booked By</th>
@@ -484,7 +479,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+          
         </tr>
 
         
@@ -495,7 +490,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from booking WHERE classtype='Dance'";
+              $query  = "select * from booking WHERE classtype='Dance' and approved ='yes'";
              //echo $query;
              $result = mysqli_query($con, $query);
              $sno    = 1;
@@ -525,8 +520,7 @@
                  
                    
                    <tr>
-                   <td style="width:10px; text-align: center;">
-                                                       <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                   
                      <td><?php echo $sno ?></td>
                      <td><?php echo$row ['bookingid']; ?></td>
                      <td><?php echo$row4 ['username']; ?></td>
@@ -544,11 +538,7 @@
                  
                  
                  
-                <td>
-                 
-                <a href="view_attendance.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-success" ><i class="fa fa-check" aria-hidden="true"></i></button></a>
-                
-                 <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                </tr>
                  
              <?php 
              $sno++; 
@@ -581,11 +571,11 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Mind and Body</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-bordered2" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -618,7 +608,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+          
         </tr>
 
         
@@ -629,7 +619,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from booking WHERE classtype='Mind and Body'";
+              $query  = "select * from booking WHERE classtype='Mind and Body' and approved ='yes'";
              //echo $query;
              $result = mysqli_query($con, $query);
              $sno    = 1;
@@ -659,8 +649,7 @@
                  
                    
                    <tr>
-                   <td style="width:10px; text-align: center;">
-                                                       <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                   
                      <td><?php echo $sno ?></td>
                      <td><?php echo$row ['bookingid']; ?></td>
                      <td><?php echo$row4 ['username']; ?></td>
@@ -678,11 +667,7 @@
                  
                  
                  
-                <td>
-                 
-                <a href="view_attendance.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-success" ><i class="fa fa-check" aria-hidden="true"></i></button></a>
-                
-                 <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                </tr>
                  
              <?php 
              $sno++; 
@@ -715,11 +700,11 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Cycling</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-bordered3" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -752,7 +737,7 @@
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
-          <th>Action</th>
+          
         </tr>
 
         
@@ -763,7 +748,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from booking WHERE classtype='Cycling'";
+              $query  = "select * from booking WHERE classtype='Cycling' and approved ='yes'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -811,11 +796,7 @@
                   
                   
                   
-                 <td>
-                  
-                 <a href="view_attendance.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-success" ><i class="fa fa-check" aria-hidden="true"></i></button></a>
-                 
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                 </tr>
                   
               <?php 
               $sno++; 

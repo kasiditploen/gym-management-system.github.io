@@ -150,7 +150,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">STUDIO</label>
                                                 <div class="col-sm-9">
-                                               <select name="studios" id="Studios" required onchange="mycategorydetail(this.value)" class="form-control">
+                                               <select name="studios" id="Studios" required  class="form-control">
                     <option value="">--Please Select Studio--</option>
                     <?php
                         $query="select * from studio where active='yes'";
@@ -169,7 +169,7 @@ include('../constant/connect.php');
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div id="categorydetls">
+                                                <div>
                                             </div>
                                         </div>
                                     </div>
@@ -218,7 +218,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">TRAINER</label>
                                                 <div class="col-sm-9">
-                                               <select name="trainerid" id="trainerid" required onchange="mycategorydetail(this.value)" class="form-control">
+                                               <select name="trainerid" id="trainerid" required  class="form-control">
                     <option value="">--Please Select Trainer--</option>
                     <?php
                         $query="select trainerid, username FROM trainers where trainertype LIKE'%Fitness Instructor%'";
@@ -237,7 +237,7 @@ include('../constant/connect.php');
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div id="categorydetls">
+                                                <div>
                                             </div>
                                         </div>
                                     </div>

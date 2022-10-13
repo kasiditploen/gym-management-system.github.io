@@ -26,8 +26,8 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertData` (IN `in_username` VARCHAR(40), IN `in_gender` VARCHAR(8), IN `in_mobile` VARCHAR(20), IN `in_email` VARCHAR(20), IN `in_dob` VARCHAR(10), IN `in_joining_date` VARCHAR(10), IN `in_userid` VARCHAR(20), IN `in_image` LONGBLOB, IN `in_status` varchar(300), IN `in_password` varchar(100), IN `in_fname` varchar(50), IN `in_lname` varchar(500),IN `in_nationalid` varchar(500),IN `in_nationality` varchar(100),IN `in_goal` varchar(100),IN `in_conditions` varchar(200),IN `in_utype` varchar(100))  BEGIN
-INSERT INTO users(username, gender, mobile, email, dob, joining_date, userid, image, status,password,fname,lname,nationalid,nationality,goal,conditions,utype) VALUES(in_username,in_gender,in_mobile,in_email,in_dob,in_joining_date,in_userid,in_image,in_status,in_password,in_fname,in_lname,in_nationalid,in_nationality,in_goal,in_conditions,in_utype);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertData` (IN `in_username` VARCHAR(40), IN `in_gender` VARCHAR(8), IN `in_mobile` VARCHAR(20), IN `in_email` VARCHAR(20), IN `in_dob` VARCHAR(10), IN `in_joining_date` VARCHAR(10), IN `in_userid` VARCHAR(20), IN `in_image` LONGBLOB, IN `in_status` varchar(300), IN `in_password` varchar(100), IN `in_fname` varchar(50), IN `in_lname` varchar(500),IN `in_nationalid` varchar(500),IN `in_nationality` varchar(100),IN `in_goal` varchar(100),IN `in_conditions` varchar(200),IN `in_utype` varchar(100),IN `in_title` varchar(10))  BEGIN
+INSERT INTO users(username, gender, mobile, email, dob, joining_date, userid, image, status,password,fname,lname,nationalid,nationality,goal,conditions,utype,title) VALUES(in_username,in_gender,in_mobile,in_email,in_dob,in_joining_date,in_userid,in_image,in_status,in_password,in_fname,in_lname,in_nationalid,in_nationality,in_goal,in_conditions,in_utype,in_title);
 END$$
 
 
@@ -96,9 +96,9 @@ CREATE TABLE `admin` (
   `dob` text NOT NULL,
   `contact` text NOT NULL,
   `address` varchar(500) NOT NULL,
-  `image` varchar(2000) NOT NULL,
   `created_on` date NOT NULL,
   `utype` varchar(100) NOT NULL,
+  `image` LONGBLOB NULL,
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -107,7 +107,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `fname`, `lname`, `gender`, `dob`, `contact`, `address`, `image`, `created_on`, `utype`,`group_id`) VALUES
-(1, 'Kasidit P.', 'admin@admin.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Kasidit', 'Ploenthamakhun', 'Male', '1999-02-19', '+919090909090', 'Bangkok', 'man1.png', '2018-04-30','admin', 1);
+(1, 'Kasidit P.', 'admin@admin.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Kasidit', 'Ploenthamakhun', 'Male', '1999-02-19', '+919090909090', 'Bangkok', LOAD_FILE('../assets/uploadImage/Profile/man1.png'), '2018-04-30','admin', 1);
 
 -- --------------------------------------------------------
 
@@ -461,6 +461,8 @@ CREATE TABLE `plan` (
 
 INSERT INTO `plan` (`pid`, `planName`,  `description`, `validity`, `amount`, `plantype`, `active`,`session`) VALUES
 ('000000', 'NOT MEMBER',  'NOTHING', 'NULL','NULL','Months','yes',NULL),
+('100000', 'NO CLASSES',  'NOTHING', 'NULL','NULL','Classes','yes',NULL),
+('200000', 'NO SESSIONS',  'NOTHING', 'NULL','NULL','Sessions','yes',NULL),
 ('333333', 'Single Member',  'FULL GYM ACCESS, classes will be charged at an additional cost', '1','1690','Months','yes',NULL),
 ('444444', '3 Month Membership',  'FULL GYM ACCESS, classes will be charged at an additional cost', '3','4290','Months','yes',NULL),
 ('555555', '12 Month Membership',  'FULL GYM ACCESS, classes will be charged at an additional cost', '12','16800','Months','yes',NULL),
@@ -529,7 +531,20 @@ CREATE TABLE `plan2` (
 
 
 
+--
+-- Table structure for table `salary`
+--
 
+CREATE TABLE `salary` (
+  `salaryid` varchar(20) NOT NULL,
+  `trainerid` varchar(50) NOT NULL,
+  `earning` int(50) NOT NULL,
+  `deduction` int(50) NOT NULL,
+  `total` int(50) NOT NULL,
+  `date_from` varchar(10) NOT NULL,
+  `active` varchar(255) DEFAULT NULL
+  
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 
 --
@@ -714,15 +729,13 @@ CREATE TABLE `appointment` (
   `description` varchar(200) NOT NULL,
   `studios` varchar(8) NOT NULL,
   `classtype` varchar(300) DEFAULT NULL,
-  `start_date`date DEFAULT NULL,
-  `end_date`date DEFAULT NULL,
-  `dow` varchar(500) NOT NULL,
-  `time_from` time NOT NULL,
-  `time_to` time NOT NULL,
+  `time_from` datetime NOT NULL,
+  `time_to` datetime NOT NULL,
   `session` varchar(100) NOT NULL,
   `userid` varchar(20) NOT NULL,
   `trainerid` varchar(20) NOT NULL,
-  `approved` varchar(100) NOT NULL
+  `approved` varchar(100) NOT NULL,
+  `active` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 
@@ -792,6 +805,7 @@ CREATE TABLE `privateclasses` (
   `classcap` int(20) NOT NULL,
   `bookcap` int(20) NOT NULL,
   `approved` varchar(300) NOT NULL,
+  `time_text` datetime NOT NULL,
   `active` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -867,6 +881,7 @@ CREATE TABLE `users` (
   `goal` varchar(300) DEFAULT NULL,
   `conditions` varchar(200) DEFAULT NULL,
   `joining_date` varchar(10) NOT NULL,
+  `title` varchar(10) NOT NULL,
   `utype` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -1214,6 +1229,13 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`categoryid`) USING BTREE,
   ADD KEY `categoryid` (`categoryid`) USING BTREE;
 
+    -- Indexes for table `salary`
+--
+ALTER TABLE `salary`
+  ADD PRIMARY KEY (`salaryid`) USING BTREE,
+  ADD KEY `trainerID_sl` (`trainerid`) USING BTREE,
+  ADD KEY `salaryid` (`salaryid`) USING BTREE;
+
 
 
 
@@ -1408,6 +1430,12 @@ ALTER TABLE `booking`
 --
 ALTER TABLE `bookingread`
   MODIFY `bookingreadid` int(5) NOT NULL AUTO_INCREMENT;
+
+     --
+-- AUTO_INCREMENT for table `salary`
+--
+ALTER TABLE `salary`
+  MODIFY `salaryid` int(5) NOT NULL AUTO_INCREMENT;
 
   --
 -- AUTO_INCREMENT for table `enrolls_to_maintenance`
@@ -1675,6 +1703,13 @@ ALTER TABLE `booking`
 ALTER TABLE `bookingread`
   ADD CONSTRAINT `userIDB` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `trainerIDB` FOREIGN KEY (`trainerid`) REFERENCES `trainers` (`trainerid`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+      --
+-- Constraints for table `bookingread`
+--
+ALTER TABLE `salary`
+  
+  ADD CONSTRAINT `trainerSL` FOREIGN KEY (`trainerid`) REFERENCES `trainers` (`trainerid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
       --
 -- Constraints for table `classes`

@@ -55,6 +55,41 @@ date_default_timezone_set("Asia/Bangkok");
         $y5date=date('Y-m-d',strtotime('- 5 days'));
         $y6date=date('Y-m-d',strtotime('- 6 days'));
         $y7date=date('Y-m-d',strtotime('- 7 days'));
+
+        $query5  = "select * from classes WHERE classid = '$classid'";
+        $result5=mysqli_query($con,$query5);
+        $query6="SELECT userid, count(*)  FROM classholder where classid='$classid' and userid='$userid' and created_date LIKE '%$sdate%'";
+        $result6=mysqli_query($con,$query6);
+                            $query7="SELECT userid, count(*)  FROM booking  WHERE  classid = '$classid' and userid ='$userid' and date_from LIKE '%$sdate%'";
+                            $result7=mysqli_query($con,$query7);
+                            $query8="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no'";
+                            $result8=mysqli_query($con,$query8);
+              
+                      
+                            
+                            if($result5){
+                                $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                $classcap = $row5['classcap'];
+                                            if($result6){
+                                              $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                              (int)$count1   = $row6['count(*)'];
+                                              if($result7){
+                                                $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
+                                                
+                                                $count2   = $row7['count(*)'];
+                                                $count = (int)$count1 + (int)$count2;
+                                                if($result8){
+                                                  $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                                  $count3   = $row8['count(*)'];
+
+                                                  if((int)$count >= $classcap) {
+                                                    echo "<head><script>alert('There is no class space left for you! ');</script></head></html>";
+                                                    echo "error".mysqli_error($con);
+                                                    echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+                                                  } else {
+                                                    
+                                                    
      
 $query="INSERT INTO booking (bookingid,classid,className,username,trainerid,userid,description,classtype,studios,dow,date_from,date_to,time_from,time_to,session,created_date,approved) values('$bookingid','$classid','$classname','$username','$trainerid','$userid','$desc','$type','$studio','$dow','$sdate','$date_to','$time_from','$time_to','1','$cdate','no')";
       //echo  $query;exit;
@@ -71,7 +106,7 @@ $query="INSERT INTO booking (bookingid,classid,className,username,trainerid,user
 }  
         if(mysqli_query($con,$query2)==1){
         
-            echo "<head><script>alert('Booked ');</script></head></html>";
+            echo "<head><script>alert('Booked');</script></head></html>";
             echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
         
         }
@@ -85,139 +120,17 @@ $query="INSERT INTO booking (bookingid,classid,className,username,trainerid,user
     }
 
     
-
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
     
-    
+                                
 
 ?>
 
-  <!-- Page wrapper  -->
-        <div class="page-wrapper">
-            <!-- Bread crumb -->
-            <div class="row page-titles">
-                <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Edit Member Details </h3> </div>
-                <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">Edit Member Details</li>
-                    </ol>
-                </div>
-            </div>
-            <!-- End Bread crumb -->
-            <!-- Container fluid  -->
-            <div class="container-fluid">
-                <!-- Start Page Content -->
-                
-                <!-- /# row -->
-                <div class="row">
-                    <div class="col-lg-8" style="    margin-left: 10%;">
-                        <div class="card">
-                            <div class="card-title">
-                               
-                            </div>
-                            <div class="card-body">
-                                <div class="input-states">
-                                    <form class="form-horizontal" method="POST"  name="userform" enctype="multipart/form-data" action="" id="form1" name="form1">
-                                    <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">CLASS ID</label>
-                                                <div class="col-sm-9">
-                                                  
-                                               <input type="text" id="boxx" readonly value='<?php echo $classid ?>' name="usrid" required class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                  
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">CLASS NAME</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" id="boxxe" readonly="" value='<?php echo $name?>'  required  class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">Trainer ID</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" id="trainer" readonly="" value='<?php echo $trainerid?>'  required  class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">Description</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" id="desc" readonly="" value='<?php echo $desc?>'  required  class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">CLASS TYPE</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" id="desc" readonly="" value='<?php echo $type?>'  required  class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">STUDIO</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" id="desc" readonly="" value='<?php echo $studio?>'  required  class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">User ID</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" id="boxxe" readonly="" value='<?php echo $userid?>'  required  class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">User Name</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" id="boxxe" readonly="" value='<?php echo $username?>'  required  class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">DAY OF WEEK</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" id="boxxe" readonly="" value='<?php echo  $dow ?>'  class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                       
-                                         
-                                       <button type="submit" name="submit" id="submit" value="SUBMIT" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit</button>
-                                         <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
-
-                
-                                    </form>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                  
-                </div>
+  
                 
                
                 <!-- /# row -->

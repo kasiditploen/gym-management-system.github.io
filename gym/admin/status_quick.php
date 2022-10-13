@@ -14,7 +14,7 @@ include('../constant/connect.php');
 
 	 if(mysqli_query($con,$query1)==1){
     
-    echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
+    echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
    
     
    }

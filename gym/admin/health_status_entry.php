@@ -37,12 +37,12 @@ if(isset($_POST['submit'])){
 if(mysqli_query($con,$query0)){
     
     echo "<head><script>alert('Health Status Added ');</script></head></html>";
-        echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
+        echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
     }
     else{
      echo "<head><script>alert('NOT SUCCESSFUL, Check Again');</script></head></html>";
      echo "error".mysqli_error($con);
-     echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
+     echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
         
     }
 

@@ -26,6 +26,7 @@ include('../constant/connect.php');
  $yoe=$_POST['yoe'];
  $user=$_POST['utype'];
  //$plan=$_POST['plan2'];
+
  function createSalt()
  {
      return '2123293dsj2hu2nikhiljdsd';
@@ -36,6 +37,22 @@ $pass = hash('sha256', $salt . $password);
  
  $duplicate=mysqli_query($con,"select * from trainers where trainerid='$memtID' or email ='$email'");
 if (mysqli_num_rows($duplicate)>0)
+{
+  echo "<head><script>alert('This Email has already been used! Please fill a new email. ');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+}
+
+$duplicate1=mysqli_query($con,"select * from users where email ='$email'");
+if (mysqli_num_rows($duplicate1)>0)
+{
+  echo "<head><script>alert('This Email has already been used! Please fill a new email. ');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+}
+
+$duplicate2=mysqli_query($con,"select * from admin where email ='$email'");
+if (mysqli_num_rows($duplicate2)>0)
 {
   echo "<head><script>alert('This Email has already been used! Please fill a new email. ');</script></head></html>";
   echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";

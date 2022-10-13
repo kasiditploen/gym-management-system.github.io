@@ -8,6 +8,9 @@ include('../constant/connect.php');
  $nationalid=mysqli_real_escape_string($con,$_POST['nationalid']);
  $privilege=mysqli_real_escape_string($con,$_POST['privilege']);
  $goal=mysqli_real_escape_string($con,$_POST['goal']);
+ $nationality=mysqli_real_escape_string($con,$_POST['nationality']);
+ $conditions=$_POST['conditions'];
+ $i = implode(',', $conditions);
  $fname=mysqli_real_escape_string($con,$_POST['fname']);
  $lname=mysqli_real_escape_string($con,$_POST['lname']);
  $stname=mysqli_real_escape_string($con,$_POST['street_name']);
@@ -20,14 +23,22 @@ include('../constant/connect.php');
  $email=$_POST['email'];
  $jdate=$_POST['jdate'];
  $domp=$_POST['domp'];
- $conditions=$_POST['conditions'];
- $i = implode(',', $conditions);
  $status=$_POST['status'];
  $plan=mysqli_real_escape_string($con,$_POST['plan']);
  $pt=mysqli_real_escape_string($con,$_POST['pt']);
  $ct=mysqli_real_escape_string($con,$_POST['ct']);
+ $imageFileType = strtolower(pathinfo($image,PATHINFO_EXTENSION));
+ $title=mysqli_real_escape_string($con,$_POST['title']);
 
 $user=$_POST['utype'];
+$none = "none";
+
+if(strpos($i,$none) !== false){
+  $e = $i;
+  }else{
+  $e = $none;
+
+  }
 
  function createSalt()
  {
@@ -49,8 +60,30 @@ if (mysqli_num_rows($duplicate)>0)
 echo mysqli_error($db);
 }
 
+$duplicate1=mysqli_query($con,"select * from trainers where email ='$email'");
+if (mysqli_num_rows($duplicate1)>0)
+{
+  echo "<head><script>alert('This Email has already been used! Please fill a new email. ');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+}
+
+$duplicate2=mysqli_query($con,"select * from admin where email ='$email'");
+if (mysqli_num_rows($duplicate2)>0)
+{
+  echo "<head><script>alert('This Email has already been used! Please fill a new email. ');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+}
+
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+&& $imageFileType != "gif" ) {
+  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+}
+
 //inserting into users table
-$query="CALL insertData('$uname','$gender','$phn','$email','$dob','$jdate','$memID', '$image','$status','$pass','$fname','$lname','$nationalid','$privilege', '$goal','".mysqli_real_escape_string($con,$i)."','$user')";
+$query="CALL insertData('$uname','$gender','$phn','$email','$dob','$jdate','$memID', '$image','$status','$pass','$fname','$lname','$nationalid','$nationality', '$goal','".mysqli_real_escape_string($con,$e)."','$user','$title')";
 mysqli_real_escape_string($con, $uname);
 mysqli_real_escape_string($con, $password);
 mysqli_real_escape_string($con, $stname);

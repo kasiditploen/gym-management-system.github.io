@@ -110,8 +110,11 @@
                       if ($result9){
                         $row3 = mysqli_fetch_array($result9, MYSQLI_ASSOC);
                         $countt = $row3['COUNT(*)'];
-                        $countrate = $row3['SUM(service)']/$countt;
+                        if ($row3['SUM(service)']> 0) {
+                          $countrate = $row3['SUM(service)']/$countt;
+                      } else {
                         
+                      }
                         
                       }
                             }
@@ -144,10 +147,10 @@
                  <td>
                  
                  <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="far fa-calendar-alt"></i></button></a>
-                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-dollar"></i></button></a>
-                  <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
-                  <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="fa fa-pencil"></i></button></a>
-                  <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-white btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>
+                 
+                  
+                 
+                  
                  
                   </td></tr>
                   
@@ -230,11 +233,15 @@
                       if ($result9){
                         $row3 = mysqli_fetch_array($result9, MYSQLI_ASSOC);
                         $countt = $row3['COUNT(*)'];
-                        $countrate = $row3['SUM(service)']/$countt;
+                        if ($row3['SUM(service)']> 0) {
+                          $countrate = $row3['SUM(service)']/$countt;
+                      } else {
                         
+                      }
                         
                       }
                             }
+
                 ?>  
                   
                   <tr>
@@ -262,10 +269,7 @@
                   
                  <td>
                  <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="far fa-calendar-alt"></i></button></a>
-                 <a href="view_trainer_schedules.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-dollar"></i></button></a>
-                  <a href="read_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
-                  <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="fa fa-pencil"></i></button></a>
-                  <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-white btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>
+                 
                  
                   </td></tr>
                   

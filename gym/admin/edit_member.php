@@ -183,6 +183,54 @@ include('../constant/connect.php');
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="from-group">
+                    <div class="row">
+                    <label class="col-sm-3 control-label"><h4><b>Goal</b></h4></label>
+                    <div class="col-sm-9">
+                                <select name="goal" id="goal" required class="form-control">
+                                    <option value="">--Select Goal--</option>
+                                    <option value="Athletic">Athletic</option>
+                                    <option value="Weight Loss">Weight Loss</option>
+                                    <option value="Increase Strength">Increase Strength</option>
+                                    <option value="Well Being">Well Being</option>
+                                </select>
+                            </div>
+                            </div>
+                            </div>
+</div>
+<div class="form-group">
+                                            <div class="row">
+                                                <div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="from-group">
+                    <div class="row">
+                    <label class="col-sm-3 control-label"><h4><b>Health Conditions</b></h4></label>
+                    <div class="col-sm-9">
+                                <select name="conditions[]" id="conditions" required class="form-control" multiple="multiple">
+                                    <option value="None">None</option>
+                                    <option value="Back Pain">Back Pain</option>
+                                    <option value="Wheelchair Users">Wheelchair/Handicapped Users</option>
+                                    <option value="Osteoarthritis">Osteoarthritis</option>
+                                    <option value="Type 2 Diabetes">Type 2 Diabetes</option>
+                                    <option value="High Blood Pressure">High Blood Pressure</option>
+                                    <option value="Vision Loss">Vision Loss</option>
+                                    <option value="Hearing Loss">Hearing Loss</option>
+                                    <option value="Asthma">Asthma</option>
+                                </select>
+                            </div>
+                            </div>
+                            </div>
+</div>
+<div class="form-group">
+                                            <div class="row">
+                                                <div>
+                                            </div>
+                                        </div>
+                                    </div>
                                          <div class="form-group">
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">CALORIE</label>
@@ -267,6 +315,16 @@ include('../constant/connect.php');
                 
             }
         </script>
+
+<script>
+  $("#conditions").select2({
+});
+    </script>
+
+<script>
+  $("#goal").select2({
+});
+    </script>
 
 <?php include('../constant/layout/footer.php');?>
 

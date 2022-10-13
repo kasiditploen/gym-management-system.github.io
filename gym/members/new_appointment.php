@@ -87,7 +87,7 @@ include('../constant/connect.php');
               if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     $uid  = $row['userid'];
-                      $query1  = "select * from enrolls_to WHERE uid='$uid'";
+                      $query1  = "select * from enrolls_to WHERE uid='$uid' and renewal='yes'";
                       $result1 = mysqli_query($con, $query1);
                       
                       if (mysqli_affected_rows($con) == 1) {

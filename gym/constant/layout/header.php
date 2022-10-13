@@ -83,7 +83,7 @@ include('../constant/check.php');
                                       $image = $row['image'];
                                     }
                                                                     ?>
-                                <img src="../assets/uploadImage/Profile/<?=$image?>" alt="user" class="profile-pic" /></a>
+                                <img src="data:image/jpeg;base64,<?php echo base64_encode($image);?>" width="60" height="60" class="profile-picture" /></a>
                             <div class="dropdown-menu dropdown-menu-left animated zoomIn"><h3>ADMIN: <?php echo $fname ?></h3>
                                 <ul class="dropdown-user">
                                 <li><a href="profile.php"><i class="ti-user"></i> My Profile</a></li>

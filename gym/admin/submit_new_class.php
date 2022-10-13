@@ -31,7 +31,7 @@ echo mysqli_error($db);
 date_default_timezone_set("Asia/Bangkok"); 
 $date_to_now = (date("Y-m-d",strtotime($date_to.'-1 +1 month -1 day')));
 $cdate = date("Y-m-d H:i");
-$query="INSERT INTO classes (classid,className,description,classtype,studios,dow,date_from,date_to,time_from,time_to,trainerid,session,active,classcap) values('$classid','".mysqli_real_escape_string($con,$name)."','$desc','$classtype','$studio','".mysqli_real_escape_string($con,$i)."','$date_from','$date_to_now','$time_from','$time_to','$trainer','$session','yes','$classcap')";
+$query="INSERT INTO classes (classid,className,description,classtype,studios,dow,date_from,date_to,time_from,time_to,trainerid,session,active,classcap) values('$classid','".mysqli_real_escape_string($con,$name)."','$desc','$classtype','$studio','".mysqli_real_escape_string($con,$i)."','$date_from','$date_to_now','$time_from','$time_to','$trainer','yes','yes','$classcap')";
 //$query="insert into classes (pid,className,description,studios,dow,date_from,date_to,time_from,time_to,trainerid) values('$classid','$name','$desc','$studio','$dow','$date_from','$date_to','$time_from','$time_to','$trainer')";
     if(mysqli_query($con,$query)==1){
       //Retrieve information of plan selected by user

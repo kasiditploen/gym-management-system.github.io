@@ -246,7 +246,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                 <!-- Start Page Content -->
                 
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
-    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black4.jpg');
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black10.jpg');
     height: 125px; width: auto;
   ">
   
@@ -262,8 +262,8 @@ $dayOfWeek = date("l", $unixTimestamp);
                   
                  <div class="col-md-16">
                   
-                 <a href="new_daypass.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Walk-ins</b></button></a>
-                 <a href="new_entry.php"><button class="btn btn-lg btn-light waves-effect waves-light"><b> + Add Member</b></button></a></div>
+                 <a href="new_daypass.php"><button class="btn btn-lg btn-light waves-effect waves-light"><h4 class="color-black"><b> + Add Walk-ins</b></button></a>
+                 <a href="new_entry.php"><button class="btn btn-lg btn-light waves-effect waves-light"><h4 class="color-black"><b> + Add Member</b></button></a></div>
                  
 
 <!-- Modal -->
@@ -277,8 +277,14 @@ $dayOfWeek = date("l", $unixTimestamp);
                                 <form action="" method="GET">
                                     <div class="input-group mb-3">
                                         <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search for a member">
-                                        <button type="submit" class="btn btn-danger">Search</button>
+                                        <button type="submit" class="btn btn-light color-black mb-3 h5"><b>Search</b></button>
+                                        <a href="dashboard.php"><button type="button" class="btn btn-xs btn-danger color-black mb-3 h5"><b>Clear</b></button></a>
                                     </div>
+
+                                    
+                                        
+                                        
+                                    
                                     
                                 </form>
   <table id="myTable" class="table">
@@ -287,20 +293,19 @@ $dayOfWeek = date("l", $unixTimestamp);
                                         <thead>
         <tr>
         
-        <th style="width:2%;">Sl.No</th>
-        <th style="width:2%;">Package</th>
-          <th style="width:5%;">Image</th>
-          <th style="width:3%;">Member ID</th>
-          <th style="width:10%;">Full Name</th>
-          
-          
-          <th style="width:3%;">Contact</th>
-          <th style="width:5%;">E-Mail</th>
-          <th style="width:1%;">Gender</th>
-          <th style="width:1%;">Goal</th>
-          <th style="width:1%;">Health Conditions</th>
-          <th style="width:2%;">Joining Date</th>
-          <th style="width:2%;">Action</th>
+        <th style="width:2%;"class="color-black mb-3 h6">Sl.No</th>
+        <th style="width:2%;" class="color-black mb-3 h6">Package</th>
+          <th style="width:5%;"class="color-black mb-3 h6">Image</th>
+          <th style="width:3%;"class="color-black mb-3 h6">Member ID</th>
+          <th style="width:10%;"class="color-black mb-3 h6">Full Name</th>
+          <th style="width:10%;"class="color-black mb-3 h6">Nationality</th>
+          <th style="width:3%;"class="color-black mb-3 h6">Contact</th>
+          <th style="width:5%;"class="color-black mb-3 h6">E-Mail</th>
+          <th style="width:1%;"class="color-black mb-3 h6">Gender</th>
+          <th style="width:1%;"class="color-black mb-3 h6">Goal</th>
+          <th style="width:1%;"class="color-black mb-3 h6">Health Conditions</th>
+          <th style="width:2%;"class="color-black mb-3 h6">Joining Date</th>
+          <th style="width:2%;"class="color-black mb-3 h6">Action</th>
         </tr>
       </thead>    
       
@@ -308,7 +313,7 @@ $dayOfWeek = date("l", $unixTimestamp);
         <?php
         $filtervalues = mysqli_real_escape_string($con, $_GET['search']);
         $tomorrow = date("d-m-Y", strtotime('tomorrow'));
-        $query  = "select * from users WHERE CONCAT(fname,lname,email,userid) LIKE '%$filtervalues%'  ORDER BY joining_date";
+        $query  = "select * from users WHERE CONCAT(fname,lname,email,userid) LIKE '%$filtervalues%'   ORDER BY joining_date";
         mysqli_real_escape_string($con, $filtervalues);
         $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -319,6 +324,8 @@ $dayOfWeek = date("l", $unixTimestamp);
                       $ugender;
                       if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                    extract($row);
+                    $image = $row['image'];
                     mysqli_real_escape_string($con, $filtervalues);
                     $uid  = $row['userid'];
                       $query1  = "select * from enrolls_to WHERE uid='$uid' AND renewal='yes'";
@@ -457,7 +464,15 @@ $dayOfWeek = date("l", $unixTimestamp);
                                ?>
                                
 
+                               <?php
+                  if(isset($_GET['search']))
+                  {
+                      $filtervalues = $_GET['search'];
+                      
+                      
 
+                  
+                            ?>
                           
                             
                                 
@@ -480,31 +495,19 @@ $dayOfWeek = date("l", $unixTimestamp);
                   $today = date('Y-m-d');
 
                    ?>
-                  <?php
-                  if(isset($_GET['search']))
-                  {
-                      $filtervalues = $_GET['search'];
-                      $query  = "select * from users WHERE CONCAT(fname,lname,email,userid) LIKE '%$filtervalues%'  ORDER BY joining_date";
-                      //echo $query;
-                      $query_run = mysqli_query($con, $query);
-                   if(mysqli_num_rows($query_run) > 0)
-                      {
-                          foreach($query_run as $items)
-                          {
-
+                   
                   
-                            ?>
                   <tr>
 
-                    <td><?php echo $sno; ?></td>
+                    <td><?php echo  $sno; ?></td>
                     <td><?php 
                      if(strtotime($diff2)<=45 && strtotime($today)< strtotime($expire)){
         echo '<ul class="list-group list-group-flush">
-        <li class="list-group-item"><h4>Membership:<h5 class="color-black"><b>'.$planname.'<b></h5><span class="badge badge-color blue"> '.$diff2.'  Days Left</span></h4></li>
+        <li class="list-group-item"><h1 class="color-black"><b>Membership:</b><h4 class="color-black"><b>'.$planname.'<b></h5><span class="badge badge-color blue"> '.$diff2.'  Days Left</span></h4></li>
         </ul>';
         }else if(strtotime($diff)<=15 && strtotime($today) < strtotime($expire)){
           echo '<ul class="list-group list-group-flush">
-        <li class="list-group-item"><h4>Membership:<span class="badge badge-color blue"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4></li>
+        <li class="list-group-item"><h1 class="color-black"><b>Membership:</b><span class="badge badge-color blue"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4></li>
         </ul>';
       }else if(strtotime($diff2)<=7 && strtotime($today) < strtotime($expire)){
         echo '<h4>Membership:<span class="badge badge-warning"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4>';
@@ -522,19 +525,19 @@ $dayOfWeek = date("l", $unixTimestamp);
         if(strtotime($diff4)<=45 && strtotime($today)< strtotime($expire1)){
           echo '<ul class="list-group list-group-flush">
           <li class="list-group-item">
-          <h4>Personal Training:<span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname1.'</h4><span class="badge badge-color blue">'.$diff4.'  Days Left </b></h3></br></li>
+          <h1 class="color-black"><b>PT:</h3><span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname1.'</h4><span class="badge badge-color blue">'.$diff4.'  Days Left </b></h3></br></li>
           
           
           </ul>';
           }else if(strtotime($diff3)<=15 && strtotime($today) < strtotime($expire1)){
-            echo '<h4>Personal Training:</br><span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-info"><h6 class="color-white">'.$planname1.'</h6> '.$diff4.'  Days Left </span></br></h4>';
+            echo '<h4>Personal Training:</br><span class="badge badge-light"><h1 class="color-black"><b>  '.$sessioncount.'</b></h3> Session(s) Left</br></span><br><span class="badge badge-info"><h6 class="color-white">'.$planname1.'</h6> '.$diff4.'  Days Left </span></br></h4>';
         }else if(strtotime($diff4)<=7 && strtotime($today) < strtotime($expire1)){
-           echo '<h5>Personal Training:</br><span class="badge badge-light"><h5 class="color-black"><b>  '.$sessioncount.'</b></h5> Session(s) Left</br></span><br><span class="badge badge-warning"><h5 class="color-white">'.$planname1.'</h5> '.$diff4.'  Days Left </span></br></h5>';
+           echo '<h5>Personal Training:</br><span class="badge badge-light"><h1 class="color-black"><b>  '.$sessioncount.'</b></h5> Session(s) Left</br></span><br><span class="badge badge-warning"><h5 class="color-white">'.$planname1.'</h5> '.$diff4.'  Days Left </span></br></h5>';
           }else {if(empty($expire1)){
             echo '<h4><span class="badge badge-dark"><h6 class="color-white">No Personal Training</h6></span></h4>';
           
           }else if(strtotime($diff4)<=0 && strtotime($today) >= strtotime($expire1)){{
-            echo '<span class="badge badge-light"><h3 class="color-black"><b>  '.$sessioncount.'</b></h3> Session(s) Left</span><h4>Sessions:<span class="badge badge-danger"><h6 class="color-white">'.$planname1.'</h6>  Expired</span></h4>';
+            echo '<span class="badge badge-light"><h1 class="color-black"><b>  '.$sessioncount.'</b></h3> Session(s) Left</span><h4>Sessions:<span class="badge badge-danger"><h6 class="color-white">'.$planname1.'</h6>  Expired</span></h4>';
           }
         
           }
@@ -543,7 +546,7 @@ $dayOfWeek = date("l", $unixTimestamp);
         if(strtotime($diff6)<=45 && strtotime($today)< strtotime($expire2)){
           echo '<ul class="list-group list-group-flush">
           <li class="list-group-item">
-          <h4>Classes:<span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount1.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname2.'</h4><span class="badge badge-color blue">'.$diff6.'  Days Left </b></h3></br></li>
+          <h2 class="color-black"><b>Group Classes:</b></h3><span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount1.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname2.'</h4><span class="badge badge-color blue">'.$diff6.'  Days Left </b></h3></br></li>
           
           
           </ul>';
@@ -569,11 +572,13 @@ $dayOfWeek = date("l", $unixTimestamp);
                         } else{
                             echo '<p><a href="status_quick.php?userid='.$row['userid'].'&status=1" class="btn btn-dark">Disabled</a></p>';
                         }  ?></p> 
+                        <a href="submit_new_checkin.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-blue" >Check In</button></a>
                         <ul class="list-group list-group-flush">
           <li class="list-group-item">
                         <h4>
-                          <span class="badge badge-light">Latest Checkin: <?php echo $row7['created_date']; ?>
+                          <span class="badge badge-light">Today's Latest Checkin: <?php echo $row7['created_date']; ?>
                         <br><?php echo$row7['created_time']; ?></span></h4>
+                        
                         <ul class="list-group list-group-flush">
           <li class="list-group-item">
                      <h3>
@@ -612,9 +617,9 @@ $dayOfWeek = date("l", $unixTimestamp);
           </li>
                      </ul>
                       </td>
-                     <td><h4><?= $items['userid']; ?></h4></td>
-                     <td><h4><?php echo $row['fname']; ?><br><?php echo $row['lname']; ?></br></h4></td>
-                     
+                     <td><h4><?= $row['userid']; ?></h4></td>
+                     <td><h4><?php echo $row['title']; ?> <?php echo $row['fname']; ?><br><?php echo $row['lname']; ?></br></h4></td>
+                     <td><?php echo $row['nationality']; ?></td>
                      <td><?php echo $row['mobile']; ?></td>
                      <td><?php echo $row['email']; ?> </td>
                       <td><?php echo $row['gender']; ?> </td>
@@ -634,12 +639,12 @@ $dayOfWeek = date("l", $unixTimestamp);
                     <!-- Split button -->
                     
 
-<a href="read_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-light" >More Info.</button></a>
-    <a href="edit_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-light" >Edit Member</button></a>
+<a href="read_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-light" ><h4 class="color-black"><b>More Info.</b></button></a>
+    <a href="edit_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-light" ><h4 class="color-black"><b>Edit Member</b></button></a>
 
 <form id="form2" action='make_payments.php' method='post'><input type='hidden' name='userID' value='<?php echo $uid; ?>'/>
                           <input type='hidden' name='planID' value='<?php echo $planid; ?>'/>
-                          <a href="edit_member.php?id=<?php echo $row['userid'];?>"><input type='submit' class="btn btn-xs btn-light" value='Buy Packages' /></form></a>
+                          <a href="edit_member.php?id=<?php echo $row['userid'];?>"><input type='submit' class="btn btn-xs btn-light" value='Buy Packages' /><b></b></form></a>
 
 <form id="form3" action='health_status_entry.php' method='post'>
                             <input type='hidden' name='uid' value='<?php echo $uid;?>'/>
@@ -652,13 +657,15 @@ $dayOfWeek = date("l", $unixTimestamp);
                   <input type='submit'   value='Health Status' class="btn btn-xs btn-light"/></form>
                   
 
-<a href="submit_new_checkin.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-blue" >Check In</button></a>
 
-<a href="new_privateclass_quick.php?id=<?php echo $row['userid'];?>&&ss=<?php echo $sessions;?>&&pi=<?php echo $pidss;?>&&am=<?php echo $amount;?>"><button type="button" class="btn btn-xs btn-light" >Take Personal Training</button></a>
 
-<a href="view_class_quick.php?id=<?php echo $row['userid'];?>&&cs=<?php echo $csessions;?>&&pi=<?php echo $pid2;?>&&am=<?php echo $amount1;?>"><button type="button" class="btn btn-xs btn-light" >Take Classes</button></a>
+<a href="new_privateclass_quick.php?id=<?php echo $row['userid'];?>&&ss=<?php echo $sessions;?>&&pi=<?php echo $pidss;?>&&am=<?php echo $amount;?>"><button type="button" class="btn btn-xs btn-light" ><h4 class="color-black"><b>Take Personal Training</b></button></a>
 
-<a href="new_appointment_quick.php?id=<?php echo $row['userid'];?>"><button class="btn btn-light">Add Appointment</button></a>
+<a href="view_class_quick.php?id=<?php echo $row['userid'];?>&&cs=<?php echo $csessions;?>&&pi=<?php echo $pid2;?>&&am=<?php echo $amount1;?>"><button type="button" class="btn btn-xs btn-light" ><h4 class="color-black"><b>Take Group Classes</b></button></a>
+
+
+
+<a href="view_class_session_fast.php?id=<?php echo $row['userid'];?>&&cs=<?php echo $csessions;?>&&pi=<?php echo $pid2;?>&&am=<?php echo $amount1;?>"><button class="btn btn-light"><h4 class="color-black"><b>Advance Booking Group Classes</b></button></a>
 <!--<a href="read_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-folder-open"></i></button></a>-->
                   <!--<a href="edit_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>-->
                   <a href="del_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-danger"onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a>         
@@ -710,13 +717,15 @@ $dayOfWeek = date("l", $unixTimestamp);
               }
             }
           }
-        }
-      }
+      
+    
+    
     
 
           
                 
           ?>  
+          
 
           
 
@@ -760,11 +769,11 @@ $dayOfWeek = date("l", $unixTimestamp);
           <th>E-Mail</th>
           <th>Gender</th>
           <th>Joining Date</th>
-          <th style="width:10%;">Available Day</th>
           <th>Available Time From</th>
           <th>Available Time To</th>
           <th>Special Skill</th>
-          <th >Year Of Experience</th>
+          <th>Year Of Experience</th>
+          <th>Action</th>
           
         </tr>
       </thead>    
@@ -814,6 +823,12 @@ $dayOfWeek = date("l", $unixTimestamp);
                                   $classname=$row10['className'];
                                   $tfrom=$row10['time_from'];
                                   $tto=$row10['time_to'];
+                                  $query11="select * ,COUNT(userid) from users";
+                                $result11=mysqli_query($con,$query11);
+                                if($result11){
+                                  $row11=mysqli_fetch_array($result11,MYSQLI_ASSOC);
+                                  (int)$countuser=$row11['count(userid)'];
+                                  
                   //$msgid = $row['pid'];
                   //foreach($result and $result1 as $row)
                 ?>  
@@ -821,19 +836,19 @@ $dayOfWeek = date("l", $unixTimestamp);
                   <tr>
                  
                                                         <td><?php echo $sno; ?></td>
-                    <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?></td>
-                     <td><?php echo $row['trainerid']; ?></td>
-                     <td><?php 
+                    <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?><?php 
                      if(strpos($dow,$dayOfWeek) !== false){
-        echo '<h3><span class="badge badge-success">AVAILABLE</span></h3>';
-        }else{
-        echo '<h3><span class="badge badge-danger">NOT AVAILABLE</span></h3>';
+                      echo '<h2 class="color-white mb-3 h2"><span class="badge badge-success"><b>AVAILABLE</b></span></h2>';
+                    }else{
+                    echo '<h2 class="color-white mb-3 h2"><span class="badge badge-danger"><b>BUSY</b></span></h2>';
       
         }
         
         
         
-        ?>
+        ?></td>
+                     <td><?php echo $row['trainerid']; ?></td>
+                     <td>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
                      <h3>
@@ -861,12 +876,22 @@ $dayOfWeek = date("l", $unixTimestamp);
                      <td><?php echo $row['email']; ?> </td>
                       <td><?php echo $row['gender']; ?> </td>
                        <td><?php echo $row['joining_date']; ?> </td>
-                       <td><?php echo $row['availableday']; ?></td>
                        <td><?php echo $row['time_from']; ?></td>
                        <td><?php echo $row['time_to']; ?></td>
                        <td><?php echo $row['skills']; ?></td>
-                       <td><?php echo $row['yoe'] .' Years'; ?></td>
-                  
+                       <td><?php echo $row['yoe'] .' Years'; ?><?php  echo $countuser ?></td>
+                       
+                       
+                       <td>
+                       
+                       <?php  if(strpos($dow,$dayOfWeek) !== false){
+                      echo '<a href="new_appointment_quick.php?id='.$uid.'&&ss='.$sessions.'&&pi='.$pidss.'&&am='.$amount.'&&tr='.$trainerid.'" class="btn btn-sm btn-success">Add Appointment</a></p>';
+                       }else{
+                        
+                       }
+                      
+                       ?>
+                       </td>
                   
                 </tr>
                   
@@ -880,6 +905,7 @@ $dayOfWeek = date("l", $unixTimestamp);
             }
           }
         }
+      }
       
           ?>  
 
@@ -963,9 +989,9 @@ $dayOfWeek = date("l", $unixTimestamp);
                      <td><?php echo $row['trainerid']; ?></td>
                      <td><?php 
                      if(strpos($dow,$dayOfWeek) !== false){
-        echo '<h3><span class="badge badge-success">AVAILABLE</span></h3>';
+        echo '<h2 class="color-white mb-3 h1"><span class="badge badge-success">AVAILABLE</span></h2>';
         }else{
-        echo '<h3><span class="badge badge-danger">NOT AVAILABLE</span></h3>';
+        echo '<h2 class="color-white mb-3 h1"><span class="badge badge-danger">NOT AVAILABLE</span></h2>';
       
         }
         
@@ -992,7 +1018,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                        <td><?php echo $row['time_to']; ?></td>
                        <td><?php echo $row['skills']; ?></td>
                        <td><?php echo $row['yoe'] .' Years'; ?></td>
-                  
+                       
                   
                  <td>
 

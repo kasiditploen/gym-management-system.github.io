@@ -631,7 +631,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                     <!-- Split button -->
                     
 
-<a href="read_member.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-light" >More Info.</button></a>
+
     
                   
 

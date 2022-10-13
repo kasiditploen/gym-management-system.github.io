@@ -81,7 +81,7 @@ $tomorrow = date("l", $unixTimestamptom);
                 ?>
         <tr>
         
-         <th>Sl.No</th>
+        <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
           <th>Description</th>
@@ -92,6 +92,7 @@ $tomorrow = date("l", $unixTimestamptom);
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
+          <th>Enrolled</th>
           <th>Action</th>
         </tr>
 
@@ -130,15 +131,24 @@ $tomorrow = date("l", $unixTimestamptom);
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   $uid   = $row['classid'];
+                  $classcap = $row['classcap'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4  = "select * from users where userid = '".$_SESSION["userid"]."'";
+                            $query4  = "select * from users";
               $result4 = mysqli_query($con, $query4);
               $query5  = "select * from classes";
               $result5 = mysqli_query($con, $query5);
+              /////////////////////////////////////////////////////////////////////////////////////////////////
+              $query6="SELECT userid, count(*)  FROM classholder where classid='$uid' and created_date='$cdate'";
+                            $result6=mysqli_query($con,$query6);
+                            $query7="SELECT userid, count(*)  FROM booking  WHERE  classid = '$classid' and userid ='$userid'";
+                            $result7=mysqli_query($con,$query7);
+                            $query8="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no'";
+                            $result8=mysqli_query($con,$query8);
               
                       
                             if($result2){
@@ -154,9 +164,22 @@ $tomorrow = date("l", $unixTimestamptom);
                                         if($result5){
                                             $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                                             $session   = $row5['session'];
+                                            if($result6){
+                                              $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                              $count1   = $row6['count(*)'];
+                                              if($result7){
+                                                $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
+                                                $bookingid = $row7['bookingid'];
+                                                $count2   = $row7['count(*)'];
+                                                $count = (int)$count1 + (int)$count2;
+                                                if($result8){
+                                                  $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                                  $count3   = $row8['count(*)'];
+                                        ?>
+                                            
                                             
                                               
-                                ?>
+                                
                     
                   
                     
@@ -173,7 +196,7 @@ $tomorrow = date("l", $unixTimestamptom);
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
-                       
+                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                   
                   
                   
@@ -200,29 +223,36 @@ $tomorrow = date("l", $unixTimestamptom);
                    ?>
                  
               
+                  <?php
+                  if($count >= $classcap) {
+                    echo '<p><a class="btn btn-sm btn-danger">FULL</a></p>';
+                    
+                  } else {
+                    echo '<form id="form3" action=confirm_booking.php method=post><input type=hidden name=classid value='.$classid.'/>
                   
-                 <form id="form3" action='confirm_booking.php' method='post'><input type='hidden' name='classid' value='<?php echo $classid;?>'/>
-                  
-                              <input type='hidden' name='classid' value='<?php echo $classid;?>'/>
-                              <input type='hidden' name='className' value='<?php echo $name;?>'/>
-                              <input type='hidden' name='description' value='<?php echo $desc;?>'/>
-                              <input type='hidden' name='studios' value='<?php echo $studioid ?>'/>
-                              <input type='hidden' name='classtype' value='<?php echo $type;?>'/>
-                              <input type='hidden' name='dow' value='<?php echo $dow;?>'/>
-                              <input type='hidden' name='date_from' value='<?php echo $df;?>'/>
-                              <input type='hidden' name='date_to' value='<?php echo $dt ?>'/>
-                              <input type='hidden' name='time_from' value='<?php echo $tf;?>'/>
-                              <input type='hidden' name='time_to' value='<?php echo $tt;?>'/>
-                              <input type='hidden' name='trainerid' value='<?php echo $trainerid;?>'/>
-                              <input type='hidden' name='trainerName' value='<?php echo $trainername ?>'/>
-                              <input type='hidden' name='userid' value='<?php echo $userid?>'/>
-                              <input type='hidden' name='username' value='<?php echo $username?>'/>
-                              <input type='hidden' name='session' value='<?php echo $session?>'/>
-                              
+                    <input type="hidden" name="classid" value='.$classid.'/>
+                    <input type="hidden" name="className" value=' .$name.'/>
+                    <input type="hidden" name="description" value='.$desc.'/>
+                    <input type="hidden" name="studios" value='.$studioid.'/>
+                    <input type="hidden" name="classtype" value='.$type.'/>
+                    <input type="hidden" name="dow" value='.$dow.'/>
+                    <input type="hidden" name="date_from" value='.$df.'/>
+                    <input type="hidden" name="date_to" value='.$dt.'/>
+                    <input type="hidden" name="time_from" value='.$tf.'/>
+                    <input type="hidden" name="time_to" value='.$tt.'/>
+                    <input type="hidden" name="trainerid" value='.$trainerid.'/>
+                    <input type="hidden" name="trainerName" value='.$trainername.'/>
+                    <input type="hidden" name="userid" value='.$userid.'/>
+                    <input type="hidden" name="username" value='.$username.'/>
+                    <input type="hidden" name="session" value='.$session.'/>
+                    <input type="hidden" name="classcap" value='.$classcap.'/>
+                    
+       
+                    
+        <input type="submit" id="button1" value="Book" class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>';
+                  }
                  
-                              <!--  <a href="health_status_entry.php?id=<?php echo $row4['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ></button></a> -->
-                  <input type='submit' id='button1' value='Book' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
-                 
+                 ?>
                   </td></tr>
                   
               <?php 
@@ -234,6 +264,10 @@ $tomorrow = date("l", $unixTimestamptom);
                   }
                 }
               }
+            }
+          }
+        }
+      
 
               
             
@@ -668,7 +702,7 @@ $(document).ready(function(){
 
          
 
-         
+var dateToday = new Date(); 
          var js_array = <?php echo json_encode($dow); ?>;
          
          let sunday = js_array.includes("Sunday");
@@ -733,16 +767,6 @@ const arrayna =  ['0', '1', '2', '3', '4', '5', '6'];
 const arrayuse =  [sun,mon, tues, wed, thu, fri, sat];
      
      
-   
-     
-
-
-
-
-
-
-
-  
 
 
 console.log(js_array);
@@ -761,12 +785,18 @@ console.log(js_array);
      console.log(saturday); 
      console.log(sat); 
   
-
+     
+     
          $('#sdate').datepicker({
-          
+          defaultDate: "+1w",
+    changeMonth: true,
+    numberOfMonths: 1,
            format: "yyyy-mm-dd",
            daysOfWeekDisabled: arrayuse,
-           daysOfWeekHighlighted: arrayuse
+           daysOfWeekHighlighted: arrayuse,
+           numberOfMonths: 3,
+        showButtonPanel: true,
+        startDate: new Date(),
            
          });
 
@@ -774,6 +804,8 @@ console.log(js_array);
         
      
 </script>
+
+
 
 
 

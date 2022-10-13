@@ -184,48 +184,7 @@ include('../constant/connect.php');
                                                 </div>
                                             </div>
                                         </div>
-                                         <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">CALORIE</label>
-                                                <div class="col-sm-9">
-                                               <input type="text" id="boxxe"  name="calorie" value='<?php echo $calorie?>' class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                         <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">HEIGHT</label>
-                                                <div class="col-sm-9">
-                                                <input type="text"  id="boxxe"  name="height" value='<?php echo $height?>' class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                         <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">WEIGHT</label>
-                                                <div class="col-sm-9">
-                                                <input type="text"  id="boxxe"  name="weight" value='<?php echo $weight?>' class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                         <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">FAT</label>
-                                                <div class="col-sm-9">
-                                                <input type="text"  id="boxxe"  name="fat" value='<?php echo $fat?>' class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        
-                                          <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">REMARKS</label>
-                                                <div class="col-sm-9">
-                                           <textarea  style="resize:none; margin: 0px; width: 550px; height: 53px;" class="form-control" name="remarks" ><?php echo $remarks?></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
+                                         
                                          
                                         <button type="submit" name="submit" id="submit" value="UPDATE" class="btn btn-primary btn-flat m-b-30 m-t-30">UPDATE</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>

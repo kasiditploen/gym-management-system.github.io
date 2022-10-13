@@ -14,11 +14,10 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary"> Private Classes</h3> </div>
+                    
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">View Private Classes</li>
+                        
                     </ol>
                 </div>
             </div>
@@ -26,7 +25,12 @@
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                
+                <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black13.jpg');
+    height: 150px; width: auto;
+  ">
+  <h1 class="color-white mb-3 h1"><b>Personal Training Classes</b></h1>
+</div>
                 
                 <!-- /# row -->
                  <div class="card">

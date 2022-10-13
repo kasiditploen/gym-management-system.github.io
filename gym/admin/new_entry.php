@@ -50,6 +50,36 @@ include('../constant/connect.php');
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Title</label>
+                                                <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="title" id="title" value="Mr" />
+  <label class="form-check-label" for="inlineRadio1">Mr</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="title" id="title" value="Mrs" />
+  <label class="form-check-label" for="inlineRadio1">Mrs</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="title" id="title" value="Ms" />
+  <label class="form-check-label" for="inlineRadio1">Ms</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="title" id="title" value="Miss" />
+  <label class="form-check-label" for="inlineRadio1">Miss</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="title" id="title" value="Dr" />
+  <label class="form-check-label" for="inlineRadio1">Dr</label>
+</div>
+
+</div>
+</div>
 
                                         <div class="col-md-6 mb-3">
 
@@ -141,6 +171,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                                 <label class="col-sm-3 control-label">PASSWORD</label>
                                                 <div class="col-sm-9">
                                                  <input type="password" name="password" id="boxx"  required  class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">Nationality</label>
+                                                <div class="col-sm-9">
+                                                <input  name="nationality" id="nationality" class="form-control" required/>
                                                 </div>
                                             </div>
                                         </div>

@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="popup_style.css">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
+<script src="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/js/bootstrap-datetimepicker.js"></script>
+<link href="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+
  <?php
 //session_start();
 //error_reporting(0);
@@ -37,6 +42,37 @@ include('../constant/connect.php');
                     $countCheckin = $row3['COUNT(*)'];
           }
       }
+    }
+      ?>
+
+<?php
+      $id     = $_GET['id'];;
+      $ss    = $_GET['ss'];;
+      (int)$am    = $_GET['am'];;
+      $tr    = $_GET['tr'];;
+      $pidss    = $_GET['pidss'];;
+      $query  = "select * from users WHERE userid='$id'";
+      $result = mysqli_query($con, $query);
+
+      if($am > 0){
+
+      
+
+      if (mysqli_affected_rows($con) != 0) {
+          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $image = $row['image'];
+            $name = $row['username'];
+              $memid=$row['userid'];
+              $gender=$row['gender'];
+              $mobile=$row['mobile'];
+              $email=$row['email'];
+              $joinon=$row['joining_date'];
+              echo $name;
+          }
+      }
+    } else {
+        echo "<head><script>alert('Not Enough Session Point to take a personal training class. ');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
     }
       ?>
 <?php
@@ -176,6 +212,16 @@ include('../constant/connect.php');
                                         $pidss=$row3['pid'];
                                         $amount=$row3['amount'];
                                         $sessioncount=$row3['amount'];
+                                        $query18="select * from appointment where trainerid='$trainerid' and active='yes'";
+                                  $result18=mysqli_query($con,$query18);
+                                  if($result18){
+                                    $row18=mysqli_fetch_array($result18,MYSQLI_ASSOC);
+                                    $timefrom=$row18['time_from'];
+                                    $query19="select * from appointment where trainerid='$trainerid' and active='yes'";
+                                  $result19=mysqli_query($con,$query19);
+                                  if($result19){
+                                    $row19=mysqli_fetch_array($result19,MYSQLI_ASSOC);
+                                    $timefrom1=$row19['time_from'];
 
                                     }
                             
@@ -198,7 +244,8 @@ include('../constant/connect.php');
                                     }
                                 }
                             }
-                                        
+                        }   
+                    }
 
                                ?>
 
@@ -243,7 +290,7 @@ include('../constant/connect.php');
               }
 
             ?>
-                                                  <input type="text" name="privateclassid" id="privateclassID" readonly value="<?php echo getRandomWord(); ?>" class="form-control">
+                                                  <input type="text" name="appointmentid" id="appointmentID" readonly value="<?php echo getRandomWord(); ?>" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -278,43 +325,14 @@ include('../constant/connect.php');
                                     </div>
                                         
 
-                                        <div class="form-group">
+                                    <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label">TRAINER</label>
+                                                <label class="col-sm-3 control-label">TRAINER ID</label>
                                                 <div class="col-sm-9">
-                                               <select name="trainerid" id="trainerid" required onchange="mycategorydetail(this.value)" class="form-control">
-                    <option value="">--Please Select Trainer--</option>
-                    <?php
-                    date_default_timezone_set("Asia/Bangkok"); 
-                    $day=date("Y-m-d");
-                    $cdate=date("Y-m-d");
-                    
-            
-                    $unixTimestamp = strtotime($cdate);
-            
-            //Get the day of the week using PHP's date function.
-            $dayOfWeek = date("l", $unixTimestamp);
-            
-                        $query="select trainerid, username,availableday FROM trainers where availableday LIKE '%$dayOfWeek%'";
-                        $result=mysqli_query($con,$query);
-                        if(mysqli_affected_rows($con)!=0){
-                            while($row=mysqli_fetch_row($result)){
-                                echo "<option value=".$row[0].">".$row[1]."</option>";
-                            }
-                        }
-
-                    ?>
-                    
-                </select>
+                                                 <input name="trainerid" id="trainerid" type="text" readonly placeholder="xxxx" value='<?php echo $tr ?>' class="form-control">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     
 
@@ -393,36 +411,33 @@ include('../constant/connect.php');
                                         </div>
                                     </div>
 
+                                    
                                     <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label">Day</label>
+                                                <label class="col-sm-3 control-label">TRAINING SESSION</label>
                                                 <div class="col-sm-9">
-                                                 <input name="dow" id="dow" type="text" readonly value="<?php echo $dayOfWeek; ?>" placeholder=""class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <input type="number" name="amount" id="amount" readonly value='<?php echo $am;?>' class="form-control">
+                                    </div>
+                                    </div>
+                                    </div>
 
-                                    <div class="form-group">
-                        
-						<label for="" class="control-label">DATE</label>
-						<input type="date" name="date_from" id="date_from" class="form-control" readonly value="<?php echo date('Y-m-d') ?>">
-					</div>
-
-					
 
 					<div class="form-group">
 						<label for="" class="control-label">Time From</label>
-						<input type="time" name="time_from" id="time_from" class="form-control" value="<?php echo isset($time_from) ? $time_from : '' ?>">
+						<input   name="time_from" id="timefrom" class="form-control datepicker" type="text"  >
+					</div>
+
+                    <div class="form-group">
+						<label for="" class="control-label">Time To</label>
+						<input   name="time_to" id="timeto" class="form-control datepicker" type="text"  >
 					</div>
                     
-					<div class="form-group">
-						<label for="" class="control-label">Time To</label>
-						<input type="time" name="time_to" id="time_to" class="form-control" value="<?php echo isset($time_to) ? $time_to : '' ?>">
-					</div>
+                    
+					
 
                     
                     <input type="hidden" name="session" id="session" value='<?php echo $sessionid;?>'>
-                    <input type="hidden" name="amount" id="amount" value='<?php echo $amount;?>'>
+                    
                     <input type="hidden" name="pid" id="pid" value='<?php echo $pidss;?>'>
                     
 
@@ -485,14 +500,108 @@ include('../constant/connect.php');
   $("#privatestudios").select2({
 });
     </script>
-    <script>
-  $("#trainerid").select2({
-});
-    </script>
+
     <script>
   $("#privateclasstype").select2({
 });
     </script>
+
+<script>
+var js_array = <?php echo json_encode($timefrom1); ?>;
+
+         let nine9 = js_array.includes(" 9");
+let monday = js_array.includes("Monday");
+let tuesday = js_array.includes("Tuesday");
+let wednesday = js_array.includes("Wednesday");
+let thursday = js_array.includes("Thursday");
+let friday = js_array.includes("Friday");
+let saturday = js_array.includes("Saturday");
+         
+
+
+    
+
+
+         if (nine9 === true) {
+  var nine9D ;
+  
+  
+}else if (nine9=== false){
+  nine9D = 9;
+}
+     
+     if (monday === true) {
+  var mon ;
+  
+}else if (monday === false){
+  mon = [1];
+}
+     
+     if (tuesday === true) {
+  var tues ;
+  
+}else if (tuesday === false){
+  tues = [2];
+}
+     
+     if (wednesday === true) {
+  var wed ;
+  
+}else if (wednesday === false){
+  wed = [3];
+}
+     
+     if (thursday === true) {
+  var thu ;
+  
+}else if (thursday === false){
+  thu = [4];
+}
+     
+     if (friday === true) {
+  var fri ;
+  
+}else if (friday === false){
+  fri = [5];
+}
+     
+     if (saturday === true) {
+  var sat ;
+  
+}else if (saturday === false){
+  sat = [6];
+}
+
+const arrayna =  ['0', '1', '2', '3', '4', '5', '6'];
+const arrayuse =  [nine9D];
+
+
+
+
+</script>
+
+<script>
+    
+
+  $("#timefrom").datetimepicker({
+    format: "yyyy-mm-dd h",
+    hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
+    
+});
+    </script>
+
+<script>
+    
+
+    $("#timeto").datetimepicker({
+      format: "yyyy-mm-dd h",
+      hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
+      
+  });
+      </script>
+    
+
+
     
                 <script src="../admin/custom/js/product.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

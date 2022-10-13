@@ -19,7 +19,7 @@ include('../constant/connect.php');
 <?php
       $id     = $_GET['id'];;
       $ss    = $_GET['ss'];;
-      (int)$am    = $_GET['am'];;
+      $am    = $_GET['am'];;
       $pidss    = $_GET['pidss'];;
       $query  = "select * from users WHERE userid='$id'";
       $result = mysqli_query($con, $query);
@@ -256,7 +256,7 @@ include('../constant/connect.php');
 
                     <div class="form-group">
 						<label for="" class="control-label">Current Session</label>
-						<input type="number" name="amount" id="amount" readonly class="form-control" value='<?php echo $am;?>'>
+						<input type="number" name="amount" id="amount" readonly class="form-control" value="<?php echo $am;?>">
 					</div>
 
                     <input type="hidden" name="session" id="session" value='<?php echo $ss;?>'>

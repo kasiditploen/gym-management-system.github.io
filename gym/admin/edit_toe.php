@@ -13,7 +13,7 @@ include('../constant/connect.php');
                     
                     $query6  = "SELECT * FROM toe t
                     INNER JOIN categories c ON c.categoryid=t.categories
-                    INNER JOIN vendors v ON v.vendorid=t.vendors
+                    
                                
                                WHERE toeid=".$_GET['id'];
                     //echo $query;
@@ -34,6 +34,10 @@ include('../constant/connect.php');
                             $brand=$row['brands'];
                             $category=$row['categories'];
                             $vendor=$row['vendors'];
+                            $contact=$row['contact'];
+                            $address=$row['address'];
+                            $mobile=$row['mobile'];
+                            $email=$row['email'];
                             $amount=$row['amount'];
                             
                             
@@ -160,7 +164,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label"><h4><b>CATEGORY</b></h4></label>
                                                 <div class="col-sm-9">
-                                               <select name="category" id="Category" required onchange="mycategorydetail(this.value)" value="<?php echo $category; ?>" class="form-control">
+                                               <select name="category" id="Category" required  value="<?php echo $category; ?>" class="form-control">
                     <option value="">--Please Select Category--</option>
                     <?php
                         $query="select * from categories where active='yes'";
@@ -179,38 +183,59 @@ include('../constant/connect.php');
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div id="categorydetls">
+                                                <div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label"><h4><b>VENDOR</b></h4></label>
+                                                <label class="col-sm-3 control-label"><h4><b>Vendor</b></h4></label>
                                                 <div class="col-sm-9">
-                                               <select name="vendor" id="Vendor" required onchange="mycategorydetail(this.value)" value="<?php echo $vendor; ?>" class="form-control">
-                    <option value="">--Please Select Category--</option>
-                    <?php
-                        $query="select * from vendors where active='yes'";
-                        $result=mysqli_query($con,$query);
-                        if(mysqli_affected_rows($con)!=0){
-                            while($row=mysqli_fetch_row($result)){
-                                echo "<option value=".$row[0].">".$row[1]."</option>";
-                            }
-                        }
-
-                    ?>
-                    
-                </select>
+                                                 <input type="text" name="vendor" id="vendor" placeholder="Enter EQUIPMENT brand" class="form-control" value="<?php echo $brand; ?>" required/>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        
                                         <div class="form-group">
                                             <div class="row">
-                                                <div id="categorydetls">
+                                                <label class="col-sm-3 control-label"><h4><b>Contact Name</b></h4></label>
+                                                <div class="col-sm-9">
+                                                 <input type="text" name="contact" id="Contact" placeholder="Enter Contact name" value="<?php echo $contact; ?>" class="form-control" required/>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label"><h4><b>Address</b></h4></label>
+                                                <div class="col-sm-9">
+                                                 <input type="text" name="address" id="Address" placeholder="Enter Contact name" value="<?php echo $address; ?>" class="form-control" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label"><h4><b>Phone Number</b></h4></label>
+                                                <div class="col-sm-9">
+                                                <input type="number" name="mobile" id="boxx" placeholder="Enter Phone Number" maxlength="10" value="<?php echo $mobile; ?>" class="form-control" required pattern="^[0][1-9]\d{9}$|^[1-9]\d{9}$">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">EMAIL ID</label>
+                                                <div class="col-sm-9">
+                                                <input type="email" name="email" id="boxx" class="form-control" value="<?php echo $email; ?>" required  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    
 
                                       <div class="form-group">
                                             <div class="row">
@@ -237,31 +262,7 @@ include('../constant/connect.php');
                
                 <!-- /# row -->
 
-                <!-- End PAge Content -->
-    <script>
-            function myplandetail(str){
-                 
-                if(str==""){
-                    document.getElementById("plandetls").innerHTML = "";
-                    return;
-                }else{
-                    if (window.XMLHttpRequest) {
-                 // code for IE7+, Firefox, Chrome, Opera, Safari
-                     xmlhttp = new XMLHttpRequest();
-                     }
-                    xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                     document.getElementById("plandetls").innerHTML=this.responseText;
-                
-                        }
-                    };
-                    
-                     xmlhttp.open("GET","plandetail.php?q="+str,true);
-                     xmlhttp.send();    
-                }
-                
-            }
-        </script>
+    
 
 <script>
   $("#Studio").select2({
@@ -292,10 +293,7 @@ include('../constant/connect.php');
   $("#Category").select2({
 });
     </script>
-    <script>
-  $("#Vendor").select2({
-});
-    </script>
+
     
 
 <?php include('../constant/layout/footer.php');?>

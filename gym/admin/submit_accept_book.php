@@ -20,13 +20,7 @@ $session= $_POST['session'];
 $approved= $_POST['approved'];
 
 
-$duplicate=mysqli_query($con,"select * from trainertt where trainerid='$trainer' and time_from='$time_from' and time_to='$time_to'");
-if (mysqli_num_rows($duplicate)>0)
-{
-  echo "<head><script>alert('Schedule Conflict!!! ERROR111 ');</script></head></html>";
-  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
-echo mysqli_error($db);
-}
+
 
 $duplicate1=mysqli_query($con,"select * from booking where classid='$classid' and userid='$user' and trainerid='$trainer' and date_from='$df' and time_from='$time_from' and time_to='$time_to' and approved='yes'");
 if (mysqli_num_rows($duplicate1)>0)

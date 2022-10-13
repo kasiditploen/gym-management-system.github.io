@@ -17,7 +17,6 @@ $amount = $_POST['amount'];
 $warranty = $_POST['warranty'];
 
 
-
 //inserting into users table
 $query="INSERT INTO toe (toeid,image,type,toeName,description,brands,categories,vendors,amount,warranty,contact,address,mobile,email) values('$toeid','$image','$type','$name','$desc','$brand','$category','$vendor','$amount','$warranty','$contact','$address','$mobile','$email')";
 mysqli_real_escape_string($con, $toeid);

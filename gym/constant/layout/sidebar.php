@@ -17,8 +17,8 @@
                         <br>
                         <br>
                         
-                        <li><a href="dashboard.php" aria-expanded="false"><i class="fas fa-home"></i><i></i><span class="hide-menu">Service</span></a></li>
-                        
+                        <li><a href="dashboard.php" aria-expanded="false"><i class="fas fa-home"></i><i></i><span class="hide-menu"><b>Service</b></span></a></li>
+                        <li><a href="view_admin.php" aria-expanded="false"><i class="fa fa-key" aria-hidden="true"></i><i></i><span class="hide-menu"><b>Administrators</b></span></a></li>
                         
                         
                         
@@ -27,7 +27,7 @@
                         
 
 
-<li><a href="trainer.php" aria-expanded="false"><i class="fa fa-star"></i><i></i><span class="hide-menu">Trainers <span class="badge badge-pill badge-light"><h6 class="color-black"><?php
+<li><a href="trainer.php" aria-expanded="false"><i class="fa fa-star"></i><i></i><span class="hide-menu"><b>Trainers</b> <span class="badge badge-pill badge-light"><h6 class="color-black"><?php
                             $query = "select COUNT(*) from trainers";
 
                             //echo $query;
@@ -40,7 +40,7 @@
                             }
                             $i = 1;
                             ?></h6></span></a></span></a></span></a></li>
-<!--<li><a href="#" aria-expanded="false"><i class="fa fa-key" aria-hidden="true"></i><i></i><span class="hide-menu">Administrator</span></a></li>-->
+
 <!--<li><a href="#" aria-expanded="false"><i class="fas fa-users"></i><i></i><span class="hide-menu">Private Groups</span></a></li>-->
 
 
@@ -69,10 +69,10 @@
                     
                       
                 
-            <li><a href="view_booking.php" aria-expanded="false"><i class="fa fa-plus"></i><i></i><span class="hide-menu">Booking List</span></a></li> 
+            <li><a href="view_booking.php" aria-expanded="false"><i class="fa fa-plus"></i><i></i><span class="hide-menu"><b>Booking List</b></span></a></li> 
             
             
-                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-user-clock"></i><i></i><span class="hide-menu">Classes</span></a>
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-user-clock"></i><i></i><span class="hide-menu"><b>Classes</b></span></a>
                         <ul aria-expanded="false" class="collapse">
                         
                         
@@ -89,11 +89,11 @@
             
 
                         <li>
-                <a href="view_class_session.php">Group Class Training</a>
+                <a href="view_class_session.php"><b>Group Class Training</b></a>
             </li> 
             
             <li>
-                <a href="view_privateclass.php">Personal Training </a>
+                <a href="view_privateclass.php"><b>Personal Training</b> </a>
             </li> 
 
       
@@ -106,7 +106,7 @@
                         
 
                         
-                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-dumbbell"></i><i></i><span class="hide-menu">Equipment <span class="badge badge-pill badge-light"><?php
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-dumbbell"></i><i></i><span class="hide-menu"><b>Equipment</b> <span class="badge badge-pill badge-light"><?php
                             $query = "select COUNT(*) from newmachine where mneed='1'";
 
                             //echo $query;
@@ -125,11 +125,11 @@
 
                         
                         <li>
-                <a href="newmachine.php">Gym Equipment</a>
+                <a href="newmachine.php"><b>Gym Equipment</b></a>
             </li> 
 
             <li>
-                <a href="view_maintenance.php">Maintenance <h6 class="color-white"><span class="badge badge-pill badge-light"><?php
+                <a href="view_maintenance.php"><b>Maintenance</b> <h6 class="color-white"><span class="badge badge-pill badge-light"><?php
                             $query = "select COUNT(*) from newmachine where mneed='1'";
 
                             //echo $query;
@@ -148,13 +148,13 @@
                         
             <li class="nav-label"><b>Types Of Equipment</b></li>
 
-            <li><a href="view_wt.php" aria-expanded="false">Weight Training</a></li>
-            <li><a href="view_ym.php" aria-expanded="false">Yoga Mats/Exercise Mats</a></li>
-            <li><a href="view_se.php" aria-expanded="false">Strength Equipment</a></li>
-            <li><a href="view_rs.php" aria-expanded="false">Rig Systems</a></li>
-            <li><a href="view_mb.php" aria-expanded="false">MMA & Boxing</a></li>
-            <li><a href="view_cf.php" aria-expanded="false">Commercial Flooring</a></li>
-            <li><a href="view_te.php" aria-expanded="false">Treadmill & Elliptical</a></li>
+            <li><a href="view_wt.php" aria-expanded="false"><b>Weight Training</b></a></li>
+            <li><a href="view_ym.php" aria-expanded="false"><b>Yoga Mats/Exercise Mats</b></a></li>
+            <li><a href="view_se.php" aria-expanded="false"><b>Strength Equipment</b></a></li>
+            <li><a href="view_rs.php" aria-expanded="false"><b>Rig Systems</a></b></li>
+            <li><a href="view_mb.php" aria-expanded="false"><b>MMA & Boxing</a></b></li>
+            <li><a href="view_cf.php" aria-expanded="false"><b>Commercial Flooring</b></a></li>
+            <li><a href="view_te.php" aria-expanded="false"><b>Treadmill & Elliptical</b></a></li>
 
             <li class="nav-label"><b>Setup</b></li>
                         
@@ -168,14 +168,14 @@
                         </li>
                         
             <li>
-                <a href="view_category.php">Categories</a>
+                <a href="view_category.php"><b>Categories</b></a>
             </li>   
    
 
        
                         </li>
                         <li>
-                <a href="view_room.php">Studio</a>
+                <a href="view_room.php"><b>Studio</b></a>
             </li>   
 
             
@@ -184,7 +184,7 @@
                 
             
 
-<li><a href="view_plan.php" aria-expanded="false"><i class="fas fa-wallet"></i><i></i><span class="hide-menu">Packages</span></a></li>
+<li><a href="view_plan.php" aria-expanded="false"><i class="fas fa-wallet"></i><i></i><span class="hide-menu"><b>Packages</b></span></a></li>
 
 <!--<li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-wheelchair"></i><span class="hide-menu">Exercise Routine</span></a>
     <ul aria-expanded="false" class="collapse">
@@ -212,7 +212,7 @@
                         
             
                         
-            <li><a href="view_feedback.php" aria-expanded="false"><i class="fa fa-window-restore"></i><i></i><span class="hide-menu">Feedback</span></a></li>
+            <li><a href="view_feedback.php" aria-expanded="false"><i class="fa fa-window-restore"></i><i></i><span class="hide-menu"><b>Feedback</b></span></a></li>
               
                     
                             
@@ -221,26 +221,26 @@
             <li class="nav-label">Reports</li>
 <!--<li><a href="#" aria-expanded="false"><i class="fas fa-scroll"></i><i></i><span class="hide-menu">Debtors/Bad Debts</span></a></li>-->
 <!--<li><a href="#" aria-expanded="false"><i class="fa fa-percent"></i><i></i><span class="hide-menu">Trainer Payroll</span></a></li>-->
-<li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-scroll"></i><i></i><span class="hide-menu">Overview</span></a>
+<li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-scroll"></i><i></i><span class="hide-menu"><b>Overview</b></span></a>
                             <ul aria-expanded="false" class="collapse">
                             
                             <li>
-                <a href="charts.php">Chart Representation</a>
+                <a href="charts.php"><b>Chart Representation</b></a>
             </li>
 
                             <li>
-                            <a href="view_checkin.php" aria-expanded="false"><i></i>Check-in</a>
+                            <a href="view_checkin.php" aria-expanded="false"><i></i><b>Check-in</b></a>
             </li>
                             <li>
-                            <a href="view_attendance.php" aria-expanded="false"><i></i>PT Attendance</a>
+                            <a href="view_attendance.php" aria-expanded="false"><i></i><b>PT Attendance</b></a>
             </li>
 
             <li>
-                            <a href="view_attendance_group.php" aria-expanded="false"><i></i>Group Class Attendance</a>
+                            <a href="view_attendance_group.php" aria-expanded="false"><i></i><b>Group Class Attendance</b></a>
             </li>
 
             <li>
-                <a href="over_members_month.php">Member Joined Log</a>
+                <a href="over_members_month.php"><b>Member Joined Log</b></a>
             </li>
 
             
@@ -248,7 +248,7 @@
 
 
             <li>
-                <a href="revenue_month.php">Monthly Income</a>
+                <a href="revenue_month.php"><b>Monthly Income</b></a>
             </li>
 
             
@@ -258,8 +258,8 @@
 
                          
                         
-                        <li class="nav-label">Administrator</li>
-                         <li><a href="profile.php" aria-expanded="false"><i class="fas fa-cogs"></i><i></i><span class="hide-menu">Admin Profile</span></a></li>
+                        <li class="nav-label"><b>Administrator</b></li>
+                         <li><a href="profile.php" aria-expanded="false"><i class="fas fa-cogs"></i><i></i><span class="hide-menu"><b>Admin Profile</b></span></a></li>
                          
 
 

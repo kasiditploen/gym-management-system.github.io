@@ -146,7 +146,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label"><h4><b>STUDIO</b></h4></label>
                                                 <div class="col-sm-9">
-                                               <select name="studio" id="Studio" required onchange="mycategorydetail(this.value)" value='<?php echo $studio?>' class="form-control">
+                                               <select name="studio" id="Studio" required  value='<?php echo $studio?>' class="form-control">
                     <option value="">--Please Select Studio--</option>
                     <?php
                         $query="select * from studio where active='yes'";
@@ -165,7 +165,7 @@ include('../constant/connect.php');
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div id="categorydetls">
+                                                <div>
                                             </div>
                                         </div>
                                     </div>

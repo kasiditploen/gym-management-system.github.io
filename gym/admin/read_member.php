@@ -341,7 +341,8 @@
                                     <br>
                                     <br>
                                     <h3>Payment history of : - <?php echo $name;?></h3>
-                                               <table class="table table-bordered table-striped">
+                                    <div class="table-responsive m-t-40">
+                                               <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
         <tr>
          <th>Sl.No</th>
@@ -399,6 +400,7 @@
         </tbody>
                                       
                                     </table>
+                                    </div>
                                     
                                     <h3>Health Status history of : - <?php echo $name;?></h3>
                                                <table class="table table-bordered table-striped">
@@ -467,6 +469,7 @@
         </tbody>
                                       
                                     </table>
+                                    
                            
                
                 <!-- /# row -->
