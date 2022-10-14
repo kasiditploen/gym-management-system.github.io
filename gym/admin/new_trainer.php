@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     <label class="col-sm-3 control-label"><h4><b>Trainer Type</b></h4></label>
                     <div class="col-sm-9">
                                 <select name="trainertype[]" id="Trainertype" required class="form-control" multiple="multiple" tags="tags">
-                                    <option value="">--Select Trainer Type--</option>
+                                    
                                     <option value="Fitness Instructor">Fitness Instructor</option>
                                     <option value="Personal Trainer">Personal Trainer</option>
                                     <option value="Coach">Coach</option>

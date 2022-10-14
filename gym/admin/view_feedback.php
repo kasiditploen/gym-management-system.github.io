@@ -31,7 +31,7 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Feedback</h2></a>
-                            <a href="new_feedback.php"><button class="btn btn-primary">Add Feedback</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -143,7 +143,7 @@
                         <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Trainer Rating</h2></a>
-                            <a href="new_rating.php"><button class="btn btn-primary">Add Trainer Rating</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">

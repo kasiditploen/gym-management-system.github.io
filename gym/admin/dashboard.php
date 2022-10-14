@@ -272,13 +272,25 @@ $dayOfWeek = date("l", $unixTimestamp);
                     <div class="table-responsive m-t-40">
                     
                                 
-                                <h2 class="text-center mb-3 h1"><b>Memberships Search</b></h2>
+                                <h2 class="text-center mb-3 h1"><b>Memberships Search</b> <span class="badge badge-pill badge-dark"><h2 class="color-white mb-1 h3"><b><?php
+                            $query = "select COUNT(*) from users";
+
+                            //echo $query;
+                            $result  = mysqli_query($con, $query);
+                            $i = 1;
+                            if (mysqli_affected_rows($con) != 0) {
+                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                                    echo $row['COUNT(*)'];
+                                }
+                            }
+                            $i = 1;
+                            ?> Members </b></h2></span></h2>
  
                                 <form action="" method="GET">
                                     <div class="input-group mb-3">
                                         <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Search for a member">
-                                        <button type="submit" class="btn btn-light color-black mb-3 h5"><b>Search</b></button>
-                                        <a href="dashboard.php"><button type="button" class="btn btn-xs btn-danger color-black mb-3 h5"><b>Clear</b></button></a>
+                                        <button type="submit" class="btn btn-light color-black mb-20 h3"><b><i class="fa fa-search"></i><i></i></b></button>
+                                        <a href="dashboard.php"><button type="button" class="btn btn-xs btn-danger color-black mb-20 h5"><b><i class="fa fa-refresh"></i><i></i></b></button></a>
                                     </div>
 
                                     
@@ -313,7 +325,7 @@ $dayOfWeek = date("l", $unixTimestamp);
         <?php
         $filtervalues = mysqli_real_escape_string($con, $_GET['search']);
         $tomorrow = date("d-m-Y", strtotime('tomorrow'));
-        $query  = "select * from users WHERE CONCAT(fname,lname,email,userid) LIKE '%$filtervalues%'   ORDER BY joining_date";
+        $query  = "select * from users WHERE CONCAT(fname,' ',lname) LIKE '%$filtervalues%'  or userid LIKE '%$filtervalues%' or email LIKE '%$filtervalues%' or username LIKE '%$filtervalues%'   ORDER BY joining_date";
         mysqli_real_escape_string($con, $filtervalues);
         $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -404,14 +416,14 @@ $dayOfWeek = date("l", $unixTimestamp);
                                   $bookedclassname=$row11['className'];
                                   $tfrom1=$row11['time_from'];
                                   $tto1=$row11['time_to'];
-                                  $query12="select ch.userid,COUNT(*) from classholder ch
-                                  inner join users u ON u.userid=ch.userid
-                                  LEFT OUTER JOIN classes c ON c.trainerid=ch.trainerid
-                                   where u.userid='$uid' and ch.classid='$classid' and created_date LIKE '%$cdate%'";
+                                  $query12="select *,COUNT(ch.userid) from classholder ch
+                                  inner join  users u ON u.userid=ch.userid
+                                  inner join  classes c ON c.classid=ch.classid
+                                   where ch.userid='$uid' and ch.classid=c.classid and created_date LIKE '%$cdate%'";
                                 $result12=mysqli_query($con,$query12);
                                 if($result12){
                                   $row12=mysqli_fetch_array($result12,MYSQLI_ASSOC);
-                                  $classcount=$row12['COUNT(*)'];
+                                  $classcount=$row12['COUNT(ch.userid)'];
                                   $userid12=$row12['userid'];
                                   $classid1=$row12['classid'];
                                   $classname1=$row12['className'];
@@ -596,7 +608,7 @@ $dayOfWeek = date("l", $unixTimestamp);
           <li class="list-group-item">
                      <h3>
                       <span class="badge badge-light">Class Sessions <br> <i class="far fa-clock"></i> Today:</br>
-                       <br><?php echo $classcount; ?></br>
+                       <br><?php echo $classname1; ?></br>
                        <h3><br><?php echo $tfrom2; ?>-<?php echo $tto2; ?>
                       </br>
                     </span>
@@ -748,7 +760,19 @@ $dayOfWeek = date("l", $unixTimestamp);
                  
                     <div class="table-responsive m-t-40">
                                 
-                                <h2>Trainer Search</h2>
+                    <h2 class="text-center mb-3 h1"><b>Trainer Search</b> <span class="badge badge-pill badge-dark"><h2 class="color-white mb-1 h3"><b><?php
+                            $query = "select COUNT(*) from trainers";
+
+                            //echo $query;
+                            $result  = mysqli_query($con, $query);
+                            $i = 1;
+                            if (mysqli_affected_rows($con) != 0) {
+                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                                    echo $row['COUNT(*)'];
+                                }
+                            }
+                            $i = 1;
+                            ?> Trainers</b></h2></span></h2>
  
   <input class="form-control" id="myInput2" type="text" placeholder="Search Trainer..">
   <table id="dt-all-checkbox2" class="table">
@@ -807,7 +831,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                 $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
                                 $create_date=$row8 ['created_date'];
                                 $create_time=$row8 ['created_time'];
-                                $query9="select * from privateclasses where trainerid='$trainerid' and approved='yes' and  date_from LIKE '$cdate%' ORDER BY time_from DESC";
+                                $query9="select * from privateclasses where trainerid='$trainerid' and approved='yes' and date_from LIKE '$cdate%' ORDER BY time_from DESC";
                               $result9=mysqli_query($con,$query9);
                               if($result9){
                                 $row9=mysqli_fetch_array($result9,MYSQLI_ASSOC);
@@ -828,6 +852,13 @@ $dayOfWeek = date("l", $unixTimestamp);
                                 if($result11){
                                   $row11=mysqli_fetch_array($result11,MYSQLI_ASSOC);
                                   (int)$countuser=$row11['count(userid)'];
+                                  $query12="select * from appointment where trainerid='$trainerid' and approved='yes' and time_from LIKE '%$cdate%' ORDER BY time_from DESC";
+                              $result12=mysqli_query($con,$query12);
+                              if($result12){
+                                $row12=mysqli_fetch_array($result12,MYSQLI_ASSOC);
+                                $appointmentclassname=$row12['className'];
+                                $time_from1=$row12['time_from'];
+                                $time_to1=$row12['time_to'];
                                   
                   //$msgid = $row['pid'];
                   //foreach($result and $result1 as $row)
@@ -855,6 +886,20 @@ $dayOfWeek = date("l", $unixTimestamp);
                       <span class="badge badge-light">LATEST PT Sessions <br> <i class="far fa-clock"></i> Today:</br>
                        <br><?php echo $privateclassname; ?></br>
                        <h3><br><?php echo $time_from; ?>-<?php echo $time_to; ?>
+                      </br>
+                    </span>
+                  </h3>
+                      </h3>
+          </li>
+                     </ul>
+
+                     <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+                     <h3>
+                      <span class="badge badge-light">LATEST  APPOINTMENT <br> <i class="far fa-clock"></i> Today:</br>
+                       <br><?php echo $appointmentclassname; ?></br>
+                       <h3><br><?php echo $time_from1; ?>
+                       <br><?php echo $time_to1; ?>
                       </br>
                     </span>
                   </h3>
@@ -904,6 +949,7 @@ $dayOfWeek = date("l", $unixTimestamp);
               }
             }
           }
+        }
         }
       }
       

@@ -6,6 +6,30 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript"> </script>
 
+<?php
+              $query  = "select * from users";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                      $userid  = $row['userid'];
+                      $query7  = "select * from users WHERE userid='$userid'";
+                      $result7 = mysqli_query($con, $query7);
+                      if (mysqli_affected_rows($con) == 1) {
+                          while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
+                            $useridx  = $row1['userid'];
+                            
+                  //$msgid = $row['pid'];
+                  //foreach($result and $result1 as $row)
+                              }
+                            }
+                          }
+                        }
+                      
+                ?> 
+
 
 <?php
         date_default_timezone_set("Asia/Bangkok"); 
@@ -135,7 +159,7 @@ $tomorrow = date("l", $unixTimestamptom);
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4  = "select * from users where userid = '$id'";
+                            $query4  = "select * from users where userid = '$userid'";
               $result4 = mysqli_query($con, $query4);
               $query5  = "select * from classes";
               $result5 = mysqli_query($con, $query5);
@@ -262,7 +286,7 @@ $tomorrow = date("l", $unixTimestamptom);
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">Apply Specific Date</label>
                                                 <div class="col-sm-9">
-                                                <input name="sdate" id="sdate" class="form-control" placeholder="DATE!!!!" required/>
+                                                <input name="sdate" id="sdate" class="form-control" placeholder="DATE!!!!" min="<?php echo date('Y-m-d'); ?>" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -343,7 +367,7 @@ $tomorrow = date("l", $unixTimestamptom);
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4  = "select * from users where userid = '$id'";
+                            $query4  = "select * from users where userid = '$userid'";
               $result4 = mysqli_query($con, $query4);
               $query5  = "select * from classes";
               $result5 = mysqli_query($con, $query5);
@@ -761,12 +785,19 @@ console.log(js_array);
      console.log(saturday); 
      console.log(sat); 
   
-
+     var dateToday = new Date();
+     
          $('#sdate').datepicker({
           
            format: "yyyy-mm-dd",
            daysOfWeekDisabled: arrayuse,
-           daysOfWeekHighlighted: arrayuse
+           daysOfWeekHighlighted: arrayuse,
+           hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
+      numberOfMonths: 3,
+        showButtonPanel: true,
+        todayHighlight: 1,
+        startDate: dateToday,
+        endDate: "+14d",
            
          });
 

@@ -10,6 +10,8 @@ if(isset($_POST["btn_update"]))
 {
   extract($_POST);
   $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+
+  
   
    $q1="UPDATE `admin` SET `fname`='$fname',`lname`='$lname',`email`='$email',`contact`='$contact',`dob`='$dob',`gender`='$gender',`image`='$image' where id = '".$_SESSION["id"]."'";
   //$query1=$conn->query($q1);
@@ -17,10 +19,11 @@ if(isset($_POST["btn_update"]))
     if ($con->query($q1) === TRUE) {
    
       $_SESSION['success']='Record Successfully Updated';
-      ?>
+    ?>
       <script type="text/javascript">
         window.location = "profile.php";
       </script>
+      
       <?php
 
 } else {
@@ -46,6 +49,7 @@ while($row=mysqli_fetch_array($query))
   //print_r($row);
   extract($row);
   $fname = $row['fname'];
+  $image = $row['image'];
   $lname = $row['lname'];
   $email = $row['email'];
   $contact = $row['contact'];
@@ -88,16 +92,16 @@ while($row=mysqli_fetch_array($query))
                                     <form class="form-horizontal" method="POST" enctype="multipart/form-data">
                                     <div class="col-md-6 mb-3">
 
-<!--Card-->
+<!--Card--><?php  echo '<img src="data:image;base64,'.base64_encode($image).'" alt="Image" style="width: 200px; height: 200px;" >'; ?>
 <div class="card red text-center z-depth-2 light-version py-3 px-4">
 
   <form class="md-form" action="#">
-  <div class="form-group">
+  <div class="form-group" >
                                     <div class="row">
                                         <label class="col-sm-3 control-label">PHOTO</label>
                                         <div class="col-sm-9">
         <span>Choose file<i class="fas fa-cloud-upload-alt ml-3" aria-hidden="true"></i></span>
-        <input type="file" name="image" id="image"  required multiple accept="image/*">
+        <input type="file" name="image" id="image"   required multiple accept="image/*">
         
         <img id="blah" src="#"   alt="image"   style="width: 80px; height: 80px;" />
       </div>

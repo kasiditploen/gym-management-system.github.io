@@ -484,10 +484,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                       $query  = "select * from users WHERE CONCAT(fname,lname,email,userid) LIKE '%$filtervalues%'  ORDER BY joining_date";
                       //echo $query;
                       $query_run = mysqli_query($con, $query);
-                   if(mysqli_num_rows($query_run) > 0)
-                      {
-                          foreach($query_run as $items)
-                          {
+                   
 
                   
                             ?>
@@ -692,8 +689,7 @@ $dayOfWeek = date("l", $unixTimestamp);
               }
             }
           }
-        }
-      }
+      
     
 
           

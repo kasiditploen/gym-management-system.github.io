@@ -406,15 +406,14 @@ include('../constant/connect.php');
 
 					
 
-					<div class="form-group" id="time_from">
+                                        <div class="form-group">
 						<label for="" class="control-label">Time From</label>
-						<input type="time" name="time_from" id="time_from" class="form-control" required>
-                        </div>
-				
-                    
-					<div class="form-group">
+						<input   name="time_from" id="timefrom" class="form-control datepicker" type="text"  >
+					</div>
+
+                    <div class="form-group">
 						<label for="" class="control-label">Time To</label>
-						<input type="time" name="time_to" id="time_to" class="form-control" value="<?php echo isset($time_to) ? $time_to : '' ?>" required>
+						<input   name="time_to" id="timeto" class="form-control datepicker" type="text"  >
 					</div>
 
                     
@@ -487,125 +486,112 @@ include('../constant/connect.php');
 });
     </script>
     <script>
+var js_array = <?php echo json_encode($timefrom1); ?>;
 
-    
-
-
-     
-       
-         
-         
-
-         
-
-         
-var js_array = <?php echo json_encode($availableday); ?>;
-
-let sunday = js_array.includes("Sunday");
+         let nine9 = js_array.includes(" 9");
 let monday = js_array.includes("Monday");
 let tuesday = js_array.includes("Tuesday");
 let wednesday = js_array.includes("Wednesday");
 let thursday = js_array.includes("Thursday");
 let friday = js_array.includes("Friday");
 let saturday = js_array.includes("Saturday");
-
-if (sunday === true) {
-var sun ;
+         
 
 
-}else if (sunday === false){
-sun = [0];
+    
+
+
+         if (nine9 === true) {
+  var nine9D ;
+  
+  
+}else if (nine9=== false){
+  nine9D = 9;
 }
-
-if (monday === true) {
-var mon ;
-
+     
+     if (monday === true) {
+  var mon ;
+  
 }else if (monday === false){
-mon = [1];
+  mon = [1];
 }
-
-if (tuesday === true) {
-var tues ;
-
+     
+     if (tuesday === true) {
+  var tues ;
+  
 }else if (tuesday === false){
-tues = [2];
+  tues = [2];
 }
-
-if (wednesday === true) {
-var wed ;
-
+     
+     if (wednesday === true) {
+  var wed ;
+  
 }else if (wednesday === false){
-wed = [3];
+  wed = [3];
 }
-
-if (thursday === true) {
-var thu ;
-
+     
+     if (thursday === true) {
+  var thu ;
+  
 }else if (thursday === false){
-thu = [4];
+  thu = [4];
 }
-
-if (friday === true) {
-var fri ;
-
+     
+     if (friday === true) {
+  var fri ;
+  
 }else if (friday === false){
-fri = [5];
+  fri = [5];
 }
-
-if (saturday === true) {
-var sat ;
-
+     
+     if (saturday === true) {
+  var sat ;
+  
 }else if (saturday === false){
-sat = [6];
+  sat = [6];
 }
 
 const arrayna =  ['0', '1', '2', '3', '4', '5', '6'];
-const arrayuse =  [sun,mon, tues, wed, thu, fri, sat];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-console.log(js_array);
-console.log(sunday);
-console.log(sun);
-console.log(monday);
-console.log(mon);
-console.log(tuesday);
-console.log(tues);
-console.log(wednesday);
-console.log(wed);
-console.log(thursday);
-console.log(thu);
-console.log(friday);
-console.log(fri);
-console.log(saturday); 
-console.log(sat); 
-
-
-$('#date_from').datepicker({
- 
-  format: "yyyy-mm-dd",
-  daysOfWeekDisabled: arrayuse,
-  daysOfWeekHighlighted: arrayuse
-  
-});
-
-
+const arrayuse =  [nine9D];
 
 
 
 
 </script>
+
+<script>
+    var todayDate = new Date();
+
+  $("#timefrom").datetimepicker({
+    format: "yyyy-mm-dd h",
+    hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
+    numberOfMonths: 3,
+        showButtonPanel: true,
+        startDate: new Date(),
+        todayHighlight: 1,
+        endDate: "+14d",
+});
+    </script>
+
+<script>
+    var todayDate = new Date();
+
+    $("#timeto").datetimepicker({
+      format: "yyyy-mm-dd h",
+      hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
+      numberOfMonths: 3,
+        showButtonPanel: true,
+        startDate: new Date(),
+        todayHighlight: 1,
+        endDate: "+14d",
+      
+  });
+      </script>
+
+<script>
+    
+    var picker = new AppointmentPicker(document.getElementById('#time-1'), {});
+      </script>
 
 
 

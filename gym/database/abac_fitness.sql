@@ -1210,6 +1210,7 @@ ALTER TABLE `booking`
   ADD PRIMARY KEY (`bookingid`) USING BTREE,
   ADD KEY `userID_idbo` (`userid`) USING BTREE,
   ADD KEY `trainerID_idbo` (`trainerid`) USING BTREE,
+  ADD KEY `classID_idbo` (`classid`) USING BTREE,
   ADD KEY `bookingid` (`bookingid`) USING BTREE;
 
   -- Indexes for table `bookingread`
@@ -1218,6 +1219,7 @@ ALTER TABLE `bookingread`
   ADD PRIMARY KEY (`bookingreadid`) USING BTREE,
   ADD KEY `userID_idb` (`userid`) USING BTREE,
   ADD KEY `trainerID_idb` (`trainerid`) USING BTREE,
+  ADD KEY `classID_idb` (`classid`) USING BTREE,
   ADD KEY `bookingreadid` (`bookingreadid`) USING BTREE;
 
 
@@ -1695,6 +1697,7 @@ ALTER TABLE `attendance`
 --
 ALTER TABLE `booking`
   ADD CONSTRAINT `userIDBO` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `classIDBO` FOREIGN KEY (`classid`) REFERENCES `classes` (`classid`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `trainerIDBO` FOREIGN KEY (`trainerid`) REFERENCES `trainers` (`trainerid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
     --
@@ -1702,6 +1705,7 @@ ALTER TABLE `booking`
 --
 ALTER TABLE `bookingread`
   ADD CONSTRAINT `userIDB` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `classIDB` FOREIGN KEY (`classid`) REFERENCES `classes` (`classid`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `trainerIDB` FOREIGN KEY (`trainerid`) REFERENCES `trainers` (`trainerid`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
       --
@@ -1722,7 +1726,8 @@ ALTER TABLE `classes`
 --
 ALTER TABLE `classholder`
   ADD CONSTRAINT `userIDch` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `trainerIDch` FOREIGN KEY (`trainerid`) REFERENCES `trainers` (`trainerid`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `trainerIDch` FOREIGN KEY (`trainerid`) REFERENCES `trainers` (`trainerid`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `classIDch` FOREIGN KEY (`classid`) REFERENCES `classes` (`classid`) ON DELETE CASCADE ON UPDATE NO ACTION;
    
       --
 -- Constraints for table `appointment`

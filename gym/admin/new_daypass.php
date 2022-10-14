@@ -73,14 +73,7 @@ include('../constant/connect.php');
                                             </div>
                                         </div>
                                         
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">USERNAME</label>
-                                                <div class="col-sm-9">
-                                                 <input name="name" id="boxx"  required  class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
                                         <div class="form-group">
                                             <div class="row">

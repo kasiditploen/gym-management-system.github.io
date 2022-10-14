@@ -1,8 +1,12 @@
 
+
 <?php include('../constant/layout/head.php');?>
 <?php include('../constant/layout/header.php');?>
 
 <?php include('../constant/layout/sidebar.php');?> 
+<link rel="stylesheet" href="assets/css/appointment-picker.css">
+<script src="assets/js/appointment-picker.min.js"></script>
+
 <link rel="stylesheet" href="popup_style.css">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -10,6 +14,9 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
 <script src="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/js/bootstrap-datetimepicker.js"></script>
 <link href="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+
+
+
 
  <?php
 //session_start();
@@ -406,10 +413,132 @@ include('../constant/connect.php');
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div id="categorydetls">
+                                                <div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="card">
+                                    <div class="card-body">
+                            <h2 class="color-black">Booked Appointments</h2></a>
+                            
+                            
+                         
+                                <div class="table-responsive m-t-40">
+                               
+                                    <table id="myTable" class="table table-bordered table-striped">
+                                    
+                                        <thead>
+                                        <?php
+          $query  = "select machineid from newmachine";
+          //echo $query;
+          $result = mysqli_query($con, $query);
+          $sno    = 1;
+          
+          
+
+          if (mysqli_affected_rows($con) != 0) {
+              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+              }
+            }
+                ?>
+        <tr>
+        
+         <th>Sl.No</th>
+          <th>Class</th>
+          <th>Time From</th>
+          <th>Time To</th>
+          <th>By Trainer:</th>
+          <th>Approved</th>
+          <th>Action</th>
+        </tr>
+
+        
+              <!--  and dow LIKE '%Monday%' "use to spcify Monday" -->
+              
+      </thead>    
+
+      
+        <tbody>
+        <?php
+              $query  = "select * from appointment where trainerid='$tr' ORDER BY time_from DESC";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $appointmentid = $row['appointmentid'];
+                  $uid   = $row['classid'];
+                  $classid   = $row['classid'];
+                  $trainerid   = $row['trainerid'];
+                  $userid   = $row['userid'];
+                  $tf   = $row['time_from'];
+                  $tt   = $row['time_to'];
+                  $df   = $row['date_from'];
+                  $query2="select studioid,studioName from studio";
+                            $result2=mysqli_query($con,$query2);
+                            $query3="select trainerid,username from trainers";
+                            $result3=mysqli_query($con,$query3);
+                            $query4="select userid,username from users";
+                            $result4=mysqli_query($con,$query4);
+                            
+                       
+                      
+                            if($result2){
+                                $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+                                if($result3){
+                                    $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                                    if($result4){
+                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                    
+                                ?>
+                    
+                  
+                    
+                    <tr>
+                    
+                      <td><?php echo $sno ?></td>
+                       <td><?php echo $row['className'] ?></td>
+                       
+                       <td><h3><span class="badge badge-light"><?php echo $row['time_from'] ?></span></h3></td>
+                       <td><h3><span class="badge badge-light"><?php echo $row['time_to'] ?></span></h3></td>
+                       <td><?php echo $row3['username'] ?></td>
+                       <td><h3><span class="badge badge-info"><?php echo $row['approved'] ?></span></h3></td>
+                       
+                  
+                  
+                  
+                 <td>
+                 <h3><span class="badge badge-danger">BOOKED</span></h3>
+                 </td></tr>
+                  
+              <?php 
+              $sno++; 
+              $msgid = 0;
+                          }
+                      }
+                    }
+                  }
+              }
+              
+            
+            
+        
+          
+        
+            
+          ?>  
+
+        </tbody>
+       
+                                      
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
 
                                     
                                     <div class="form-group">
@@ -423,15 +552,16 @@ include('../constant/connect.php');
 
 
 					<div class="form-group">
-						<label for="" class="control-label">Time From</label>
+						<label for="" class="control-label">From</label>
 						<input   name="time_from" id="timefrom" class="form-control datepicker" type="text"  >
 					</div>
 
                     <div class="form-group">
-						<label for="" class="control-label">Time To</label>
+						<label for="" class="control-label">To</label>
 						<input   name="time_to" id="timeto" class="form-control datepicker" type="text"  >
 					</div>
-                    
+
+          
                     
 					
 
@@ -581,30 +711,48 @@ const arrayuse =  [nine9D];
 </script>
 
 <script>
-    
+    var todayDate = new Date();
 
   $("#timefrom").datetimepicker({
     format: "yyyy-mm-dd h",
     hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
-    
+    numberOfMonths: 3,
+        showButtonPanel: true,
+        startDate: new Date(),
+        todayHighlight: 1,
+        endDate: "+14d",
 });
     </script>
 
 <script>
-    
+    var todayDate = new Date();
 
     $("#timeto").datetimepicker({
       format: "yyyy-mm-dd h",
       hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
+      numberOfMonths: 3,
+        showButtonPanel: true,
+        startDate: new Date(),
+        todayHighlight: 1,
+        endDate: "+14d",
       
   });
       </script>
+
+<script>
     
+    var picker = new AppointmentPicker(document.getElementById('#time-1'), {});
+      </script>
+
+
+
 
 
     
                 <script src="../admin/custom/js/product.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+                
+                
 
 <?php include('../constant/layout/footer.php');?>
   

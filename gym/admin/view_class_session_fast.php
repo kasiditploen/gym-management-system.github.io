@@ -337,6 +337,20 @@
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
+              $userid;
+              $username;
+              $classid;
+              $name;
+                      $desc;
+                      $studioid;
+                      $type;
+                      $dow;
+                      $df;
+                      $dt;
+                      $tf;
+                      $tt;
+                      $trainerid;
+                      $session;
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -368,6 +382,7 @@
                                             
                                               
                                 ?>
+                    
                   
                     
                     <tr>
@@ -388,10 +403,52 @@
                   
                   
                  <td>
-                  
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                
+                 <?php
+                  $classid=$row['classid'];
+                  $userid=$row4['userid'];
+                  $session=$row4['session'];
+                  $username=$row4['username'];
+                  $name=$row['className'];
+                          $desc=$row['description'];
+                          $studioid=$row2['studioid'];
+                          $type=$row['classtype'];
+                          $dow=$row['dow'];
+                          $df=$row['date_from'];
+                          $dt=$row['date_to'];
+                          $tf=$row['time_from'];
+                          $tt=$row['time_to'];
+                          $trainerid=$row['trainerid'];
+                          $studioname=$row2['studioName'];
+                          $trainername=$row3['trainerName'];
+                          
+                   ?>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+              
+                  
+                 <form id="form3" action='check_class_session.php?id=<?php echo $classid;?>' method='post'><input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                  
+                              <input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                              <input type='hidden' name='className' value='<?php echo $name;?>'/>
+                              <input type='hidden' name='description' value='<?php echo $desc;?>'/>
+                              <input type='hidden' name='studios' value='<?php echo $studioid ?>'/>
+                              <input type='hidden' name='classtype' value='<?php echo $type;?>'/>
+                              <input type='hidden' name='dow' value='<?php echo $dow;?>'/>
+                              <input type='hidden' name='date_from' value='<?php echo $df;?>'/>
+                              <input type='hidden' name='date_to' value='<?php echo $dt ?>'/>
+                              <input type='hidden' name='time_from' value='<?php echo $tf;?>'/>
+                              <input type='hidden' name='time_to' value='<?php echo $tt;?>'/>
+                              <input type='hidden' name='trainerid' value='<?php echo $trainerid;?>'/>
+                              <input type='hidden' name='trainerName' value='<?php echo $trainername ?>'/>
+                              <input type='hidden' name='userid' value='<?php echo $userid?>'/>
+                              <input type='hidden' name='username' value='<?php echo $username?>'/>
+                              <input type='hidden' name='session' value='<?php echo $session?>'/>
+                              
+                 
+                              <!--  <a href="health_status_entry.php?id=<?php echo $row4['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ></button></a> -->
+                  <input type='submit' id='button1' value='Proceed' class="btn btn-dark btn-xs m-b-30 m-t-30"/></form>
+                 
+                  </td></tr>
                   
               <?php 
               $sno++; 
@@ -402,6 +459,7 @@
                   }
                 }
               }
+
               
             
             
@@ -474,6 +532,20 @@
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
+              $userid;
+              $username;
+              $classid;
+              $name;
+                      $desc;
+                      $studioid;
+                      $type;
+                      $dow;
+                      $df;
+                      $dt;
+                      $tf;
+                      $tt;
+                      $trainerid;
+                      $session;
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -526,10 +598,52 @@
                   
                   
                  <td>
-                  
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                
+                 <?php
+                  $classid=$row['classid'];
+                  $userid=$row4['userid'];
+                  $session=$row4['session'];
+                  $username=$row4['username'];
+                  $name=$row['className'];
+                          $desc=$row['description'];
+                          $studioid=$row2['studioid'];
+                          $type=$row['classtype'];
+                          $dow=$row['dow'];
+                          $df=$row['date_from'];
+                          $dt=$row['date_to'];
+                          $tf=$row['time_from'];
+                          $tt=$row['time_to'];
+                          $trainerid=$row['trainerid'];
+                          $studioname=$row2['studioName'];
+                          $trainername=$row3['trainerName'];
+                          
+                   ?>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+              
+                  
+                 <form id="form3" action='check_class_session.php?id=<?php echo $classid;?>' method='post'><input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                  
+                              <input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                              <input type='hidden' name='className' value='<?php echo $name;?>'/>
+                              <input type='hidden' name='description' value='<?php echo $desc;?>'/>
+                              <input type='hidden' name='studios' value='<?php echo $studioid ?>'/>
+                              <input type='hidden' name='classtype' value='<?php echo $type;?>'/>
+                              <input type='hidden' name='dow' value='<?php echo $dow;?>'/>
+                              <input type='hidden' name='date_from' value='<?php echo $df;?>'/>
+                              <input type='hidden' name='date_to' value='<?php echo $dt ?>'/>
+                              <input type='hidden' name='time_from' value='<?php echo $tf;?>'/>
+                              <input type='hidden' name='time_to' value='<?php echo $tt;?>'/>
+                              <input type='hidden' name='trainerid' value='<?php echo $trainerid;?>'/>
+                              <input type='hidden' name='trainerName' value='<?php echo $trainername ?>'/>
+                              <input type='hidden' name='userid' value='<?php echo $userid?>'/>
+                              <input type='hidden' name='username' value='<?php echo $username?>'/>
+                              <input type='hidden' name='session' value='<?php echo $session?>'/>
+                              
+                 
+                              <!--  <a href="health_status_entry.php?id=<?php echo $row4['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ></button></a> -->
+                  <input type='submit' id='button1' value='Proceed' class="btn btn-dark btn-xs m-b-30 m-t-30"/></form>
+                 
+                  </td></tr>
                   
               <?php 
               $sno++; 
@@ -540,6 +654,7 @@
                   }
                 }
               }
+
               
             
             
@@ -611,6 +726,20 @@
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
+              $userid;
+              $username;
+              $classid;
+              $name;
+                      $desc;
+                      $studioid;
+                      $type;
+                      $dow;
+                      $df;
+                      $dt;
+                      $tf;
+                      $tt;
+                      $trainerid;
+                      $session;
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -646,7 +775,7 @@
                   
                     
                     <tr>
-                   
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['classid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -663,10 +792,52 @@
                   
                   
                  <td>
-                  
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                
+                 <?php
+                  $classid=$row['classid'];
+                  $userid=$row4['userid'];
+                  $session=$row4['session'];
+                  $username=$row4['username'];
+                  $name=$row['className'];
+                          $desc=$row['description'];
+                          $studioid=$row2['studioid'];
+                          $type=$row['classtype'];
+                          $dow=$row['dow'];
+                          $df=$row['date_from'];
+                          $dt=$row['date_to'];
+                          $tf=$row['time_from'];
+                          $tt=$row['time_to'];
+                          $trainerid=$row['trainerid'];
+                          $studioname=$row2['studioName'];
+                          $trainername=$row3['trainerName'];
+                          
+                   ?>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+              
+                  
+                 <form id="form3" action='check_class_session.php?id=<?php echo $classid;?>' method='post'><input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                  
+                              <input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                              <input type='hidden' name='className' value='<?php echo $name;?>'/>
+                              <input type='hidden' name='description' value='<?php echo $desc;?>'/>
+                              <input type='hidden' name='studios' value='<?php echo $studioid ?>'/>
+                              <input type='hidden' name='classtype' value='<?php echo $type;?>'/>
+                              <input type='hidden' name='dow' value='<?php echo $dow;?>'/>
+                              <input type='hidden' name='date_from' value='<?php echo $df;?>'/>
+                              <input type='hidden' name='date_to' value='<?php echo $dt ?>'/>
+                              <input type='hidden' name='time_from' value='<?php echo $tf;?>'/>
+                              <input type='hidden' name='time_to' value='<?php echo $tt;?>'/>
+                              <input type='hidden' name='trainerid' value='<?php echo $trainerid;?>'/>
+                              <input type='hidden' name='trainerName' value='<?php echo $trainername ?>'/>
+                              <input type='hidden' name='userid' value='<?php echo $userid?>'/>
+                              <input type='hidden' name='username' value='<?php echo $username?>'/>
+                              <input type='hidden' name='session' value='<?php echo $session?>'/>
+                              
+                 
+                              <!--  <a href="health_status_entry.php?id=<?php echo $row4['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ></button></a> -->
+                  <input type='submit' id='button1' value='Proceed' class="btn btn-dark btn-xs m-b-30 m-t-30"/></form>
+                 
+                  </td></tr>
                   
               <?php 
               $sno++; 
@@ -677,6 +848,7 @@
                   }
                 }
               }
+
               
             
             
@@ -748,6 +920,20 @@
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
+              $userid;
+              $username;
+              $classid;
+              $name;
+                      $desc;
+                      $studioid;
+                      $type;
+                      $dow;
+                      $df;
+                      $dt;
+                      $tf;
+                      $tt;
+                      $trainerid;
+                      $session;
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -779,6 +965,7 @@
                                             
                                               
                                 ?>
+                    
                   
                     
                     <tr>
@@ -799,10 +986,52 @@
                   
                   
                  <td>
-                  
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                
+                 <?php
+                  $classid=$row['classid'];
+                  $userid=$row4['userid'];
+                  $session=$row4['session'];
+                  $username=$row4['username'];
+                  $name=$row['className'];
+                          $desc=$row['description'];
+                          $studioid=$row2['studioid'];
+                          $type=$row['classtype'];
+                          $dow=$row['dow'];
+                          $df=$row['date_from'];
+                          $dt=$row['date_to'];
+                          $tf=$row['time_from'];
+                          $tt=$row['time_to'];
+                          $trainerid=$row['trainerid'];
+                          $studioname=$row2['studioName'];
+                          $trainername=$row3['trainerName'];
+                          
+                   ?>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+              
+                  
+                 <form id="form3" action='check_class_session.php?id=<?php echo $classid;?>' method='post'><input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                  
+                              <input type='hidden' name='classid' value='<?php echo $classid;?>'/>
+                              <input type='hidden' name='className' value='<?php echo $name;?>'/>
+                              <input type='hidden' name='description' value='<?php echo $desc;?>'/>
+                              <input type='hidden' name='studios' value='<?php echo $studioid ?>'/>
+                              <input type='hidden' name='classtype' value='<?php echo $type;?>'/>
+                              <input type='hidden' name='dow' value='<?php echo $dow;?>'/>
+                              <input type='hidden' name='date_from' value='<?php echo $df;?>'/>
+                              <input type='hidden' name='date_to' value='<?php echo $dt ?>'/>
+                              <input type='hidden' name='time_from' value='<?php echo $tf;?>'/>
+                              <input type='hidden' name='time_to' value='<?php echo $tt;?>'/>
+                              <input type='hidden' name='trainerid' value='<?php echo $trainerid;?>'/>
+                              <input type='hidden' name='trainerName' value='<?php echo $trainername ?>'/>
+                              <input type='hidden' name='userid' value='<?php echo $userid?>'/>
+                              <input type='hidden' name='username' value='<?php echo $username?>'/>
+                              <input type='hidden' name='session' value='<?php echo $session?>'/>
+                              
+                 
+                              <!--  <a href="health_status_entry.php?id=<?php echo $row4['userid'];?>"><button type="button" class="btn btn-xs btn-primary" ></button></a> -->
+                  <input type='submit' id='button1' value='Proceed' class="btn btn-dark btn-xs m-b-30 m-t-30"/></form>
+                 
+                  </td></tr>
                   
               <?php 
               $sno++; 
@@ -813,7 +1042,7 @@
                   }
                 }
               }
-                
+
               
             
             

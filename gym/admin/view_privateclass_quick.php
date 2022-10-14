@@ -123,7 +123,7 @@
       
         <tbody>
         <?php
-              $query  = "select * from appointment where approved='no' and trainerid='$id' and trainerid='$trainerid'";
+              $query  = "select * from appointment where approved='no' and trainerid='$id'";
               //echo $query;
               $result = mysqli_query($con, $query);
               $sno    = 1;
@@ -133,12 +133,13 @@
                   $appointmentid   = $row['appointmentid'];
                   $trainerid   = $row['trainerid'];
                   $userid   = $row['userid'];
+                  
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
                             $query3="select trainerid,username from trainers";
                             $result3=mysqli_query($con,$query3);
-                            $query4="select userid,username from users";
+                            $query4="select userid,username from users where userid='$userid'";
                             $result4=mysqli_query($con,$query4);
                             $query5="select pid,amount from sessions where userid='$userid'";
                             $result5=mysqli_query($con,$query5);
@@ -151,7 +152,8 @@
                                     $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
                                     if($result4){
                                       $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
-                                    $userid=$row4['userid'];
+                                    
+                                    $username   = $row4['username'];
                                     if($result5){
                                       $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                                       $amount=$row5['amount'];
@@ -163,7 +165,7 @@
                     
                       <td><?php echo $sno ?></td>
                       <td><?php echo $row['appointmentid'] ?></td>
-                      <td><h3><?php echo $row4['username'] ?></h3></td>
+                      <td><h3><?php echo $username  ?></h3></td>
                        <td><?php echo $row['className'] ?></td>
                        <td width='380'><?php echo $row['description'] ?></td>
                        <td><?php echo $row2['studioName'] ?></td>
@@ -230,7 +232,7 @@
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox6" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -349,7 +351,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox7" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -469,7 +471,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox8" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -589,7 +591,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-bordered9" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -898,7 +900,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkboxx" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -1021,7 +1023,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -1145,7 +1147,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox1" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -1269,7 +1271,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-bordered2" class="table table-bordered table-striped">
                                     
                                         <thead>

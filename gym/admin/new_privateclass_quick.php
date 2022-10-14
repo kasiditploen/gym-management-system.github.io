@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css">
 <link rel="stylesheet" href="./assets/css/dselect.css" />
 <link rel="stylesheet" href="popup_style.css">
+<script src="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/js/bootstrap-datetimepicker.js"></script>
+<link href="https://rawgit.com/AuspeXeu/bootstrap-datetimepicker/master/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
   
  <?php
 //session_start();
@@ -222,10 +224,10 @@ include('../constant/connect.php');
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div id="categorydetls">
+                                                <div>
                                             </div>
                                         </div>
-                                    </div>
+                                    
 
                                     <div class="form-group">
                                             <div class="row">
@@ -246,12 +248,12 @@ include('../constant/connect.php');
 
 					<div class="form-group">
 						<label for="" class="control-label">Time From</label>
-						<input type="time" name="time_from" id="time_from" class="form-control" value="<?php echo isset($time_from) ? $time_from : '' ?>">
+						<input  name="time_from" id="timefrom" class="form-control" value="<?php echo isset($time_from) ? $time_from : '' ?>">
 					</div>
                     
 					<div class="form-group">
 						<label for="" class="control-label">Time To</label>
-						<input type="time" name="time_to" id="time_to" class="form-control" value="<?php echo isset($time_to) ? $time_to : '' ?>">
+						<input  name="time_to" id="timeto" class="form-control" value="<?php echo isset($time_to) ? $time_to : '' ?>">
 					</div>
 
                     <div class="form-group">
@@ -332,6 +334,109 @@ include('../constant/connect.php');
   $("#privateclasstype").select2({
 });
     </script>
+
+<script>
+var js_array = <?php echo json_encode($timefrom1); ?>;
+
+         let nine9 = js_array.includes(" 9");
+let monday = js_array.includes("Monday");
+let tuesday = js_array.includes("Tuesday");
+let wednesday = js_array.includes("Wednesday");
+let thursday = js_array.includes("Thursday");
+let friday = js_array.includes("Friday");
+let saturday = js_array.includes("Saturday");
+         
+
+
+    
+
+
+         if (nine9 === true) {
+  var nine9D ;
+  
+  
+}else if (nine9=== false){
+  nine9D = 9;
+}
+     
+     if (monday === true) {
+  var mon ;
+  
+}else if (monday === false){
+  mon = [1];
+}
+     
+     if (tuesday === true) {
+  var tues ;
+  
+}else if (tuesday === false){
+  tues = [2];
+}
+     
+     if (wednesday === true) {
+  var wed ;
+  
+}else if (wednesday === false){
+  wed = [3];
+}
+     
+     if (thursday === true) {
+  var thu ;
+  
+}else if (thursday === false){
+  thu = [4];
+}
+     
+     if (friday === true) {
+  var fri ;
+  
+}else if (friday === false){
+  fri = [5];
+}
+     
+     if (saturday === true) {
+  var sat ;
+  
+}else if (saturday === false){
+  sat = [6];
+}
+
+const arrayna =  ['0', '1', '2', '3', '4', '5', '6'];
+const arrayuse =  [nine9D];
+
+
+
+
+</script>
+
+<script>
+    
+
+  $("#timefrom").datetimepicker({
+    format: 'h:ii',
+    hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
+    numberOfMonths: 3,
+        showButtonPanel: true,
+        startDate: new Date(),
+        todayHighlight: 1,
+        endDate: "+1d",
+});
+    </script>
+
+<script>
+    
+
+    $("#timeto").datetimepicker({
+        format: "h:ii",
+      hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
+      numberOfMonths: 3,
+        showButtonPanel: true,
+        startDate: new Date(),
+        todayHighlight: 1,
+        endDate: "+1d",
+      
+  });
+      </script>
     
                 <script src="../admin/custom/js/product.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

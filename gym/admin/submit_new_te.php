@@ -16,7 +16,22 @@ $email = $_POST['email'];
 $amount = $_POST['amount'];
 $warranty = $_POST['warranty'];
 
-
+function isimage(){
+  $type=$_FILES['image']['type'];     
+  
+  $extensions=array('image/jpg','image/jpe','image/jpeg','image/jfif','image/png','image/bmp','image/dib','image/gif');
+      if(in_array($type, $extensions)){
+          return true;
+      }
+      else
+      {
+        echo "<head><script>alert('Not an image file.');</script></head></html>";
+        echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+      echo mysqli_error($db);
+      }
+  }
+  
+      if(isimage()){
 //inserting into users table
 $query="INSERT INTO toe (toeid,image,type,toeName,description,brands,categories,vendors,amount,warranty,contact,address,mobile,email) values('$toeid','$image','$type','$name','$desc','$brand','$category','$vendor','$amount','$warranty','$contact','$address','$mobile','$email')";
 mysqli_real_escape_string($con, $toeid);
@@ -58,7 +73,7 @@ mysqli_real_escape_string($con, $warranty);
                 mysqli_query($con,$query3);
             }
             
-          
+      }
         
 
          

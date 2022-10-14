@@ -267,8 +267,7 @@ $dayonly = date("l", $unixTimestamp);
           <th>Friday</th>
           <th>Saturday</th>
           <th>Sunday </th>
-          <th>Available Time From</th>
-          <th>Available Time To</th>
+          
           
           
         </tr>
@@ -396,8 +395,7 @@ $dayonly = date("l", $unixTimestamp);
                        }else{
                          echo $row2['className']; ?>  <br><?php echo $row['sun_date']; ?></br>  <?php echo $row2['time_from']; ?> to <?php echo $row2['time_to']; 
                        } ?></h3> </td>  
-                       <td><?php echo $row2['time_from']; ?></td>
-                       <td><?php echo $row2['time_to']; ?></td>
+                       
                        
                   
                   

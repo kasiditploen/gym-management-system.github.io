@@ -14,7 +14,7 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary"> Studio</h3> </div>
+                    <h3 class="text-dark"> Studio</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
@@ -31,7 +31,7 @@
                  <div class="card">
                             <div class="card-body">
                               
-                            <a href="new_room.php"><button class="btn btn-primary">Add Studio</button></a>
+                            <a href="new_room.php"><button class="btn btn-light">Add Studio</button></a>
                             <form action="del_all_room.php" method="POST">
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
@@ -71,9 +71,9 @@
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['studioid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_trainer.php?id=<?php echo $row['studioid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_room.php?id=<?php echo $row['studioid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_room.php?id=<?php echo $row['studioid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 

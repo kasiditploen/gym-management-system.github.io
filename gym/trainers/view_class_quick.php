@@ -70,7 +70,7 @@
 					</div></br>
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -203,7 +203,7 @@ $thistrainer = $row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -328,7 +328,7 @@ $thistrainer = $row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox1" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -453,7 +453,7 @@ $thistrainer = $row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-bordered2" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -578,7 +578,7 @@ $thistrainer = $row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-bordered3" class="table table-bordered table-striped">
                                     
                                         <thead>

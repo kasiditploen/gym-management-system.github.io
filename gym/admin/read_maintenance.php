@@ -327,15 +327,15 @@
                   <?php echo $duration ?>
                   
                     <td style="width:10%;"><?php echo $sno; ?></td>
-                    <td><?php if ($start <= date("h:i:s") and date("h:i:s")  <= $duration){
+                    <td><?php if ($start <= date("H:i:s") and date("H:i:s")  <= $duration){
                        $query="select * from newmachine where machineid='$uid1'";
                        $con->query("UPDATE maintain SET active='yes' WHERE machineid='".$uid."'");
-                 $result=mysqli_query($con,$query);
+                 
                                             echo '<h1><span class="badge badge-dark">In Progress</span></h1>';
                                         } else  if ($start <= date("h:i:s") and date("h:i:s") >= $duration){
                                           $query1="select * from newmachine where machineid='$uid1'";
                        $con->query("UPDATE maintain SET active='no' WHERE machineid='".$uid."'");
-                 $result1=mysqli_query($con,$query1);
+                
                                             echo '<h1><span class="badge badge-success">Complete</span></h1>';
                                         }
                                     

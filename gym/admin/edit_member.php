@@ -26,8 +26,12 @@ include('../constant/connect.php');
                         while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     
                             $name    = $row['username'];
+                            $fname    = $row['fname'];
+                            $lname    = $row['lname'];
                             $gender =$row['gender'];
                             $mobile = $row['mobile'];
+                            $nationality = $row['nationality'];
+                            $nationalid = $row['nationalid'];
                             $email   = $row['email'];
                             $dob     = $row['dob'];         
                             $jdate    = $row['joining_date'];
@@ -96,16 +100,53 @@ include('../constant/connect.php');
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">FIRSTNAME</label>
+                                                <div class="col-sm-9">
+                                                <input type="text" id="boxxe" name="fname" value='<?php echo $fname?>'  required  class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">LASTNAME</label>
+                                                <div class="col-sm-9">
+                                                <input type="text" id="boxxe" name="lname" value='<?php echo $lname?>'  required  class="form-control"/>
+                                                </div>
+                                            </div>
+                                        </div>
                                   
 
                                         <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label">NAME</label>
+                                                <label class="col-sm-3 control-label">USERNAME</label>
                                                 <div class="col-sm-9">
                                                 <input type="text" id="boxxe" name="uname" value='<?php echo $name?>'  required  class="form-control"/>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">NATIONALITY</label>
+                                                <div class="col-sm-9">
+                                                <input type="text" id="boxxe" name="nationality" value='<?php echo $nationality?>' class="form-control" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-sm-3 control-label">NATIONAL ID</label>
+                                                <div class="col-sm-9">
+                                                <input type="text" id="boxxe" name="nationalid" value='<?php echo $nationalid?>' class="form-control" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                               
                                         
                                         <div class="form-group">
                                             <div class="row">
@@ -144,9 +185,9 @@ include('../constant/connect.php');
                                         </div><div class="form-group">
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">GENDER</label>
-                                                <div class="col-sm-9">
+                                                <div class="col-sm-9" >
                                               
-                                               <select id="boxxe" name="gender" id="gender" class="form-control" required>
+                                               <select id="boxxe" name="gender" id="gender" class="form-control"  required>
 
                         <option <?php if($gender == 'Male'){echo("selected");}?> value="Male">Male</option>
                         <option <?php if($gender == 'Female'){echo("selected");}?> value="Female">Female</option>

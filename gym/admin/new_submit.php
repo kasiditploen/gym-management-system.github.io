@@ -33,6 +33,23 @@ include('../constant/connect.php');
 $user=$_POST['utype'];
 $none = "none";
 
+function isimage(){
+  $type=$_FILES['image']['type'];     
+  
+  $extensions=array('image/jpg','image/jpe','image/jpeg','image/jfif','image/png','image/bmp','image/dib','image/gif');
+      if(in_array($type, $extensions)){
+          return true;
+      }
+      else
+      {
+        echo "<head><script>alert('Not an image file.');</script></head></html>";
+        echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+      echo mysqli_error($db);
+      }
+  }
+  
+      if(isimage()){
+
 if(strpos($i,$none) !== false){
   $e = $i;
   }else{
@@ -260,6 +277,7 @@ mysqli_real_escape_string($con, $plan);
 
          
         }
+      }
         
       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

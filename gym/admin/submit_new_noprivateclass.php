@@ -26,6 +26,15 @@ $tomorrow = date("d-m-Y", strtotime('tomorrow'));
 $compare_date=date("d M Y");
 $d1=strtotime("+ 1 hour");
 
+$duplicate=mysqli_query($con,"select * from appointment where time_from BETWEEN '$time_from' AND '$time_to'");
+
+if (mysqli_num_rows($duplicate)>0){
+    echo "<head><script>alert('Appointment Conflict.');</script></head></html>";
+    echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+  }else {
+
+  }
 
 
   if ($amount <= 0){
@@ -46,10 +55,7 @@ $d1=strtotime("+ 1 hour");
   $result1=mysqli_query($con,$query1);
 
         if($result1){
-			$query2="insert into attendance(attendanceid,present,userid,created_date,compare_date,expire,active,type) values('$aid','yes','$user','$cdate','$compare_date','$tomorrow','yes','pt')";
-			$result2=mysqli_query($con,$query2);
 			
-				if($result2){
 					echo "<head><script>alert('Persional Training Appointment Added ');</script></head></html>";
 					echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>"; 
               }
@@ -63,7 +69,7 @@ $d1=strtotime("+ 1 hour");
 			  
 				
 	}
-}
+
              
             else{
                echo "<head><script>alert('Persional Training Class Failed');</script></head></html>";

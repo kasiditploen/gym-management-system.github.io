@@ -47,6 +47,7 @@ $sessionid= $_POST['session'];
 date_default_timezone_set("Asia/Bangkok"); 
         $day=date("Y-m-d");
         $cdate=date('Y-m-d');
+        $tomorrow=date('Y-m-d',strtotime('+ 1 days'));
         $y1date=date('Y-m-d',strtotime('- 1 days'));
         $y2date=date('Y-m-d',strtotime('- 2 days'));
         $y3date=date('Y-m-d',strtotime('- 3 days'));
@@ -54,8 +55,58 @@ date_default_timezone_set("Asia/Bangkok");
         $y5date=date('Y-m-d',strtotime('- 5 days'));
         $y6date=date('Y-m-d',strtotime('- 6 days'));
         $y7date=date('Y-m-d',strtotime('- 7 days'));
+
+        $query5  = "select * from classes WHERE classid = '$classid'";
+        $result5=mysqli_query($con,$query5);
+        $query6="SELECT userid, count(*)  FROM classholder where classid='$classid' and userid='$userid' and created_date LIKE '%$sdate%'";
+        $result6=mysqli_query($con,$query6);
+                            $query7="SELECT userid, count(*)  FROM booking  WHERE  classid = '$classid' and userid ='$userid' and date_from LIKE '%$sdate%'";
+                            $result7=mysqli_query($con,$query7);
+                            $query8="SELECT bookingid,count(*)  FROM booking 
+                            WHERE approved='no'";
+                            $result8=mysqli_query($con,$query8);
+                            $query9="SELECT *  FROM booking  WHERE  classid = '$classid' and userid ='$userid'";
+                            $result9=mysqli_query($con,$query9);
+                      
+                            
+                            if($result5){
+                                $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
+                                $classcap = $row5['classcap'];
+                                $datefrom = $row5['date_from'];
+                                $dateto = $row5['date_to'];
+                                $timefrom = $row5['time_from'];
+                                $timeto = $row5['time_to'];
+                                            if($result6){
+                                              $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                                              (int)$count1   = $row6['count(*)'];
+                                              if($result7){
+                                                $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
+                                                
+                                                $count2   = $row7['count(*)'];
+                                                $count = (int)$count1 + (int)$count2;
+                                                
+                                                if($result8){
+                                                  $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                                  $count3   = $row8['count(*)'];
+                                                  if($result9){
+                                                    $row9=mysqli_fetch_array($result9,MYSQLI_ASSOC);
+                                                    $datebooked = $row9['date_from'];
+
+                                                  $duplicate=mysqli_query($con,"select * from booking where userid ='$userid' and classid ='$classid' and date_from LIKE '%$sdate%'");
+if (mysqli_num_rows($duplicate)>0)
+{
+  echo "<head><script>alert('You cannot book the same class within the same day.');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+}
+
+                                                  if((int)$count >= $classcap) {
+                                                    echo "<head><script>alert('There is no class space left for you! ');</script></head></html>";
+                                                    echo "error".mysqli_error($con);
+                                                    echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+                                                  } else {
      
-$query="INSERT INTO booking (bookingid,classid,className,username,trainerid,userid,description,classtype,studios,dow,date_from,date_to,time_from,time_to,session,created_date,approved) values('$bookingid','$classid','$classname','$username','$trainerid','$userid','$desc','$type','$studio','$dow','$date_from','$date_to','$time_from','$time_to','1','$cdate','no')";
+$query="INSERT INTO booking (bookingid,classid,className,username,trainerid,userid,description,classtype,studios,dow,date_from,date_to,time_from,time_to,session,created_date,approved) values('$bookingid','$classid','$classname','$username','$trainerid','$userid','$desc','$type','$studio','$dow','$tomorrow','$date_to','$time_from','$time_to','1','$cdate','no')";
       //echo  $query;exit;
     if(mysqli_query($con,$query)){
 
@@ -82,6 +133,13 @@ $query="INSERT INTO booking (bookingid,classid,className,username,trainerid,user
      echo "<meta http-equiv='refresh' content='0; url=dashboard.php'>";
         
     }
+}
+                                                  }
+                                                }
+                                            }
+                                        }
+                                    }
+                                
 
     
 

@@ -29,10 +29,10 @@
                    
 
                     
-                            <a href="new_category.php"><button class="btn btn-primary" id="addProductModalBtn">Add Category</button></a></div>
+                            <a href="new_category.php"><button class="btn btn-light" id="addProductModalBtn"><b>Add Category</b></button></a></div>
                             <form action="del_all_category.php" method="POST">
                                 <div class="table-responsive m-t-40">
-                                    <table id="myTable" class="table table-bordered table-striped">
+                                    <table id="myTable" class="table table-hover">
                                         <thead>
         <tr>
         
@@ -67,9 +67,9 @@
                      
                   
                  <td>
-                  <a href="edit_plan.php?id=<?php echo $row['categoryid'];?>"><button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_category.php?id=<?php echo $row['categoryid'];?>"><button type="button" class="btn btn-xs btn-light"><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_category.php?id=<?php echo $row['categoryid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_category.php?id=<?php echo $row['categoryid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 

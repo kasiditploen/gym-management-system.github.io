@@ -36,11 +36,11 @@
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black d-flex justify-content-center">Strength Training</h2></a>
-                            <a href="new_privateclass.php"><button class="btn btn-light">Add Class</button></a>
+                            
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -163,7 +163,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -287,7 +287,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-all-checkbox1" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -411,7 +411,7 @@ $trainerid=$row['trainerid'];
                             
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_class.php" method="POST">
+                                
                                     <table id="dt-bordered2" class="table table-bordered table-striped">
                                     
                                         <thead>

@@ -3,7 +3,76 @@
 <?php include('../constant/layout/sidebar.php');
 ?>
 
+<?php
+        date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date('Y-m-d');
+        $y1date=date('Y-m-d',strtotime('- 1 days'));
+        $y2date=date('Y-m-d',strtotime('- 2 days'));
+        $y3date=date('Y-m-d',strtotime('- 3 days'));
+        $y4date=date('Y-m-d',strtotime('- 4 days'));
+        $y5date=date('Y-m-d',strtotime('- 5 days'));
+        $y6date=date('Y-m-d',strtotime('- 6 days'));
+        $y7date=date('Y-m-d',strtotime('- 7 days'));
 
+
+        $unixTimestamp = strtotime($cdate);
+
+//Get the day of the week using PHP's date function.
+$dayOfWeek = date("l", $unixTimestamp);
+?>
+
+<?php
+              $query  = "select * from users";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                      $userid  = $row['userid'];
+                      $query7  = "select * from users WHERE userid='$userid'";
+                      $result7 = mysqli_query($con, $query7);
+                      if (mysqli_affected_rows($con) == 1) {
+                          while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
+                            $useridx  = $row1['userid'];
+                            
+                  //$msgid = $row['pid'];
+                  //foreach($result and $result1 as $row)
+                              }
+                            }
+                          }
+                        }
+                      
+                ?> 
+                <?php
+              $query  = "select * from trainers";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                      $trainerid   = $row['trainerid'];
+                      $dow = $row['availableday'];
+                      $query7  = "select * from enrolls2_to WHERE uid='$trainerid' AND renewal='yes'";
+                      $result7 = mysqli_query($con, $query7);
+                      if (mysqli_affected_rows($con) == 1) {
+                          while ($row1 = mysqli_fetch_array($result7, MYSQLI_ASSOC)) {
+                            $query8="select * from checkint where trainerid='$trainerid' and  created_date LIKE '$cdate%' ORDER BY created_time DESC";
+                              $result8=mysqli_query($con,$query8);
+                              if($result8){
+                                $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                $create_date=$row8 ['created_date'];
+                                $create_time=$row8 ['created_time'];
+                  //$msgid = $row['pid'];
+                  //foreach($result and $result1 as $row)
+                              }
+                            }
+                          }
+                        }
+                      }
+                ?>  
 
   
   
@@ -96,9 +165,9 @@
                   $df   = $row['date_from'];
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
-                            $query3="select trainerid,username from trainers";
+                            $query3="select trainerid,username from trainers WHERE trainerid='$trainerid'";
                             $result3=mysqli_query($con,$query3);
-                            $query4="select userid,username from users";
+                            $query4="select userid,username from users WHERE userid='$userid'";
                             $result4=mysqli_query($con,$query4);
                             
                        

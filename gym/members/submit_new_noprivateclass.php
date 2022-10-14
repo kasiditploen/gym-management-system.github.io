@@ -3,7 +3,7 @@ include('../constant/connect.php');
 
 
 
-$classid =$_POST['privateclassid'];
+$classid =$_POST['appointmentid'];
 $name=mysqli_real_escape_string($con,$_POST['privateclassname']);
 $desc=mysqli_real_escape_string($con,$_POST['desc']);
 $user = $_POST['userid'];
@@ -24,13 +24,25 @@ date_default_timezone_set("Asia/Bangkok");
 $cdate=date("d M Y H:i");
 $tomorrow = date("d-m-Y", strtotime('tomorrow'));
 $compare_date=date("d M Y");
+$d1=strtotime("+ 1 hour");
+
+$duplicate=mysqli_query($con,"select * from appointment where time_from BETWEEN '$time_from' AND '$time_to'");
+
+if (mysqli_num_rows($duplicate)>0){
+    echo "<head><script>alert('Appointment Conflict.');</script></head></html>";
+    echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+  }else {
+
+  }
+
 
   if ($amount <= 0){
     echo "<head><script>alert('No more session left. Please renew your class package. ');</script></head></html>";
     echo "<meta http-equiv='refresh' content='0; url=view_attendance.php'>";
   
   }else {
-	$query="INSERT INTO privateclasses (privateclassid,className,description,userid,studios,dow,date_from,time_from,time_to,trainerid,classtype,active,approved) values('$classid','$name','$desc','$user','$studio','$dow','$date_from','$time_from','$time_to','$trainer','$classtype','yes','no')";
+	$query="INSERT INTO appointment (appointmentid,className,description,userid,studios,time_from,time_to,trainerid,classtype,approved,active) values('$classid','$name','$desc','$user','$studio','$time_from','$time_to','$trainer','$classtype','no','yes')";
 	$query1="update sessions set amount='".$output."'where userid='".$user."'";
   }
 //inserting into private table
@@ -43,10 +55,7 @@ $compare_date=date("d M Y");
   $result1=mysqli_query($con,$query1);
 
         if($result1){
-			$query2="insert into attendance(attendanceid,present,userid,created_date,compare_date,expire,active,type) values('$aid','yes','$user','$cdate','$compare_date','$tomorrow','yes','pt')";
-			$result2=mysqli_query($con,$query2);
 			
-				if($result2){
 					echo "<head><script>alert('Persional Training Appointment Added ');</script></head></html>";
 					echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>"; 
               }
@@ -60,8 +69,8 @@ $compare_date=date("d M Y");
 			  
 				
 	}
-}
-             
+
+          
             else{
                echo "<head><script>alert('Persional Training Class Failed');</script></head></html>";
               echo "error: ".mysqli_error($con);

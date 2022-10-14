@@ -13,6 +13,24 @@ include('../constant/connect.php');
 
 ?>
 <?php
+        date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date('Y-m-d');
+        $y1date=date('Y-m-d',strtotime('- 1 days'));
+        $y2date=date('Y-m-d',strtotime('- 2 days'));
+        $y3date=date('Y-m-d',strtotime('- 3 days'));
+        $y4date=date('Y-m-d',strtotime('- 4 days'));
+        $y5date=date('Y-m-d',strtotime('- 5 days'));
+        $y6date=date('Y-m-d',strtotime('- 6 days'));
+        $y7date=date('Y-m-d',strtotime('- 7 days'));
+
+
+        $unixTimestamp = strtotime($cdate);
+
+//Get the day of the week using PHP's date function.
+$dayOfWeek = date("l", $unixTimestamp);
+?>
+<?php
 if(isset($_GET['classid'])){
 $qry = $conn->query("SELECT * FROM classes where classid= ".$_GET['classid']);
 foreach($qry->fetch_array() as $k => $val){
@@ -116,7 +134,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">CLASS DESCRIPTION</label>
                                                 <div class="col-sm-9">
-                                                 <input type="text" name="desc" id="Desc" placeholder="Enter machine description" class="form-control" required/>
+                                                 <textarea name="desc" id="Desc" placeholder="Enter class description" style="margin: 0px; width: 750px; height: 202px; " class="form-control" required/> </textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -172,14 +190,14 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                                             </div> <div class="form-group">
                                             
                         
-						<label for="" class="control-label">Month From</label>
-						<input type="month"  name="date_from" id="date_from" class="form-control" value="<?php echo isset($date_from) ? date('M-y',strtotime($date_from)):'' ?>">
+						<label for="" class="control-label">Date Created</label>
+						<input type="date"  name="date_from" id="date_from" class="form-control"  readonly value="<?=$cdate ?>">
 					</div>
 
-					<div class="form-group">
+					<!--<div class="form-group">
 						<label for="" class="control-label">Month To</label>
 						<input type="month" name="date_to" id="date_to" class="form-control" value="<?php echo isset($date_to) ? date('M-y',strtotime($date_to)) :'' ?>">
-					</div>
+					</div> -->
 
 					<div class="form-group">
 						<label for="" class="control-label">Time From</label>
