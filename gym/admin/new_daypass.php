@@ -159,7 +159,7 @@ include('../constant/connect.php');
                                                 <label class="col-sm-3 control-label">Class PACKAGE FEE (For class sessions)</label>
                                                 <div class="col-sm-9">
                                                <select name="ct" id="ct"  onchange="myplandetail2(this.value)" class="form-control">
-                    <option value="">===PLEASE SELECT Sessions PACKAGE===</option>
+                    
                     <?php
                         $query="select * from plan where plantype='Classes' and pid='019486'";
                         $result=mysqli_query($con,$query);
@@ -187,7 +187,7 @@ include('../constant/connect.php');
                                                 <label class="col-sm-3 control-label">Personal Training PACKAGE FEE</label>
                                                 <div class="col-sm-9">
                                                <select name="pt" id="pt"  onchange="myplandetail3(this.value)" class="form-control">
-                    <option value="">===PLEASE SELECT Sessions PACKAGE===</option>
+                    
                     <?php
                         $query="select * from plan where plantype='Sessions' and pid='895431'";
                         $result=mysqli_query($con,$query);

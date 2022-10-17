@@ -98,7 +98,7 @@ $dayOfWeek = date("l", $unixTimestamp);
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black14.jpg');
     height: 150px; width: auto;
   ">
-  <h1 class="color-white mb-3 h1"><b>Booking List</b></h1>
+  <h1 class="color-white mb-3 h1"><span class="badge badge-pill badge-dark"><b>Booking List</b></span></h1>
 </div>
                 <div class="card">
                             <div class="card-body">
@@ -663,7 +663,7 @@ $dayOfWeek = date("l", $unixTimestamp);
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
          <th>Booking ID</th>
          <th>Booked By</th>

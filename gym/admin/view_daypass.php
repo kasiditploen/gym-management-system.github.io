@@ -143,14 +143,14 @@
                     </div>
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_mem.php" method="POST">
+                                
                                 
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                     
                                         <thead>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
         <th style="width:2%;">Sl.No</th>
         <th style="width:2%;">Package</th>
           <th style="width:5%;">Status</th>
@@ -254,8 +254,7 @@
                    ?>
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" name="member_delete_id[]" value="<?= $row['dayuserid']; ?>">
+                  
                     <td><?php echo $sno; ?></td>
                     <td><?php 
                      if(strtotime($diff2)<=45 && strtotime($today)< strtotime($expire)){

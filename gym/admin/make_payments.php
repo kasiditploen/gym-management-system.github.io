@@ -27,9 +27,9 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                $planValue=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                $planName=$planValue['planName'];
 
-               $query3="select * from enrolls_to et inner join plan p on p.pid=et.pid
+               $query3="select * from enrolls_to et inner join plan p on p.pid=et.pid 
                
-               where uid='$uid'";
+               where uid='$uid' and renewal='yes'";
 
             $result3=mysqli_query($con,$query3);
             if($result3){
@@ -37,18 +37,18 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                $planName1=$planValue1['planName'];
                
 
-               $query4="select s.amount as amountpt, s.pid,s.userid,s.paid_date,s.expire,s.renewal,p.planName from sessions s inner join plan p on p.pid=s.pid
+               $query4="select s.amount as amountpt, s.pid,s.userid,s.paid_date,s.expire,s.renewal,p.planName from sessions s inner join plan p on p.pid=s.pid 
                
-               where userid='$uid'";
+               where userid='$uid' and renewal='yes'";
 
             $result4=mysqli_query($con,$query4);
             if($result4){
                $planValue2=mysqli_fetch_array($result4,MYSQLI_ASSOC);
                $planName2=$planValue2['planName'];
                $amountpt=$planValue2['amountpt'];
-               $query5="select cs.amount as amountct, cs.pid,cs.userid,cs.paid_date,cs.expire,cs.renewal,p.planName from csessions cs inner join plan p on p.pid=cs.pid
+               $query5="select cs.amount as amountct, cs.pid,cs.userid,cs.paid_date,cs.expire,cs.renewal,p.planName from csessions cs inner join plan p on p.pid=cs.pid 
                
-               where userid='$uid'";
+               where userid='$uid' and renewal='yes'";
 
             $result5=mysqli_query($con,$query5);
             if($result5){
@@ -147,7 +147,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                                                 <label class="col-sm-3 control-label">SELECT NEW MEMBERSHIP</label>
                                                 <div class="col-sm-9">
                                                <select name="plan" id="plan" required onchange="myplandetail(this.value)" class="form-control">
-                    <option value="">===PLEASE SELECT MEMBERSHIP PACKAGE ===</option>
+                    
                     <?php
                         $query="select * from plan where active='yes' and plantype!='Hours' and plantype!='Sessions' and plantype!='Classes'";
                         $result=mysqli_query($con,$query);
@@ -178,7 +178,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                                                 
                                                <select name="ct" id="ct"  onchange="myplandetail2(this.value)" class="form-control">
                                                
-                    <option value="">===PLEASE SELECT Sessions PACKAGE===</option>
+                   
                     <?php
                         $query="select * from plan where plantype='Classes'";
                         $result=mysqli_query($con,$query);
@@ -208,7 +208,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                                                 <div class="col-sm-9">
                                                 
                                                <select name="pt" id="pt"  onchange="myplandetail3(this.value)" class="form-control">
-                    <option value="">===PLEASE SELECT Sessions PACKAGE===</option>
+                    
                     <?php
                         $query="select * from plan where plantype='Sessions'";
                         $result=mysqli_query($con,$query);

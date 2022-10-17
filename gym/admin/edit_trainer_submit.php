@@ -28,7 +28,7 @@ include('../constant/connect.php');
         $query3="update health2_status set calorie='".$calorie."',height='".$height."',weight='".$weight."',fat='".$fat."',remarks='".$remarks."' where uid='".$uid."'";
         if(mysqli_query($con,$query3)){
             echo "<html><head><script>alert('Trainer Update Successfully');</script></head></html>";
-            echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
+            echo "<meta http-equiv='refresh' content='0; url=view_trainer.php'>";
         }else{
              echo "<html><head><script>alert('ERROR! Update Opertaion Unsucessfull');</script></head></html>";
              echo "error".mysqli_error($con);

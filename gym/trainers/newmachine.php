@@ -1,31 +1,25 @@
 <?php include('../constant/layout/head.php');?>
 <?php include('../constant/layout/header_trainer.php');?>
-
-<?php include('../constant/layout/sidebar_trainer.php');?> 
+<?php include('../constant/layout/sidebar_trainer.php');
+?>
  
 
   <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
             <div class="row page-titles">
-                <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary"> Manage Gym Equipment</h3> </div>
-                <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">View Gym Equipment</li>
-                    </ol>
-                </div>
-            </div>
+                
+                
+            
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="bg-image .hover-zoom d-flex justify-content-center align-items-center" style="
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black9.jpg');
-    height: 300px; width: auto;
+    height: 150px; width: auto;
   ">
-  <h1 class="color-white mb-3 h1"><b>Gym Equipment</b></h1>
+  <h1 class="color-white mb-3 h1"><span class="badge badge-pill badge-dark"><b>Gym Equipment</b></span></h1>
 </div>
                 <!-- /# row -->
                  <div class="card">
@@ -38,26 +32,21 @@
                             <a href="new_add_machine.php"><button class="btn btn-light" id="addProductModalBtn">Add Gym Equipment</button></a></div>
                             
                                 <div class="table-responsive m-t-40">
-                                    <table id="myTable" class="table table-bordered table-striped">
+                                    <table id="myTable" class="table ">
                                         <thead>
         <tr>
         
           <th style="width:10%;">S.No</th>
           <th style="width:10%;">Machine Condition</th>
           <th style="width:10%;">Types Of Equipment</th>
-          <th style="width:10%;">Image</th>
-          <th style="width:10%;">Serial No.</th>
+          <th style="width:10%;">Image & S/N.</th>
           <th style="width:10%;">Model</th>
           <th style="width:10%;">Brand</th>
           <th style="width:10%;">Category</th>
           <th style="width:10%;">Vendor</th>
           <th style="width:10%;">Studio</th>
-          <th style="width:10%;">Price</th>
           <th style="width:10%;">Quantity</th>
-          <th style="width:10%;">Subtotal</th>
           <th style="width:10%;">Maintenance Freq. Days</th>
-          <th style="width:10%;">Machine Status</th>
-          <th style="width:10%;">Action</th>
         </tr>
         
         
@@ -136,7 +125,7 @@
                                 $result7=mysqli_query($con,$query7);
                                 if($result7){
                                     $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
-                                    $query8="select * from enrolls_to_maintenance where machineid='$uid'";  
+                                    $query8="select * from enrolls_to_maintenance where machineid='$uid' and renewal='yes'";  
                             $result8=mysqli_query($con,$query8);
                                     if($result8){
                                         $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
@@ -155,9 +144,13 @@
                   
                                         
                                         
-                  $total=($revenue);           
-                                                
-                                            
+                  $total=($revenue);  
+                  $query9="select * from enrolls_to_warranty where machineid='$uid' ";  
+                            $result9=mysqli_query($con,$query9);
+                                    if($result9){
+                                        $row9=mysqli_fetch_array($result9,MYSQLI_ASSOC);
+                                        $active = $row9['active'];
+                                        $expire9 = $row9['expire'];
                                 ?>
                       
                       
@@ -169,25 +162,24 @@
                     <td class="text-center">
                     
                     <?php
-           
+                   $zoo = 0;
                  
            if (strtotime(date("d-m-Y")) < strtotime($row8['expire'])){
             $query = $con->query("UPDATE newmachine SET mneed='0' WHERE machineid='".$uids."'");
-            
+            $zoo = 0;
             if($query){
-            echo '<h3><span class="badge badge-success">'.$diff2.'  Days Left Until Warranty Void</span></h3>';
+                $zoo = 0;
             
             } else if (strtotime(date("d-m-Y")) > strtotime($row8['expire'] )) {
                 $query1 = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
                 
-                
-                echo '<h3><span class="badge badge-danger ">WARRANTY VOID!!!</span></h3>';
-            
+                $zoo = 1;
             
                
-              } else{
+              } else if ($expire9 <= $cdate) {
                 $query1 = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
-                echo '<h3><span class="badge badge-danger">WARRANTY VOID!!!</span></h3>';
+                        $query2 = $con->query("UPDATE enrolls_to_warranty SET active='no' WHERE machineid='".$uids."'");
+                        $zoo = 1;
             } 
             }
         }
@@ -195,20 +187,35 @@
             }
         }
 
+        if ($zoo == 0){
+            echo '<h4><span class="badge badge-light "><h2><b>'.$diff2.' Days</b></h2>   Left Until Maintenance</span></h4>';
+        } else if ($zoo == 1){
+            echo '<h4><span class="badge badge-danger ">WARRANTY VOID!!!</span></h4>';
+        }
+        
+        if($row['mneed']=='1'){
+            echo '<p><h3><span class="badge  badge-red"><b>Maintenance<br> Enabled</b></span></h3></p>';
+        } else{
+            echo '<p><h3><span class="badge  badge-light"><b>Maintenance<br> Disabled</b></span></h3></p>';
+        }  
+
         if($diff2 <= 15){
             $query1 = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
-            echo '<h3><span class="badge badge-warning"> Maintenance Needed </span></h3>';
+            echo '<h4><span class="badge badge-warning ">Maintenance Needed</span></h4>';
             
             } else if($diff2 > 15){
-                echo '<h3><span class="badge badge-success"> Good Condition </span></h3>';
+                echo '<br><h3><span class="badge badge-success"> Good Condition </span></h3>';
             
             
                
               } else{
                 
-                echo '<h3><span class="badge badge-danger">Maintenance Immediately!!!</span></h3>';
+                echo '<br><h3><span class="badge badge-danger">Maintenance Immediately!!!</span></h3>';
                 $query1 = $con->query("UPDATE newmachine SET mneed='1' and status='0' WHERE machineid='".$uids."'");
             } 
+
+            
+                        
                
     
                     
@@ -219,43 +226,27 @@
 									</td>
                                     
                     <td><?php echo$row3 ['type']; ?></td>
-                    <td><?php echo '<img src="data:image;base64,'.base64_encode($row1['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?></td>
-                     <td><?php echo$row2 ['machineid']; ?></td>
+                    <td><?php echo '<img src="data:image;base64,'.base64_encode($row1['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?>
+                <br>
+                <h2><span class="badge badge-pill badge-dark">S/N: <?php echo$row2 ['machineid']; ?></span></h2>
+            </td>
+                     
                      <td><?php echo $row3['toeName'] ?></td>
                      <!--<td width='100'><?php echo $row['description'] ?></td> -->
                      <td><?php echo$row3['brands'] ?></td>
                      <td><?php echo$row5['categoryName'] ?></td>
                      <td><?php echo$row3['vendors'] ?></td>
                      <td><?php echo$row7['studioName'] ?></td>
-                     <td> <h3><b> <?php echo $row3['amount'].'฿'?> </b></h3></td>
                      <td width='100'> <h3><b><?php echo $row2['quantity']?></h3></b></td>
-                     <td width='100'><h3><b><?php echo $extotal.'฿'?></h3></b></td>
                      <td width='100'><b><?php echo $row2['mainday'].' days'?></b></td>
-                     <td><?php
-                        if($row['status']=='1'){
-                            echo '<p><a href="status_machine.php?machineid='.$row['machineid'].'&status=0" class="btn blue-gradient waves-effect waves-light">Active</a></p>';
-                        } else{
-                            echo '<p><a href="status_machine.php?machineid='.$row['machineid'].'&status=1" class="btn purple-gradient waves-effect waves-light">Inactive</a></p>';
-                        }  ?> 
-                        <?php
-                        if($row['mneed']=='1'){
-                            echo '<p><a href="status_mneed.php?machineid='.$row['machineid'].'&mneed=0" class="btn btn-red mneedbutton">Maintenance Enabled</a></p>';
-                        } else{
-                            echo '<p><a href="status_mneed.php?machineid='.$row['machineid'].'&mneed=1" class="btn btn-black button">Maintenance Disabled</a></p>';
-                        }  ?>
-                    </td>
+                     
                      
                   
                      
                      
                   
                  
-                 <td>
-                 <a href="read_machine.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-secondary"  ><i class="fa fa-folder"></i></button></a>
-                 <a href="read_maintenance.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-warning"   ><i class="fa fa-wrench"></i></button></a>
-                 <a href="edit_machine.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-primary" ><i class="fa fa-pencil"></i></button></a>
-                  
-                  </td>
+                 
                   
                   
               <?php 
@@ -269,6 +260,7 @@
 }
 }
               }
+            }
             
           
       
@@ -296,14 +288,7 @@
 
         <tbody>
         
-      <tr>
-       <th colspan="12"><h3><b>Total Price</b></h3></th>
-          
-                     <td> <h3><b><?php echo $total.'฿'?></b></h3> </td>
-                     <td</td>
-                     
-       
-      </tr>
+      
 </tbody>  
                                       
                                     </table>

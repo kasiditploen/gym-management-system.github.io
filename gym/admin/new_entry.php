@@ -11,6 +11,32 @@
 include('../constant/connect.php');
 
 ?>
+<?php
+        date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date('Y-m-d');
+        $y1date=date('Y-m-d',strtotime('- 1 days'));
+        $y2date=date('Y-m-d',strtotime('- 2 days'));
+        $y3date=date('Y-m-d',strtotime('- 3 days'));
+        $y4date=date('Y-m-d',strtotime('- 4 days'));
+        $y5date=date('Y-m-d',strtotime('- 5 days'));
+        $y6date=date('Y-m-d',strtotime('- 6 days'));
+        $y7date=date('Y-m-d',strtotime('- 7 days'));
+        $py1date=date('Y-m-d',strtotime('+ 1 days'));
+        $py2date=date('Y-m-d',strtotime('+ 2 days'));
+        $py3date=date('Y-m-d',strtotime('+ 3 days'));
+        $py4date=date('Y-m-d',strtotime('+ 4 days'));
+        $py5date=date('Y-m-d',strtotime('+ 5 days'));
+        $py6date=date('Y-m-d',strtotime('+ 6 days'));
+        $py7date=date('Y-m-d',strtotime('+ 7 days'));
+        $pm1month=date('Y-m-d',strtotime('+ 1 month'));
+
+
+        $unixTimestamp = strtotime($cdate);
+
+//Get the day of the week using PHP's date function.
+$dayOfWeek = date("l", $unixTimestamp);
+?>
   <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
@@ -240,11 +266,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="form-group">
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">DATE OF BIRTH</label>
                                                 <div class="col-sm-9">
-                                                <input type="date"  name="dob" id="boxx"  class="form-control" required/>
+                                                <input type="date"  name="dob" id="boxx" max=<?php echo $cdate ?> class="form-control" required/>
                                                 </div>
                                             </div>
                                         </div><div class="form-group">
@@ -259,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">JOINING DATE</label>
                                                 <div class="col-sm-9">
-                                                <input type="date" name="jdate" id="boxx" class="form-control" required/>
+                                                <input type="date" name="jdate" id="boxx" max=<?php echo $pm1month ?> class="form-control" required/>
                                                 </div>
                                             </div>
                                         </div>
@@ -269,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     <label class="col-sm-3 control-label"><h4><b>Goal</b></h4></label>
                     <div class="col-sm-9">
                                 <select name="goal" id="goal" required class="form-control">
-                                    <option value="">--Select Goal--</option>
+                                    
                                     <option value="Athletic">Athletic</option>
                                     <option value="Weight Loss">Weight Loss</option>
                                     <option value="Increase Strength">Increase Strength</option>
@@ -321,10 +348,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                                         <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label">MEMBERSHIP PACKAGE FEE (Courses & Full Gym Access)</label>
+                                                <label class="col-sm-3 control-label">MEMBERSHIP PACKAGE FEE (Full Gym Access)</label>
                                                 <div class="col-sm-9">
                                                <select name="plan" id="plan" required onchange="myplandetail(this.value)" class="form-control">
-                    <option value="">===PLEASE SELECT MEMBERSHIP PACKAGE ===</option>
+                    
                     <?php
                         $query="select * from plan where active='yes' and plantype!='Hours' and plantype!='Sessions' and plantype!='Classes'";
                         $result=mysqli_query($con,$query);
@@ -353,7 +380,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                                 <label class="col-sm-3 control-label">Class PACKAGE FEE (For class sessions)</label>
                                                 <div class="col-sm-9">
                                                <select name="ct" id="ct"  onchange="myplandetail2(this.value)" class="form-control">
-                    <option value="">===PLEASE SELECT Sessions PACKAGE===</option>
+                    
                     <?php
                         $query="select * from plan where plantype='Classes'";
                         $result=mysqli_query($con,$query);
@@ -381,7 +408,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                                 <label class="col-sm-3 control-label">Personal Training PACKAGE FEE</label>
                                                 <div class="col-sm-9">
                                                <select name="pt" id="pt"  onchange="myplandetail3(this.value)" class="form-control">
-                    <option value="">===PLEASE SELECT Sessions PACKAGE===</option>
+                    
                     <?php
                         $query="select * from plan where plantype='Sessions'";
                         $result=mysqli_query($con,$query);
@@ -406,14 +433,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                                     
 
-                                    <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">DATE OF MAKING PAYMENT</label>
-                                                <div class="col-sm-9">
-                                                <input type="date"  name="domp" id="boxx"  class="form-control" value="<?php echo date('d-M-y');?>" required/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    
 
                                         <input type="hidden" name="status" id="status" value="1">
                                         <input type="hidden" name="utype" id="utype" value="user">

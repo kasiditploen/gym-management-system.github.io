@@ -281,13 +281,14 @@ $result=mysqli_query($con,$qry);
            ?> 
 
       <?php
-          $query10 = "SELECT *, SUM(n.subtotal) as numbert FROM toe t
-          INNER JOIN newmachine n on t.toeid = n.toe
+          $query10 = "SELECT (SELECT SUM(n.subtotal) from newmachine n) + (SELECT SUM(m.cost) from maintain m)as numbert
+          
           ";
             $res1000=mysqli_query($con,$query10);
             while($data=mysqli_fetch_array($res1000)){
               $expenses='Expenses';
               $numbert=$data['numbert'];
+              
               
            ?>
            ['<?php echo $expenses;?>',<?php echo $numbert;?>,],   
@@ -834,7 +835,7 @@ include('../constant/connect.php');
                             }
                             $i = 1;
                             ?></h2>
-                                     <a href="table_view.php"><h2 class="color-white">Total Members</h2></a>
+                                     <a><h2 class="color-white">Total Members</h2></a>
                                 </div>
                             </div>
                         </div>

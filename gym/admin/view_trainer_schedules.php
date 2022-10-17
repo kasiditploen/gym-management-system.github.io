@@ -85,7 +85,7 @@
                     </div>
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_trainer.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -256,7 +256,7 @@ $dayonly = date("l", $unixTimestamp);
 
                                 
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
         <th>Sl.No</th>
           <th>First Name</th>
           <th>Last Name</th>
@@ -344,8 +344,7 @@ $dayonly = date("l", $unixTimestamp);
                 
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" name="trainer_delete_id[]" value="<?= $row['trainerid']; ?>">
+                  
                                                         <td><?php echo $sno; ?></td>
                     
                      

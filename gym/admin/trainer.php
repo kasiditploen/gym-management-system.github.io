@@ -43,7 +43,7 @@
     background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black12.jpg');
     height: 150px; width: auto;
   ">
-  <h1 class="color-white mb-3 h1"><b>Trainers</b></h1>
+  <h1 class="color-white mb-3 h1"><span class="badge badge-pill badge-dark"><b>Trainers</b></span></h1>
 </div>
                 <!-- /# row -->
              
@@ -53,7 +53,7 @@
 
                             <div class="card-body">
                             <h2 class="color-black d-flex justify-content-center mb-3 h2"><b>Personal Trainers</b></h2></a>
-                            <a href="new_trainer.php"><button class="btn btn-light">Add Trainer</button></a>
+                            <a href="new_trainer.php"><button class="btn btn-lg btn-light waves-effect waves-light"><h4 class="color-black"><b> + Add Trainer</b></button></a>
                             
                             <div class="col-md-16">
                         <div>
@@ -82,7 +82,7 @@
                     </div>
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_trainer.php" method="POST">
+                                
                                     <table id="myTable" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -170,7 +170,7 @@
                   <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="fa fa-pencil"></i></button></a>
                   <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-white btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>
                  
-                  <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-red" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -204,7 +204,7 @@
                                 
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_trainer.php" method="POST">
+                               
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
@@ -294,7 +294,7 @@
                   <a href="edit_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-white" ><i class="fa fa-pencil"></i></button></a>
                   <a href="view_privateclass_quick.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-white btn-xs">Appointment <span class="badge badge-pill badge-danger"><?php echo $countapp;?></span><span class="sr-only">unread messages</span></button></a>
                  
-                  <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-red" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_trainer.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 

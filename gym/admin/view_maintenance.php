@@ -31,12 +31,12 @@
 
                     
                             </div>
-                            <form action="del_all_machine.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
         <tr>
-        <th style="width:1%;"><button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger btn-sm">Delete</button></th>
+        
           <th style="width:10%;">S.No</th>
           <th style="width:10%;">Machine Condition</th>
           <th style="width:10%;">Types Of Equipment</th>
@@ -61,19 +61,19 @@
       
 
         <tbody>
-          <?php
+        <?php
           
-          $query  = "select * from newmachine where mneed='1'";
+          $query  = "select * from newmachine where mneed = '1'";
           //echo $query;
           $result = mysqli_query($con, $query);
           $sno    = 1;
           
-          
+          $revenue = 0;
 
           if (mysqli_affected_rows($con) != 0) {
               while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   //$msgid = $row['machineid'];
-                  
+                  $uido   = $row['machineid'];
                   $toe   = $row['toe'];
                   $query1  = "select * from toe where toeid='$toe'"; 
                       $result1 = mysqli_query($con, $query1);
@@ -82,7 +82,7 @@
                           while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
                             
                             $toeid   = $row1['toeid'];
-                            $toe   = $row['toe'];
+                            
                             $uid1   = $row['machineid'];
                             $mneed   = $row['mneed'];
                             $category   = $row1['categories'];
@@ -91,31 +91,43 @@
                             $status   = $row['status'];
                             
                             $query2="select * from newmachine where machineid='$uid1'";
+                            $con->query("UPDATE newmachine SET subtotal='".$extotal."' WHERE machineid='".$uids."'");
                       $result2=mysqli_query($con,$query2);
-                      $query3="select * from toe where toeid='$toe'";
-                      $result3=mysqli_query($con,$query3);
-                      $query4="select * from newmachine where toe='$toeid'";
-                      $result4=mysqli_query($con,$query2);
+                      
+                      
+                      
                       
                       if($result2){
                         $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
-                        $toe   = $row2['toe'];
+                        $subtotal=$row2['subtotal'];
+                        $toee   = $row2['toe'];
                         $uid   = $row2['machineid'];
+                        $query3="select * from newmachine n  INNER JOIN toe t on n.toe=t.toeid where t.toeid='$toe'";
+                      $result3=mysqli_query($con,$query3);
                         if($result3){
                             $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
+                            $extotal=$row3['amount']* $row2['quantity'];
+                            
+                            $query4="select * from newmachine where toe='$toeid'";
+
+                      $result4=mysqli_query($con,$query2);
+                      
+                            
+                                    $revenue = $subtotal+$revenue;
+                            
                             if($result4){
                                 $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
                                 $uids   = $row4['machineid'];
+                                $value=mysqli_fetch_row($result2);
+                            $value1=mysqli_fetch_row($result3);
                             $query5="select * from categories where categoryid='$category'";  
                             $result5=mysqli_query($con,$query5);
 
                             if($result5){
                                 $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
-                            $query6="select * from vendors where vendorid='$vendor'";  
-                            $result6=mysqli_query($con,$query6);
+                            
 
-                            if($result6){
-                                $row6=mysqli_fetch_array($result6,MYSQLI_ASSOC);
+                            
                                 $query7="select * from studio where studioid='$studio'";  
                                 $result7=mysqli_query($con,$query7);
                                 if($result7){
@@ -124,6 +136,8 @@
                             $result8=mysqli_query($con,$query8);
                                     if($result8){
                                         $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
+                                        $expire=$row8['expire'];
+                                        $pdate=$row8['paid_date'];
                                         $result9 = mysqli_query($con,"SELECT SUM(amount) AS value_sum FROM toe WHERE toeid='$toe'"); 
                                         $row9 = mysqli_fetch_assoc($result9); 
                                         $query10="select * from newmachine where mneed='1'";
@@ -131,50 +145,78 @@
                                         $row10 = mysqli_fetch_assoc($result10); 
                                         $uid2   = $row10['machineid'];
                                         $sum = $row9['value_sum'];
+                                        $today=date('Y-m-d');
+                    $diff = abs(strtotime($expire) - strtotime($pdate));
+                  $diff2 = date('z',$diff);
+                  
                                         
                                         
-                                        
-                                            
-                                                
-                                            
+                  $total=($revenue);  
+                  $query9="select * from enrolls_to_warranty where machineid='$uid' ";  
+                            $result9=mysqli_query($con,$query9);
+                                    if($result9){
+                                        $row9=mysqli_fetch_array($result9,MYSQLI_ASSOC);
+                                        $active = $row9['active'];
+                                        $expire9 = $row9['expire'];
                                 ?>
-                  
-                  
+                      
+                      
                   
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="room_delete_id[]" value="<?= $row['machineid']; ?>">
+                  
                     <td><?php echo $sno ?></td>
                     <td class="text-center">
                     
                     <?php
-                    include('../constant/connect.php');
-                    
-                    
-                    
-                    if (strtotime(date("d-m-Y")) < strtotime($row8['expire'])){
-                        $query = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
-                        
-                        if($query){
-                        echo '<h3><span class="badge badge-warning">Maintenance Needed</span></h3>';
-                        }
-                        } else if (strtotime(date("d-m-Y")) > strtotime($row8['expire'] )) {
-                            $query1 = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
-                            
-                            if($query1){
-                            echo '<h3><span class="badge badge-danger">NEED MAINTENANCE!!!</span></h3>';
-                        }
-                        
-                           
-                          } else{
+                   $zoo = 0;
+                 
+           if (strtotime(date("d-m-Y")) < strtotime($row8['expire'])){
+            $query = $con->query("UPDATE newmachine SET mneed='0' WHERE machineid='".$uids."'");
+            
+            if($query){
+                $zoo = 0;
+            
+            } else if (strtotime(date("d-m-Y")) > strtotime($row8['expire'] )) {
+                $query1 = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
+                
+                $zoo = 1;
+            
+               
+              } else if ($expire9 <= $cdate) {
+                $query1 = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
+                        $query2 = $con->query("UPDATE enrolls_to_warranty SET active='no' WHERE machineid='".$uids."'");
+                        $zoo = 1;
+            } 
+            }
+        }
+              
+            }
+        }
 
-                            echo '<h3><span class="badge badge-danger">NEED MAINTENANCE!!!</span></h3>';
-                        } 
-                        }
-                          
-                        }
-                    }
+        if ($zoo = 0){
+            echo '<h2><span class="badge badge-success">'.$diff2.'  Days Left Until Warranty Void</span></h2>';
+        } else if ($zoo = 1){
+            echo '<h2><span class="badge badge-danger ">WARRANTY VOID!!!</span></h2>';
+        }
+
+        if($diff2 <= 15){
+            $query1 = $con->query("UPDATE newmachine SET mneed='1' WHERE machineid='".$uids."'");
+            echo '<h2><span class="badge badge-warning"> Maintenance Needed </span></h2>';
+            
+            } else if($diff2 > 15){
+                echo '<h2><span class="badge badge-success"> Good Condition </span></h2>';
+            
+            
+               
+              } else{
+                
+                echo '<h2><span class="badge badge-danger">Maintenance Immediately!!!</span></h2>';
+                $query1 = $con->query("UPDATE newmachine SET mneed='1' and status='0' WHERE machineid='".$uids."'");
+            } 
+               
+    
+                    
                 
                 
             ?>
@@ -188,19 +230,25 @@
                      <!--<td width='100'><?php echo $row['description'] ?></td> -->
                      <td><?php echo$row3['brands'] ?></td>
                      <td><?php echo$row5['categoryName'] ?></td>
-                     <td><?php echo$row6['vendorName'] ?></td>
+                     <td><?php echo$row3['vendors'] ?></td>
                      <td><?php echo$row7['studioName'] ?></td>
-                     <td width='100'><h3><b> <?php echo $row3['warranty'].' Years'?></b></h3> </td>
                      <td> <h3><b> <?php echo $row3['amount'].'฿'?> </b></h3></td>
                      <td width='100'> <h3><b><?php echo $row2['quantity']?></h3></b></td>
-                     <td width='100'><h3><b><?php echo $row3['amount']* $row2['quantity'].'฿'?></h3></b></td>
+                     <td width='100'><h3><b><?php echo $extotal.'฿'?></h3></b></td>
                      <td width='100'><b><?php echo $row2['mainday'].' days'?></b></td>
                      <td><?php
                         if($row['status']=='1'){
                             echo '<p><a href="status_machine.php?machineid='.$row['machineid'].'&status=0" class="btn blue-gradient waves-effect waves-light">Active</a></p>';
                         } else{
                             echo '<p><a href="status_machine.php?machineid='.$row['machineid'].'&status=1" class="btn purple-gradient waves-effect waves-light">Inactive</a></p>';
-                        }  ?> </td>
+                        }  ?> 
+                        <?php
+                        if($row['mneed']=='1'){
+                            echo '<p><a href="status_mneed.php?machineid='.$row['machineid'].'&mneed=0" class="btn btn-red mneedbutton">Maintenance Enabled</a></p>';
+                        } else{
+                            echo '<p><a href="status_mneed.php?machineid='.$row['machineid'].'&mneed=1" class="btn btn-black button">Maintenance Disabled</a></p>';
+                        }  ?>
+                    </td>
                      
                   
                      
@@ -208,10 +256,11 @@
                   
                  
                  <td>
-                 <a href="read_machine.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-secondary"  ><i class="fa fa-folder"></i></button></a>
-                 <a href="edit_plan.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-primary" ><i class="fa fa-pencil"></i></button></a>
-                  <a href="del_newmachine.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a>
-                  <a href="read_maintenance.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-warning"   ><i class="fa fa-wrench"></i></button></a></td>
+                 <a href="read_machine.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-light"  ><i class="fa fa-folder"></i></button></a>
+                 <a href="read_maintenance.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-light"   ><i class="fa fa-wrench"></i></button></a>
+                 <a href="edit_machine.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-light" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="del_newmachine.php?id=<?php echo $row['machineid'];?>"><button type="button" class="btn btn-sm btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a>
+                  </td>
                   
                   
               <?php 
@@ -223,11 +272,18 @@
         }
     }
 }
-        }
-    }
 }
+              }
+            }
+            
+          
+      
+ 
+
+
+          
         
-                      
+                   
 
           
 
@@ -238,7 +294,7 @@
           
 
           ?>  
-          
+         
               
            
 
@@ -247,7 +303,7 @@
         <tbody>
         
       <tr>
-       <th colspan="14"><h3><b>Total Price</b></h3></th>
+       <th colspan="13"><h3><b>Total Price</b></h3></th>
           
                      <td> <h3><b><?php echo $row9['value_sum'].'฿'?></b></h3> </td>
                      <td</td>

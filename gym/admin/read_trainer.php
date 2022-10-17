@@ -149,7 +149,7 @@
         </tr>
       </thead>    
         <tbody>
-          <?php
+        <?php
           $id     = $_GET['id'];;
       $query0  = "select * from trainers WHERE trainerid='$id'";
       $sno    = 1;
@@ -165,11 +165,11 @@
               if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   $salaryid = $row['salaryid'];
-                  $query2="select * from salary where trainerid='$id' ORDER BY date_from desc";
+                  $query2="select * from salary where trainerid='$id' and salaryid='$salaryid' ";
                   $result2=mysqli_query($con,$query2);
-                  while($row1=mysqli_fetch_array($result2)){
+                  if($result2){
+                    $row1=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                     
-                    $pvclassid = $row1['privateclassid'];
                     $trainerid = $row1['trainerid'];
                     $trainern = $row1['username'];
                     $userid = $row1['userid'];
@@ -209,6 +209,9 @@
         </tbody>
                                       
                                     </table>
+
+                                    
+                                    
 
                                     
                                     <br>

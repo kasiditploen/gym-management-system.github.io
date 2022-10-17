@@ -74,6 +74,7 @@ include('../constant/connect.php');
               $mobile=$row['mobile'];
               $email=$row['email'];
               $joinon=$row['joining_date'];
+              
               echo $name;
           }
       }
@@ -81,6 +82,33 @@ include('../constant/connect.php');
         echo "<head><script>alert('Not Enough Session Point to take a personal training class. ');</script></head></html>";
   echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
     }
+      ?>
+
+<?php
+      
+      $query  = "select * from trainers WHERE trainerid='$tr'";
+      //echo $query;
+      $result = mysqli_query($con, $query);
+
+      if (mysqli_affected_rows($con) != 0) {
+          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $image = $row['image'];
+            $name = $row['username'];
+            $firstname = $row['fname'];
+            $lastname = $row['lname'];
+              $memid=$row['userid'];
+              $gender=$row['gender'];
+              $mobile=$row['mobile'];
+              $email=$row['email'];
+              $joinon=$row['joining_date'];
+              $ttime_from=$row['time_from'];
+              $ttime_to=$row['time_to'];
+
+              
+              
+          }
+      }
+    
       ?>
 <?php
         $tomorrow = date("d-m-Y", strtotime('tomorrow'));
@@ -156,11 +184,12 @@ include('../constant/connect.php');
                                 $privateclassname=$row8['className'];
                                 $time_from=$row8['time_from'];
                                 $time_to=$row8['time_to'];
-                                $query9="select * from trainers";
+                                $query9="select * from trainers where trainerid='$tr'";
                                 $result9=mysqli_query($con,$query9);
                                 if($result9){
                                   $row9=mysqli_fetch_array($result9,MYSQLI_ASSOC);
                                   $trainerid=$row9['trainerid'];
+                                  
                                   $query10="select * from classes where trainerid='$trainerid'";
                                 $result10=mysqli_query($con,$query10);
                                 if($result10){
@@ -553,12 +582,12 @@ include('../constant/connect.php');
 
 					<div class="form-group">
 						<label for="" class="control-label">From</label>
-						<input   name="time_from" id="timefrom" class="form-control datepicker" type="text"  >
+						<input   name="time_from" id="timefrom" class="form-control datepicker"  >
 					</div>
 
                     <div class="form-group">
 						<label for="" class="control-label">To</label>
-						<input   name="time_to" id="timeto" class="form-control datepicker" type="text"  >
+						<input   name="time_to" id="timeto" class="form-control datepicker"  >
 					</div>
 
           
@@ -569,7 +598,8 @@ include('../constant/connect.php');
                     <input type="hidden" name="session" id="session" value='<?php echo $sessionid;?>'>
                     
                     <input type="hidden" name="pid" id="pid" value='<?php echo $pidss;?>'>
-                    
+                    <input  readonly name="ttime_from" id="ttime_from" value='<?php echo $ttime_from;?>'>
+                    <input  readonly  name="ttime_to" id="ttime_to" value='<?php echo $ttime_to;?>'>
 
                                     
                                         <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Add</button>

@@ -32,7 +32,7 @@
                             <div class="card-body">
                               
                             <a href="new_room.php"><button class="btn btn-light">Add Studio</button></a>
-                            <form action="del_all_room.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
@@ -71,7 +71,7 @@
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['studioid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_room.php?id=<?php echo $row['studioid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
                  
                   <a href="del_room.php?id=<?php echo $row['studioid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   

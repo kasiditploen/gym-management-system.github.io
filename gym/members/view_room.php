@@ -32,7 +32,7 @@
                             <div class="card-body">
                               
                             <a href="new_room.php"><button class="btn btn-primary">Add Studio</button></a>
-                            <form action="del_all_room.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>

@@ -253,7 +253,7 @@
 
 <div><a href="new_maintain.php?id=<?php echo $id;?>"><button class="btn btn-secondary" id="addProductModalBtn">Maintain/Repair</button></a>
                             <a href="new_add_machine.php"><button class="btn btn-danger" id="addProductModalBtn">Replace</button></a></div></div></div>
-                            <form action="del_all_machine.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>

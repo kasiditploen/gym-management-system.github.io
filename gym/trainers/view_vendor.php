@@ -29,7 +29,7 @@
 
                     
                             <a href="new_vendor.php"><button class="btn btn-primary" id="addProductModalBtn">Add Vendor</button></a></div>
-                            <form action="del_all_vendor.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>

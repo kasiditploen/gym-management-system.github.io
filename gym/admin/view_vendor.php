@@ -30,12 +30,12 @@
 
                     
                             <a href="new_vendor.php"><button class="btn btn-primary" id="addProductModalBtn">Add Vendor</button></a></div>
-                            <form action="del_all_vendor.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
         <tr>
-        <th style="width:1%;"><button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete</button></th>
+        
           <th style="width:1%;">S.No</th>
           <th style="width:10%;">Brand ID</th>
           <th>Firm Name</th>
@@ -63,8 +63,7 @@
                 ?>  
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="vendor_delete_id[]" value="<?= $row['vendorid']; ?>">
+                  
                     <td><?php echo $sno ?></td>
                      <td><?php echo$row ['vendorid']; ?></td>
                      <td><?php echo $row['vendorName'] ?></td>

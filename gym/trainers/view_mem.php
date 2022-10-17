@@ -147,7 +147,7 @@
                     </div>
                          
                                 <div class="table-responsive m-t-40">
-                                <form id="form1" action="del_all_mem.php" method="POST">
+                                
                                 
                                     <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     

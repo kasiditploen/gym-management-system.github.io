@@ -63,6 +63,9 @@ include('../constant/connect.php');
               $email=$row['email'];
               $joinon=$row['joining_date'];
               $availableday=$row['availableday'];
+              $ttime_from=$row['time_from'];
+              $ttime_to=$row['time_to'];
+
               
               $query4="select COUNT(*) from checkin where userid='$id'";
                   $result4=mysqli_query($con,$query4);
@@ -420,6 +423,8 @@ include('../constant/connect.php');
                     <input type="hidden" name="session" id="session" value='<?php echo $sessionid;?>'>
                     <input type="hidden" name="amount" id="amount" value='<?php echo $amount;?>'>
                     <input type="hidden" name="pid" id="pid" value='<?php echo $pidss;?>'>
+                    <input type="hidden" name="ttime_from" id="ttime_from" value='<?php echo $ttime_from;?>'>
+                    <input type="hidden" name="ttime_to" id="ttime_to" value='<?php echo $ttime_to;?>'>
                     
 
                                     

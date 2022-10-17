@@ -38,7 +38,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             <div class="row">
                             <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Nickname</label>
+                                        <label>Username</label>
                                         <input type="text" name="name" value="<?php if(isset($_GET['name']))?>" class="form-control">
                                     </div>
                                 <div class="col-md-4">
@@ -122,7 +122,8 @@ $dayOfWeek = date("l", $unixTimestamp);
                                    
 
                                    if( isset( $_GET['name'] ) && !empty( $_GET['name'] ) ){
-                                    $clauses[] = "`username` = '{$_GET['name']}'";   
+                                    $clauses[] = "`username` = '{$_GET['name']}'";
+                                     
                                 }
 
                                 if(isset($_GET['from_date'],$_GET['to_date']) && !empty( $_GET['from_date'] )  && !empty( $_GET['to_date'] ) )

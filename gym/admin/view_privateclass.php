@@ -59,7 +59,7 @@ $trainerid=$row['trainerid'];
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -88,7 +88,7 @@ $trainerid=$row['trainerid'];
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $uid   = $row['classid'];
+                  $uid   = $row['privateclassid'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
@@ -107,8 +107,7 @@ $trainerid=$row['trainerid'];
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row ['privateclassid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -125,9 +124,9 @@ $trainerid=$row['trainerid'];
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                 <a href="edit_privateclass.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_privateclass.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -182,7 +181,7 @@ $trainerid=$row['trainerid'];
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -211,7 +210,7 @@ $trainerid=$row['trainerid'];
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $uid   = $row['classid'];
+                  $uid   = $row['privateclassid'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
@@ -230,16 +229,14 @@ $trainerid=$row['trainerid'];
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
-                       <td><?php echo$row ['classid']; ?></td>
+                       <td><?php echo$row ['privateclassid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
                        <td width='380'><?php echo $row['description'] ?></td>
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -249,9 +246,8 @@ $trainerid=$row['trainerid'];
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
-                 
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                 <a href="edit_privateclass.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="del_privateclass.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -306,7 +302,7 @@ $trainerid=$row['trainerid'];
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -335,7 +331,7 @@ $trainerid=$row['trainerid'];
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $uid   = $row['classid'];
+                  $uid   = $row['privateclassid'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
@@ -354,16 +350,14 @@ $trainerid=$row['trainerid'];
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
-                       <td><?php echo$row ['classid']; ?></td>
+                       <td><?php echo$row ['privateclassid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
                        <td width='380'><?php echo $row['description'] ?></td>
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -373,9 +367,9 @@ $trainerid=$row['trainerid'];
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                 <a href="edit_privateclass.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_privateclass.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -430,7 +424,7 @@ $trainerid=$row['trainerid'];
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
          <th>Sl.No</th>
           <th>Class ID</th>
           <th>Class</th>
@@ -459,7 +453,7 @@ $trainerid=$row['trainerid'];
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $classid   = $row['classid'];
+                  $classid   = $row['privateclassid'];
 
                   $query2="select studioid,studioName from studio";
                             $result2=mysqli_query($con,$query2);
@@ -478,8 +472,7 @@ $trainerid=$row['trainerid'];
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       <td><?php echo $sno ?></td>
                        <td><?php echo$row['privateclassid']; ?></td>
                        <td><?php echo $row['className'] ?></td>
@@ -496,9 +489,9 @@ $trainerid=$row['trainerid'];
                   
                  <td>
                   
-                  <a href="edit_trainer.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_privateclass.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_privateclass.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 

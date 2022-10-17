@@ -46,15 +46,15 @@ if(mysqli_query($con,$query)==1){
       }
       if(mysqli_query($con,$query4)==1){
         $query1="select * from toe where warranty = '$warranty'";
-      $result=mysqli_query($con,$query1);
-        if($result){
-          $value=mysqli_fetch_row($result);
+      $resultx=mysqli_query($con,$query1);
+        if($resultx){
+          $valuex=mysqli_fetch_row($resultx);
             date_default_timezone_set("Asia/Bangkok"); 
             $d=strtotime("+".$value[13]." Years");
-            $cdate=date("Y-m-d"); //current date
             
+            $expiredatex=date("Y-m-d",$d);
             $toeid=$value['toeid'];
-            $query5="insert into enrolls_to_warranty(wid,toeid,paid_date,expire,active,machineid) values('$warranty','$type','$cdate','$expire','yes',$machineid)";
+            $query5="insert into enrolls_to_warranty(wid,toeid,paid_date,expire,active,machineid) values('$warranty','$type','$cdate','$expiredatex','yes','$machineid')";
         }
       
       if(mysqli_query($con,$query5)==1){

@@ -1,20 +1,20 @@
 
 <?php include('../constant/layout/head.php');?>
-<?php include('../constant/layout/header.php');?>
+<?php include('../constant/layout/header_member.php');?>
 
-<?php include('../constant/layout/sidebar.php');?> 
+<?php include('../constant/layout/sidebar_member.php');?> 
 <link rel="stylesheet" href="popup_style.css">
 
  <?php
 session_start();
  include('../constant/connect.php');
 
-if($_SESSION["username"]=='admin' || $_SESSION["username"]=='pubb' || $_SESSION["username"]=='user'){
+if($_SESSION["utype"]=='user' || $_SESSION["username"]=='pubb' || $_SESSION["username"]=='user'){
     
-    $q = "select * from  admin where id = '".$_SESSION['id']."'";
+    $q = "select * from  users where userid = '".$_SESSION['userid']."'";
 }
 else {
-   $q = "select * from  admin where id = '".$_SESSION['id']."'";
+   $q = "select * from  users where userid = '".$_SESSION['userid']."'";
 }
  
   $q1 = $con->query($q);
@@ -51,17 +51,15 @@ $confirm =  hash('sha256', $salt . $confirm_new);
     </script> -->
   <?php } else {
     //$pass = md5($_POST['password']);
-if($_SESSION["username"]=='admin'  || $_SESSION["username"]=='pubb' || $_SESSION["username"]=='user'){
+if($_SESSION["utype"]=='user' || $_SESSION["username"]=='pubb' || $_SESSION["username"]=='user'){
     
-   $sql = "update  admin set `password`='$confirm' where id = '".$_SESSION['id']."'";
+   $sql = "update  users set `password`='$confirm' where userid = '".$_SESSION['userid']."'";
 }
-else {
-  $sql = "update  tbl_customer set `password`='$confirm' where id = '".$_SESSION['id']."'";
-}    
+  
   
   $res = $con->query($sql);
   
- if($_SESSION["username"]=='admin' || $_SESSION["username"]=='pubb' || $_SESSION["username"]=='user'){ ?>
+ if($_SESSION["utype"]=='user'|| $_SESSION["username"]=='pubb' || $_SESSION["username"]=='user'){ ?>
 
     <div class="popup popup--icon -success js_success-popup popup--visible">
   <div class="popup__background"></div>

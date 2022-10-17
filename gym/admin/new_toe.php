@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                             <div class="row">
                                                 <label class="col-sm-3 control-label"><h4><b>EQUIPMENT PRICE</b></h4></label>
                                                 <div class="col-sm-9">
-                                                <input type="text" name="amount" id="Amnt" placeholder="Enter EQUIPMENT price in ฿"  class="form-control"  required/>
+                                                <input type="text" name="amount" id="Amnt" step="0.01" placeholder="Enter EQUIPMENT price in ฿"  class="form-control"  required/>
                                                 </div>
                                             </div>
                                         </div>

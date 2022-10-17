@@ -24,7 +24,7 @@
                 <div class="card">
                 <div class="card-body">
                             <a href="new_plan.php"><button class="btn btn-primary">Add Package</button></a></div>
-                            <form action="del_all_plan.php" method="POST">
+                            
                          
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">

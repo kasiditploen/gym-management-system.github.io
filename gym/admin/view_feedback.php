@@ -14,19 +14,20 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Feedback</h3> </div>
+                    
                 <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">View Feedback</li>
-                    </ol>
+                    
                 </div>
             </div>
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                
+                <a><div class="bg-image hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black16.jpg');
+    height: 150px; width: auto;
+  "></a>
+  <h1 class="color-white mb-3 h1 "><b>Feedback</b></h1></div>
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
@@ -54,7 +55,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
         <th>S.No</th>
           <th>User ID</th>
           <th>Satisfaction Points</th>
@@ -96,8 +97,7 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       
                       <td><?php echo $sno ?></td>
                      <td><?php echo$row3 ['userid']; ?></td>
@@ -166,7 +166,7 @@
             }
                 ?>
         <tr>
-        <th style="width:1%;"><input type="checkbox" id="select-all" /></th>
+        
         <th>S.No</th>
           <th>Trainer ID</th>
           <th>Satisfaction Points</th>
@@ -211,8 +211,7 @@
                   
                     
                     <tr>
-                    <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="class_delete_classid[]" value="<?= $row['classid']; ?>">
+                    
                       
                       <td><?php echo $sno ?></td>
                      <td><?php echo$row4 ['trainerid']; ?></td>

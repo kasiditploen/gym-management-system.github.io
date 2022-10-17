@@ -36,7 +36,7 @@
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
         <tr>
-        <th style="width:1%;"><button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger btn-sm">Delete</button></th>
+        
           <th style="width:10%;">S.No</th>
           <th style="width:10%;">Machine Condition</th>
           <th style="width:10%;">Types Of Equipment</th>
@@ -138,8 +138,7 @@
                   
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="room_delete_id[]" value="<?= $row['machineid']; ?>">
+                  
                     <td><?php echo $sno ?></td>
                     <td class="text-center">
                     

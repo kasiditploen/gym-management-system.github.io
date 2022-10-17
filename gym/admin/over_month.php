@@ -26,6 +26,7 @@ if (mysqli_affected_rows($con) != 0) {
 	echo "<thead>
 				<tr>
 					<th>Sl.No</th>
+					<th>Image</th>
 					<th>Member ID</th>
 					<th>Name</th>
 					<th>Contact</th>
@@ -41,6 +42,8 @@ if (mysqli_affected_rows($con) != 0) {
       
 
                 echo "<tr><td>".$sno."</td>";
+
+				echo "<td> <img src=data:image;base64,".base64_encode($row['image'])." alt='Image' style='width: 80px; height: 80px;'> </td>";
                 
                 echo "<td>" . $row['userid'] . "</td>";
 

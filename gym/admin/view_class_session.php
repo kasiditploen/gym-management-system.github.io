@@ -161,7 +161,7 @@ $userid = $row['userid'];
                     <tr>
                     
                       <td><?php echo $sno ?></td>
-                       <td><?php echo$row ['classid']; ?></td>
+                       <td><h2><span class="badge badge-pill badge-dark "><?php echo$row ['classid']; ?></span></td>
                        <td><?php echo $row['className'] ?></td>
                        <td width='380'><?php echo $row['description'] ?></td>
                        <td><?php echo $row2['studioName'] ?></td>
@@ -172,7 +172,7 @@ $userid = $row['userid'];
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
                        <td><?php echo $count3  ?></td>
-                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       <td><h2><span class="badge badge-pill badge-dark "><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
 
                     <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
@@ -181,11 +181,11 @@ $userid = $row['userid'];
                     
                   
                  <td>
-                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   </td></tr>
                   
               <?php 
@@ -330,7 +330,7 @@ $userid = $row['userid'];
                     <tr>
                     
                       <td><?php echo $sno ?></td>
-                       <td><?php echo$row ['classid']; ?></td>
+                       <td><h2><span class="badge badge-pill badge-dark "><?php echo$row ['classid']; ?></span></td>
                        <td><?php echo $row['className'] ?></td>
                        <td width='380'><?php echo $row['description'] ?></td>
                        <td><?php echo $row2['studioName'] ?></td>
@@ -341,7 +341,7 @@ $userid = $row['userid'];
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
                        <td><?php echo $count3  ?></td>
-                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       <td><h2><span class="badge badge-pill badge-dark "><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
 
                     <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
@@ -350,11 +350,11 @@ $userid = $row['userid'];
                     
                   
                  <td>
-                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   </td></tr>
                   
               <?php 
@@ -499,7 +499,7 @@ $userid = $row['userid'];
                     <tr>
                     
                       <td><?php echo $sno ?></td>
-                       <td><?php echo$row ['classid']; ?></td>
+                       <td><h2><span class="badge badge-pill badge-dark "><?php echo$row ['classid']; ?></span></td>
                        <td><?php echo $row['className'] ?></td>
                        <td width='380'><?php echo $row['description'] ?></td>
                        <td><?php echo $row2['studioName'] ?></td>
@@ -510,7 +510,7 @@ $userid = $row['userid'];
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
                        <td><?php echo $count3  ?></td>
-                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       <td><h2><span class="badge badge-pill badge-dark "><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
 
                     <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
@@ -519,11 +519,11 @@ $userid = $row['userid'];
                     
                   
                  <td>
-                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   </td></tr>
                   
               <?php 
@@ -667,39 +667,38 @@ $userid = $row['userid'];
                     
                     <tr>
                     
-                      <td><?php echo $sno ?></td>
-                       <td><?php echo$row ['classid']; ?></td>
-                       <td><?php echo $row['className'] ?></td>
-                       <td width='380'><?php echo $row['description'] ?></td>
-                       <td><?php echo $row2['studioName'] ?></td>
-                       <td><?php echo$row ['dow']; ?></td>
-                       <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
-                       <td><?php echo $row['time_from'] ?></td>
-                       <td><?php echo $row['time_to'] ?></td>
-                       <td><?php echo $row3['username'] ?></td>
-                       <td><?php echo $count3  ?></td>
-                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
-                       
+                    <td><?php echo $sno ?></td>
+                     <td><h2><span class="badge badge-pill badge-dark "><?php echo$row ['classid']; ?></span></td>
+                     <td><?php echo $row['className'] ?></td>
+                     <td width='380'><?php echo $row['description'] ?></td>
+                     <td><?php echo $row2['studioName'] ?></td>
+                     <td><?php echo$row ['dow']; ?></td>
+                     <td><?php echo $row['date_from'] ?></td>
+                     <td><?php echo $row['date_to'] ?></td>
+                     <td><?php echo $row['time_from'] ?></td>
+                     <td><?php echo $row['time_to'] ?></td>
+                     <td><?php echo $row3['username'] ?></td>
+                     <td><?php echo $count3  ?></td>
+                     <td><h2><span class="badge badge-pill badge-dark "><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                     
 
-                    <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
-                    <input type="hidden" name="pid" id="pid" value='<?php echo $pid2;?>'>
+                  <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
+                  <input type="hidden" name="pid" id="pid" value='<?php echo $pid2;?>'>
+                
                   
-                    
-                  
-                 <td>
-                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
-                  
-                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
-                 
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
-                  </td></tr>
-                  
-              <?php 
-              $sno++; 
-              $msgid = 0;
-                          }
-                      }
+                
+               <td>
+               <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
+                
+                <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
+               
+                <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                </td></tr>
+                
+            <?php 
+            $sno++; 
+            $msgid = 0;
+                        }
                     }
                   }
                 }
@@ -707,24 +706,25 @@ $userid = $row['userid'];
             }
           }
         }
-                
+      }
               
             
-            
-        
           
+          
+      
         
-            
-          ?>  
+      
+          
+        ?>  
 
-        </tbody>
-       
-                                      
-                                    </table>
+      </tbody>
+     
                                     
-                                </div>
-                            </div>
-                        </div>
+                                  </table>
+                                  
+                              </div>
+                          </div>
+                      </div>
 
                         <!-- /# row -->
                  <div class="card">
@@ -837,7 +837,7 @@ $userid = $row['userid'];
                     <tr>
                     
                       <td><?php echo $sno ?></td>
-                       <td><?php echo$row ['classid']; ?></td>
+                       <td><h2><span class="badge badge-pill badge-dark "><?php echo$row ['classid']; ?></span></td>
                        <td><?php echo $row['className'] ?></td>
                        <td width='380'><?php echo $row['description'] ?></td>
                        <td><?php echo $row2['studioName'] ?></td>
@@ -848,7 +848,7 @@ $userid = $row['userid'];
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
                        <td><?php echo $count3  ?></td>
-                       <td><h2><span class="badge badge-danger"><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
+                       <td><h2><span class="badge badge-pill badge-dark "><?php echo $count ?>/<?php echo $row['classcap'] ?></span"></h2></td>
                        
 
                     <input type="hidden" name="csession" id="csession" value='<?php echo $cs;?>'>
@@ -857,11 +857,11 @@ $userid = $row['userid'];
                     
                   
                  <td>
-                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-folder-open"></i></button></a>
+                 <a href="read_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-folder-open"></i></button></a>
                   
-                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-sm btn-danger" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="edit_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   </td></tr>
                   
               <?php 

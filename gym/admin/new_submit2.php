@@ -1,7 +1,7 @@
 <?php
 include('../constant/connect.php');
 
- $memtID=$_POST['mt_id'];
+ $memtID=mysqli_real_escape_string($con,$_POST['mt_id']);
  $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
  $uname=mysqli_real_escape_string($con,$_POST['ut_name']);
  $password= hash('sha256', mysqli_real_escape_string($con, $_POST['password']));
@@ -9,22 +9,22 @@ include('../constant/connect.php');
  $lname=mysqli_real_escape_string($con,$_POST['lname']);
  $stname=mysqli_real_escape_string($con,$_POST['street_name2']);
  $city=mysqli_real_escape_string($con,$_POST['city2']);
- $zipcode=$_POST['zipcode2'];
+ $zipcode=mysqli_real_escape_string($con,$_POST['zipcode2']);
  $state=mysqli_real_escape_string($con,$_POST['state2']);
- $gender=$_POST['gender2'];
- $dob=$_POST['dob2'];
- $phn=$_POST['mobile2'];
- $email=$_POST['email2'];
- $jdate=$_POST['jdate2'];
+ $gender=mysqli_real_escape_string($con,$_POST['gender2']);
+ $dob=mysqli_real_escape_string($con,$_POST['dob2']);
+ $phn=mysqli_real_escape_string($con,$_POST['mobile2']);
+ $email=mysqli_real_escape_string($con,$_POST['email']);
+ $jdate=mysqli_real_escape_string($con,$_POST['jdate2']);
  $availableday = $_POST['availableday'];
  $i = implode(',', $availableday);
- $timefrom=$_POST['time_from'];
- $timeto=$_POST['time_to'];
+ $timefrom=mysqli_real_escape_string($con,$_POST['time_from']);
+ $timeto=mysqli_real_escape_string($con,$_POST['time_to']);
  $trainertype=$_POST['trainertype'];
  $e = implode(',', $trainertype);
- $skills=$_POST['skills'];
- $yoe=$_POST['yoe'];
- $user=$_POST['utype'];
+ $skills=mysqli_real_escape_string($con,$_POST['skills']);
+ $yoe=mysqli_real_escape_string($con,$_POST['yoe']);
+ $user=mysqli_real_escape_string($con,$_POST['utype']);
  //$plan=$_POST['plan2'];
  function isimage(){
   $type=$_FILES['image']['type'];     

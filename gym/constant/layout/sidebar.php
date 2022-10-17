@@ -36,8 +36,8 @@ $dayOfWeek = date("l", $unixTimestamp);
                         <br>
                         <br>
                         
-                        <li><a href="dashboard.php" aria-expanded="false"><i class="fas fa-home"></i><i></i><span class="hide-menu"><b>Service</b></span></a></li>
-                        <li><a href="view_admin.php" aria-expanded="false"><i class="fa fa-key" aria-hidden="true"></i><i></i><span class="hide-menu"><b>Administrators</b></span></a></li>
+                        <li><a href="dashboard.php" aria-expanded="false"><i class="fas fa-arrows-alt fa-lg"></i><i></i><span class="hide-menu"><b>Service</b></span></a></li>
+                        <li><a href="view_admin.php" aria-expanded="false"><i class="fa fa-key fa-lg" aria-hidden="true"></i><i></i><span class="hide-menu"><b>Administrators</b></span></a></li>
                         
                         
                         
@@ -46,7 +46,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                         
 
 
-<li><a href="trainer.php" aria-expanded="false"><i class="fa fa-star"></i><i></i><span class="hide-menu"><b>Trainers</b> <span class="badge badge-pill badge-light"><h6 class="color-black mb-0 h6"><?php
+<li><a href="trainer.php" aria-expanded="false"><i class="fas fa-users-cog fa-lg"></i><i></i><span class="hide-menu"><b>Trainers</b> <span class="badge badge-pill badge-light"><h6 class="color-black mb-0 h6"><?php
                             $query = "select COUNT(*) from trainers";
 
                             //echo $query;
@@ -88,7 +88,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                     
                       
                 
-            <li><a href="view_booking.php" aria-expanded="false"><i class="fa fa-plus"></i><i></i><span class="hide-menu"><b>Booking List  </b><span class="badge badge-pill badge-danger"><h6 class="color-white mb-0 h6"><?php
+            <li><a href="view_booking.php" aria-expanded="false"><i class="fas fa-plus-circle fa-lg"></i><i></i><span class="hide-menu"><b>Booking List  </b><span class="badge badge-pill badge-danger"><h6 class="color-white mb-0 h6"><?php
                             $query = "select COUNT(*) from booking where approved = 'no'";
 
                             //echo $query;
@@ -103,7 +103,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             ?></h6></span></a></span></a></span></a></li>
             
             
-                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-user-clock"></i><i></i><span class="hide-menu"><b>Classes</b></span></a>
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-chalkboard fa-lg"></i><i></i><span class="hide-menu"><b>Classes</b></span></a>
                         <ul aria-expanded="false" class="collapse">
                         
                         
@@ -137,7 +137,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                         
 
                         
-                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-dumbbell"></i><i></i><span class="hide-menu"><b>Equipment</b> <span class="badge badge-pill badge-light"><?php
+                        <li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-dumbbell fa-lg"></i><i></i><span class="hide-menu"><b>Equipment</b> <span class="badge badge-pill badge-light"><?php
                             $query = "select COUNT(*) from newmachine where mneed='1'";
 
                             //echo $query;
@@ -215,7 +215,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                 
             
 
-<li><a href="view_plan.php" aria-expanded="false"><i class="fas fa-wallet"></i><i></i><span class="hide-menu"><b>Packages</b></span></a></li>
+<li><a href="view_plan.php" aria-expanded="false"><i class="fas fa-cubes fa-lg"></i><i></i><span class="hide-menu"><b>Packages</b></span></a></li>
 
 <!--<li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-wheelchair"></i><span class="hide-menu">Exercise Routine</span></a>
     <ul aria-expanded="false" class="collapse">
@@ -243,7 +243,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                         
             
                         
-            <li><a href="view_feedback.php" aria-expanded="false"><i class="fa fa-window-restore"></i><i></i><span class="hide-menu"><b>Feedback</b></span></a></li>
+            <li><a href="view_feedback.php" aria-expanded="false"><i class="fas fa-comment fa-lg"></i><i></i><span class="hide-menu"><b>Feedback</b></span></a></li>
               
                     
                             
@@ -252,7 +252,7 @@ $dayOfWeek = date("l", $unixTimestamp);
             <li class="nav-label">Reports</li>
 <!--<li><a href="#" aria-expanded="false"><i class="fas fa-scroll"></i><i></i><span class="hide-menu">Debtors/Bad Debts</span></a></li>-->
 <!--<li><a href="#" aria-expanded="false"><i class="fa fa-percent"></i><i></i><span class="hide-menu">Trainer Payroll</span></a></li>-->
-<li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-scroll"></i><i></i><span class="hide-menu"><b>Overview</b></span></a>
+<li> <a class="has-arrow" href="#" aria-expanded="false"><i class="fas fa-chart-pie fa-lg"></i><i></i><span class="hide-menu"><b>Overview</b></span></a>
                             <ul aria-expanded="false" class="collapse">
                             
                             <li>
@@ -294,10 +294,12 @@ $dayOfWeek = date("l", $unixTimestamp);
                          
                         
                         <li class="nav-label"><b>Administrator</b></li>
-                         <li><a href="profile.php" aria-expanded="false"><i class="fas fa-cogs"></i><i></i><span class="hide-menu"><b>Admin Profile</b></span></a></li>
+                         <li><a href="profile.php" aria-expanded="false"><i class="fas fa-cogs fa-lg"></i><i></i><span class="hide-menu"><b>Admin Profile</b></span></a></li>
                          
 
-                         <div class="card ">
+                         <div class="hide-menu card  bg-image " style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black13.jpg' );
+    height: auto; width: auto;">
                 
                 <div class="col-md-3 align-self-left">
                 
@@ -306,9 +308,23 @@ $dayOfWeek = date("l", $unixTimestamp);
                  <!-- <div class="row"> -->
                   
                  <div class="col-md-16 justify-content-center">
+                 <h1><b>Contents</b></h1>
                   
-                 <a href="view_checkin.php" class="btn btn-lg btn-light"><b> Today's Checkin<span class="badge badge-pill badge-dark"><h6 class="color-white mb-0 h3"><?php
+                 <a href="view_checkin.php" class="btn btn-lg btn-white"><b> Today's Checkin<span class="badge badge-pill badge-dark "><h6 class="color-white mb-0 h3"><?php
                             $query = "select COUNT(*) from checkin where created_date='$cdate'";
+
+                            //echo $query;
+                            $result  = mysqli_query($con, $query);
+                            $i = 1;
+                            if (mysqli_affected_rows($con) != 0) {
+                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                                    echo $row['COUNT(*)'];
+                                }
+                            }
+                            $i = 1;
+                            ?></h6></span></a></span></a></span></a></li>
+                            <a href="over_members_month.php" class="btn btn-lg btn-white"><b> Today's Newcomer<br><span class="badge badge-pill badge-dark"><h6 class="color-white mb-0 h3"><?php
+                            $query = "select COUNT(*) from users where joining_date='$cdate'";
 
                             //echo $query;
                             $result  = mysqli_query($con, $query);

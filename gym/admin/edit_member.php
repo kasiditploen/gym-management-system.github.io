@@ -274,7 +274,7 @@ include('../constant/connect.php');
                                     </div>
                                          <div class="form-group">
                                             <div class="row">
-                                                <label class="col-sm-3 control-label">CALORIE</label>
+                                                <label class="col-sm-3 control-label">BMR</label>
                                                 <div class="col-sm-9">
                                                <input type="text" id="boxxe"  name="calorie" value='<?php echo $calorie?>' class="form-control" required/>
                                                 </div>

@@ -30,7 +30,7 @@
                    
 
                     
-                            <a href="new_toe.php"><button class="btn btn-primary" id="addProductModalBtn">Add Yoga Mats/Exercise Mats</button></a></div>
+                            <a href="new_toe.php"><button class="btn btn-light" id="addProductModalBtn">Add Yoga Mats/Exercise Mats</button></a></div>
                             <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>

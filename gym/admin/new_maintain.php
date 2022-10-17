@@ -6,6 +6,26 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="popup_style.css">
   
+<?php
+              $query  = "select * from enrolls_to_warranty";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
+
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                      $etw_id  = $row['etw_id'];
+                      $machineid  = $row['machineid'];
+                      $activeA = $row['active'];
+                     
+                  //$msgid = $row['pid'];
+                  //foreach($result and $result1 as $row)
+                              }
+                            }
+                            ?>
+                      
+
+
  <?php
 //session_start();
 //error_reporting(0);
@@ -29,7 +49,7 @@ include('../constant/connect.php');
             <!-- Container fluid  -->
             <?php
           $id     = $_GET['id'];;
-          $query  = "select * from newmachine";
+          $query  = "select * from newmachine where machineid = '$id'";
           //echo $query;
           $result = mysqli_query($con, $query);
           $sno    = 1;
@@ -39,8 +59,13 @@ include('../constant/connect.php');
           if (mysqli_affected_rows($con) != 0) {
               while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   //$msgid = $row['machineid'];
-                  
+                  $status = $row['status'];
                   $toe   = $row['toe'];
+                  if($status ==1){
+                    echo "<head><script>alert('Please deactive the equipment first!!! ');</script></head></html>";
+                    echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+                  echo mysqli_error($db);
+                }
                   $query1  = "select * from toe"; 
                       $result1 = mysqli_query($con, $query1);
                       
@@ -56,18 +81,19 @@ include('../constant/connect.php');
                             
                             
                             
+                            
                             $query2="select * from newmachine where toe='$toeid'";
                       $result2=mysqli_query($con,$query2);
                       $query3="select * from toe where toeid='$toe'";
                       $result3=mysqli_query($con,$query3);
-                      $query4="select * from newmachine where toe='$toeid'";
+                      $query4="select * from newmachine where machineid='$uid'";
                       $result4=mysqli_query($con,$query2);
                       
                       if($result2){
                         $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                         $u2id   = $row2['machineid'];
                         $toe   = $row2['toe'];
-                        $status   = $row2['status'];
+                        
                         $warranty   = $row1['warranty'];
                         
                         if($result3){
@@ -80,10 +106,18 @@ include('../constant/connect.php');
                             
                             if($result4){
                                 $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
+                                
+                                $machineid = $row4['machineid'];
+                                $queryx="select * from enrolls_to_warranty where machineid='$machineid'";
+                                $resultx=mysqli_query($con,$queryx);
+                                
+                           
 
-                            $query5="select * from categories where categoryid='$category'";  
-                            $result5=mysqli_query($con,$query5);
-
+                            if($resultx){
+                                $rowx=mysqli_fetch_array($resultx,MYSQLI_ASSOC);
+                                $active = $rowx['active'];
+                                $query5="select * from categories where categoryid='$category'";  
+                                $result5=mysqli_query($con,$query5);
                             if($result5){
                                 $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                                 $category   = $row5['categoryName'];
@@ -92,7 +126,7 @@ include('../constant/connect.php');
                                 $result7=mysqli_query($con,$query7);
                                 if($result7){
                                     $row7=mysqli_fetch_array($result7,MYSQLI_ASSOC);
-                                    $query8="select * from enrolls_to_maintenance where machineid='$uid'";  
+                                    $query8="select * from enrolls_to_maintenance where machineid='$machineid ";  
                             $result8=mysqli_query($con,$query8);
                                     if($result8){
                                         $row8=mysqli_fetch_array($result8,MYSQLI_ASSOC);
@@ -110,6 +144,9 @@ include('../constant/connect.php');
                       }
                     }
                   }
+                }
+
+            
                 
               
                                         
@@ -206,12 +243,12 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label"><h4><b>Maintenance Cost</b></h4></label>
                                                 <div class="col-sm-9">
-                                                 <input type="number" name="cost" id="cost" placeholder="Enter the maintenance cost" class="form-control" required/>
+                                                 <input type="number" name="cost" id="cost" step="0.01" min=0 placeholder="Enter the maintenance cost" class="form-control" required/>
                                                 </div>
                                             </div>
                             <div class="form-group">
                                             <div class="row">
-                                                <div id="categorydetls">
+                                                <div>
                                             </div>
                                         </div>
                                     </div>
@@ -246,7 +283,7 @@ include('../constant/connect.php');
                                                 </div>
                                             </div>
                                         </div>
-                                        
+                                        <input type="hidden" name="active" id="active" value="<?php echo $activeA?>"/>
                                         <button type="submit" name="submit" id="crateProductBtn" value="CREATE PLAN" class="btn btn-primary btn-flat m-b-30 m-t-30">Submit</button>
                                          <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
 

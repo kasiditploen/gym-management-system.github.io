@@ -14,19 +14,21 @@
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Packages</h3> </div>
+                    
                 <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active">View Packages</li>
-                    </ol>
+                    
                 </div>
             </div>
             <!-- End Bread crumb -->
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Start Page Content -->
-                
+                <a><div class="bg-image hover-zoom d-flex justify-content-center align-items-center" style="
+    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black17.jpg');
+    height: 200px; width: auto;
+  "></a>
+  <h1 class="color-white mb-3 h1 "><b>Packages</b></h1>
+</div>
                 <!-- /# row -->
                  <div class="card">
                             <div class="card-body">
@@ -34,6 +36,8 @@
                             <a href="new_plan.php"><button class="btn btn-light">Add Packages</button></a>
                             
                          
+                <!-- Start Page Content -->
+                
                                 <div class="table-responsive m-t-40">
                                 
                                     <table id="myTable" class="table table-bordered table-striped">
@@ -152,7 +156,7 @@
                          
                                 <div class="table-responsive m-t-40">
                                 
-                                    <table id="myTable" class="table table-bordered table-striped">
+                                    <table id="dt-all-checkbox" class="table table-bordered table-striped">
                                     
                                         <thead>
                                         <?php
@@ -270,7 +274,7 @@
                          
                                 <div class="table-responsive m-t-40">
                                 
-                                    <table id="myTable" class="table table-bordered table-striped">
+                                    <table id="dt-all-checkbox1" class="table table-bordered table-striped">
                                     
                                         <thead>
                                         <?php
@@ -389,7 +393,7 @@
                          
                                 <div class="table-responsive m-t-40">
                                 
-                                    <table id="myTable" class="table table-bordered table-striped">
+                                    <table id="dt-bordered" class="table table-bordered table-striped">
                                     
                                         <thead>
                                         <?php

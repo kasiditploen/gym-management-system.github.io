@@ -716,7 +716,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             <div class="card-body">
                             <h2 class="color-black">PERSONAL TRAINERS STATUS</h2></a>
                         <div class="table-responsive m-t-40">
-                                <form id="form2" action="del_all_trainer.php" method="POST">
+                                
                                     <table id="dt-bordered1" class="table table-bordered table-striped">
                                     
                                     

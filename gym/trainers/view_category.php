@@ -29,7 +29,7 @@
 
                     
                             <a href="new_category.php"><button class="btn btn-primary" id="addProductModalBtn">Add Category</button></a></div>
-                            <form action="del_all_category.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>

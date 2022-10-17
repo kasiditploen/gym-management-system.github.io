@@ -31,12 +31,12 @@
 
                     
                             <a href="new_toe.php"><button class="btn btn-primary" id="addProductModalBtn">Add Commercial Flooring</button></a></div>
-                            <form action="del_all_machine.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
         <tr>
-        <th style="width:1%;"><button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete</button></th>
+        
           <th style="width:1%;">S.No</th>
           <th style="width:1%;">Image</th>
           <th style="width:1%;">Types Of Equipment</th>
@@ -92,8 +92,7 @@
                   
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="room_delete_id[]" value="<?= $row['toeid']; ?>">
+                  
                     <td><?php echo $sno ?></td>
                     <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?></td>
                     <td><?php echo$row ['type']; ?></td>

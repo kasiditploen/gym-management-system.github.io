@@ -3,20 +3,20 @@ include('../constant/connect.php');
 
 
 
-$classid =$_POST['privateclassid'];
+$classid =mysqli_real_escape_string($con,$_POST['privateclassid']);
 $name=mysqli_real_escape_string($con,$_POST['privateclassname']);
 $desc=mysqli_real_escape_string($con,$_POST['desc']);
-$user = $_POST['userid'];
-$studio = $_POST['privatestudios'];
-$dow = $_POST['dow'];
-$date_from = $_POST['date_from'];
-$date_to  = $_POST['date_to'];
-$time_from = $_POST['time_from'];
-$time_to = $_POST['time_to'];
-$classtype= $_POST['privateclasstype'];
-$trainer= $_POST['trainerid'];
+$user =mysqli_real_escape_string($con,$_POST['userid']);
+$studio =mysqli_real_escape_string($con,$_POST['privatestudios']);
+$dow =mysqli_real_escape_string($con,$_POST['dow']);
+$date_from =mysqli_real_escape_string($con,$_POST['date_from']);
+$date_to  =mysqli_real_escape_string($con,$_POST['date_to']);
+$time_from =mysqli_real_escape_string($con,$_POST['time_from']);
+$time_to =mysqli_real_escape_string($con,$_POST['time_to']);
+$classtype=mysqli_real_escape_string($con,$_POST['privateclasstype']);
+$trainer=mysqli_real_escape_string($con,$_POST['trainerid']);
 $session=mysqli_real_escape_string($con,$_POST['session']);
-$amount=$_POST['amount'];
+$amount=mysqli_real_escape_string($con,$_POST['amount']);
 $pid=mysqli_real_escape_string($con,$_POST['pid']);
 $one= 1;
 $output = $amount-$one;

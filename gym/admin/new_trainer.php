@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">EMAIL ID</label>
                                                 <div class="col-sm-9">
-                                                <input type="email" name="email2" id="boxx" class="form-control" required  />
+                                                <input type="email" name="email" id="boxx" class="form-control" required  />
                                                 </div>
                                             </div>
                                         </div>
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                     
                                     <option value="Fitness Instructor">Fitness Instructor</option>
                                     <option value="Personal Trainer">Personal Trainer</option>
-                                    <option value="Coach">Coach</option>
+                                    
                                 </select>
                             </div>
                             </div>
@@ -254,32 +254,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
 </div>
 
                     <div class="form-group">
-                                            <div class="row">
+                                            
                                                 <label class="col-sm-3 control-label"><b>Skills</b></label>
                                                 <div class="col-sm-9">
                                                 <input type="text"  name="skills" id="boxx" class="form-control" required/>
-                                                </div>
+                                                
                                             </div>
 
                                             <div class="form-group">
-                                            <div class="row">
+                                            </div>
                                                 <label class="col-sm-3 control-label"><b>YEAR OF EXPERIENCE</b></label>
                                                 <div class="col-sm-9">
                                                 <input type="number"  name="yoe" id="boxx" class="form-control" required/>
-                                                </div>
+                                                
                                             </div>
 
                                         
-                    <?php
-                        $query="select * from plan2 where active='yes'";
-                        $result=mysqli_query($con,$query);
-                        if(mysqli_affected_rows($con)!=0){
-                            while($row=mysqli_fetch_row($result)){
-                                echo "<option value=".$row[0].">".$row[1]."</option>";
-                            }
-                        }
-
-                    ?>
+                    
                     
                 </select>
                 

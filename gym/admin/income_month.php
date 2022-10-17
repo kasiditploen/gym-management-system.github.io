@@ -3,13 +3,39 @@ include('../constant/connect.php');
 $month=$_GET['mm'];
 $year=$_GET['yy'];
 
-$query="select DISTINCT u.userid,u.username,u.gender,u.mobile,
+$query="select u.userid,u.username,u.gender,u.mobile,
 u.email,u.joining_date,a.state,a.city,
-e.paid_date,e.expire,p.planName,p.amount,p.validity from users u 
+e.paid_date,e.expire,s.paid_date,s.expire,cs.paid_date,cs.expire,p.planName,p.amount,p.validity
+from users u 
 INNER JOIN address a on u.userid=a.id 
 INNER JOIN enrolls_to e on u.userid=e.uid
+INNER JOIN  sessions s on u.userid=s.userid
+INNER JOIN csessions cs on u.userid=cs.userid
 INNER JOIN plan p on p.pid=e.pid
-where e.paid_date  like '".$year."-".$month."___'";
+where e.paid_date  like '".$year."-".$month."___' and s.paid_date  like '".$year."-".$month."___' and cs.paid_date  like '".$year."-".$month."___' 
+union
+select u.userid,u.username,u.gender,u.mobile,
+u.email,u.joining_date,a.state,a.city,
+e.paid_date,e.expire,s.paid_date,s.expire,cs.paid_date,cs.expire,p.planName,p.amount,p.validity
+from users u 
+INNER JOIN address a on u.userid=a.id 
+INNER JOIN enrolls_to e on u.userid=e.uid
+INNER JOIN  sessions s on u.userid=s.userid
+INNER JOIN csessions cs on u.userid=cs.userid
+INNER JOIN plan p on p.pid=s.pid
+where e.paid_date  like '".$year."-".$month."___' and s.paid_date  like '".$year."-".$month."___' and cs.paid_date  like '".$year."-".$month."___' 
+union
+select u.userid,u.username,u.gender,u.mobile,
+u.email,u.joining_date,a.state,a.city,
+e.paid_date,e.expire,s.paid_date,s.expire,cs.paid_date,cs.expire,p.planName,p.amount,p.validity
+from users u 
+INNER JOIN address a on u.userid=a.id 
+INNER JOIN enrolls_to e on u.userid=e.uid
+INNER JOIN  sessions s on u.userid=s.userid
+INNER JOIN csessions cs on u.userid=cs.userid
+INNER JOIN plan p on p.pid=cs.pid
+where e.paid_date  like '".$year."-".$month."___' and s.paid_date  like '".$year."-".$month."___' and cs.paid_date  like '".$year."-".$month."___' 
+";
   
 
 $res=mysqli_query($con,$query);

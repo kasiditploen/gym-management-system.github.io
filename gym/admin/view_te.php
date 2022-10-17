@@ -30,7 +30,7 @@
                    
 
                     
-                            <a href="new_toe.php"><button class="btn btn-primary" id="addProductModalBtn">Add Treadmill & Elliptical</button></a></div>
+                            <a href="new_toe.php"><button class="btn btn-light" id="addProductModalBtn">Add Treadmill & Elliptical</button></a></div>
                             
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
@@ -110,8 +110,8 @@
                   
                  
                  <td>
-                  <a href="edit_toe.php?id=<?php echo $row['toeid'];?>"><button type="button" class="btn btn-xs btn-primary" ><i class="fa fa-pencil"></i></button></a>
-                  <a href="del_wt.php?id=<?php echo $row['toeid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="edit_toe.php?id=<?php echo $row['toeid'];?>"><button type="button" class="btn btn-xs btn-light" ><i class="fa fa-pencil"></i></button></a>
+                  <a href="del_wt.php?id=<?php echo $row['toeid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
                   
               <?php 

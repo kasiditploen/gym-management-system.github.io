@@ -252,9 +252,11 @@
                              
 <h1 class="color-red"><b></b>Maintenance Records (In Progress)</h1>
 
+<h5 class="color-red"><b></b>*** Don't forget to deactivate the equipment before using maintenance/repair function.***</h5>
+
 <div><a href="new_maintain.php?id=<?php echo $id;?>"><button class="btn btn-secondary" id="addProductModalBtn">Maintain/Repair</button></a>
                             
-                            <form action="del_all_machine.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
@@ -279,16 +281,32 @@
       
 
         <tbody>
+
         <?php
-              $query  = "select * from maintain where machineid='$id' and active='yes'";
+              $query  = "select * from maintain";
               $result = mysqli_query($con, $query);
-              $mid= $row['maintainid'];
+              
               $sno    = 1;
               
               
               if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                    $mid= $row['maintainid'];
+                    $maintainok= $row['maintainid'];
+                    
+                      
+                        
+                          
+                                ?>
+        <?php
+              $query  = "select * from maintain where active='yes' ";
+              $result = mysqli_query($con, $query);
+              
+              $sno    = 1;
+              
+              
+              if (mysqli_affected_rows($con) != 0) {
+                  while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                    
                     $uid   = $row['machineid'];
                     $query1  = "select * from enrolls_to_maintain where etmt_id='$etmt'  ORDER BY etmt_id DESC";
                     $result1 = mysqli_query($con, $query1);
@@ -300,7 +318,7 @@
                       if($result2){
                         $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
                       $uid1   = $row1['machineid'];
-                      $query2  = "select * from maintain where maintainid='$mid'and machineid='$uid1'";
+                      $query2  = "select * from maintain where machineid='$uid' and maintainid='$maintainok' and active='yes'";
                       $result3 = mysqli_query($con, $query3);
                       if($result3){
                         $row2=mysqli_fetch_array($result3,MYSQLI_ASSOC);
@@ -323,18 +341,17 @@
 
                   
                   <tr>
-                  <?php echo date("h:i:s")  ?>
-                  <?php echo $duration ?>
+                  
                   
                     <td style="width:10%;"><?php echo $sno; ?></td>
                     <td><?php if ($start <= date("H:i:s") and date("H:i:s")  <= $duration){
-                       $query="select * from newmachine where machineid='$uid1'";
-                       $con->query("UPDATE maintain SET active='yes' WHERE machineid='".$uid."'");
+                       $query="select * from maintain where maintainid='$maintainok'";
+                       $con->query("UPDATE maintain SET active='yes' WHERE maintainid='".$maintainok."'");
                  
                                             echo '<h1><span class="badge badge-dark">In Progress</span></h1>';
                                         } else  if ($start <= date("h:i:s") and date("h:i:s") >= $duration){
-                                          $query1="select * from newmachine where machineid='$uid1'";
-                       $con->query("UPDATE maintain SET active='no' WHERE machineid='".$uid."'");
+                                          $query1="select * from maintain where maintainid='$maintainok'";
+                       $con->query("UPDATE maintain SET active='no' WHERE maintainid='".$maintainok."'");
                 
                                             echo '<h1><span class="badge badge-success">Complete</span></h1>';
                                         }
@@ -344,8 +361,9 @@
                      <td><?php echo $row['maintainName']; ?></td>
                      <td><?php echo $row['machineid']; ?></td>
                      <td><h4><?php echo $row['mainday'],' days'; ?></h4></td>
-                     <td><h4><?php echo $row['cost'],' ฿'; ?></h4></td>
                      <td><h4><?php echo $row['duration'],' minutes'; ?></h4></td>
+                     <td><h4><?php echo $row['cost'],' ฿'; ?></h4></td>
+                     
                     
                        
 
@@ -393,6 +411,8 @@
             }
           }
         }
+      }
+    }
         
           
           ?>  

@@ -80,7 +80,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">Earning</label>
                                                 <div class="col-sm-9">
-                                                <input type="number" name="earning" id="boxx" maxlength="13" class="form-control" required pattern="^[0-9]+$" />
+                                                <input type="number" name="earning" step="0.01" id="boxx" maxlength="13" class="form-control" required pattern="^[0-9]+$" />
                                                 </div>
                                             </div>
                                         </div>
@@ -89,7 +89,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">Deduction</label>
                                                 <div class="col-sm-9">
-                                                <input type="number" name="deduction" id="boxx" maxlength="13" class="form-control" required pattern="^[0-9]+$" />
+                                                <input type="number" name="deduction" step="0.01" id="boxx" maxlength="13" class="form-control" required pattern="^[0-9]+$" />
                                                 </div>
                                             </div>
                                         </div>

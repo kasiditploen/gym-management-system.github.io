@@ -146,7 +146,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                                                 <label class="col-sm-3 control-label">SELECT NEW MEMBERSHIP</label>
                                                 <div class="col-sm-9">
                                                <select name="plan" id="plan" required onchange="myplandetail(this.value)" class="form-control">
-                    <option value="">===PLEASE SELECT MEMBERSHIP PACKAGE ===</option>
+                    
                     <?php
                         $query="select * from plan where active='yes' and plantype!='Hours' and plantype!='Sessions' and plantype!='Classes'";
                         $result=mysqli_query($con,$query);
@@ -177,7 +177,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                                                 
                                                <select name="ct" id="ct"  onchange="myplandetail2(this.value)" class="form-control">
                                                
-                    <option value="">===PLEASE SELECT Sessions PACKAGE===</option>
+                   
                     <?php
                         $query="select * from plan where plantype='Classes'";
                         $result=mysqli_query($con,$query);
@@ -207,7 +207,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                                                 <div class="col-sm-9">
                                                 
                                                <select name="pt" id="pt"  onchange="myplandetail3(this.value)" class="form-control">
-                    <option value="">===PLEASE SELECT Sessions PACKAGE===</option>
+                    
                     <?php
                         $query="select * from plan where plantype='Sessions'";
                         $result=mysqli_query($con,$query);

@@ -88,7 +88,7 @@ CREATE TABLE `address2` (
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `username` varchar(500) NOT NULL,
-  `email` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
   `fname` varchar(50) NOT NULL,
   `lname` varchar(500) NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `email`, `password`, `fname`, `lname`, `gender`, `dob`, `contact`, `address`, `image`, `created_on`, `utype`,`group_id`) VALUES
-(1, 'Kasidit P.', 'admin@admin.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Kasidit', 'Ploenthamakhun', 'Male', '1999-02-19', '+919090909090', 'Bangkok', LOAD_FILE('../assets/uploadImage/Profile/man1.png'), '2018-04-30','admin', 1);
+(1, 'darun007', 'admin@admin.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Darun', 'Kesrarat', 'Male', '1999-02-19', '+919090909090', 'Bangkok', LOAD_FILE('../assets/uploadImage/Profile/man1.png'), '2018-04-30','admin', 1);
 
 -- --------------------------------------------------------
 
@@ -453,7 +453,7 @@ CREATE TABLE `plan` (
   `planName` varchar(20) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `validity` varchar(20) DEFAULT NULL,
-  `amount` int(10) DEFAULT NULL,
+  `amount` float(10) DEFAULT NULL,
   `plantype` varchar(200) DEFAULT NULL,
   `active` varchar(255) DEFAULT NULL,
   `session` int(255) DEFAULT NULL
@@ -538,9 +538,9 @@ CREATE TABLE `plan2` (
 CREATE TABLE `salary` (
   `salaryid` varchar(20) NOT NULL,
   `trainerid` varchar(50) NOT NULL,
-  `earning` int(50) NOT NULL,
-  `deduction` int(50) NOT NULL,
-  `total` int(50) NOT NULL,
+  `earning` float(50) NOT NULL,
+  `deduction` float(50) NOT NULL,
+  `total` float(50) NOT NULL,
   `date_from` varchar(10) NOT NULL,
   `active` varchar(255) DEFAULT NULL
   
@@ -643,7 +643,7 @@ CREATE TABLE `maintain` (
   `machineid` varchar(255) DEFAULT NULL,
   `maintainName` varchar(200) NOT NULL,
   `description` varchar(200) NOT NULL,
-  `cost` varchar(200) NOT NULL,
+  `cost` float(20) NOT NULL,
   `mainday` varchar(100) NOT NULL,
   `duration` varchar(200) NOT NULL,
   `active` varchar(255) DEFAULT NULL
@@ -662,13 +662,13 @@ CREATE TABLE `maintain` (
 CREATE TABLE `toe` (
   `toeid` varchar(20) NOT NULL,
   `image` LONGBLOB NOT NULL,
-  `type` varchar(50) DEFAULT NULL,
-  `toeName` varchar(50) NOT NULL,
+  `type` varchar(100) DEFAULT NULL,
+  `toeName` varchar(400) NOT NULL,
   `description` varchar(200) NOT NULL,
   `brands` varchar(100) NOT NULL,
   `categories` varchar(8) NOT NULL,
   `vendors` varchar(100) NOT NULL,
-  `amount` int(10) NOT NULL,
+  `amount` float(10) NOT NULL,
   `contact` varchar(100) NOT NULL,
   `address` varchar(300) NOT NULL,
   `mobile` varchar(100) NOT NULL,
@@ -875,7 +875,7 @@ CREATE TABLE `users` (
   `lname` varchar(500) NOT NULL,
   `gender` varchar(8) NOT NULL,
   `mobile` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `dob` varchar(10) NOT NULL,
   `status` varchar(300) DEFAULT NULL,
   `goal` varchar(300) DEFAULT NULL,
@@ -896,7 +896,7 @@ CREATE TABLE `dayusers` (
   `lname` varchar(500) NOT NULL,
   `gender` varchar(8) NOT NULL,
   `mobile` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `joining_date` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -917,7 +917,7 @@ CREATE TABLE `trainers` (
   `lname` varchar(500) NOT NULL,
   `gender` varchar(8) NOT NULL,
   `mobile` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `dob` varchar(10) NOT NULL,
   `joining_date` varchar(10) NOT NULL,
   `availableday` varchar(300) NOT NULL,

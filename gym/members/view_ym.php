@@ -31,7 +31,7 @@
 
                     
                             <a href="new_toe.php"><button class="btn btn-primary" id="addProductModalBtn">Add Yoga Mats/Exercise Mats</button></a></div>
-                            <form action="del_all_machine.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>

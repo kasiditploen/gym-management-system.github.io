@@ -30,12 +30,12 @@
 
                     
                             <a href="new_category.php"><button class="btn btn-primary" id="addProductModalBtn">Add Category</button></a></div>
-                            <form action="del_all_category.php" method="POST">
+                            
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
         <tr>
-        <th style="width:1%;"><button type="submit" id="submit" name="stud_delete_multiple_btn" class="btn btn-danger">Delete</button></th>
+        
           <th style="width:1%;">S.No</th>
           <th style="width:10%;">Category ID</th>
           <th>Category</th>
@@ -59,8 +59,7 @@
                 ?>  
                   
                   <tr>
-                  <td style="width:10px; text-align: center;">
-                                                        <input type="checkbox" onclick="Enable(this, 'delete1')" name="category_delete_id[]" value="<?= $row['categoryid']; ?>">
+                  
                     <td><?php echo $sno ?></td>
                      <td><b><h3><?php echo$row ['categoryid']; ?></h3><b></td>
                      <td><b><h3><?php echo $row['categoryName'] ?></h3></b></td>

@@ -1,16 +1,16 @@
 <?php
 include('../constant/connect.php');
 
- $memID=$_POST['m_id'];
- $fname=$_POST['fname'];
- $lname=$_POST['lname'];
- $name=$_POST['name'];
- $email=$_POST['email'];
- $mobile=$_POST['mobile'];
- $gender=$_POST['gender'];
- $jdate=$_POST['jdate'];
- $domp=$_POST['domp'];
- $status=$_POST['status'];
+ $memID=mysqli_real_escape_string($con,$_POST['m_id']);
+ $fname=mysqli_real_escape_string($con,$_POST['fname']);
+ $lname=mysqli_real_escape_string($con,$_POST['lname']);
+ $name=mysqli_real_escape_string($con,$_POST['name']);
+ $email=mysqli_real_escape_string($con,$_POST['email']);
+ $mobile=mysqli_real_escape_string($con,$_POST['mobile']);
+ $gender=mysqli_real_escape_string($con,$_POST['gender']);
+ $jdate=mysqli_real_escape_string($con,$_POST['jdate']);
+ $domp=mysqli_real_escape_string($con,$_POST['domp']);
+ $status=mysqli_real_escape_string($con,$_POST['statud']);
  $plan=mysqli_real_escape_string($con,$_POST['plan']);
  $pt=mysqli_real_escape_string($con,$_POST['pt']);
  $ct=mysqli_real_escape_string($con,$_POST['ct']);

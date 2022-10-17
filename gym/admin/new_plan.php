@@ -106,7 +106,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">PACKAGE AMOUNT</label>
                                                 <div class="col-sm-9">
-                                                <input type="text" name="amount" id="planAmnt" placeholder="Enter package amount" class="form-control" required/>
+                                                <input type="text" name="amount" step="0.01" id="planAmnt" placeholder="Enter package amount" class="form-control" required/>
                                                 </div>
                                             </div>
                                         </div>
