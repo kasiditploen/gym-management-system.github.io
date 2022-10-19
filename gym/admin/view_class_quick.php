@@ -82,7 +82,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button>
                             <br></br>
                             <h2 class="color-black">Cardio </h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            <a href="new_class.php"><button class="btn btn-light">Add Class</button></a>
                             <div class="form-group">
                             <br><label for="" class="control-label">Current Class Sessions</label>
             
@@ -121,7 +121,6 @@ $thistrainer = $row['trainerid'];
           <th>Studio</th>
           <th>Days Of Week</th>
           <th>Date From</th>
-          <th>Date To</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -203,7 +202,6 @@ $thistrainer = $row['trainerid'];
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -263,7 +261,7 @@ $thistrainer = $row['trainerid'];
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">HIIT</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            <a href="new_class.php"><button class="btn btn-light">Add Class</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -293,7 +291,6 @@ $thistrainer = $row['trainerid'];
           <th>Studio</th>
           <th>Days Of Week</th>
           <th>Date From</th>
-          <th>Date To</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -375,7 +372,6 @@ $thistrainer = $row['trainerid'];
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -435,7 +431,7 @@ $thistrainer = $row['trainerid'];
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Dance</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            <a href="new_class.php"><button class="btn btn-light">Add Class</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -465,7 +461,6 @@ $thistrainer = $row['trainerid'];
           <th>Studio</th>
           <th>Days Of Week</th>
           <th>Date From</th>
-          <th>Date To</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -547,7 +542,6 @@ $thistrainer = $row['trainerid'];
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -607,7 +601,7 @@ $thistrainer = $row['trainerid'];
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Mind and Body</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            <a href="new_class.php"><button class="btn btn-light">Add Class</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -637,7 +631,6 @@ $thistrainer = $row['trainerid'];
           <th>Studio</th>
           <th>Days Of Week</th>
           <th>Date From</th>
-          <th>Date To</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -719,7 +712,6 @@ $thistrainer = $row['trainerid'];
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -779,7 +771,7 @@ $thistrainer = $row['trainerid'];
                  <div class="card">
                             <div class="card-body">
                             <h2 class="color-black">Cycling</h2></a>
-                            <a href="new_class.php"><button class="btn btn-primary">Add Class</button></a>
+                            <a href="new_class.php"><button class="btn btn-light">Add Class</button></a>
                             
                          
                                 <div class="table-responsive m-t-40">
@@ -809,7 +801,6 @@ $thistrainer = $row['trainerid'];
           <th>Studio</th>
           <th>Days Of Week</th>
           <th>Date From</th>
-          <th>Date To</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -891,7 +882,6 @@ $thistrainer = $row['trainerid'];
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>

@@ -11,7 +11,7 @@
 include('../constant/connect.php');
                      $classid=$_GET['id'];
                     
-                    $query6  = "SELECT * FROM classes c
+                    $query6  = "SELECT c.* FROM classes c
                                INNER JOIN trainers t ON t.trainerid=c.trainerid
                                
                                WHERE classid=".$_GET['id'];
@@ -31,10 +31,9 @@ include('../constant/connect.php');
                             $classtype     = $row['classtype'];         
                             $classcap   = $row['classcap'];
                             $desc=$row['description'];
-                            $studio=$row['studio'];
+                            $studio=$row['studios'];
                             $dow=$row['dow'];  
                             $date_from=$row['date_from'];
-                            $date_to=$row['date_to'];
                             $time_from=$row['time_from'];
                             $time_to=$row['time_to'];
                             $trainer=$row['username'];
@@ -106,7 +105,7 @@ include('../constant/connect.php');
                     <label class="col-sm-3 control-label"><h4><b>Class Type</b></h4></label>
                     <div class="col-sm-9">
                                 <select name="classtype" id="Classtype" required class="form-control">
-                                    <option value="">--Select Trainer Type--</option>
+                                    
                                     <option value="Cardio">Cardio</option>
                                     <option value="HIIT">HIIT</option>
                                     <option value="Dance">Dance</option>
@@ -157,7 +156,7 @@ include('../constant/connect.php');
                         $result=mysqli_query($con,$query);
                         if(mysqli_affected_rows($con)!=0){
                             while($row=mysqli_fetch_row($result)){
-                                echo "<option value=".$row[0].">".$row[1]."</option>";
+                                echo "<option data-custom-attribute=".$studio." value=".$row[0].">".$row[1]."</option>";
                             }
                         }
 
@@ -195,14 +194,11 @@ include('../constant/connect.php');
                                             </div> <div class="form-group">
                                             
                         
-						<label for="" class="control-label">Month From</label>
-						<input type="month" name="date_from" id="date_from" class="form-control" value='<?php echo $date_from?>'>
+						<label for="" class="control-label">Date Created</label>
+						<input type="date" name="date_from" id="date_from" class="form-control" readonly value='<?php echo $date_from?>'>
 					</div>
 
-					<div class="form-group">
-						<label for="" class="control-label">Month To</label>
-						<input type="month" name="date_to" id="date_to" class="form-control" value='<?php echo $date_to?>'>
-					</div>
+					
 
 					<div class="form-group">
 						<label for="" class="control-label">Time From</label>
@@ -286,8 +282,14 @@ include('../constant/connect.php');
 
 <script>
   $("#Studios").select2({
+    templateSelection: function (data, container) {
+    // Add custom attributes to the <option> tag for the selected option
+    $(data.element).attr('data-custom-attribute', data.customValue);
+    return data.text;
+  }
 });
     </script>
+    
     <script>
   $("#dow").select2({
 });

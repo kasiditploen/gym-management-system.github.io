@@ -23,6 +23,20 @@
           }
       }
       ?>
+
+<?php
+      
+      $query  = "select * from appointment where trainerid='$id'";
+      //echo $query;
+      $result = mysqli_query($con, $query);
+
+      if (mysqli_affected_rows($con) != 0) {
+          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+              $appointmentid = $row['$appointmentid'];
+            
+          }
+      }
+      ?>
   
   
  
@@ -135,7 +149,7 @@
 
               if (mysqli_affected_rows($con) != 0) {
                 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $appointmentid   = $row['appointmentid'];
+                  $appointmentid  = $row['appointmentid'];
                   $trainerid   = $row['trainerid'];
                   $userid   = $row['userid'];
                   $atimefrom = $row['time_from'];
@@ -172,6 +186,10 @@
                                     if($result5){
                                       $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                                       $amount=$row5['amount'];
+
+                                      $duplicate=mysqli_query($con,"select * from appointment where time_from LIKE '%$atimefrom%' and approved='yes'");
+                                      $duplicate1=mysqli_query($con,"select * from appointment where time_to LIKE '%$atimeto%'and approved='yes'");
+
                                 ?>
                     
                   
@@ -190,13 +208,28 @@ $force1 = 'no';
                          
                          
                          
-                        } else {
-                          echo '<p><a class="btn btn-red mneedbutton">UNAVAILABLE</a></p>';
+                        } else if($atimefromnew < $timefrom && $atimefromnew < $timeto){
+                          echo '<p><a class="btn btn-red mneedbutton">TIME CONFLICTED</a></p>';
                           $force1 = 'yes';
+                        } else {
+                          echo '<p><a class="btn btn-red mneedbutton">UNAVAILABLE TIME</a></p>';
                         }
+                        
+                        
+                        if (mysqli_num_rows($duplicate)>0){
+                          echo '<p><a class="badge badge-red badge-sm badge-pill ">TIME CONFLICTED</a></p>';
+
+                        } else {
+                          echo '';
+                        }
+
+                        
+                        
+                        
                          ?>
                          </td>
-                       <td><?php if($atimetonew <= $timeto && $atimetonew >= $timefrom ){
+                       <td>
+                         <?php if($atimetonew <= $timeto && $atimetonew >= $timefrom){
 $force2 ='no';
 echo $row['time_to'];
 
@@ -227,9 +260,16 @@ echo $row['time_to'];
                               <input type='hidden' name='username' value='<?php echo $username?>'/>
                               <input type='hidden' name='session' value='<?php echo $session?>'/>
                               <h6><input type='number' class="form-control" readonly name='amount' value='<?php echo $amount?>'/>Sessions</h6>
-                              <?php if(($atimefromnew >= $timefrom && $atimefromnew <= $timeto) and ($atimetonew <= $timeto && $atimetonew >= $timefrom ))
+                              <?php
+                              if (mysqli_num_rows($duplicate)<=0){
+
+                              
+                                 if(($atimefromnew >= $timefrom && $atimefromnew <= $timeto) and ($atimetonew <= $timeto && $atimetonew >= $timefrom))
+                              
                               {
                                 echo '<input type="submit" id="button1" value="Approve" class="btn btn-light btn-xs m-b-30 m-t-30"/></form>';
+                              }
+                                
                               } 
                               else{
                               echo '';
@@ -355,7 +395,7 @@ $trainerid=$row['trainerid'];
                   
                   
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                 <a href="del_appointment_quick.php?id=<?php echo $row['appointmentid'];?>&&amount=<?php echo $amount?>&&userid=<?php echo $userid?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -474,7 +514,7 @@ $trainerid=$row['trainerid'];
                   
                   
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                 <a href="del_appointment_quick.php?id=<?php echo $row['appointmentid'];?>&&amount=<?php echo $amount?>&&userid=<?php echo $userid?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -593,7 +633,7 @@ $trainerid=$row['trainerid'];
                   
                   
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                 <a href="del_appointment_quick.php?id=<?php echo $row['appointmentid'];?>&&amount=<?php echo $amount?>&&userid=<?php echo $userid?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -630,7 +670,7 @@ $trainerid=$row['trainerid'];
                          
                                 <div class="table-responsive m-t-40">
                                 
-                                    <table id="dt-bordered9" class="table table-bordered table-striped">
+                                    <table id="dt-bordered3" class="table table-bordered table-striped">
                                     
                                         <thead>
                                         <?php
@@ -711,7 +751,7 @@ $trainerid=$row['trainerid'];
                   
                   
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                 <a href="del_appointment_quick.php?id=<?php echo $row['appointmentid'];?>&&amount=<?php echo $amount?>&&userid=<?php echo $userid?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -760,173 +800,7 @@ $trainerid=$row['trainerid'];
   <h1 class="color-white mb-3 h1"><b>Private Class</b></h1>
 </div>
                 <div class="card">
-                            <div class="card-body">
-                            <button class="btn btn-dark" onclick="history.go(-1);"><i class="fas fa-arrow-left"></i><b></button></b>
-                            <h2 class="color-black">Personal Trainer (Approval Request Training)</h2></a>
                             
-                            
-                         
-                                <div class="table-responsive m-t-40">
-                               
-                                    <table id="myTable" class="table table-bordered table-striped">
-                                    
-                                        <thead>
-                                        <?php
-      $id     = $_GET['id'];;
-      $query  = "select * from trainers";
-      //echo $query;
-      $result = mysqli_query($con, $query);
-
-      if (mysqli_affected_rows($con) != 0) {
-          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-            $trainerid = $row['trainerid'];
-            $image = $row['image'];
-            $trainername = $row['username'];
-              $memid=$row['userid'];
-              $gender=$row['gender'];
-              $mobile=$row['mobile'];
-              $email=$row['email'];
-              $joinon=$row['joining_date'];
-              echo $name;
-          }
-      }
-      ?>
-                                        <?php
-      $id     = $_GET['id'];;
-      $query  = "select * from trainers WHERE trainerid='$id'";
-      //echo $query;
-      $result = mysqli_query($con, $query);
-
-      if (mysqli_affected_rows($con) != 0) {
-          while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-              $image = $row['image'];
-            $trainername = $row['username'];
-              $memid=$row['userid'];
-              $gender=$row['gender'];
-              $mobile=$row['mobile'];
-              $email=$row['email'];
-              $joinon=$row['joining_date'];
-              echo $name;
-          }
-      }
-      ?>
-        <tr>
-         <th>Sl.No</th>
-          <th>Appointment ID</th>
-          <th>Appointer</th>
-          <th>Class</th>
-          <th>Description</th>
-          <th>Studio</th>
-          <th>Appointment Date</th>
-          <th>Time From</th>
-          <th>Time To</th>
-          <th>By Trainer:</th>
-          <th>Action</th>
-        </tr>
-
-        
-              <!--  and dow LIKE '%Monday%' "use to spcify Monday" -->
-              
-      </thead>    
-
-      
-        <tbody>
-        <?php
-              $query  = "select * from privateclasses where approved='no' and trainerid='$id' and trainerid='$trainerid'";
-              //echo $query;
-              $result = mysqli_query($con, $query);
-              $sno    = 1;
-
-              if (mysqli_affected_rows($con) != 0) {
-                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                  $uid   = $row['privateclassid'];
-                  $classid   = $row['privateclassid'];
-                  $trainerid   = $row['trainerid'];
-                  $userid   = $row['userid'];
-
-                  $query2="select studioid,studioName from studio";
-                            $result2=mysqli_query($con,$query2);
-                            $query3="select trainerid,username from trainers";
-                            $result3=mysqli_query($con,$query3);
-                            $query4="select userid,username from users";
-                            $result4=mysqli_query($con,$query4);
-                            
-                       
-                      
-                            if($result2){
-                                $row2=mysqli_fetch_array($result2,MYSQLI_ASSOC);
-                                if($result3){
-                                    $row3=mysqli_fetch_array($result3,MYSQLI_ASSOC);
-                                    if($result4){
-                                      $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
-                                    
-                                ?>
-                    
-                  
-                    
-                    <tr>
-                    
-                      <td><?php echo $sno ?></td>
-                      <td><?php echo $row['privateclassid'] ?></td>
-                      <td><h3><?php echo $row4['username'] ?></h3></td>
-                       <td><?php echo $row['className'] ?></td>
-                       <td width='380'><?php echo $row['description'] ?></td>
-                       <td><?php echo $row2['studioName'] ?></td>
-                       <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['time_from'] ?></td>
-                       <td><?php echo $row['time_to'] ?></td>
-                       <td><?php echo $row3['username'] ?></td>
-                       
-                  
-                  
-                  
-                 <td>
-                  
-                 <form id="form3" action='submit_appointment.php' method='post'><input type='hidden' name='classid' value='<?php echo $classid;?>'/>
-                 
-                 <input type='hidden' name='privateclassid' value='<?php echo $classid;?>'/>
-                              <input type='hidden' name='className' value='<?php echo $name;?>'/>
-                              <input type='hidden' name='description' value='<?php echo $desc;?>'/>
-                              <input type='hidden' name='studios' value='<?php echo $studioid ?>'/>
-                              <input type='hidden' name='classtype' value='<?php echo $type;?>'/>
-                              <input type='hidden' name='dow' value='<?php echo $dow;?>'/>
-                              <input type='hidden' name='date_from' value='<?php echo $df;?>'/>
-                              <input type='hidden' name='date_to' value='<?php echo $dt ?>'/>
-                              <input type='hidden' name='time_from' value='<?php echo $tf;?>'/>
-                              <input type='hidden' name='time_to' value='<?php echo $tt;?>'/>
-                              <input type='hidden' name='trainerid' value='<?php echo $trainerid;?>'/>
-                              <input type='hidden' name='trainerName' value='<?php echo $trainername ?>'/>
-                              <input type='hidden' name='userid' value='<?php echo $userid?>'/>
-                              <input type='hidden' name='username' value='<?php echo $username?>'/>
-                              <input type='hidden' name='session' value='<?php echo $session?>'/>
-                              <input type='submit' id='button1' value='Approve' class="btn btn-light btn-xs m-b-30 m-t-30"/></form>
-                  <a href="del_privateclass_quick.php?id=<?php echo $row['privateclassid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
-                  
-              <?php 
-              $sno++; 
-              $msgid = 0;
-                          }
-                      }
-                    }
-                  }
-              }
-              
-            
-            
-        
-          
-        
-            
-          ?>  
-
-        </tbody>
-       
-                                      
-                                    </table>
-                                    
-                                </div>
-                            </div>
-                        </div>
                 
                 <!-- /# row -->
                 
@@ -1023,7 +897,7 @@ $trainerid=$row['trainerid'];
                   
                   
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_privateclass_quick.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -1145,7 +1019,7 @@ $trainerid=$row['trainerid'];
                   
                  
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_privateclass_quick.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -1268,7 +1142,7 @@ $trainerid=$row['trainerid'];
                   
                  
                  
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_privateclass_quick.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 
@@ -1389,7 +1263,7 @@ $trainerid=$row['trainerid'];
                  <td>
                   
                   
-                  <a href="del_class.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
+                  <a href="del_privateclass_quick.php?id=<?php echo $row['classid'];?>"><button type="button" class="btn btn-xs btn-light" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash"></i></button></a></td></tr>
                   
               <?php 
               $sno++; 

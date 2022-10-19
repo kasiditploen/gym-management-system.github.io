@@ -18,14 +18,29 @@ $classtype= $_POST['classtype'];
 $session= $_POST['session'];
 $approved= $_POST['approved'];
 
+date_default_timezone_set("Asia/Bangkok"); 
+$$cdate=date("Y-m-d H:i");
+$cdatex=date("Y-m-d");
+$tomorrow = date("Y-m-d", strtotime('tomorrow'));
+$compare_date=date("Y-m-d H:i");
 
-$duplicate=mysqli_query($con,"select * from trainertt where trainerid='$trainer' and time_from='$time_from' and time_to='$time_to'");
-if (mysqli_num_rows($duplicate)>0)
+
+
+
+
+$duplicate1=mysqli_query($con,"select * from privateclasses where trainerid='$trainer' and time_from='$time_from' and time_to='$time_to' and date_from LIKE '$cdatex%'");
+
+
+if (mysqli_num_rows($duplicate1)>0)
 {
   echo "<head><script>alert('Schedule Conflict!!! ');</script></head></html>";
   echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
 echo mysqli_error($db);
 }
+
+
+
+
 //inserting into users table
 date_default_timezone_set("Asia/Bangkok"); 
 $date_to_now = (date("Y-m-d",strtotime($date_to.'-1 +1 month -1 day')));

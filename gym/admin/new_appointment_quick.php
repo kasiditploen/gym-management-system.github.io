@@ -61,7 +61,7 @@ include('../constant/connect.php');
       $query  = "select * from users WHERE userid='$id'";
       $result = mysqli_query($con, $query);
 
-      if($am > 0){
+      
 
       
 
@@ -78,10 +78,7 @@ include('../constant/connect.php');
               echo $name;
           }
       }
-    } else {
-        echo "<head><script>alert('Not Enough Session Point to take a personal training class. ');</script></head></html>";
-  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
-    }
+   
       ?>
 
 <?php
@@ -124,7 +121,7 @@ include('../constant/connect.php');
               if (mysqli_affected_rows($con) != 0) {
                   while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                     $uid  = $row['userid'];
-                      $query1  = "select * from enrolls_to WHERE uid='$uid'";
+                      $query1  = "select * from enrolls_to WHERE uid='$id'";
                       $result1 = mysqli_query($con, $query1);
                       
                       if (mysqli_affected_rows($con) == 1) {
@@ -155,7 +152,7 @@ include('../constant/connect.php');
                             $row4=mysqli_fetch_array($result4,MYSQLI_ASSOC);
                             $planname1=$row4['planName'];
                             $sessionid=$row3['sessionid'];
-                            $query5="select * from csessions where userid='$uid'and renewal='yes'";
+                            $query5="select * from csessions where userid='$id'and renewal='yes'";
                           $result5=mysqli_query($con,$query5);
                           if($result5){
                             $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
@@ -258,6 +255,16 @@ include('../constant/connect.php');
                                   if($result19){
                                     $row19=mysqli_fetch_array($result19,MYSQLI_ASSOC);
                                     $timefrom1=$row19['time_from'];
+
+                                    if($sessioncount <= 0){
+                                      echo "<head><script>alert('Not Enough Session Point to take a personal training class. ');</script></head></html>";
+                                      echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+      
+
+                                      
+                                    } 
+                                        
+                                    
 
                                     }
                             
@@ -386,7 +393,7 @@ include('../constant/connect.php');
                     <label class="col-sm-3 control-label"><h4><b>Class Type</b></h4></label>
                     <div class="col-sm-9">
                                 <select name="privateclasstype" id="privateclasstype" required class="form-control">
-                                    <option value="">--Select Trainer Type--</option>
+                                    
                                     <option value="Strength Training">Strength Training</option>
                                     <option value="Combat Sports">Combat Sports</option>
                                     <option value="Dance">Dance</option>
@@ -745,7 +752,6 @@ const arrayuse =  [nine9D];
 
   $("#timefrom").datetimepicker({
     format: "yyyy-mm-dd h",
-    hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
     numberOfMonths: 3,
         showButtonPanel: true,
         startDate: new Date(),
@@ -759,7 +765,6 @@ const arrayuse =  [nine9D];
 
     $("#timeto").datetimepicker({
       format: "yyyy-mm-dd h",
-      hoursDisabled: [0,1,2,3,4,5,6,7,8,22,23],
       numberOfMonths: 3,
         showButtonPanel: true,
         startDate: new Date(),

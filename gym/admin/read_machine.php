@@ -122,8 +122,9 @@
                                             
                                 ?>
       </h3>
+      
                                 <div class="table-responsive m-t-40">
-                                    <table class="table table-bordered table-striped">
+                                    <table  class="table table-bordered table-striped">
                                         <thead>
         <tr>
         <th>Machine Photo</th>
@@ -163,7 +164,7 @@
                                     <br>
                                     <br>
                                     <h3>Payment history of : - <?php echo $name."(ALL)";?></h3>
-                                               <table class="table table-bordered table-striped">
+                                               <table id="myTable"  class="table table-bordered table-striped">
                                         <thead>
         <tr>
          <th>Sl.No</th>

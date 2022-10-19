@@ -45,6 +45,14 @@ $trainerid= $_POST['trainerid'];
 $sessionid= $_POST['session'];
 $sdate= $_POST['sdate'];
 
+if($sdate <= $cdate and $tf >= $chour and $tt >= $chour) {
+    echo "<head><script>alert('You cannot book the ongoing or ended class within the same day.');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+}
+
+
+
 date_default_timezone_set("Asia/Bangkok"); 
         $day=date("Y-m-d");
         $cdate=date('Y-m-d');

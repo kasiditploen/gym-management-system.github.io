@@ -84,8 +84,7 @@ $userid = $row['userid'];
           <th>Description</th>
           <th>Studio</th>
           <th>Days Of Week</th>
-          <th>Date From</th>
-          <th>Date To</th>
+          <th>Date Created</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -167,7 +166,6 @@ $userid = $row['userid'];
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -253,8 +251,7 @@ $userid = $row['userid'];
           <th>Description</th>
           <th>Studio</th>
           <th>Days Of Week</th>
-          <th>Date From</th>
-          <th>Date To</th>
+          <th>Date Created</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -336,7 +333,6 @@ $userid = $row['userid'];
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -422,8 +418,7 @@ $userid = $row['userid'];
           <th>Description</th>
           <th>Studio</th>
           <th>Days Of Week</th>
-          <th>Date From</th>
-          <th>Date To</th>
+          <th>Date Created</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -505,7 +500,6 @@ $userid = $row['userid'];
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -591,8 +585,7 @@ $userid = $row['userid'];
           <th>Description</th>
           <th>Studio</th>
           <th>Days Of Week</th>
-          <th>Date From</th>
-          <th>Date To</th>
+          <th>Date Created</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -674,7 +667,6 @@ $userid = $row['userid'];
                      <td><?php echo $row2['studioName'] ?></td>
                      <td><?php echo$row ['dow']; ?></td>
                      <td><?php echo $row['date_from'] ?></td>
-                     <td><?php echo $row['date_to'] ?></td>
                      <td><?php echo $row['time_from'] ?></td>
                      <td><?php echo $row['time_to'] ?></td>
                      <td><?php echo $row3['username'] ?></td>
@@ -760,8 +752,7 @@ $userid = $row['userid'];
           <th>Description</th>
           <th>Studio</th>
           <th>Days Of Week</th>
-          <th>Date From</th>
-          <th>Date To</th>
+          <th>Date Created</th>
           <th>Time From</th>
           <th>Time To</th>
           <th>By Trainer:</th>
@@ -843,7 +834,6 @@ $userid = $row['userid'];
                        <td><?php echo $row2['studioName'] ?></td>
                        <td><?php echo$row ['dow']; ?></td>
                        <td><?php echo $row['date_from'] ?></td>
-                       <td><?php echo $row['date_to'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>

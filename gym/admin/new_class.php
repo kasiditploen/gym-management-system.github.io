@@ -101,7 +101,7 @@ $dow_arr = !empty($dow) ? explode(',',$dow) : '';
                     <label class="col-sm-3 control-label"><h4><b>Class Type</b></h4></label>
                     <div class="col-sm-9">
                                 <select name="classtype" id="Classtype" required class="form-control">
-                                    <option value="">--Select Trainer Type--</option>
+                                   
                                     <option value="Cardio">Cardio</option>
                                     <option value="HIIT">HIIT</option>
                                     <option value="Dance">Dance</option>

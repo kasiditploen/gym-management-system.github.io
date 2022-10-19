@@ -21,15 +21,34 @@ $pid=mysqli_real_escape_string($con,$_POST['pid']);
 $one= 1;
 $output = $amount-$one;
 date_default_timezone_set("Asia/Bangkok"); 
-$cdate=date("d M Y H:i");
-$tomorrow = date("d-m-Y", strtotime('tomorrow'));
-$compare_date=date("d M Y");
+$cdate=date("Y-m-d H:i");
+$cdatex=date("Y-m-d");
+$tomorrow = date("Y-m-d", strtotime('tomorrow'));
+$compare_date=date("Y-m-d H:i");
 
   if ($amount <= 0){
     echo "<head><script>alert('No more session left. Please renew your class package. ');</script></head></html>";
     echo "<meta http-equiv='refresh' content='0; url=view_attendance.php'>";
   
   }
+
+  if ($time_from == $time_to){
+    echo "<head><script>alert('You cannot select this time period!!! ');</script></head></html>";
+    echo "<meta http-equiv='refresh' content='0; url=view_attendance.php'>";
+	echo mysqli_error($db);
+  }
+
+  
+
+$duplicate1=mysqli_query($con,"select * from privateclasses where trainerid='$trainer' and time_from='$time_from' and time_to='$time_to' and date_from LIKE '$cdatex%'");
+
+
+if (mysqli_num_rows($duplicate1)>0)
+{
+  echo "<head><script>alert('Schedule Conflict!!! ');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+}
 //inserting into private table
 $query="INSERT INTO privateclasses (privateclassid,className,description,userid,studios,dow,date_from,time_from,time_to,trainerid,classtype,active,approved) values('$classid','$name','$desc','$user','$studio','$dow','$date_from','$time_from','$time_to','$trainer','$classtype','yes','yes')";
 $query1="update sessions set amount='".$output."'where userid='".$user."'";

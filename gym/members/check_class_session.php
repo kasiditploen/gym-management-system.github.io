@@ -228,7 +228,7 @@ $tomorrow = date("l", $unixTimestamptom);
                     echo '<p><a class="btn btn-sm btn-danger">FULL</a></p>';
                     
                   } else {
-                    echo '<form id="form3" action=confirm_booking.php method=post><input type=hidden name=classid value='.$classid.'/>
+                    echo '<form id="form3" action="confirm_booking.php" method=post><input type=hidden name=classid value='.$classid.'/>
                   
                     <input type="hidden" name="classid" value='.$classid.'/>
                     <input type="hidden" name="className" value=' .$name.'/>

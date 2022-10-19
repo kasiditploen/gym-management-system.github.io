@@ -96,7 +96,7 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                             </div>
                             <div class="card-body">
                                 <div class="input-states">
-                                    <form class="form-horizontal" method="POST"  name="userform" enctype="multipart/form-data" action="submit_payments.php" id="form1" name="form1">
+                                    <form class="form-horizontal" method="POST"  name="userform" enctype="multipart/form-data" action="submit_payments_m.php" id="form1" name="form1">
                                     <div class="form-group">
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">MEMBERSHIP ID</label>
@@ -127,23 +127,14 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">CURRENT PT SESSION</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" name="prevPlan" id="boxx" value="<?php echo $planName2; ?>" readonly class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">CURRENT CLASS SESSION</label>
-                                                <div class="col-sm-9">
-                                                <input type="text" name="prevPlan" id="boxx" value="<?php echo $planName3; ?>" readonly class="form-control" required/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
+
+                                        
+
+
+                                    
 
                                         <div class="form-group">
                                             <div class="row">
@@ -173,71 +164,9 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
                                         </div>
                                     </div>
 
-
-                                    <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">SELECT NEW Class PACKAGE</label>
-                                                <div class="col-sm-9">
-                                                
-                                               <select name="ct" id="ct"  onchange="myplandetail2(this.value)" class="form-control">
-                                               
-                                               <option value="">===PLEASE SELECT Class Sessions PACKAGE===</option>
-                    <?php
-                        $query="select * from plan where plantype='Classes'";
-                        $result=mysqli_query($con,$query);
-                        if(mysqli_affected_rows($con)!=0){
-                            while($row=mysqli_fetch_row($result)){
-                                echo "<option value=".$row[0].">".$row[1]."</option>";
-                            }
-                        }
-
-                    ?>
-                    
-                </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div id="plandetls2">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                            <div class="row">
-                                                <label class="col-sm-3 control-label">SELECT Personal Training PACKAGE</label>
-                                                <div class="col-sm-9">
-                                                
-                                               <select name="pt" id="pt"  onchange="myplandetail3(this.value)" class="form-control">
-                                               <option value="">===PLEASE SELECT Sessions PACKAGE===</option>
-                    <?php
-                        $query="select * from plan where plantype='Sessions'";
-                        $result=mysqli_query($con,$query);
-                        if(mysqli_affected_rows($con)!=0){
-                            while($row=mysqli_fetch_row($result)){
-                                echo "<option value=".$row[0].">".$row[1]."</option>";
-                            }
-                        }
-
-                    ?>
-                    
-                </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div id="plandetls3">
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     
-                                        <button type="submit" name="submit" id="submit" value="ADD PAYMENT" class="btn btn-primary btn-flat m-b-30 m-t-30">ADD PAYMENT</button>
-                                         <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-primary btn-flat m-b-30 m-t-30">Reset</button>
+                                        <button type="submit" name="submit" id="submit" value="ADD PAYMENT" class="btn btn-light btn-flat m-b-30 m-t-30">ADD PAYMENT</button>
+                                         <button type="reset" name="reset" id="reset" value="Reset" class="btn btn-light btn-flat m-b-30 m-t-30">Reset</button>
 
                 
                                     </form>

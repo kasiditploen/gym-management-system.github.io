@@ -18,9 +18,46 @@ $classtype= $_POST['classtype'];
 $session= $_POST['session'];
 $classcap= $_POST['classcap'];
 
+$thisSunday = strtotime('this sunday');
+$thisMonday = strtotime('this monday');
+$thisTuesday = strtotime('this tuesday');
+$thisWednesday = strtotime('this wednesday');
+$thisThursday = strtotime('this thursday');
+$thisFriday = strtotime('this friday');
+$thisSaturday = strtotime('this saturday');
+$nextSunday = strtotime('next sunday');
+				$nextMonday = strtotime('next monday');
+				$nextTuesday = strtotime('next tuesday');
+				$nextWednesday = strtotime('next wednesday');
+				$nextThursday = strtotime('next thursday');
+				$nextFriday = strtotime('next friday');
+				$nextSaturday = strtotime('next saturday');
+
+				$sundayna = date("Y-m-d", $thisSunday);
+				$nextsundayna = date("Y-m-d", $nextSunday);
+
+				$m = date("Y-m-d", $thisMonday);
+				$nextm = date("Y-m-d", $nextMonday);
+
+				$t = date("Y-m-d", $thisTuesday);
+				$nextt = date("Y-m-d", $nextTuesday);
+
+				$w = date("Y-m-d", $thisWednesday);
+				$nextw = date("Y-m-d", $nextWednesday);
+
+				$th = date("Y-m-d", $thisThursday);
+				$nextth = date("Y-m-d", $nextThursday);
+
+				$f = date("Y-m-d", $thisFriday);
+				$nextf = date("Y-m-d", $nextFriday);
+
+				$s = date("Y-m-d", $thisSaturday);
+				$nexts = date("Y-m-d", $nextSaturday);
 
 
-$duplicate=mysqli_query($con,"select * from trainertt where trainerid='$trainer' and time_from='$time_from' and time_to='$time_to'");
+$duplicate=mysqli_query($con,"select * from trainertt where trainerid='$trainer' and time_from='$time_from' and time_to='$time_to' ");
+
+
 if (mysqli_num_rows($duplicate)>0)
 {
   echo "<head><script>alert('Schedule Conflict!!! ');</script></head></html>";

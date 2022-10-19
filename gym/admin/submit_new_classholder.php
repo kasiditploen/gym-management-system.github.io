@@ -1,6 +1,17 @@
 <?php
 include('../constant/connect.php');
 
+date_default_timezone_set("Asia/Bangkok"); 
+        $day=date("Y-m-d");
+        $cdate=date('Y-m-d');
+        $chour=date('H:i');
+        $y1date=date('Y-m-d',strtotime('- 1 days'));
+        $y2date=date('Y-m-d',strtotime('- 2 days'));
+        $y3date=date('Y-m-d',strtotime('- 3 days'));
+        $y4date=date('Y-m-d',strtotime('- 4 days'));
+        $y5date=date('Y-m-d',strtotime('- 5 days'));
+        $y6date=date('Y-m-d',strtotime('- 6 days'));
+        $y7date=date('Y-m-d',strtotime('- 7 days'));
 
 
 $classid =$_GET['ci'];
@@ -20,23 +31,50 @@ $amount= $_GET['am'];
 $csession= $_GET['cs'];
 $pid= $_GET['pid'];
 date_default_timezone_set("Asia/Bangkok"); 
-$tomorrow = date("d-m-Y", strtotime('tomorrow'));
-  $compare_date=date("d M Y");
-  $cdate=date("d M Y H:i"); //current date
+$tomorrow = date("Y-m-d", strtotime('tomorrow'));
+  $compare_date=date("Y-m-d");
+  $cdate=date("Y-m-d"); //current date
 $one= 1;
 $output = $amount-$one;
 date_default_timezone_set("Asia/Bangkok"); 
 $cdate=date('Y-m-d');
+
+$queryx  = "select * from classholder WHERE userid='$id'";
+            $result = mysqli_query($con, $queryx);
+           
+
+            if ($result) {
+                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                  $timexfrom = $row['time_from'];
+				  $timexto = $row['time_to'];
+			}
+
+$duplicate=mysqli_query($con,"select * from classholder where userid ='$user' and classid ='$classid' and created_date LIKE '%$cdate%'");
+$duplicate1=mysqli_query($con,"select * from classholder where userid ='$user' and classid ='$classid' and created_date LIKE '%$cdate%' and time_from='$timexfrom' and time_to='$timexto'");
 
 if ($amount <= 0){
     echo "<head><script>alert('No more session left. Please renew your class package. ');</script></head></html>";
     echo "<meta http-equiv='refresh' content='0; url=view_attendance.php'>";
 	echo "error: ".mysqli_error($con);
 	
-  } else {
+  } else if($chour >= $time_from and $chour >= $time_to) {
+    echo "<head><script>alert('You cannot book the ongoing or ended class within the same day.');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+} else if (mysqli_num_rows($duplicate)>0)
+{
+  echo "<head><script>alert('You have already register this class already.');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+} else if (mysqli_num_rows($duplicate1)>0)
+{
+  echo "<head><script>alert('Schedule Conflict!!!');</script></head></html>";
+  echo "<meta http-equiv='refresh' content='0; url=".$_SERVER['HTTP_REFERER']."'>";
+echo mysqli_error($db);
+} else {
 	$query="INSERT INTO classholder (classholderid,classid,userid,trainerid,active,created_date,time_from,time_to) values('$classholderid','$classid','$user','$trainer','yes','$cdate','$time_from','$time_to')";
 	$query1="update csessions set amount='".$output."'where userid='".$user."'";
-  }
+  
 
 //inserting into private table
 
@@ -77,6 +115,7 @@ $result1=mysqli_query($con,$query1);
 		}
             
           
+	}
 
          
         

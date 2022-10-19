@@ -297,47 +297,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                          <li><a href="profile.php" aria-expanded="false"><i class="fas fa-cogs fa-lg"></i><i></i><span class="hide-menu"><b>Admin Profile</b></span></a></li>
                          
 
-                         <div class="hide-menu card  bg-image " style="
-    background-image: url('https://raw.githubusercontent.com/kasiditploen/picturesaver/main/black13.jpg' );
-    height: auto; width: auto;">
-                
-                <div class="col-md-3 align-self-left">
-                
-                 </div>
-
-                 <!-- <div class="row"> -->
-                  
-                 <div class="col-md-16 justify-content-center">
-                 <h1><b>Contents</b></h1>
-                  
-                 <a href="view_checkin.php" class="btn btn-lg btn-white"><b> Today's Checkin<span class="badge badge-pill badge-dark "><h6 class="color-white mb-0 h3"><?php
-                            $query = "select COUNT(*) from checkin where created_date='$cdate'";
-
-                            //echo $query;
-                            $result  = mysqli_query($con, $query);
-                            $i = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h6></span></a></span></a></span></a></li>
-                            <a href="over_members_month.php" class="btn btn-lg btn-white"><b> Today's Newcomer<br><span class="badge badge-pill badge-dark"><h6 class="color-white mb-0 h3"><?php
-                            $query = "select COUNT(*) from users where joining_date='$cdate'";
-
-                            //echo $query;
-                            $result  = mysqli_query($con, $query);
-                            $i = 1;
-                            if (mysqli_affected_rows($con) != 0) {
-                                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                                    echo $row['COUNT(*)'];
-                                }
-                            }
-                            $i = 1;
-                            ?></h6></span></a></span></a></span></a></li>
-                 </div>
-                 </div>
+                         
                  
                    
                 </nav>

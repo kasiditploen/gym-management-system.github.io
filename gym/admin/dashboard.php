@@ -61,6 +61,7 @@
         date_default_timezone_set("Asia/Bangkok"); 
         $day=date("Y-m-d");
         $cdate=date('Y-m-d');
+        $cdatex=date('Y-m-d H:i');
         $y1date=date('Y-m-d',strtotime('- 1 days'));
         $y2date=date('Y-m-d',strtotime('- 2 days'));
         $y3date=date('Y-m-d',strtotime('- 3 days'));
@@ -308,7 +309,6 @@ $dayOfWeek = date("l", $unixTimestamp);
         <th style="width:1%;"class="color-black mb-3 h6">Sl.No</th>
         <th style="width:10%;" class="color-black mb-3 h6">Package</th>
           <th style="width:10%;"class="color-black mb-3 h6">Image</th>
-          <th style="width:10%;"class="color-black mb-3 h6">Member ID</th>
           <th style="width:10%;"class="color-black mb-3 h6">Full Name</th>
           <th style="width:10%;"class="color-black mb-3 h6">Nationality</th>
           <th style="width:10%;"class="color-black mb-3 h6">Contact</th>
@@ -378,7 +378,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                           if($result5){
                             $row5=mysqli_fetch_array($result5,MYSQLI_ASSOC);
                             $pid2=$row5['pid'];
-                            $csessions=$row5['csessionsid'];
+                            $csessions=$row5['csessionid'];
                             $amount1=$row5['amount'];
                             $expire2=$row5['expire'];
                             $pdate2=$row5['paid_date'];
@@ -418,7 +418,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                   $bookedclassname=$row11['className'];
                                   $tfrom1=$row11['time_from'];
                                   $tto1=$row11['time_to'];
-                                  $query12="select *,COUNT(ch.userid) from classholder ch
+                                  $query12="select *,COUNT(ch.userid),ch.time_to as timing from classholder ch
                                   inner join  users u ON u.userid=ch.userid
                                   inner join  classes c ON c.classid=ch.classid
                                    where ch.userid='$uid' and ch.classid=c.classid and created_date LIKE '%$cdate%'";
@@ -432,6 +432,9 @@ $dayOfWeek = date("l", $unixTimestamp);
                                   $create_date1=$row12['created_date'];
                                   $tfrom2=$row12['time_from'];
                                   $tto2=$row12['time_to'];
+                                  $timing=$row12['timing'];
+                                  $active=$row12['active'];
+                                  $classholderid=$row12['classholderid'];
                                   $query13="select * from classholder where userid='$userid12'  and classid='$classid1' and created_date LIKE '$cdate%'";
                                 $result13=mysqli_query($con,$query13);
                                 if($result13){
@@ -473,11 +476,55 @@ $dayOfWeek = date("l", $unixTimestamp);
                                 if($result18){
                                   $row18=mysqli_fetch_array($result18,MYSQLI_ASSOC);
                                   $countuser=$row18['countme'];
+                                  $query19="select * from attendance  WHERE userid='$uid'";
+                                $result19=mysqli_query($con,$query19);
+                                if($result19){
+                                  $row19=mysqli_fetch_array($result19,MYSQLI_ASSOC);
+                                  $attendanceid=$row19['attendanceid'];
+                                  $expire19=$row19['expire'];
+                                  
+                                  $query20="select * from appointment where userid='$uid' and trainerid='$trainerid' and approved='yes' and  time_from LIKE '%$cdate%' ";
+                              $result20=mysqli_query($con,$query20);
+                              if($result20){
+                                $row20=mysqli_fetch_array($result20,MYSQLI_ASSOC);
+                                $classnamea=$row20['className'];
+                                $time_froma=$row20['time_from'];
+                                $time_toa=$row20['time_to'];
 
 
                                         mysqli_real_escape_string($con, $uid);
 
+                                        
+                                        date_default_timezone_set("Asia/Bangkok"); 
+                                        $day=date("Y-m-d");
+                                        $cxdate=date('H:i');
+                                        $y1date=date('Y-m-d',strtotime('- 1 days'));
+                                        $y2date=date('Y-m-d',strtotime('- 2 days'));
+                                        $y3date=date('Y-m-d',strtotime('- 3 days'));
+                                        $y4date=date('Y-m-d',strtotime('- 4 days'));
+                                        $y5date=date('Y-m-d',strtotime('- 5 days'));
+                                        $y6date=date('Y-m-d',strtotime('- 6 days'));
+                                        $y7date=date('Y-m-d',strtotime('- 7 days'));
+                                
+                                
+                                        $unixTimestamp = strtotime($cxdate);
+                                        $expirec19 = strtotime($expire19);
+                                
+                                
+                                //Get the day of the week using PHP's date function.
+                                $hourman = date("H:i", $unixTimestamp);
+                                $dayman = date("Y-m-d", $expirec19);
+                              
+                                if($create_date1 >= $day and $hourman >= $timing ){
+                                  $query2="select * from classholder where classholderid='$classholderid'";
+                                  $query2=$con->query("UPDATE classholder SET active='no' WHERE classholderid='".$classholderid."'");
+                                } 
 
+                                if($dayman <= $day){
+                                  $query3="select * from attendance where attendanceid='$attendanceid'";
+                                  $query3=$con->query("UPDATE attendance SET active='no' WHERE attendanceid='".$attendanceid."'");
+                                } 
+                                
                                         
 
                                ?>
@@ -492,9 +539,9 @@ $dayOfWeek = date("l", $unixTimestamp);
 
                   
                             ?>
+                            
                           
                             
-                                
                             
                             
                     
@@ -529,12 +576,29 @@ $dayOfWeek = date("l", $unixTimestamp);
         <li class="list-group-item"><h1 class="color-black"><b>Membership:</b><span class="badge badge-color blue"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4></li>
         </ul>';
       }else if(strtotime($diff2)<=7 && strtotime($today) < strtotime($expire)){
-        echo '<h4>Membership:<span class="badge badge-warning"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4>';
+        echo '<ul class="list-group list-group-flush">
+        <li class="list-group-item"><h1 class="color-black"><b>Membership:</b><span class="badge badge-color blue"><h6 class="color-white">'.$planname.'</h6> '.$diff2.'  Days Left</span></h4></li>
+        </ul>';
         }else {if(empty($expire)){
-          echo '<h4><span class="badge badge-dark"><h6 class="color-white">No Membership</h6></span></h4>';
+          echo '<ul class="list-group list-group-flush">
+        <li class="list-group-item"><h1 class="color-black"><b>Membership:</b><span class="badge badge-danger"><h6 class="color-white">EXPIRED</span></h4>
+        <form id="form3" action="make_payments_m.php" method="post"><input type="hidden" name="userID" value='.$uid.'>
+                          <input type="hidden" name="planID" value='.$planid.'/>
+                          
+                          <a href="make_payments_m.php?id='.$row['userid'].'"><input type="submit" class="btn btn-xs btn-light" value="RENEW MEMBERSHIP" /><b></b></form></a></br></li>
+        
+        </ul>';
         
         }else if(strtotime($diff2)<=0 && strtotime($today) >= strtotime($expire)){{
-          echo '<h4>Membership:<span class="badge badge-danger"><h6 class="color-white">'.$planname.'</h6>  Expired</span></h4>';
+          echo '<ul class="list-group list-group-flush">
+          <li class="list-group-item"><h1 class="color-black"><b>Membership:</b><span class="badge badge-danger"><h6 class="color-white">EXPIRED</span></h4></li>
+          <form id="form3" action="make_payments_m.php" method="post"><input type="hidden" name="userID" value='.$uid.'>
+                          <input type="hidden" name="planID" value='.$planid.'/>
+                          
+                          <a href="make_payments_m.php?id='.$row['userid'].'"><input type="submit" class="btn btn-xs btn-light" value="RENEW MEMBERSHIP" /><b></b></form></a></br></li>
+          
+          
+          </ul>';
         }
       
         }
@@ -562,11 +626,14 @@ $dayOfWeek = date("l", $unixTimestamp);
           
           
           </ul>';
-          }else {if(empty($expire1)){
+          }else {if(empty($expire1)|| $sessioncount <= 0){
             echo '<ul class="list-group list-group-flush">
             <li class="list-group-item">
-            <h1 class="color-black"><b>PT Sessions:</h3><span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname1.'</h4><span class="badge badge-color blue">'.$diff4.'  Days Left </b></h3></br></li>
-            
+            <h1 class="color-black"><b>PT Sessions:</h3><span class="badge badge-danger"><h4 class="color-white">'.$sessioncount.'&nbsp;'.'NO Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname1.'</h4></h3>
+            <form id="form2" action="make_payments_pt.php" method="post"><input type="hidden" name="userID" value='.$uid.'>
+                          <input type="hidden" name="planID" value='.$planid.'/>
+                          <input type="hidden" name="pt" value='.$sessioncount.'/>
+                          <a href="make_payments_pt.php?id='.$row['userid'].'"><input type="submit" class="btn btn-xs btn-light " value="Buy PT Session Only" /><b></b></form></a></br></li>
             
             </ul>';
           
@@ -574,7 +641,10 @@ $dayOfWeek = date("l", $unixTimestamp);
             echo '<ul class="list-group list-group-flush">
           <li class="list-group-item">
           <h1 class="color-black"><b>PT Sessions:</h3><span class="badge badge-color red"><h4 class="color-white">'.$sessioncount.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname1.'</h4><span class="badge badge-color red">EXPIRED</b></h3></br></li>
-          
+          <form id="form3" action="make_payments_pt.php" method="post"><input type="hidden" name="userID" value='.$uid.'>
+                          <input type="hidden" name="planID" value='.$planid.'/>
+                          <input type="hidden" name="pt" value='.$sessioncount.'/>
+                          <a href="make_payments_pt.php?id='.$row['userid'].'"><input type="submit" class="btn btn-xs btn-light" value="Buy PT Session Only" /><b></b></form></a></br></li>
           
           </ul>';
           }
@@ -606,18 +676,28 @@ $dayOfWeek = date("l", $unixTimestamp);
           }else {if(empty($expire2)){
             echo '<ul class="list-group list-group-flush">
             <li class="list-group-item">
-            <h2 class="color-black"><b>Group Classes:</b></h3><span class="badge badge-color grey"><h4 class="color-white">'.$sessioncount1.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname2.'</h4><span class="badge badge-color blue">'.$diff6.'  Days Left </b></h3></br></li>
-            
+            <h2 class="color-black"><b>Group Classes:</b></h3><span class="badge badge-danger"><h4 class="color-white">'.$sessioncount1.'&nbsp;'.'No Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname2.'</h4></h3>
+            <form id="form2" action="make_payments_ct.php" method="post"><input type="hidden" name="userID" value='.$uid.'>
+                          <input type="hidden" name="planID" value='.$planid.'/>
+                          <input type="hidden" name="pt" value='.$sessioncount.'/>
+                          <a href="make_payments_ct.php?id='.$row['userid'].'"><input type="submit" class="btn btn-xs btn-light" value="Buy Group Class Session Only" /><b></b></form></a></br></li>
             
             </ul>';
           
-          }else if(strtotime($diff6)<=0 && strtotime($today) >= strtotime($expire2)){{
+          }else if(strtotime($diff6)<=0 && strtotime($today) >= strtotime($expire2)|| $sessioncount1 <= 0){{
             echo '<ul class="list-group list-group-flush">
             <li class="list-group-item">
             <h2 class="color-black"><b>Group Classes:</b></h3><span class="badge badge-color red"><h4 class="color-white">'.$sessioncount1.'&nbsp;'.'Sessions</h4> </span></br><h3 class="color-black"><b>  '.$planname2.'</h4><span class="badge badge-color red">EXPIRED </b></h3></br></li>
-            
+            <form id="form2" action="make_payments_ct.php" method="post"><input type="hidden" name="userID" value='.$uid.'>
+                          <input type="hidden" name="planID" value='.$planid.'/>
+                          <input type="hidden" name="pt" value='.$sessioncount.'/>
+                          <a href="make_payments_ct.php?id='.$row['userid'].'"><input type="submit" class="btn btn-xs btn-light" value="Buy Group Class Session Only" /><b></b></form></a></br></li>
+                          
             
             </ul>';
+            
+            $query=$con->query("UPDATE csessions SET amount= '0' WHERE csessionid='".$csessions."'");
+            ;
           }
         
           }
@@ -625,13 +705,13 @@ $dayOfWeek = date("l", $unixTimestamp);
         
         ?></td>
                      
-                     <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?><p><?php
+                     <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?><h2><span class="badge badge-color black badge-pill">ID: <?= $row['userid']; ?></span></h2><p><?php
                         if($row['status']=='1'){
                             echo '<p><a href="status_quick.php?userid='.$row['userid'].'&status=0" class="btn btn-success">Enabled</a></p>';
                         } else{
                             echo '<p><a href="status_quick.php?userid='.$row['userid'].'&status=1" class="btn btn-dark">Disabled</a></p>';
                         }  ?></p> 
-                        <a href="submit_new_checkin.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-blue" >Check In</button></a>
+                        <a href="submit_new_checkin.php?id=<?php echo $row['userid'];?>"><button type="button" class="btn btn-xs btn-secondary" >Check In</button></a>
                         <ul class="list-group list-group-flush">
           <li class="list-group-item">
                         <h4>
@@ -674,9 +754,22 @@ $dayOfWeek = date("l", $unixTimestamp);
                   </h3>
                       </h3>
           </li>
+          <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+                     <h3>
+                      <span class="badge badge-light">Appointed PT Sessions <br> <i class="far fa-clock"></i> Today:</br>
+                       <br><?php echo $classnamea; ?></br>
+                       <h3><br><?php echo $time_froma; ?>
+                       <br> <?php echo $time_toa; ?>
+                      </br>
+                    </span>
+                  </h3>
+                      </h3>
+          </li>
+                     </ul>
                      </ul>
                       </td>
-                     <td><h4><?= $row['userid']; ?></h4></td>
+                     
                      <td><h4><?php echo $row['title']; ?> <?php echo $row['fname']; ?><br><?php echo $row['lname']; ?></br></h4></td>
                      <td><?php echo $row['nationality']; ?></td>
                      <td><?php echo $row['mobile']; ?></td>
@@ -703,7 +796,7 @@ $dayOfWeek = date("l", $unixTimestamp);
 
 <form id="form2" action='make_payments.php' method='post'><input type='hidden' name='userID' value='<?php echo $uid; ?>'/>
                           <input type='hidden' name='planID' value='<?php echo $planid; ?>'/>
-                          <a href="edit_member.php?id=<?php echo $row['userid'];?>"><input type='submit' class="btn btn-xs btn-light" value='Buy Packages' /><b></b></form></a>
+                          <a href="make_payments.php?id=<?php echo $row['userid'];?>"><input type='submit' class="btn btn-xs btn-light" value='Buy Packages' /><b></b></form></a>
 
 <form id="form3" action='health_status_entry.php' method='post'>
                             <input type='hidden' name='uid' value='<?php echo $uid;?>'/>
@@ -716,7 +809,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                   <input type='submit'   value='Health Status' class="btn btn-xs btn-light"/></form>
                   
 
-
+                  
 
 <a href="new_privateclass_quick.php?id=<?php echo $row['userid'];?>&&ss=<?php echo $sessions;?>&&pi=<?php echo $pidss;?>&&am=<?php echo $amount;?>"><button type="button" class="btn btn-xs btn-light" ><h4 class="color-black"><b>Take Personal Training</b></button></a>
 
@@ -778,6 +871,8 @@ $dayOfWeek = date("l", $unixTimestamp);
             }
           }
         }
+      }
+    }
       
     
     
@@ -924,7 +1019,7 @@ $dayOfWeek = date("l", $unixTimestamp);
         
         ?>
         </p> 
-                        <a href="submit_new_checkint.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-blue" >Check In</button></a>
+                        <a href="submit_new_checkint.php?id=<?php echo $row['trainerid'];?>"><button type="button" class="btn btn-xs btn-secondary" >Check In</button></a>
                         <ul class="list-group list-group-flush">
           <li class="list-group-item">
                         <h4>
@@ -977,7 +1072,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                        
                        <td>
                        
-                       <?php  if(strpos($dow,$dayOfWeek) !== false){
+                       <?php  if(strpos($dow,$dayOfWeek) !== false && $uid >='1'){
                       echo '<a href="new_appointment_quick.php?id='.$uid.'&&ss='.$sessions.'&&pi='.$pidss.'&&am='.$amount.'&&tr='.$trainerid.'" class="btn btn-lg btn-light">Add Appointment</a></p>';
                        }else{
                         echo '<a class="btn btn-lg btn-danger">UNAVAILABLE!!!</a></p>';

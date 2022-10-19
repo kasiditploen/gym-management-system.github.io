@@ -307,7 +307,7 @@
         <tbody>
         
       <tr>
-       <th colspan="12"><h3><b>Total Price</b></h3></th>
+       <th colspan="11"><h3><b>Total Price</b></h3></th>
           
                      <td> <h3><b><?php echo $total.'฿'?></b></h3> </td>
                      <td</td>

@@ -7,6 +7,7 @@
         date_default_timezone_set("Asia/Bangkok"); 
         $day=date("Y-m-d");
         $cdate=date('Y-m-d');
+        $chour=date('H:i');
         $y1date=date('Y-m-d',strtotime('- 1 days'));
         $y2date=date('Y-m-d',strtotime('- 2 days'));
         $y3date=date('Y-m-d',strtotime('- 3 days'));
@@ -112,19 +113,20 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     
                                         <thead>
                                         <?php
-          $query  = "select machineid from newmachine";
-          //echo $query;
-          $result = mysqli_query($con, $query);
-          $sno    = 1;
-          
-          
+              $query  = "select * from booking where approved='no'";
+              //echo $query;
+              $result = mysqli_query($con, $query);
+              $sno    = 1;
 
-          if (mysqli_affected_rows($con) != 0) {
-              while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
-              }
-            }
-                ?>
+              if (mysqli_affected_rows($con) != 0) {
+                while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                  $bookingid = $row['bookingid'];
+                  
+                  
+                            }
+                          }
+                                    
+                                ?>
         <tr>
         
          <th>Sl.No</th>
@@ -191,7 +193,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                        <td><?php echo $row['className'] ?></td>
                        <td width='380'><?php echo $row['description'] ?></td>
                        <td><?php echo $row2['studioName'] ?></td>
-                       <td><?php echo $row['created_date'] ?></td>
+                       <td><?php echo $row['date_from'] ?></td>
                        <td><?php echo $row['time_from'] ?></td>
                        <td><?php echo $row['time_to'] ?></td>
                        <td><?php echo $row3['username'] ?></td>
@@ -200,25 +202,32 @@ $dayOfWeek = date("l", $unixTimestamp);
                   
                   
                  <td>
-                  
-                 <form id="form3" action='submit_accept_book.php?id=<?php echo $bookingid;?>' method='post'><input type='hidden' name='bookingid' value='<?php echo $bookingid;?>'/>
-                 <input type='hidden' name='bookingid' value='<?php echo $bookingid;?>'/>
-                 <input type='hidden' name='classid' value='<?php echo $classid;?>'/>
-                              <input type='hidden' name='className' value='<?php echo $name;?>'/>
-                              <input type='hidden' name='description' value='<?php echo $desc;?>'/>
-                              <input type='hidden' name='studios' value='<?php echo $studioid ?>'/>
-                              <input type='hidden' name='classtype' value='<?php echo $type;?>'/>
-                              <input type='hidden' name='dow' value='<?php echo $dow;?>'/>
-                              <input type='hidden' name='date_from' value='<?php echo $df;?>'/>
-                              <input type='hidden' name='date_to' value='<?php echo $dt ?>'/>
-                              <input type='hidden' name='time_from' value='<?php echo $tf;?>'/>
-                              <input type='hidden' name='time_to' value='<?php echo $tt;?>'/>
-                              <input type='hidden' name='trainerid' value='<?php echo $trainerid;?>'/>
-                              <input type='hidden' name='trainerName' value='<?php echo $trainername ?>'/>
-                              <input type='hidden' name='userid' value='<?php echo $userid?>'/>
-                              <input type='hidden' name='username' value='<?php echo $username?>'/>
-                              <input type='hidden' name='session' value='<?php echo $session?>'/>
-                              <input type='submit' id='button1' value='Approve' class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>
+                 <?php if($df >= $cdate and $tf <= $chour and $tt <= $chour) {
+                  echo
+                 '<form id="form3" action="submit_accept_book.php?id=<?php echo $bookingid;?>" method="post"><input type="hidden" name="bookingid" value='.$bookingid.'/>
+                 <input type="hidden" name="bookingid" value='.$bookingid.'/>
+                 <input type="hidden" name="classid" value='. $classid.'/>
+                              <input type="hidden" name="className" value='.$name.'/>
+                              <input type="hidden" name="description" value='.$desc.'/>
+                              <input type="hidden" name="studios" value='.$studioid.'/>
+                              <input type="hidden" name="classtype" value='.$type.'/>
+                              <input type="hidden" name="dow" value='.$dow.'/>
+                              <input type="hidden" name="date_from" value='.$df.'/>
+                              <input type="hidden" name="date_to" value='.$dt.'/>
+                              <input type="hidden" name="time_from" value='.$tf.'/>
+                              <input type="hidden" name="time_to" value='.$tt.'/>
+                              <input type="hidden" name="trainerid" value='.$trainerid.'/>
+                              <input type="hidden" name="trainerName" value='.$trainername.'/>
+                              <input type="hidden" name="userid" value='.$userid.'/>
+                              <input type="hidden" name="username" value='.$username.'/>
+                              <input type="hidden" name="session" value='.$session.'/>
+                              <input type="submit" id="button1" value="Approve" class="btn btn-primary btn-xs m-b-30 m-t-30"/></form>';
+                 } else {
+
+                 }
+                              
+                              ?>
+                              
                   <a href="del_book.php?id=<?php echo $row['bookingid'];?>"><button type="button" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to deny this appointment?')"><i class="fas fa-times"></i></button></a></td></tr>
                   
               <?php 
@@ -229,6 +238,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                     }
                   }
               }
+            
               
             
             

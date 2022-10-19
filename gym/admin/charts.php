@@ -500,6 +500,7 @@ include('../constant/connect.php');
                 
                 <!-- /# row -->
                 <div class="card">
+                
                 <h1 class="text-center">Total Earnings & Expenses</h1>
                 <div class="card-body">
                     

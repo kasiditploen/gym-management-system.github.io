@@ -45,15 +45,16 @@ if(mysqli_query($con,$query)==1){
           $query4="insert into enrolls_to_maintenance(machineid,wid,paid_date,expire,renewal) values('$machineid','$mainday','$cdate','$expiredate','yes')";
       }
       if(mysqli_query($con,$query4)==1){
-        $query1="select * from toe where warranty = '$warranty'";
-      $resultx=mysqli_query($con,$query1);
+        $queryx="select * from toe where toeid='$type'";
+      $resultx=mysqli_query($con,$queryx);
         if($resultx){
           $valuex=mysqli_fetch_row($resultx);
+          $expirex=$valuex['expire'];
             date_default_timezone_set("Asia/Bangkok"); 
-            $d=strtotime("+".$value[13]." Years");
+            $d2=strtotime("+".$valuex[13]." Years");
             
-            $expiredatex=date("Y-m-d",$d);
-            $toeid=$value['toeid'];
+            $expiredatex=date("Y-m-d",$d2);
+            
             $query5="insert into enrolls_to_warranty(wid,toeid,paid_date,expire,active,machineid) values('$warranty','$type','$cdate','$expiredatex','yes','$machineid')";
         }
       

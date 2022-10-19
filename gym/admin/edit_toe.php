@@ -11,7 +11,7 @@
 include('../constant/connect.php');
                      $machineid=$_GET['id'];
                     
-                    $query6  = "SELECT * FROM toe t
+                    $query6  = "SELECT t.* FROM toe t
                     INNER JOIN categories c ON c.categoryid=t.categories
                     
                                

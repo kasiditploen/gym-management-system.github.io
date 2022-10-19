@@ -111,7 +111,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                             <thead>
                                 <tr>
                                 
-                                    <th>Class Name</th>
+                                    
                                     <th>Member ID</th>
                                     <th>Image</th>
                                     <th>First Name</th>
@@ -163,6 +163,15 @@ $dayOfWeek = date("l", $unixTimestamp);
                                    //$usernamein=$rowme['username'];
                                  }
                                    ?>
+
+<?php 
+                                 $query4  = "select * from trainers";
+                                 $result4 = mysqli_query($con, $query4);
+                                 while($row4=mysqli_fetch_array($result4)){
+                                   $trainerid=$row4['trainerid'];
+                                   //$usernamein=$rowme['username'];
+                                 }
+                                   ?>
                             
                             
 
@@ -195,9 +204,10 @@ $dayOfWeek = date("l", $unixTimestamp);
                                     //$to_date = $_GET['to_date'];
                                     $sno    = 1;
                                     $where = !empty( $clauses ) ? ' and '.implode(' and ',$clauses ) : '';
-                                    $query = "SELECT * FROM users u 
-                                    LEFT OUTER JOIN attendance a ON u.userid=a.userid
-                                    LEFT OUTER JOIN  privateclasses p ON u.userid=p.userid where  a.type='pt' " . $where;
+                                    $query = "SELECT u.*,a.created_date,a.present  FROM attendance a 
+                                    INNER JOIN users u  ON u.userid=a.userid
+                                    
+                                     where  a.type='pt' " . $where;
                                     //$query_run = mysqli_query($con, $query);
                                     
                                     if(isset($query)){
@@ -207,7 +217,7 @@ $dayOfWeek = date("l", $unixTimestamp);
                                             ?>
                                             <tr>
                                             
-                                            <td><?= $row['className']; ?></td>
+                                            
                                             <td><?= $row['userid']; ?></td>
                                             <td><?php echo '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 80px; height: 80px;" >';?><p>
                                             <td><?= $row['fname']; ?></td>

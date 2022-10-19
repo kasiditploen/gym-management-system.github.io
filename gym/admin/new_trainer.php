@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">DATE OF BIRTH</label>
                                                 <div class="col-sm-9">
-                                                <input type="date"  name="dob2" id="boxx"  class="form-control" required/>
+                                                <input type="date"  name="dob2" id="boxx" max='<?php echo $cdate ?>'  class="form-control" required/>
                                                 </div>
                                             </div>
                                         </div>

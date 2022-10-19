@@ -216,7 +216,7 @@ include('../constant/connect.php');
                                             <div class="row">
                                                 <label class="col-sm-3 control-label">DATE OF MAKING PAYMENT</label>
                                                 <div class="col-sm-9">
-                                                <input type="date"  name="domp" id="boxx"  class="form-control" value="<?php echo date('d-M-y');?>" required/>
+                                                <input type="date"  name="domp" id="boxx" readonly   class="form-control" value="<?php echo date('Y-m-d');?>" required/>
                                                 </div>
                                             </div>
                                         </div>

@@ -18,7 +18,7 @@ $classtype= $_POST['classtype'];
 $session= $_POST['session'];
 $classcap= $_POST['classcap'];
 
-$duplicate=mysqli_query($con,"select * from trainertt where trainerid='$trainer' and time_from='$time_from' and time_to='$time_to'");
+$duplicate=mysqli_query($con,"select * from trainertt where trainerid='$trainer' and time_from='$time_from' and time_to='$time_to' and classid!='$classid'");
 if (mysqli_num_rows($duplicate)>0)
 {
   echo "<head><script>alert('Schedule Conflict!!! ');</script></head></html>";
@@ -34,7 +34,7 @@ $cdate = date("Y-m-d H:i");
    if(mysqli_query($con,$query1)){
       $query2="update trainertt set classid='".$classid."',time_from='".$time_from."',time_to='".$time_to."',trainerid='".$trainer."' where classid='".$classid."'";
      if(mysqli_query($con,$query2)){
-      echo "<html><head><script>alert('Trainer Update Successfully');</script></head></html>";
+      echo "<html><head><script>alert('Class Update Successfully');</script></head></html>";
       echo "<meta http-equiv='refresh' content='0; url=view_mem.php'>";
         
             
